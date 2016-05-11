@@ -1,0 +1,73 @@
+hello World!
+size_BioPathSteps is: 10
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47211 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47301 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction47212 
+eCNumber:  
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47879 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47316 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47330 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48102 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47921 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule48140 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46452 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction48103 
+eCNumber: 6.2.1.5 
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46511 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46508 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46626 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47656 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46375 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45511 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46393 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction46376 
+eCNumber: 1.1.5.4 
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47536 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45554 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46399 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46511 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46611 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46626 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction46512 
+eCNumber: 1.3.5.1 
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48408 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46651 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46635 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47879 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47316 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47330 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction47880 
+eCNumber:  
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45900 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45978 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47536 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45554 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47330 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47641 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction47537 
+eCNumber: 2.3.3.1 2.3.3.16 
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47211 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45540 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47301 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47656 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45900 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45992 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45978 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction45901 
+eCNumber: 1.1.1.42 
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47905 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46036 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46022 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46007 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47905 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45527 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46007 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47656 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction47906 
+eCNumber:  
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48102 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47921 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46022 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45568 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48408 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46651 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule47330 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction48409 
+eCNumber: 4.2.1.2 
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46375 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45319 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45511 
+
+http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45319 ==> 
+fromNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45511 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45527 
+stepConversion: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalReaction45320 
+eCNumber: 1.1.1.37 
+nextStep: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47536 
+toNode: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45554 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45540 http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45568 
+
+Goodbye!

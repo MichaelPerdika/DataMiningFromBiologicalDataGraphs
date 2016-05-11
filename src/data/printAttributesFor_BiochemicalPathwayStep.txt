@@ -1,0 +1,82 @@
+hello World!
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47211
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47211
+equivalenceCode == 579996595
+hashCode == 982342957
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48102
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48102
+equivalenceCode == 580025395
+hashCode == 982371757
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46375
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46375
+equivalenceCode == 579967955
+hashCode == 982314317
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45319
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45319
+equivalenceCode == 579937982
+hashCode == 982284344
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47905
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47905
+equivalenceCode == 580003295
+hashCode == 982349657
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47879
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47879
+equivalenceCode == 580002555
+hashCode == 982348917
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45900
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45900
+equivalenceCode == 579943708
+hashCode == 982290070
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48408
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48408
+equivalenceCode == 580028284
+hashCode == 982374646
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46511
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46511
+equivalenceCode == 579969687
+hashCode == 982316049
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+toString == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47536
+getRDFId == http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47536
+equivalenceCode == 579999545
+hashCode == 982345907
+getAnnotations == {}
+getClass == class org.biopax.paxtools.impl.level3.BiochemicalPathwayStepImpl
+getModelInterface == interface org.biopax.paxtools.model.level3.BiochemicalPathwayStep
+
+Goodbye!

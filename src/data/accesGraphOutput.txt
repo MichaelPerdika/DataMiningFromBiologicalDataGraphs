@@ -1,0 +1,112 @@
+hello World!
+direction is [LEFT_TO_RIGHT]
+left  standardName is [citrate]
+right standardName is [<i>cis</i>-aconitate]
+right standardName is [H<sub>2</sub>O]
+
+direction is [RIGHT_TO_LEFT]
+left  standardName is [ATP]
+left  standardName is [succinate]
+left  standardName is [coenzyme A]
+right standardName is [succinyl-CoA]
+right standardName is [phosphate]
+right standardName is [ADP]
+
+direction is [LEFT_TO_RIGHT]
+left  standardName is [(<i>S</i>)-malate]
+left  standardName is [an electron-transfer quinone]
+right standardName is [oxaloacetate]
+right standardName is [an electron-transfer quinol]
+
+direction is [LEFT_TO_RIGHT]
+left  standardName is [(<i>S</i>)-malate]
+left  standardName is [NAD<sup>+</sup>]
+right standardName is [oxaloacetate]
+right standardName is [H<SUP>+</SUP>]
+right standardName is [NADH]
+
+direction is [LEFT_TO_RIGHT]
+left  standardName is [NAD<sup>+</sup>]
+left  standardName is [2-oxoglutarate]
+left  standardName is [coenzyme A]
+right standardName is [succinyl-CoA]
+right standardName is [CO<SUB>2</SUB>]
+right standardName is [NADH]
+
+direction is [LEFT_TO_RIGHT]
+left  standardName is [<i>cis</i>-aconitate]
+left  standardName is [H<sub>2</sub>O]
+right standardName is [D-<i>threo</i>-isocitrate]
+
+direction is [LEFT_TO_RIGHT]
+left  standardName is [NADP<sup>+</sup>]
+left  standardName is [D-<i>threo</i>-isocitrate]
+right standardName is [NADPH]
+right standardName is [CO<SUB>2</SUB>]
+right standardName is [2-oxoglutarate]
+
+direction is [RIGHT_TO_LEFT]
+left  standardName is [(<i>S</i>)-malate]
+right standardName is [fumarate]
+right standardName is [H<sub>2</sub>O]
+
+direction is [LEFT_TO_RIGHT]
+left  standardName is [a ubiquinone]
+left  standardName is [succinate]
+right standardName is [fumarate]
+right standardName is [an ubiquinol]
+
+direction is [LEFT_TO_RIGHT]
+left  standardName is [oxaloacetate]
+left  standardName is [H<sub>2</sub>O]
+left  standardName is [acetyl-CoA]
+right standardName is [H<SUP>+</SUP>]
+right standardName is [citrate]
+right standardName is [coenzyme A]
+
+id_b is: 10
+size_b is: 10
+0 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47211
+1 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48102
+2 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46375
+3 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45319
+4 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47905
+5 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47879
+6 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep45900
+7 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep48408
+8 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep46511
+9 ==> http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCABiochemicalPathwayStep47536
+id_e is: 0
+size_e is: 0
+Goodbye!
+
+
+getRDFid is: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule45511
+BioPAXElement 1 is: [standardName], [(<i>S</i>)-malate]
+BioPAXElement 2 is: [xref], [MetaCyc:MAL]
+BioPAXElement 3 is: [evidence], []
+BioPAXElement 4 is: [memberPhysicalEntity], []
+BioPAXElement 5 is: [displayName], []
+BioPAXElement 6 is: [availability], []
+BioPAXElement 7 is: [cellularLocation], [CellularLocationVocabulary_cytosol]
+BioPAXElement 8 is: [feature], []
+BioPAXElement 9 is: [entityReference], [http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMoleculeReference45499]
+BioPAXElement 10 is: [name], [(<i>S</i>)-malic acid, L-malate, L-apple acid, L-hydroxybutanedioic acid, L-malic acid, L-hydroxysuccinic acid, (<i>S</i>)-malate]
+BioPAXElement 11 is: [comment], []
+BioPAXElement 12 is: [dataSource], [MetaCyc (http://metacyc.org);]
+BioPAXElement 13 is: [notFeature], []
+
+getRDFid is: http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMolecule46393
+BioPAXElement 1 is: [standardName], [an electron-transfer quinone]
+BioPAXElement 2 is: [xref], [MetaCyc:ETR-Quinones]
+BioPAXElement 3 is: [evidence], []
+BioPAXElement 4 is: [memberPhysicalEntity], []
+BioPAXElement 5 is: [displayName], []
+BioPAXElement 6 is: [availability], []
+BioPAXElement 7 is: [cellularLocation], [CellularLocationVocabulary_plasma membrane]
+BioPAXElement 8 is: [feature], []
+BioPAXElement 9 is: [entityReference], [http://http://BioCyc.org//META/pathway-biopax?type=3%38object=TCASmallMoleculeReference46390]
+BioPAXElement 10 is: [name], [an electron-transfer quinone]
+BioPAXElement 11 is: [comment], [This class holds |FRAME: Quinones quinones| that are involved in electron transfer within membranes. Quinones are organic compounds derived from aromatic compound, with two carbonyl groups incorporated into the ring structure with rearrangement of the double bonds where necessary. A classic example of a quinone is |FRAME: P-BENZOQUINONE|. Quinones are commonly named with a prefix that indicates the parent aromatic hydrocarbon (for example, "benzo-" for benzene, "naphtho-" for naphthalene, and "anthra-" for anthracene) with a "-quinone" suffix. Several types of quinones serve as electron acceptors in electron transport chains. Quinones can carry two electrons, and when fully reduced they are referred to as |FRAME: Reduced-Quinones quinols|. The addition of a single H atom to a quinone results in formation of a free radical called |FRAME: Semiquinones|. Many quinone derivatives often have other biological activities, such as |FRAME: CPD-11501 "vitamin K"|.]
+BioPAXElement 12 is: [dataSource], [MetaCyc (http://metacyc.org);]
+BioPAXElement 13 is: [notFeature], []

@@ -1,0 +1,10 @@
+1. in accessGraph I should merge 
+		Map<Integer, ArrayList<String>> nodes = new HashMap<Integer, ArrayList<String>>();
+		Map<Integer, String> edges = new HashMap<Integer, String>();
+		Map<Integer, String> BioPathSteps = new HashMap<Integer, String>();
+	into one map denoted in GraphAdjList
+		private Map<Integer, ArrayList<Integer>> adjListMap;
+		
+2. "extractNodesFromEdge" can be more generic because it is used also above for the edges
+
+3. make BioPaxApi to extend GraphAdjList because it needs the model so it can retrieve information at any time given that we have the https (RDFid)

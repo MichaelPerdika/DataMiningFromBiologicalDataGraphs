@@ -174,6 +174,11 @@ public class BioPAXGraphAdjList {
 		//add stepConversion
 		valuesMap.put("stepConversion", stepConversionRDFid);
 		
+		//add edgeName
+		String[] tempString = new String[1];
+		tempString[0] = getPropertyInfo(stepConversionRDFid[0], "standardName");
+		valuesMap.put("edgeName", tempString);
+		
 		//add "startNodes" and "endNodes"
 		addStartAndEndNodesToMap(valuesMap, bioPathStepRDFid, stepConversionRDFid[0]);
 		
@@ -358,6 +363,7 @@ public class BioPAXGraphAdjList {
 		System.out.println("        !Note for [thisNodes] and [endNodes] the correct LEFT_TO_RIGHT or RIGHT_TO_LEFT direction has been taken into notice");
 		System.out.println("      [eCNumber] = eCNumber of the [stepConversion] of the current [BiochemicalPathwayStep]");
 		System.out.println("      [nextStep] = RDFid of the next [BiochemicalPathwayStep]");
+		System.out.println("      [edgeName] = edge standard name [String]");
 		System.out.println("      [previousStep] = RDFid of the previous [BiochemicalPathwayStep] (NOT IMPLEMENTED YET!!!)");
 	}
 	

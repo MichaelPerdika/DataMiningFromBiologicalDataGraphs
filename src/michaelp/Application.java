@@ -16,7 +16,7 @@ public static void main(String[] args)  {
 		*/
 		System.out.println("The TCA cycle I (prokaryotic) graph: "+fileName1);
 		BioPAXGraphAdjList graph1 = new BioPAXGraphAdjList(fileName1);
-		graph1.printGraph();
+		//graph1.printGraph();
 		
 		System.out.println("The TCA cycle, aerobic respiration graph: "+fileName2);
 		BioPAXGraphAdjList graph2 = new BioPAXGraphAdjList(fileName2);

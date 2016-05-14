@@ -28,42 +28,146 @@ public class Application {
 			String fileName2 = "src/data/TCA cycle, aerobic respiration.biopax";
 			
 			System.out.println("The TCA cycle I (prokaryotic) graph: "+fileName1);
-			DirectedGraph<MyNode, MyEdge> graph1 = createGraphFromBiopaxFile(fileName1);
+			DirectedGraph<Integer, MyEdge> graph1 = createGraphFromBiopaxFile(fileName1);
 			visualizeGraph(graph1);
-	
+			/*
+	        System.out.println(graph1.getEdgeCount());
+	        System.out.println(graph1.getVertexCount());
+	        Collection<Integer> collection = graph1.getVertices();
+	        for (Integer node : collection){
+	        	System.out.print(node+" ");
+	        }
+	        System.out.println("");
+	        */
 			System.out.println("The TCA cycle, aerobic respiration graph: "+fileName2);
-			DirectedGraph<MyNode, MyEdge> graph2 = createGraphFromBiopaxFile(fileName2);
+			DirectedGraph<Integer, MyEdge> graph2 = createGraphFromBiopaxFile(fileName2);
 			visualizeGraph(graph2);
+			
+			findMetrics(graph1, graph2);
 			
 			System.out.println("Goodbye");		
 		}
 	
 
 	/**
+	 * this is a primitive method that finds some metrics between graphs.
+	 * @param graph1
+	 * @param graph2
+	 */
+	private static void findMetrics(DirectedGraph<Integer, MyEdge> graph1, 
+			DirectedGraph<Integer, MyEdge> graph2) {
+		//TODO
+		System.out.println("graph1 info:");
+		printGraphInfo(graph1);
+		System.out.println("graph2 info:");
+		printGraphInfo(graph2);
+		
+		findCommonECNumbers(graph1, graph2);
+		findCommonEdgesNames(graph1, graph2);
+		findCommonEdges(graph1, graph2);
+		
+
+	}
+
+	private static void findCommonECNumbers(DirectedGraph<Integer, MyEdge> graph1,
+			DirectedGraph<Integer, MyEdge> graph2) {
+		/******findCommonECNumbers*******/
+		System.out.println("Common eCNumbers between graphs:");
+		Collection<MyEdge> colEdges1 = graph1.getEdges();
+		Collection<MyEdge> colEdges2 = graph2.getEdges();
+		String[] ECN1, ECN2;
+		for (MyEdge edge1 : colEdges1){
+			ECN1 = edge1.getECNumber();
+			for (MyEdge edge2 : colEdges2){
+				ECN2 = edge2.getECNumber();
+				for (String s1 : ECN1){
+					for (String s2 : ECN2){
+						if (s1.equals(s2) && s1.length()>0){
+							System.out.println(s1);
+						}
+					}
+				}
+			}
+		}
+		/********************************/
+		
+	}
+
+	private static void findCommonEdgesNames(DirectedGraph<Integer, MyEdge> graph1,
+			DirectedGraph<Integer, MyEdge> graph2) {
+		/******findCommonEdgeNames*******/
+		System.out.println("Common edgeNames between graphs:");
+		Collection<MyEdge> colEdges1 = graph1.getEdges();
+		Collection<MyEdge> colEdges2 = graph2.getEdges();
+		String edgeName1, edgeName2;
+		for (MyEdge edge1 : colEdges1){
+			edgeName1 = edge1.getEdgeName();
+			for (MyEdge edge2 : colEdges2){
+				edgeName2 = edge2.getEdgeName();
+				if (edgeName1.equals(edgeName2) && edgeName1.length()>0){
+					System.out.println(edgeName1);
+				}
+			}
+		}
+		/********************************/
+		
+	}
+	
+	private static void findCommonEdges(DirectedGraph<Integer, MyEdge> graph1, 
+			DirectedGraph<Integer, MyEdge> graph2) {
+		/******findCommonEdges***********/
+		System.out.println("Common edges between graphs:");
+		Collection<MyEdge> colEdges1 = graph1.getEdges();
+		Collection<MyEdge> colEdges2 = graph2.getEdges();
+		DirectedGraph<Integer, MyEdge> commonSubGraph = 
+				new DirectedSparseMultigraph<Integer, MyEdge>();
+		for (MyEdge edge1 : colEdges1){
+			for (MyEdge edge2 : colEdges2){
+				if (edge1.equals(edge2)){
+					commonSubGraph.addEdge(edge1, edge1.getStartNode(),edge1.getEndNode());
+				}
+			}
+		}
+		visualizeGraph(commonSubGraph);
+		/********************************/
+	}
+	
+	/**
+	 * dummy method that prints info of the graph
+	 */
+	private static void printGraphInfo(DirectedGraph<Integer, MyEdge> graph){
+		System.out.println(graph.toString());
+		System.out.println("Number of Vertices :"+graph.getVertexCount());
+		System.out.println("Number of Edges :"+graph.getEdgeCount());
+	}
+
+
+	/**
 	 * This method returns a DirectedGraph (jung) given the .biopax fileName
 	 * This method will create the BioPAXGraphAdjList graph from the .biopax file 
-	 * and then will convert it to DirectedSparseMultigraph<MyNode, MyEdge> 
+	 * and then will convert it to DirectedSparseMultigraph<Integer, MyEdge> 
 	 * @param fileName
-	 * @return DirectedGraph<MyNode, MyEdge> (which is DirectedSparseMultigraph<MyNode, MyEdge>)
+	 * @return DirectedGraph<Integer, MyEdge> (which is DirectedSparseMultigraph<Integer, MyEdge>)
 	 */
-	private static DirectedGraph<MyNode, MyEdge> createGraphFromBiopaxFile(String fileName) {
+	private static DirectedGraph<Integer, MyEdge> createGraphFromBiopaxFile(String fileName) {
 		// create the graph from the .biopax file
 		BioPAXGraphAdjList graphBiopax = new BioPAXGraphAdjList(fileName);
 		// convert the above graph to the jung graph model
-		DirectedGraph<MyNode, MyEdge> graph = biopax2jung(graphBiopax);
+		DirectedGraph<Integer, MyEdge> graph = biopax2jung(graphBiopax);
 		return graph;
 	}
 
 
 	/**
-	 * this function will convert a BioPAXGraphAdjList graph to DirectedGraph<MyNode, MyEdge> (jung) graphs
+	 * this function will convert a BioPAXGraphAdjList graph to DirectedGraph<Integer, MyEdge> (jung) graphs
 	 * @param graphBioPax
-	 * @return DirectedGraph<MyNode, MyEdge> (which is DirectedSparseMultigraph<MyNode, MyEdge>)
+	 * @return DirectedGraph<Integer, MyEdge> (which is DirectedSparseMultigraph<Integer, MyEdge>)
 	 */
-	private static DirectedGraph<MyNode, MyEdge> biopax2jung(BioPAXGraphAdjList graphBioPax) {
+	private static DirectedGraph<Integer, MyEdge> biopax2jung(BioPAXGraphAdjList graphBioPax) {
         
-        DirectedGraph<MyNode, MyEdge> graph = new DirectedSparseMultigraph<MyNode, MyEdge>();
-        MyNode startNode, endNode = null;
+        DirectedGraph<Integer, MyEdge> graph = new DirectedSparseMultigraph<Integer, MyEdge>();
+        //MyNode startNode, endNode = null;
+        Integer startNode, endNode = null;
         String edgeRDFid;
         String[] nextEdgesRDFids;
         int nodeID = 0;
@@ -84,13 +188,13 @@ public class Application {
 				// this edge hasn't been visualized yet.
 				// if it has already a starting node index
 				if (tempMap.get(edgeRDFid).containsKey("startNode")){
-					startNode = new MyNode(tempMap.get(edgeRDFid).get("startNode"));
+					startNode = tempMap.get(edgeRDFid).get("startNode");
 				}
 				// if it hasn't a node index create new.
 				else{
 					
-					startNode = new MyNode(nodeID++);
-					tempMap.get(edgeRDFid).put("startNode", startNode.getNodeId());
+					startNode = nodeID++;
+					tempMap.get(edgeRDFid).put("startNode", startNode);
 				}
 				nextEdgesRDFids = myEdge.getNextStepRDFids();
 				// if there are nextEdges
@@ -104,8 +208,8 @@ public class Application {
 							tempMap.put(nextEdgeRDFid, new HashMap<String, Integer>());
 						}
 						if (tempMap.get(nextEdgeRDFid).containsKey("startNode")){
-							endNode = new MyNode(tempMap.get(nextEdgeRDFid).get("startNode"));
-							addStartNodeToNextEdges(tempMap, nextEdgesRDFids, endNode.getNodeId());
+							endNode = tempMap.get(nextEdgeRDFid).get("startNode");
+							addStartNodeToNextEdges(tempMap, nextEdgesRDFids, endNode);
 							thereIsStartNode = true;
 							break;
 						}
@@ -113,14 +217,14 @@ public class Application {
 					// if we didn't find any endNode that matches then create new 
 					// and add it to the next edges as startNode
 					if (!thereIsStartNode){
-						endNode = new MyNode(nodeID++);
-						addStartNodeToNextEdges(tempMap, nextEdgesRDFids, endNode.getNodeId());
+						endNode = nodeID++;
+						addStartNodeToNextEdges(tempMap, nextEdgesRDFids, endNode);
 					}
 					
 				}
 				// if there aren't nextEdges
 				else{
-					endNode = new MyNode(nodeID++);
+					endNode = nodeID++;
 				}
 				//finally add the edge
 				myEdge.setEdgeNodes(startNode, endNode);
@@ -143,7 +247,8 @@ public class Application {
 	 * @param startNode the ID of the ending node of the current Edge 
 	 * (which is the starting node for the next nodes)
 	 */
-	private static void addStartNodeToNextEdges(Map<String, Map<String, Integer>> tempMap, String[] nextEdgesRDFids, Integer startNode) {
+	private static void addStartNodeToNextEdges(Map<String, 
+			Map<String, Integer>> tempMap, String[] nextEdgesRDFids, Integer startNode) {
 		for (String nextEdgeRDFid : nextEdgesRDFids){
 			if (!tempMap.containsKey(nextEdgeRDFid)){
 				tempMap.put(nextEdgeRDFid, new HashMap<String, Integer>());
@@ -166,13 +271,12 @@ public class Application {
 	 * This method visualizes a graph
 	 * @param graph
 	 */
-	private static void visualizeGraph(DirectedGraph<MyNode, MyEdge> graph) {
-		// TODO Auto-generated method stub
+	private static void visualizeGraph(DirectedGraph<Integer, MyEdge> graph) {
 		// The visualization. Code from JUNG
-		Graph<Integer, String> sgv = convertGraphForVisualization(graph);
+		Graph<Integer, String> covGraph = convertGraphForVisualization(graph);
 		
 		// Layout<V, E>, VisualizationComponent<V,E>
-        Layout<Integer, String> layout = new CircleLayout(sgv);
+        Layout<Integer, String> layout = new CircleLayout(covGraph);
         layout.setSize(new Dimension(800,600));
         BasicVisualizationServer<Integer,String> vv = new BasicVisualizationServer<Integer,String>(layout);
         vv.setPreferredSize(new Dimension(850,650));       
@@ -207,18 +311,18 @@ public class Application {
 
 
 	/**
-	 * used in method visualizeGraph. Converts a graph from <MyNode, MyEdge> to
+	 * used in method visualizeGraph. Converts a graph from <Integer, MyEdge> to
 	 * Graph<Integer, String> for convenience. 
 	 * @param graph
 	 * @return The convenient Graph<Integer, String>
 	 */
-	private static Graph<Integer, String> convertGraphForVisualization(DirectedGraph<MyNode, MyEdge> graph) {
-		Graph<Integer, String> sgv = new DirectedSparseMultigraph<Integer, String>();
+	private static Graph<Integer, String> convertGraphForVisualization(DirectedGraph<Integer, MyEdge> graph) {
+		Graph<Integer, String> covGraph = new DirectedSparseMultigraph<Integer, String>();
 		Collection<MyEdge> collection = graph.getEdges();
 		for (MyEdge myEdge : collection){
-			sgv.addEdge(myEdge.getEdgeName(), myEdge.getStartNode().getNodeId(), myEdge.getEndNode().getNodeId());
+			covGraph.addEdge(myEdge.getEdgeName(), myEdge.getStartNode(), myEdge.getEndNode());
 		}
-		return sgv;
+		return covGraph;
 	}
 
 }

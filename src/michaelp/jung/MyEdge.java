@@ -12,8 +12,8 @@ public class MyEdge {
 	private String edgeName;
 	private String[] nextStepRDFids;
 	private String[] stepConversion;
-	private MyNode startNode;
-	private MyNode endNode;
+	private Integer startNode;
+	private Integer endNode;
 	
 
 	/**
@@ -31,11 +31,18 @@ public class MyEdge {
 		
 	}
 	
+	@Override
 	public String toString() {
 		//TODO
-        return "E"+edgeId;
+        
+		String temp = "[";
+		for (String t : eCNumber){
+			temp += t+" ";
+		}
+		temp += "]";
+		return temp; //eCNumber
+		//return edgeName.substring(1,edgeName.length()-1);//remove the []
     }
-	
 
 	public String getEdgeRDFid() {
 		return this.edgeRDFid;
@@ -45,20 +52,34 @@ public class MyEdge {
 		return this.nextStepRDFids;
 	}
 	
-	public void setEdgeNodes(MyNode startNode, MyNode endNode){
-		this.startNode = startNode;
-		this.endNode = endNode;
+	public String[] getECNumber(){
+		return this.eCNumber;
 	}
 	
 	public String getEdgeName(){
 		return this.edgeName;
 	}
 	
-	public MyNode getStartNode(){
+	public Integer getStartNode(){
 		return this.startNode;
 	}
 	
-	public MyNode getEndNode(){
+	public Integer getEndNode(){
 		return this.endNode;
+	}
+	
+	public void setEdgeNodes(Integer startNode, Integer endNode){
+		this.startNode = startNode;
+		this.endNode = endNode;
+	}
+	
+	@Override
+	public boolean equals(Object other){
+	    if (other == null) return false;
+	    if (other == this) return true;
+	    if (!(other instanceof MyEdge))return false;
+	    MyEdge otherMyEdge = (MyEdge)other;
+	    if (this.edgeName.equals(otherMyEdge.getEdgeName())) return true;
+		return false;
 	}
 }

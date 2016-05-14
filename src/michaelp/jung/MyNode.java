@@ -10,10 +10,12 @@ public class MyNode {
 		this.nodeId = id;
 		}
 	
-
-	
 	public int getNodeId(){
 		return this.nodeId;
 	}
 	
+	public String toString() {
+		
+        return "V"+nodeId;
+    }
 }

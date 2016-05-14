@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class MyEdge {
-	static private int numOfEgdes = 0;
 	private int edgeId;
 	private String edgeRDFid;
 	private String[] startNodes;
@@ -22,7 +21,6 @@ public class MyEdge {
 	 * @param entry
 	 */
 	public MyEdge(Entry<String, Map<String, String[]>> entry) {
-		numOfEgdes++;
 		this.edgeRDFid = entry.getKey();
 		this.startNodes = entry.getValue().get("startNodes");
 		this.endNodes = entry.getValue().get("endNodes");
@@ -38,9 +36,6 @@ public class MyEdge {
         return "E"+edgeId;
     }
 	
-	public int getNumOfEdges(){
-		return numOfEgdes;
-	}
 
 	public String getEdgeRDFid() {
 		return this.edgeRDFid;

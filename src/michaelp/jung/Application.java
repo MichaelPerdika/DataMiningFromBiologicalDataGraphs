@@ -4,17 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.Stroke;
-import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
 import javax.swing.JFrame;
 
 import org.apache.commons.collections15.Transformer;
-import org.biopax.paxtools.model.Model;
-
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.DirectedGraph;
@@ -34,58 +29,44 @@ public class Application {
 			
 			System.out.println("The TCA cycle I (prokaryotic) graph: "+fileName1);
 			DirectedGraph<MyNode, MyEdge> graph1 = createGraphFromBiopaxFile(fileName1);
-			
 			visualizeGraph(graph1);
-			//BioPAXGraphAdjList graph1 = new BioPAXGraphAdjList(fileName1);
-			//graph1.printGraph();
-			
-			/*
+	
 			System.out.println("The TCA cycle, aerobic respiration graph: "+fileName2);
-			BioPAXGraphAdjList graph2 = new BioPAXGraphAdjList(fileName2);
-			graph2.printGraph();
-			*/
+			DirectedGraph<MyNode, MyEdge> graph2 = createGraphFromBiopaxFile(fileName2);
+			visualizeGraph(graph2);
 			
 			System.out.println("Goodbye");		
 		}
 	
 
 	/**
-	 * 
+	 * This method returns a DirectedGraph (jung) given the .biopax fileName
+	 * This method will create the BioPAXGraphAdjList graph from the .biopax file 
+	 * and then will convert it to DirectedSparseMultigraph<MyNode, MyEdge> 
 	 * @param fileName
-	 * @return
+	 * @return DirectedGraph<MyNode, MyEdge> (which is DirectedSparseMultigraph<MyNode, MyEdge>)
 	 */
 	private static DirectedGraph<MyNode, MyEdge> createGraphFromBiopaxFile(String fileName) {
 		// create the graph from the .biopax file
 		BioPAXGraphAdjList graphBiopax = new BioPAXGraphAdjList(fileName);
-		graphBiopax.printGraph();
 		// convert the above graph to the jung graph model
-		//DirectedGraph<MyNode, MyEdge> graph = biopax2jung(graphBiopax);
-		DirectedGraph<MyNode, MyEdge> graph = createTempGraph(graphBiopax);
+		DirectedGraph<MyNode, MyEdge> graph = biopax2jung(graphBiopax);
 		return graph;
 	}
+
 
 	/**
-	 * 
-	 * @param graph
-	 * @return
+	 * this function will convert a BioPAXGraphAdjList graph to DirectedGraph<MyNode, MyEdge> (jung) graphs
+	 * @param graphBioPax
+	 * @return DirectedGraph<MyNode, MyEdge> (which is DirectedSparseMultigraph<MyNode, MyEdge>)
 	 */
-	private static DirectedGraph<MyNode, MyEdge> biopax2jung(BioPAXGraphAdjList graphBiopax) {
-		
-		DirectedGraph<MyNode, MyEdge> graph = new DirectedSparseMultigraph<MyNode, MyEdge>();
-		
-		for (Map.Entry<String, Map<String, String[]>> entry : graphBiopax.getBioPathStepsGraph().entrySet()){
-		    MyEdge myEdge = new MyEdge(entry);
-		    graph.addEdge(myEdge, new MyNode(), new MyNode());
-		}
-		return graph;
-	}
-
-	private static DirectedGraph<MyNode, MyEdge> createTempGraph(BioPAXGraphAdjList graphBioPax) {
+	private static DirectedGraph<MyNode, MyEdge> biopax2jung(BioPAXGraphAdjList graphBioPax) {
         
         DirectedGraph<MyNode, MyEdge> graph = new DirectedSparseMultigraph<MyNode, MyEdge>();
         MyNode startNode, endNode = null;
         String edgeRDFid;
         String[] nextEdgesRDFids;
+        int nodeID = 0;
         boolean thereIsStartNode;
         Map<String, Map<String, Integer>> tempMap = new HashMap<String, Map<String, Integer>>();
 		for (Map.Entry<String, Map<String, String[]>> entry : 
@@ -107,7 +88,8 @@ public class Application {
 				}
 				// if it hasn't a node index create new.
 				else{
-					startNode = new MyNode();
+					
+					startNode = new MyNode(nodeID++);
 					tempMap.get(edgeRDFid).put("startNode", startNode.getNodeId());
 				}
 				nextEdgesRDFids = myEdge.getNextStepRDFids();
@@ -131,14 +113,14 @@ public class Application {
 					// if we didn't find any endNode that matches then create new 
 					// and add it to the next edges as startNode
 					if (!thereIsStartNode){
-						endNode = new MyNode();
+						endNode = new MyNode(nodeID++);
 						addStartNodeToNextEdges(tempMap, nextEdgesRDFids, endNode.getNodeId());
 					}
 					
 				}
 				// if there aren't nextEdges
 				else{
-					endNode = new MyNode();
+					endNode = new MyNode(nodeID++);
 				}
 				//finally add the edge
 				myEdge.setEdgeNodes(startNode, endNode);
@@ -152,6 +134,15 @@ public class Application {
 		return graph;
 	}
 
+	/**
+	 * Used in biopax2jung method. Nothing to see here.
+	 * When a current edge is stored in the graph it will set its ending
+	 * node as the starting node of the next edges of his.
+	 * @param tempMap Is a temporary map that stores which edges are already in the graph 
+	 * @param nextEdgesRDFids the next edges RDFids 
+	 * @param startNode the ID of the ending node of the current Edge 
+	 * (which is the starting node for the next nodes)
+	 */
 	private static void addStartNodeToNextEdges(Map<String, Map<String, Integer>> tempMap, String[] nextEdgesRDFids, Integer startNode) {
 		for (String nextEdgeRDFid : nextEdgesRDFids){
 			if (!tempMap.containsKey(nextEdgeRDFid)){
@@ -171,6 +162,10 @@ public class Application {
 		}
 	}
 
+	/**
+	 * This method visualizes a graph
+	 * @param graph
+	 */
 	private static void visualizeGraph(DirectedGraph<MyNode, MyEdge> graph) {
 		// TODO Auto-generated method stub
 		// The visualization. Code from JUNG
@@ -211,6 +206,12 @@ public class Application {
 	}
 
 
+	/**
+	 * used in method visualizeGraph. Converts a graph from <MyNode, MyEdge> to
+	 * Graph<Integer, String> for convenience. 
+	 * @param graph
+	 * @return The convenient Graph<Integer, String>
+	 */
 	private static Graph<Integer, String> convertGraphForVisualization(DirectedGraph<MyNode, MyEdge> graph) {
 		Graph<Integer, String> sgv = new DirectedSparseMultigraph<Integer, String>();
 		Collection<MyEdge> collection = graph.getEdges();

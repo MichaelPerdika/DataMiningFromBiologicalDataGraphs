@@ -15,7 +15,18 @@ public class MyEdge {
 	private Integer startNode;
 	private Integer endNode;
 	
-
+	/**
+	 * this constructor is used only for testing
+	 * it has to be erased later on!!!!!!!!
+	 * @param edge 
+	 * @param startNode
+	 * @param endNode
+	 */
+	public MyEdge(String edge, Integer startNode, Integer endNode){
+		//TODO erase this constructor.
+		
+	}
+	
 	/**
 	 * this constructor takes a BioPaxGraph edge entry and converts it to MyEdge
 	 * @param entry

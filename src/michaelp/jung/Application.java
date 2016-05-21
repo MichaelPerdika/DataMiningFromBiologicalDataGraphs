@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.Stroke;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import javax.swing.JFrame;
 
 import org.apache.commons.collections15.Transformer;
@@ -29,25 +32,51 @@ public class Application {
 			
 			System.out.println("The TCA cycle I (prokaryotic) graph: "+fileName1);
 			DirectedGraph<Integer, MyEdge> graph1 = createGraphFromBiopaxFile(fileName1);
-			visualizeGraph(graph1);
-			/*
-	        System.out.println(graph1.getEdgeCount());
-	        System.out.println(graph1.getVertexCount());
-	        Collection<Integer> collection = graph1.getVertices();
-	        for (Integer node : collection){
-	        	System.out.print(node+" ");
-	        }
-	        System.out.println("");
-	        */
+			//visualizeGraph(graph1);
+			
+			
 			System.out.println("The TCA cycle, aerobic respiration graph: "+fileName2);
 			DirectedGraph<Integer, MyEdge> graph2 = createGraphFromBiopaxFile(fileName2);
-			visualizeGraph(graph2);
+			//visualizeGraph(graph2);
+			//findMetrics(graph1, graph2);
 			
-			findMetrics(graph1, graph2);
+			//initialize the graphQueries API
+			List<DirectedGraph<Integer, MyEdge>> graphSet = new ArrayList<DirectedGraph<Integer, MyEdge>>();
+			graphSet.add(graph1);
+			graphSet.add(graph2);
+			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
+			List<DirectedGraph<Integer, MyEdge>> tbe = graphQueries.getSubGraphList();
+			visualizeListOfSubGraphs(tbe);
 			
+			
+			/**** this is a dummy test set***/
+			List<DirectedGraph<Integer, MyEdge>> graphTestSet = createTestSet();
+			visualizeListOfSubGraphs(graphTestSet);
+			/**** this is a dummy test set***/
+			
+
 			System.out.println("Goodbye");		
 		}
 	
+
+	private static void visualizeListOfSubGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
+		for (Object temp : 
+			graphList.toArray()){
+			visualizeGraph((DirectedGraph<Integer, MyEdge>) temp);
+		}
+	}
+
+
+	private static List<DirectedGraph<Integer, MyEdge>> createTestSet() {
+		List<DirectedGraph<Integer, MyEdge>> graphList = 
+				new ArrayList<DirectedGraph<Integer, MyEdge>>();
+		
+		DirectedGraph<Integer, MyEdge> graph1 = new
+				DirectedSparseMultigraph<Integer, MyEdge>();
+		
+		return null;
+	}
+
 
 	/**
 	 * this is a primitive method that finds some metrics between graphs.

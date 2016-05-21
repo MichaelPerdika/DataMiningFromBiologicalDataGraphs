@@ -27,10 +27,11 @@ public class GraphQueriesAPI {
 		//TODO
 		if (graphSet.size() < 2){
 			System.out.println("ERROR!!! The size of graphSet must have at least"
-					+ "at least two instances. You gave: "+graphSet.size()+". Exiting");
+					+ " two instances. You gave: "+graphSet.size()+". Exiting");
 			System.exit(0);
 		}
 		setGraphList(graphSet);
+		setSubGraphList(new ArrayList<DirectedGraph<Integer, MyEdge>>());
 		this.patternTable = new ArrayList<List<Integer>>();
 		findPatternsInGraphs();
 	}
@@ -86,12 +87,14 @@ public class GraphQueriesAPI {
 				}
 			}
 		}
-		/****TBE****/
+		/*
+		//TBE
 		for (Object temp : 
 			commonSubGraphList.toArray()){
 			System.out.print(temp.toString());
 		}
-		/****TBE****/
+		//TBE
+		*/
 		return commonSubGraphList;
 	}
 
@@ -147,9 +150,27 @@ public class GraphQueriesAPI {
 	private void mergeSubGraphToPatternTable(
 			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs) {
 		// TODO Auto-generated method stub
-		/******THis has to be changed!!!!***/
-		this.subGraphList = tempSubGraphs;
-		/***********************************/
+		
+		for(Object curTempSubGraph : tempSubGraphs.toArray()){
+			DirectedGraph<Integer, MyEdge> prev = (DirectedGraph<Integer, MyEdge>)curTempSubGraph;
+			boolean alreadyExists = false;
+			//line!=null && !line.isEmpty()
+			if (getSubGraphList().isEmpty()){
+				this.subGraphList.add(prev);
+			}
+			else{
+				for(Object curSubGraph : getSubGraphList().toArray()){
+					DirectedGraph<Integer, MyEdge> next = (DirectedGraph<Integer, MyEdge>)curSubGraph;
+					if(prev.equals(next)){
+						alreadyExists = true;
+					}
+				}
+			}
+			if(!alreadyExists){
+				this.subGraphList.add(prev);
+			}
+		}
+		
 	}
 	
 	public List<DirectedGraph<Integer, MyEdge>> getGraphList() {

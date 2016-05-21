@@ -40,18 +40,22 @@ public class Application {
 			//visualizeGraph(graph2);
 			//findMetrics(graph1, graph2);
 			
+			/*
 			//initialize the graphQueries API
 			List<DirectedGraph<Integer, MyEdge>> graphSet = new ArrayList<DirectedGraph<Integer, MyEdge>>();
 			graphSet.add(graph1);
 			graphSet.add(graph2);
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
-			List<DirectedGraph<Integer, MyEdge>> tbe = graphQueries.getSubGraphList();
-			visualizeListOfSubGraphs(tbe);
-			
+			visualizeListOfSubGraphs(graphQueries.getSubGraphList(););
+			*/
 			
 			/**** this is a dummy test set***/
-			List<DirectedGraph<Integer, MyEdge>> graphTestSet = createTestSet();
-			visualizeListOfSubGraphs(graphTestSet);
+			List<DirectedGraph<Integer, MyEdge>> graphTestSet = 
+					TestingClass.fetchTestSet1();
+			//List<DirectedGraph<Integer, MyEdge>> graphTestSet = createTestSet();
+			GraphQueriesAPI testGraphQueries = new GraphQueriesAPI(graphTestSet);
+			visualizeListOfSubGraphs(testGraphQueries.getSubGraphList());
+			printListOfSubGraphs(testGraphQueries.getSubGraphList());
 			/**** this is a dummy test set***/
 			
 
@@ -59,9 +63,18 @@ public class Application {
 		}
 	
 
+	private static void printListOfSubGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
+		for (Object temp : graphList.toArray()){
+			DirectedGraph<Integer, MyEdge> graph = 
+					(DirectedGraph<Integer, MyEdge>) temp;
+			System.out.println(graph.toString());
+		}
+		
+	}
+
+
 	private static void visualizeListOfSubGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
-		for (Object temp : 
-			graphList.toArray()){
+		for (Object temp : graphList.toArray()){
 			visualizeGraph((DirectedGraph<Integer, MyEdge>) temp);
 		}
 	}
@@ -71,10 +84,25 @@ public class Application {
 		List<DirectedGraph<Integer, MyEdge>> graphList = 
 				new ArrayList<DirectedGraph<Integer, MyEdge>>();
 		
+		/*******graph1**********/
 		DirectedGraph<Integer, MyEdge> graph1 = new
 				DirectedSparseMultigraph<Integer, MyEdge>();
-		
-		return null;
+		graph1.addEdge(new MyEdge("A", 0, 1), 0, 1);
+		graph1.addEdge(new MyEdge("B", 1, 2), 1, 2);
+		graph1.addEdge(new MyEdge("C", 2, 3), 2, 3);
+		graph1.addEdge(new MyEdge("D", 3, 0), 3, 0);
+		graph1.addEdge(new MyEdge("E", 3, 4), 3, 4);
+		graphList.add(graph1);
+		/*******graph2**********/
+		DirectedGraph<Integer, MyEdge> graph2 = new
+				DirectedSparseMultigraph<Integer, MyEdge>();
+		graph2.addEdge(new MyEdge("A", 5, 6), 5, 6);
+		graph2.addEdge(new MyEdge("B", 6, 7), 6, 7);
+		graph2.addEdge(new MyEdge("E", 7, 8), 7, 8);
+		graphList.add(graph2);
+		/*******graph3**********/
+		/*******graph4**********/
+		return graphList;
 	}
 
 

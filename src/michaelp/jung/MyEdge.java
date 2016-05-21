@@ -22,9 +22,17 @@ public class MyEdge {
 	 * @param startNode
 	 * @param endNode
 	 */
-	public MyEdge(String edge, Integer startNode, Integer endNode){
+	public MyEdge(String edgeName, Integer startNode, Integer endNode){
 		//TODO erase this constructor.
-		
+		this.edgeRDFid = edgeName;
+		this.startNodes = null;
+		this.endNodes = null;
+		this.eCNumber = new String[] {edgeName};
+		this.edgeName = edgeName;
+		this.nextStepRDFids = null;
+		this.stepConversion = null;
+		this.startNode = startNode;
+		this.endNode = endNode;
 	}
 	
 	/**

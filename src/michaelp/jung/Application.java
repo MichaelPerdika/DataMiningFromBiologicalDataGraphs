@@ -40,34 +40,23 @@ public class Application {
 			//visualizeGraph(graph2);
 			//findMetrics(graph1, graph2);
 			
-			/*
+			
 			//initialize the graphQueries API
 			List<DirectedGraph<Integer, MyEdge>> graphSet = new ArrayList<DirectedGraph<Integer, MyEdge>>();
 			graphSet.add(graph1);
 			graphSet.add(graph2);
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
-			visualizeListOfSubGraphs(graphQueries.getSubGraphList(););
-			*/
+			visualizeListOfSubGraphs(graphQueries.getSubGraphList());
 			
-			/**** this is a dummy test set***/
-			List<DirectedGraph<Integer, MyEdge>> graphTestSet = 
-					TestingClass.fetchTestSet1();
-			//GraphQueriesAPI testGraphQueries = new GraphQueriesAPI(graphTestSet);
-			//visualizeListOfSubGraphs(testGraphQueries.getSubGraphList());
-			//printListOfSubGraphs(testGraphQueries.getSubGraphList());
-			GraphQueriesAPI t = new GraphQueriesAPI();
-			 List<DirectedGraph<Integer, MyEdge>> mjk = 
-					 t.findCommonSubGraphs(graphTestSet.get(0), graphTestSet.get(2));
-			 visualizeListOfSubGraphs(mjk);
-			 printListOfSubGraphs(mjk);
-			/**** this is a dummy test set***/
+			
+			
 			
 
 			System.out.println("Goodbye");		
 		}
 	
 
-	private static void printListOfSubGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
+	public static void printListOfSubGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
 		for (Object temp : graphList.toArray()){
 			DirectedGraph<Integer, MyEdge> graph = 
 					(DirectedGraph<Integer, MyEdge>) temp;
@@ -77,7 +66,7 @@ public class Application {
 	}
 
 
-	private static void visualizeListOfSubGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
+	public static void visualizeListOfSubGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
 		for (Object temp : graphList.toArray()){
 			visualizeGraph((DirectedGraph<Integer, MyEdge>) temp);
 		}
@@ -307,7 +296,7 @@ public class Application {
 	 * This method visualizes a graph
 	 * @param graph
 	 */
-	private static void visualizeGraph(DirectedGraph<Integer, MyEdge> graph) {
+	public static void visualizeGraph(DirectedGraph<Integer, MyEdge> graph) {
 		// The visualization. Code from JUNG
 		Graph<Integer, String> covGraph = convertGraphForVisualization(graph);
 		

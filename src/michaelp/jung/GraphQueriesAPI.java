@@ -200,7 +200,7 @@ public class GraphQueriesAPI {
 			else{
 				for(Object curSubGraph : getSubGraphList().toArray()){
 					DirectedGraph<Integer, MyEdge> next = (DirectedGraph<Integer, MyEdge>)curSubGraph;
-					if(prev.equals(next)){
+					if(graphEquality(prev,next)){
 						alreadyExists = true;
 					}
 				}
@@ -212,6 +212,41 @@ public class GraphQueriesAPI {
 		
 	}
 	
+	/**
+	 * this function checks if two graphs are equal (have the same edges, vertices are irrelevant)
+	 * @param graph1
+	 * @param graph2
+	 * @return true if equal or else false
+	 */
+	private boolean graphEquality(DirectedGraph<Integer, MyEdge> graph1, 
+			DirectedGraph<Integer, MyEdge> graph2) {
+		// TODO This method needs better implementation. For example A->B is not same as B->A
+		// but this method will return True. Do this in the future.
+		
+		if (graph1.getEdgeCount()!=graph2.getEdgeCount() || 
+				graph1.getVertexCount()!=graph2.getVertexCount()){
+			return false;
+		}
+		else{
+			Collection<MyEdge> edgesCollection1 = graph1.getEdges();
+			Collection<MyEdge> edgesCollection2 = graph2.getEdges();
+			for ( MyEdge edge1 : edgesCollection1){
+				boolean noEqual = true;
+				for ( MyEdge edge2 : edgesCollection2){
+					if (edge1.equals(edge2)){
+						noEqual = false;
+						break;
+					}
+				}
+				if(noEqual){
+					return false;
+				}
+			}
+			return true;
+		}
+		
+	}
+
 	public List<DirectedGraph<Integer, MyEdge>> getGraphList() {
 		return graphList;
 	}

@@ -1,4 +1,4 @@
-package michaelp.jung;
+package main.jung;
 
 public class MyNode {
 	private int nodeId; 

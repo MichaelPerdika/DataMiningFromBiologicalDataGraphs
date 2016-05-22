@@ -1,4 +1,4 @@
-package michaelp.jung;
+package main.jung;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;

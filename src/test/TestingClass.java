@@ -1,10 +1,11 @@
-package michaelp.jung;
+package test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
+import main.jung.MyEdge;
 
 public class TestingClass {
 
@@ -49,7 +50,7 @@ public class TestingClass {
 		return graphList;
 	}
 	
-	private static void addEdge(DirectedGraph<Integer, MyEdge> graph, 
+	public static void addEdge(DirectedGraph<Integer, MyEdge> graph, 
 			String edge, Integer startNode, Integer endNode) {
 		graph.addEdge(new MyEdge(edge, startNode, endNode), startNode, endNode);
 		

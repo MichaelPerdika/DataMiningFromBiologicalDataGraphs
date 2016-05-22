@@ -1,4 +1,4 @@
-package michaelp.jung;
+package main.jung;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,7 +67,7 @@ public class GraphQueriesAPI {
 	 * @param graph1
 	 * @param graph2
 	 */
-	private static List<DirectedGraph<Integer, MyEdge>> findCommonEdges(
+	 public List<DirectedGraph<Integer, MyEdge>> findCommonEdges(
 			DirectedGraph<Integer, MyEdge> graph1, 
 			DirectedGraph<Integer, MyEdge> graph2) {
 
@@ -102,7 +102,7 @@ public class GraphQueriesAPI {
 	 * @param edge
 	 * @return true if the edge is found in at least one subGraph from the list
 	 */
-	private static boolean checkIfAlreadyFoundInCommonSubGraphList(
+	private boolean checkIfAlreadyFoundInCommonSubGraphList(
 			List<DirectedGraph<Integer, MyEdge>> commonSubGraphList, MyEdge edge) {
 		// TODO Auto-generated method stub
 		
@@ -186,7 +186,7 @@ public class GraphQueriesAPI {
 	 * this method merges a list of subGraphs to the global subGraphList
 	 * @param tempSubGraphs
 	 */
-	private void mergeSubGraphToPatternTable(
+	public void mergeSubGraphToPatternTable(
 			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs) {
 		// TODO Auto-generated method stub
 		
@@ -196,6 +196,7 @@ public class GraphQueriesAPI {
 			//line!=null && !line.isEmpty()
 			if (getSubGraphList().isEmpty()){
 				this.subGraphList.add(prev);
+				continue;
 			}
 			else{
 				for(Object curSubGraph : getSubGraphList().toArray()){
@@ -218,7 +219,7 @@ public class GraphQueriesAPI {
 	 * @param graph2
 	 * @return true if equal or else false
 	 */
-	private boolean graphEquality(DirectedGraph<Integer, MyEdge> graph1, 
+	public boolean graphEquality(DirectedGraph<Integer, MyEdge> graph1, 
 			DirectedGraph<Integer, MyEdge> graph2) {
 		// TODO This method needs better implementation. For example A->B is not same as B->A
 		// but this method will return True. Do this in the future.

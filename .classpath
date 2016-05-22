@@ -8,5 +8,6 @@
 			<attribute name="javadoc_location" value="file:/home/michaelp/workspace/eclipse_workspace/DataMiningFromBiologicalDataGraphs/libraries/jung2_2_0_1/apidocs/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

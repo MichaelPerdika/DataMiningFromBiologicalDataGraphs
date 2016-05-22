@@ -1,4 +1,4 @@
-package michaelp.jung;
+package main.jung;
 
 import java.util.Map;
 import java.util.Map.Entry;

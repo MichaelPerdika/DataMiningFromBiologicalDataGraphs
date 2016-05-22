@@ -1,8 +1,11 @@
-package michaelp.jung;
+package test;
 
 import java.util.List;
 
 import edu.uci.ics.jung.graph.DirectedGraph;
+import main.jung.Application;
+import main.jung.GraphQueriesAPI;
+import main.jung.MyEdge;
 
 public class UnitTesting {
 

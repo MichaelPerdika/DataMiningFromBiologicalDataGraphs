@@ -1,4 +1,4 @@
-package michaelp.jung;
+package main.jung;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -16,8 +16,7 @@ public class GraphQueriesAPI {
 	/**
 	 * empty constructor never to be called
 	 */
-	@SuppressWarnings("unused")
-	private GraphQueriesAPI(){}
+	public GraphQueriesAPI(){}
 	
 	/**
 	 * Constructor that will create the grapSet the subGraphSet and the patternTable
@@ -63,9 +62,8 @@ public class GraphQueriesAPI {
 		return findCommonEdges(graph1, graph2);
 	}
 	
-
 	/**
-	 * To Be erased. Dummy function that returns common subgraphs
+	 * insert description
 	 * @param graph1
 	 * @param graph2
 	 */
@@ -80,69 +78,110 @@ public class GraphQueriesAPI {
 		//DirectedGraph<Integer, MyEdge> commonSubGraph = 
 		//		new DirectedSparseMultigraph<Integer, MyEdge>();
 		for (MyEdge edge1 : colEdges1){
-			for (MyEdge edge2 : colEdges2){
-				if (edge1.equals(edge2)){
-					appendEdgeToSubGraph(commonSubGraphList, edge1, 
-							edge1.getStartNode(), edge1.getEndNode());
+			//if already found then skip checking. Go to another edge1.
+			if(!checkIfAlreadyFoundInCommonSubGraphList(commonSubGraphList, edge1)){
+				for (MyEdge edge2 : colEdges2){
+					if (edge1.equals(edge2)){
+						DirectedGraph<Integer, MyEdge> commonSubGraph = 
+								new DirectedSparseMultigraph<Integer, MyEdge>();
+						appendNextEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2);
+						appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2);
+						//this might need rework
+						commonSubGraphList.add(commonSubGraph);
+					}
 				}
 			}
+			
 		}
-		/*
-		//TBE
-		for (Object temp : 
-			commonSubGraphList.toArray()){
-			System.out.print(temp.toString());
-		}
-		//TBE
-		*/
 		return commonSubGraphList;
 	}
 
 	/**
-	 * 
-	 * @param graphList
+	 * checks if an edge is contained in the list of SubGraphs.
+	 * @param commonSubGraphList
 	 * @param edge
-	 * @param startNode
-	 * @param endNode
+	 * @return true if the edge is found in at least one subGraph from the list
 	 */
-	private static void appendEdgeToSubGraph(
-			List<DirectedGraph<Integer, MyEdge>> graphList, 
-			MyEdge edge, Integer startNode, Integer endNode) {
+	private static boolean checkIfAlreadyFoundInCommonSubGraphList(
+			List<DirectedGraph<Integer, MyEdge>> commonSubGraphList, MyEdge edge) {
 		// TODO Auto-generated method stub
-		if (graphList.isEmpty()){
-			DirectedGraph<Integer, MyEdge> tempGraph = 
-					new DirectedSparseMultigraph<Integer, MyEdge>();
-			tempGraph.addEdge(edge, startNode, endNode);
-			graphList.add(tempGraph);
-		}
-		else{
-			// iterate through the existing graphs to see if this edge
-			// should be an extension of a subGraph or a part of a new subGraph
-			boolean neverFound = true;
-			for (int i=0; i<graphList.size();i++){
-				DirectedGraph<Integer, MyEdge> curSubGraph = graphList.get(i);
-				// if the vertexes exist in the current subgraph then the 
-				// edge must be added here
-				if(curSubGraph.containsVertex(startNode) || 
-						curSubGraph.containsVertex(endNode)){
-					curSubGraph.addEdge(edge, startNode, endNode);
-					neverFound = false;
-					// NOTE! there could be a "break" here but we want 
-					// to see if this edge could be added in other subGraphs as well 
-				}
-			}
-			// now the edge is supposed to be appended wherever it fitted. If
-			// not found then create a new subGraph with only this edge
-			if (neverFound){
-				DirectedGraph<Integer, MyEdge> tempGraph = 
-						new DirectedSparseMultigraph<Integer, MyEdge>();
-				tempGraph.addEdge(edge, startNode, endNode);
-				graphList.add(tempGraph);
-			}
-		}
 		
+		for (Object curObj : commonSubGraphList.toArray()){
+			DirectedGraph<Integer, MyEdge> curSubGraph = 
+					(DirectedGraph<Integer, MyEdge>)curObj;
+			if(curSubGraph.containsEdge(edge)){
+				return true;
+			}
+		}
+		return false;
 	}
 
+	/**
+	 * recursive method that will add all the next edges to commonSubGraph.
+	 * This method mutates "commonSubGraph"
+	 * @param commonSubGraph
+	 * @param graph1
+	 * @param graph2
+	 * @param edge1
+	 * @param edge2
+	 */
+	private static void appendNextEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
+			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, 
+			MyEdge edge1, MyEdge edge2) {
+		// TODO Auto-generated method stub
+		// It doesn't matter if we add edge1 or edge2 since they are the same.
+		if (!commonSubGraph.containsEdge(edge1)){
+			commonSubGraph.addEdge(edge1, edge1.getStartNode(), edge1.getEndNode());
+			
+			Collection<MyEdge> nextEdges1 = graph1.getOutEdges(edge1.getEndNode());
+			Collection<MyEdge> nextEdges2 = graph2.getOutEdges(edge2.getEndNode());
+			for (MyEdge next1 : nextEdges1){
+				for (MyEdge next2: nextEdges2){
+					if(next1.equals(next2)){
+						appendNextEdgesToCommonSubGraph(commonSubGraph,graph1,graph2,next1,next2);
+					}
+				}
+			}
+		}
+		//else do nothing just return from the method
+	}
+	
+	/**
+	 * recursive method that will add all the previous edges to commonSubGraph.
+	 * The previous edges are added indirectly because they are added in the call 
+	 * of appendNextEdgesToCommonSubGraph.
+	 * This method mutates "commonSubGraph"
+	 * @param commonSubGraph
+	 * @param graph1
+	 * @param graph2
+	 * @param edge1
+	 * @param edge2
+	 */
+	private static void appendPreviousEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
+			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, MyEdge edge1, MyEdge edge2) {
+		// TODO Auto-generated method stub
+		//this has to be here because when going backward to see previous edges these edges may
+		//have more than 1 next edges. So need to search these branches first before going backwards
+		//again. If the next edges are already in the commonSubGraph then "appendNextEdgesToCommonSubGraph"
+		// will do nothing
+		appendNextEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2);
+
+		// Here we append only the previous ones.
+		Collection<MyEdge> previousEdges1 = graph1.getInEdges(edge1.getStartNode());
+		Collection<MyEdge> previousEdges2 = graph2.getInEdges(edge2.getStartNode());
+		for (MyEdge previous1 : previousEdges1){
+			for (MyEdge previous2: previousEdges2){
+				if(previous1.equals(previous2)){
+					appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, 
+							previous1, previous2);
+				}
+			}
+		}
+	}
+	
+
+	
+	
 	/**
 	 * this method merges a list of subGraphs to the global subGraphList
 	 * @param tempSubGraphs
@@ -197,6 +236,5 @@ public class GraphQueriesAPI {
 	public void setPatternTable(List<List<Integer>> patternTable) {
 		this.patternTable = patternTable;
 	}
-
 
 }

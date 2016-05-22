@@ -52,10 +52,14 @@ public class Application {
 			/**** this is a dummy test set***/
 			List<DirectedGraph<Integer, MyEdge>> graphTestSet = 
 					TestingClass.fetchTestSet1();
-			//List<DirectedGraph<Integer, MyEdge>> graphTestSet = createTestSet();
-			GraphQueriesAPI testGraphQueries = new GraphQueriesAPI(graphTestSet);
-			visualizeListOfSubGraphs(testGraphQueries.getSubGraphList());
-			printListOfSubGraphs(testGraphQueries.getSubGraphList());
+			//GraphQueriesAPI testGraphQueries = new GraphQueriesAPI(graphTestSet);
+			//visualizeListOfSubGraphs(testGraphQueries.getSubGraphList());
+			//printListOfSubGraphs(testGraphQueries.getSubGraphList());
+			GraphQueriesAPI t = new GraphQueriesAPI();
+			 List<DirectedGraph<Integer, MyEdge>> mjk = 
+					 t.findCommonSubGraphs(graphTestSet.get(0), graphTestSet.get(2));
+			 visualizeListOfSubGraphs(mjk);
+			 printListOfSubGraphs(mjk);
 			/**** this is a dummy test set***/
 			
 
@@ -79,31 +83,6 @@ public class Application {
 		}
 	}
 
-
-	private static List<DirectedGraph<Integer, MyEdge>> createTestSet() {
-		List<DirectedGraph<Integer, MyEdge>> graphList = 
-				new ArrayList<DirectedGraph<Integer, MyEdge>>();
-		
-		/*******graph1**********/
-		DirectedGraph<Integer, MyEdge> graph1 = new
-				DirectedSparseMultigraph<Integer, MyEdge>();
-		graph1.addEdge(new MyEdge("A", 0, 1), 0, 1);
-		graph1.addEdge(new MyEdge("B", 1, 2), 1, 2);
-		graph1.addEdge(new MyEdge("C", 2, 3), 2, 3);
-		graph1.addEdge(new MyEdge("D", 3, 0), 3, 0);
-		graph1.addEdge(new MyEdge("E", 3, 4), 3, 4);
-		graphList.add(graph1);
-		/*******graph2**********/
-		DirectedGraph<Integer, MyEdge> graph2 = new
-				DirectedSparseMultigraph<Integer, MyEdge>();
-		graph2.addEdge(new MyEdge("A", 5, 6), 5, 6);
-		graph2.addEdge(new MyEdge("B", 6, 7), 6, 7);
-		graph2.addEdge(new MyEdge("E", 7, 8), 7, 8);
-		graphList.add(graph2);
-		/*******graph3**********/
-		/*******graph4**********/
-		return graphList;
-	}
 
 
 	/**

@@ -1,8 +1,13 @@
 package main.jung;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
@@ -221,7 +226,8 @@ public class GraphQueriesAPI {
 	 */
 	public boolean graphEquality(DirectedGraph<Integer, MyEdge> graph1, 
 			DirectedGraph<Integer, MyEdge> graph2) {
-		// TODO This method needs better implementation. For example A->B is not same as B->A
+		// TODO This method needs better implementation. 
+		// For example A->B is not same as B->A
 		// but this method will return True. Do this in the future.
 		
 		if (graph1.getEdgeCount()!=graph2.getEdgeCount() || 
@@ -229,25 +235,160 @@ public class GraphQueriesAPI {
 			return false;
 		}
 		else{
-			Collection<MyEdge> edgesCollection1 = graph1.getEdges();
-			Collection<MyEdge> edgesCollection2 = graph2.getEdges();
-			for ( MyEdge edge1 : edgesCollection1){
-				boolean noEqual = true;
-				for ( MyEdge edge2 : edgesCollection2){
-					if (edge1.equals(edge2)){
-						noEqual = false;
-						break;
-					}
-				}
-				if(noEqual){
-					return false;
-				}
-			}
-			return true;
+			
+			Map<Integer, Map<Integer, List<String>>> canLabAdjList1 = 
+					getCanonicalLabelAdjList(graph1);
+			Map<Integer, Map<Integer, List<String>>> canLabAdjList2 = 
+					getCanonicalLabelAdjList(graph2);
+			return canonicalLabelEquality(canLabAdjList1, canLabAdjList2);
 		}
-		
 	}
 
+	/**
+	 * this method returns the "canonical label" adjacent list of a graph.
+	 * This list shows which vertex goes to which vertices with which edges
+	 * @param graph
+	 * @return the "canonical label" adjacent list.
+	 */
+	public Map<Integer, Map<Integer, List<String>>> getCanonicalLabelAdjList(
+			DirectedGraph<Integer, MyEdge> graph){
+
+		Map<Integer, Map<Integer, List<String>>> cLAdjList = 
+				new HashMap<Integer, Map<Integer, List<String>>>();
+		for (Integer vertex : graph.getVertices()){
+			Map<Integer, List<String>> tempMap = new HashMap<Integer, List<String>>();
+			for (MyEdge edge : graph.getOutEdges(vertex)){
+				Integer endNode = edge.getEndNode();
+				String edgeName = edge.toString();
+				if (tempMap.containsKey(endNode)){
+					tempMap.get(endNode).add(edgeName);
+				}
+				else{
+					ArrayList<String> tempArray = new ArrayList<String>();
+					tempArray.add(edgeName);
+					tempMap.put(endNode, tempArray);
+				}
+			}
+			cLAdjList.put(vertex, tempMap);
+		}
+		
+		return cLAdjList;
+	}
+
+	/**
+	 * this method gets two canonical label adjacent lists and checks if
+	 * they are equal.
+	 * @param canLabAdjList1 
+	 * @param canLabAdjList2
+	 * @return
+	 */
+	public boolean canonicalLabelEquality(Map<Integer, Map<Integer, List<String>>> canLabAdjList1,
+			Map<Integer, Map<Integer, List<String>>> canLabAdjList2) {
+		
+		if (canLabAdjList1 == null && canLabAdjList2 == null){
+	        return true;
+	    }
+		if((canLabAdjList1 == null && canLabAdjList2 != null) 
+			      || canLabAdjList1 != null && canLabAdjList2 == null
+			      || canLabAdjList1.size() != canLabAdjList2.size()){
+			        return false;
+		}
+		// create a deep copy of both of them because we are going 
+		// to mutate them
+		Map<Integer, Map<Integer, List<String>>> adjList1 = DeepClone.deepClone(canLabAdjList1);
+		Map<Integer, Map<Integer, List<String>>> adjList2 = DeepClone.deepClone(canLabAdjList2);
+		// if they haven't the same size or are empty return false.
+		if (adjList1.size() != adjList2.size() || adjList2.isEmpty() || adjList1.isEmpty()){
+			return false;
+		}
+		// as equality we denote two CL that have the same "form of vertices"
+		// that have the same edge names. For example: 
+		// {1 : {2:['a', 'm'],3:['b']}, 2: { 3:['c']}} is equal to
+		// {4 : {5:['a', 'm'],6:['b']}, 5: { 6:['c']}}
+		while (!adjList1.isEmpty() ){
+			boolean matchFound = false;
+			// get the next entry from adjList1
+			Entry<Integer, Map<Integer, List<String>>> entry1 = adjList1.entrySet().iterator().next();
+			// iterate all the entries of the 2nd list to see if it match.
+			for (Entry<Integer, Map<Integer, List<String>>> entry2 : adjList2.entrySet()){
+				if(canonicalLabelEntryEquality(entry1.getValue(), entry2.getValue())){
+					adjList1.remove(entry1.getKey());
+					adjList2.remove(entry2.getKey());
+					matchFound = true;
+					break;
+				}
+			}
+			// if the break from the above for loop is not reached then 
+			// entry1 dind't find a map from entry 2 to match
+			if (!matchFound) return false;
+		}
+		// if it exits normally the while then the two lists are the same so return true
+		return true;
+	}
+	
+	/**
+	 * this method gets two entries of canonical label rows 
+	 * and will return true if they are equal. By equal we denote same number 
+	 * of vertices (not same indexes in particular) that have the same edge names
+	 * @param map1
+	 * @param map2
+	 * @return true if they are "equal" else false.
+	 */
+	public boolean canonicalLabelEntryEquality(Map<Integer, List<String>> map1,
+			Map<Integer, List<String>> map2) {
+		
+		if (map1 == null && map2 == null){
+	        return true;
+	    }
+		if((map1 == null && map2 != null) 
+			      || map1 != null && map2 == null
+			      || map1.size() != map2.size()){
+			        return false;
+		}
+		// we are going to mutate the map2 so copy it
+		Map<Integer, List<String>> m2 = DeepClone.deepClone(map2);
+
+		for (Entry<Integer, List<String>> entry1 : map1.entrySet()){
+			boolean matchFound = false;
+			for (Entry<Integer, List<String>> entry2 : m2.entrySet()){
+				
+				if (equalLists(entry1.getValue(), entry2.getValue())){
+					//go the the next iteration of entry1 and remove
+					// the entry of m2. We don't won't to check again
+					m2.remove(entry2.getKey());
+					matchFound = true;
+					break;
+				}
+			}
+			// if no match then return false
+			if (!matchFound)	return false;
+		}
+		// if it exits the double for loop then it means that the two
+		// maps indeed match
+		return true;
+	}
+
+	public  boolean equalLists(List<String> one, List<String> two){     
+	    if (one == null && two == null){
+	        return true;
+	    }
+
+	    if((one == null && two != null) 
+	      || one != null && two == null
+	      || one.size() != two.size()){
+	        return false;
+	    }
+
+	    //to avoid messing the order of the lists we will use a copy
+	    //as noted in comments by A. R. S.
+	    one = new ArrayList<String>(one); 
+	    two = new ArrayList<String>(two);   
+
+	    Collections.sort(one);
+	    Collections.sort(two);      
+	    return one.equals(two);
+	}
+	
 	public List<DirectedGraph<Integer, MyEdge>> getGraphList() {
 		return graphList;
 	}

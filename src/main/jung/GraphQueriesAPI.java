@@ -229,7 +229,13 @@ public class GraphQueriesAPI {
 		// TODO This method needs better implementation. 
 		// For example A->B is not same as B->A
 		// but this method will return True. Do this in the future.
-		
+		if (graph1 == null && graph2 == null){
+	        return true;
+	    }
+		if((graph1 == null && graph2 != null) 
+			      || graph1 != null && graph2 == null){
+			        return false;
+		}
 		if (graph1.getEdgeCount()!=graph2.getEdgeCount() || 
 				graph1.getVertexCount()!=graph2.getVertexCount()){
 			return false;

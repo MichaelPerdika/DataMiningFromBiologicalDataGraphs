@@ -1,7 +1,6 @@
 package main.jung;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,23 +38,27 @@ public class GraphQueriesAPI {
 	}
 	
 	/**
-	 * This method finds all the subgraphs and fills the patternTable and subGraphList
+	 * This is the main method of this API that finds all the 
+	 * subgraphs and fills the patternTable and subGraphList
 	 */
 	public void findPatternsInGraphs(){
-		//TODO
+		//TODO add min_support sigma = {0, 1}
 		if (this.graphList.size() < 2){
 			System.out.println("ERROR!!! The size of graphSet must have at least"
 					+ " two instances. You gave: "+this.graphList.size()+". Exiting");
 			System.exit(0);
 		}
+		// check all graphs with each other.
 		for (int i=0;i<graphList.size();i++){
 			for (int j=i+1;j<graphList.size();j++){
-				List<DirectedGraph<Integer, MyEdge>> tempSubGraphs = 
-						findCommonSubGraphs(graphList.get(i), graphList.get(j));
-				mergeSubGraphsToGlobalSubGraphList(tempSubGraphs);
+				mergeSubGraphsToGlobalSubGraphList(
+						findCommonSubGraphsBetweenTwoGraphs(graphList.get(i), graphList.get(j)), 
+						i, j);
 			}
 		}
+		//fillThePatternTable //TODO
 	}
+
 
 	/**
 	 * This method returns a List of common subGraphs between graph1, graph2
@@ -63,10 +66,10 @@ public class GraphQueriesAPI {
 	 * @param graph2 the second graph to be checked
 	 * @return the common subGraphs as a list of DirectedGraphs.
 	 */
-	public List<DirectedGraph<Integer, MyEdge>> findCommonSubGraphs(
+	public List<DirectedGraph<Integer, MyEdge>> findCommonSubGraphsBetweenTwoGraphs(
 			DirectedGraph<Integer, MyEdge> graph1, 
 			DirectedGraph<Integer, MyEdge> graph2){
-		//TODO
+		//TODO this method is useless for now. Either erase it or utilize it
 		return findCommonEdges(graph1, graph2);
 	}
 	
@@ -83,13 +86,13 @@ public class GraphQueriesAPI {
 				new ArrayList<DirectedGraph<Integer, MyEdge>>();
 		Collection<MyEdge> colEdges1 = graph1.getEdges();
 		Collection<MyEdge> colEdges2 = graph2.getEdges();
-		//DirectedGraph<Integer, MyEdge> commonSubGraph = 
-		//		new DirectedSparseMultigraph<Integer, MyEdge>();
 		for (MyEdge edge1 : colEdges1){
 			//if already found then skip checking. Go to another edge1.
-			if(!checkIfAlreadyFoundInCommonSubGraphList(commonSubGraphList, edge1)){
+			if(!checkIfEdgeAlreadyFoundInCommonSubGraphList(commonSubGraphList, edge1)){
 				for (MyEdge edge2 : colEdges2){
-					if (edge1.equals(edge2)){
+					//TODO instead of equals use something like "similarity" that takes
+					// as argument min_support sigma = 0 - 100 %
+					if (edge1.equals(edge2)){ 
 						DirectedGraph<Integer, MyEdge> commonSubGraph = 
 								new DirectedSparseMultigraph<Integer, MyEdge>();
 						appendNextEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2);
@@ -110,7 +113,7 @@ public class GraphQueriesAPI {
 	 * @param edge
 	 * @return true if the edge is found in at least one subGraph from the list
 	 */
-	private boolean checkIfAlreadyFoundInCommonSubGraphList(
+	private boolean checkIfEdgeAlreadyFoundInCommonSubGraphList(
 			List<DirectedGraph<Integer, MyEdge>> commonSubGraphList, MyEdge edge) {
 		// TODO Auto-generated method stub
 		
@@ -191,19 +194,22 @@ public class GraphQueriesAPI {
 	
 	
 	/**
-	 * this method merges a list of subGraphs to the global subGraphList
-	 * @param tempSubGraphs
+	 * this method merges a list of subGraphs to the global subGraphList. 
+	 * And updated the patternTable
+	 * @param tempSubGraphs is the comonSubGraphs between the comparison of graph1ID and graph2ID
+	 * @param graph1ID first graph ID. Is going to needed to fill the patternTable
+	 * @param graph2ID second graph ID. Is going to needed to fill the patternTable
 	 */
 	public void mergeSubGraphsToGlobalSubGraphList(
-			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs) {
+			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs, int graph1ID, int graph2ID) {
 		// TODO Auto-generated method stub
 		
 		for(Object curTempSubGraph : tempSubGraphs.toArray()){
 			DirectedGraph<Integer, MyEdge> prev = (DirectedGraph<Integer, MyEdge>)curTempSubGraph;
 			boolean alreadyExists = false;
-			//line!=null && !line.isEmpty()
 			if (getSubGraphList().isEmpty()){
 				this.subGraphList.add(prev);
+				appendNewRowInPatternTable(graph1ID, graph2ID);
 				continue;
 			}
 			else{
@@ -211,16 +217,65 @@ public class GraphQueriesAPI {
 					DirectedGraph<Integer, MyEdge> next = (DirectedGraph<Integer, MyEdge>)curSubGraph;
 					if(graphEquality(prev,next)){
 						alreadyExists = true;
+						break; //TODO this brake has to go. And put updatePatternTable here.
 					}
 				}
 			}
 			if(!alreadyExists){
 				this.subGraphList.add(prev);
+				appendNewRowInPatternTable(graph1ID, graph2ID);
 			}
 		}
 		
 	}
 	
+	/**
+	 * this method adds a new row in the patternTable with 1 for the graphs that 
+	 * "match" with the two graph id's and -1 elsewhere
+	 * @param graph1id
+	 * @param graph2id
+	 */
+	private void appendNewRowInPatternTable(int graph1id, int graph2id) {
+		// TODO Auto-generated method stub
+		List<Integer> newRow = new ArrayList<Integer>(graphList.size()); 
+		for (int index=0; index<graphList.size();index++){
+			if (index==graph1id || index==graph2id) newRow.add(index, 1);
+			else newRow.add(index, -1);
+		}
+		this.patternTable.add(newRow);
+		
+	}
+	
+	/**
+	 * prints the pattern table
+	 */
+	public void printPatternTable(){
+		
+		/**** print the graphs ***/
+		for (int i=0; i<graphList.size();i++){
+			System.out.println("g"+i+" = "+graphList.get(i));
+		}
+		System.out.println("");
+		/**** print the patterns */
+		for (int i=0; i<subGraphList.size();i++){
+			System.out.println("p"+i+" = "+subGraphList.get(i));
+		}
+		System.out.println("");
+		/**** print the grid******/
+		System.out.print("   ");
+		for (int num=0; num<graphList.size();num++){
+			System.out.print("g"+num+" ");
+		}
+		System.out.println("");
+		for (int i=0;i<patternTable.size();i++){
+			System.out.print("p"+i+" ");
+			for (int j=0;j<patternTable.get(i).size();j++){
+				System.out.print(patternTable.get(i).get(j)+"  ");
+			}
+			System.out.println("");
+		}
+	}
+
 	/**
 	 * this function checks if two graphs are equal (have the same edges, vertices are irrelevant)
 	 * @param graph1

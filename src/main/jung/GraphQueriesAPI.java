@@ -19,9 +19,13 @@ public class GraphQueriesAPI {
 	private List<List<Integer>> patternTable;
 	
 	/**
-	 * empty constructor never to be called
+	 * empty constructor initialize to null
 	 */
-	public GraphQueriesAPI(){}
+	public GraphQueriesAPI(){
+		setGraphList(new ArrayList<DirectedGraph<Integer, MyEdge>>());
+		setSubGraphList(new ArrayList<DirectedGraph<Integer, MyEdge>>());
+		setPatternTable(new ArrayList<List<Integer>>());
+	}
 	
 	/**
 	 * Constructor that will create the grapSet the subGraphSet and the patternTable
@@ -29,15 +33,9 @@ public class GraphQueriesAPI {
 	 */
 	public GraphQueriesAPI(List<DirectedGraph<Integer, MyEdge>> graphSet) {
 		//TODO
-		if (graphSet.size() < 2){
-			System.out.println("ERROR!!! The size of graphSet must have at least"
-					+ " two instances. You gave: "+graphSet.size()+". Exiting");
-			System.exit(0);
-		}
 		setGraphList(graphSet);
 		setSubGraphList(new ArrayList<DirectedGraph<Integer, MyEdge>>());
-		this.patternTable = new ArrayList<List<Integer>>();
-		findPatternsInGraphs();
+		setPatternTable(new ArrayList<List<Integer>>());
 	}
 	
 	/**
@@ -45,11 +43,16 @@ public class GraphQueriesAPI {
 	 */
 	public void findPatternsInGraphs(){
 		//TODO
+		if (this.graphList.size() < 2){
+			System.out.println("ERROR!!! The size of graphSet must have at least"
+					+ " two instances. You gave: "+this.graphList.size()+". Exiting");
+			System.exit(0);
+		}
 		for (int i=0;i<graphList.size();i++){
 			for (int j=i+1;j<graphList.size();j++){
 				List<DirectedGraph<Integer, MyEdge>> tempSubGraphs = 
 						findCommonSubGraphs(graphList.get(i), graphList.get(j));
-				mergeSubGraphToPatternTable(tempSubGraphs);
+				mergeSubGraphsToGlobalSubGraphList(tempSubGraphs);
 			}
 		}
 	}
@@ -191,7 +194,7 @@ public class GraphQueriesAPI {
 	 * this method merges a list of subGraphs to the global subGraphList
 	 * @param tempSubGraphs
 	 */
-	public void mergeSubGraphToPatternTable(
+	public void mergeSubGraphsToGlobalSubGraphList(
 			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs) {
 		// TODO Auto-generated method stub
 		
@@ -399,6 +402,10 @@ public class GraphQueriesAPI {
 		return graphList;
 	}
 
+	public void addGraphToGraphSet(DirectedGraph<Integer, MyEdge> graph){
+		this.graphList.add(graph);
+	}
+	
 	public void setGraphList(List<DirectedGraph<Integer, MyEdge>> graphSet) {
 		//create a copy of it
 		this.graphList = new ArrayList<DirectedGraph<Integer, MyEdge>> (graphSet);

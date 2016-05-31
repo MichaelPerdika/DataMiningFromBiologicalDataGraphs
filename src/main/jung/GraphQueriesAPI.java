@@ -56,7 +56,7 @@ public class GraphQueriesAPI {
 						i, j);
 			}
 		}
-		//fillThePatternTable //TODO
+		fillTheCompletePatternTable();
 	}
 
 
@@ -202,7 +202,8 @@ public class GraphQueriesAPI {
 	 */
 	public void mergeSubGraphsToGlobalSubGraphList(
 			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs, int graph1ID, int graph2ID) {
-		// TODO Auto-generated method stub
+		// TODO maybe use IsSubGraphInPatternTable here???
+		// TODO do the above
 		
 		for(Object curTempSubGraph : tempSubGraphs.toArray()){
 			DirectedGraph<Integer, MyEdge> prev = (DirectedGraph<Integer, MyEdge>)curTempSubGraph;
@@ -213,12 +214,14 @@ public class GraphQueriesAPI {
 				continue;
 			}
 			else{
+				int subGraphId = 0;
 				for(Object curSubGraph : getSubGraphList().toArray()){
 					DirectedGraph<Integer, MyEdge> next = (DirectedGraph<Integer, MyEdge>)curSubGraph;
 					if(graphEquality(prev,next)){
 						alreadyExists = true;
-						break; //TODO this brake has to go. And put updatePatternTable here.
+						updateExistingRowInPatternTable(subGraphId, graph1ID, graph2ID);
 					}
+					subGraphId++;
 				}
 			}
 			if(!alreadyExists){
@@ -228,7 +231,7 @@ public class GraphQueriesAPI {
 		}
 		
 	}
-	
+
 	/**
 	 * this method adds a new row in the patternTable with 1 for the graphs that 
 	 * "match" with the two graph id's and -1 elsewhere
@@ -246,6 +249,153 @@ public class GraphQueriesAPI {
 		
 	}
 	
+	/**
+	 * this method updates the row subGraphId and columns graph1ID and graph2ID.
+	 * If these cells have -1 then convert them to 1. If these cells have >=1 then 
+	 * increment them by 1.
+	 * @param subGraphId
+	 * @param graph1id
+	 * @param graph2id
+	 */
+	private void updateExistingRowInPatternTable(int subGraphId, int graph1id, int graph2id) {
+		int cellValue1 = this.patternTable.get(subGraphId).get(graph1id);
+		int cellValue2 = this.patternTable.get(subGraphId).get(graph2id);
+		// TODO I only set values to 1. How to make it increment???
+		// TODO maybe outside of this method or pass more arguments
+
+		/********* graph1id ********/
+		if ( cellValue1 != 0){
+			insertPatternTableCell(subGraphId, graph1id, 1);}
+		else {//it should never enter here
+			System.out.println("error in updateExistingRowInPatternTable, cell ("
+					+ subGraphId +", "+graph1id+") is 0");
+			System.exit(0);}
+		/********* graph2id ********/
+		if ( cellValue2 != 0){
+			insertPatternTableCell(subGraphId, graph2id, 1);}
+		else {//it should never enter here
+			System.out.println("error in updateExistingRowInPatternTable, cell ("
+					+ subGraphId +", "+graph2id+") is 0");
+			System.exit(0);}
+		
+	}
+	
+	/**
+	 * In this method the patternTable has created all possible rows.
+	 * But there are still -1 so search for all -1 and alter them to 0 or 1.
+	 */
+	private void fillTheCompletePatternTable() {
+		// TODO Auto-generated method stub
+		// we iterate through the columns (graphs) and check the patterns with
+		// -1 if they match with any other pattern of graph(col)
+		for (int col=0; col<getGraphList().size(); col++){
+			for (int row=0; row<getSubGraphList().size(); row++){
+				if (getPatternTable().get(row).get(col) >= 1){
+					continue; // go to the next row (pattern)
+				}
+				// need to check this -1 and do it 1 or 0.
+				else if (getPatternTable().get(row).get(col) == -1 ){
+					// need to check if pattern (row,col) match any from (*,col).
+					updateColumnOfPatternTable(row, col);
+				}
+				else{//it should never enter here (value ==0)
+					System.out.println("error in fillTheCompletePatternTable, cell ("
+							+ row +", "+col+") is 0");
+					System.exit(0);
+				}
+			}
+		}
+		
+	}
+	
+	/**
+	 * we want to check the testingRow (with value -1) of the pattern table
+	 * given the specific column (graph id) check if the pattern testingRow match
+	 * any other pattern of the same column. If yes then testingRow = 1 else 0.
+	 * @param testingRow
+	 * @param columnGraph
+	 */
+	private void updateColumnOfPatternTable(int testingRow, int columnGraph) {
+		// TODO Auto-generated method stub
+		for (int row=0; row<getSubGraphList().size(); row++){
+			if (row == testingRow || getPatternTable().get(row).get(columnGraph)<=0){
+				continue;
+			}
+			else{
+				List<DirectedGraph<Integer, MyEdge>> commonSubGraph = 
+						findCommonSubGraphsBetweenTwoGraphs(
+								getSubGraphList().get(testingRow), 
+								getSubGraphList().get(row));
+				// no common patterns
+				if (commonSubGraph.size() == 0){
+					continue;
+				}
+				else{
+					for (Object tempObject : commonSubGraph.toArray()){
+						DirectedGraph<Integer, MyEdge> tempSubGraph = 
+								(DirectedGraph<Integer, MyEdge>)tempObject;
+						// all the commonSubGraphs that are found must be in the pattern table.
+						// if not it is an error thats why it must never enter the if statement
+						int foundIndex = isSubGraphInPatternTable(tempSubGraph);
+						if (foundIndex <= 0){
+							System.out.println("error in updateColumnOfPatternTable."
+									+ "This pattern was found and it wasn't on the patternTable");
+							System.out.println(tempObject);
+							System.exit(0);
+						}
+						// if found then update -1 to 1
+						if (foundIndex == testingRow){
+							insertPatternTableCell(testingRow, columnGraph, 1);
+							break;
+						}
+						else{
+							if(getPatternTable().get(foundIndex).get(columnGraph) == -1){
+								System.out.println("Warning 1 in updateColumnOfPatternTable. check this out");
+							}
+							else if(getPatternTable().get(foundIndex).get(columnGraph) == 0){
+								System.out.println("error in updateColumnOfPatternTable."
+										+ "the pattern that was found has value 0");
+								System.exit(0);
+							}
+							// else if it has >=1 do nothing
+						}
+					}
+				}
+			}
+		}
+		// if it was never found and the change -1 to 1 hasn't happen then set to 0
+		if (getPatternTable().get(testingRow).get(columnGraph)== -1){
+			insertPatternTableCell(testingRow, columnGraph, 0);
+		}
+	}
+
+	/**
+	 * this method checks if subGraph exists in the patternTable and returns its index 
+	 * (instead of true or false). If found return the index 0 to n. If not found return -1
+	 * and if the subGraphList is empty return -2.
+	 * @param subGraph
+	 * @return -2, -1 or 0 to n if subGraphList is empty, graph not found or index if found 
+	 * correspondingly
+	 */
+	private int isSubGraphInPatternTable(DirectedGraph<Integer, MyEdge> subGraph) {
+		// TODO Auto-generated method stub
+		if (getSubGraphList().isEmpty()){
+			return -2;
+		}
+		else{
+			int index = 0;
+			for(Object curObj : getSubGraphList().toArray()){
+				DirectedGraph<Integer, MyEdge> curSubGraph = (DirectedGraph<Integer, MyEdge>)curObj;
+				if(graphEquality(subGraph,curSubGraph)){
+					return index;
+				}
+				index++;
+			}
+		}
+		// if not found the return false
+		return -1;
+	}
+
 	/**
 	 * prints the pattern table
 	 */
@@ -480,6 +630,10 @@ public class GraphQueriesAPI {
 
 	public void setPatternTable(List<List<Integer>> patternTable) {
 		this.patternTable = patternTable;
+	}
+	
+	public void insertPatternTableCell(int row, int col, int value) {
+		this.patternTable.get(row).set(col, value);
 	}
 
 }

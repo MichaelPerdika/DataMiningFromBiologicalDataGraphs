@@ -102,8 +102,10 @@ public class GraphQueriesAPI {
 					if (comEdge != null){ 
 						DirectedGraph<Integer, MyEdge> commonSubGraph = 
 								new DirectedSparseMultigraph<Integer, MyEdge>();
-						appendNextEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2, comEdge);
-						appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2);
+						appendNextEdgesToCommonSubGraph(commonSubGraph, 
+								graph1, graph2, edge1, edge2, comEdge, threshold);
+						appendPreviousEdgesToCommonSubGraph(commonSubGraph, 
+								graph1, graph2, edge1, edge2, comEdge, threshold);
 						//this might need rework
 						commonSubGraphList.add(commonSubGraph);
 					}
@@ -123,7 +125,7 @@ public class GraphQueriesAPI {
 	  * @return MyEdge if there is a common edge or null if there is none 
 	  * (instead of true or false)
 	  */
-	 public MyEdge getMyEdgeFromThreshold(MyEdge edge1, MyEdge edge2, double threshold) {
+	 public static MyEdge getMyEdgeFromThreshold(MyEdge edge1, MyEdge edge2, double threshold) {
 		// TODO Auto-generated method stub
 		MyEdge comEdge;
 		List<List<String>> e1 = parseEdgeNames(edge1);
@@ -176,7 +178,7 @@ public class GraphQueriesAPI {
 	  * @param subStr2
 	  * @return
 	  */
-	 public String getParsedEdgeName(List<String> subStr1, List<String> subStr2) {
+	 public static String getParsedEdgeName(List<String> subStr1, List<String> subStr2) {
 		// TODO Auto-generated method stub
 		int length1 = subStr1.size(), length2 = subStr2.size();
 		int maxLength = length1, minLength = length1;
@@ -193,12 +195,12 @@ public class GraphQueriesAPI {
 					parsedName = subStr1.get(i);
 				}
 				else{
-					//there might be problem with dot because is used in regular expresion
-					parsedName += "."+subStr1.get(i);
+					//there might be problem with dot because is used in regular expression
+					parsedName += "x"+subStr1.get(i);
 				}
 			}
 			else{
-				parsedName += ".*";
+				parsedName += "xM";
 				break;
 			}
 		}
@@ -253,7 +255,7 @@ public class GraphQueriesAPI {
 	 * @param subStr2
 	 * @return
 	 */
-	public double getParsedEdgeScore(List<String> subStr1, List<String> subStr2) {
+	public static double getParsedEdgeScore(List<String> subStr1, List<String> subStr2) {
 		// TODO Auto-generated method stub
 		int length1 = subStr1.size(), length2 = subStr2.size();
 		int maxLength = length1, minLength = length1;
@@ -299,21 +301,26 @@ public class GraphQueriesAPI {
 	 * @param graph2
 	 * @param edge1
 	 * @param edge2
+	 * @param comEdge 
+	 * @param threshold 
 	 */
 	private static void appendNextEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
 			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, 
-			MyEdge edge1, MyEdge edge2) {
+			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold) {
 		// TODO Auto-generated method stub
-		// It doesn't matter if we add edge1 or edge2 since they are the same.
-		if (!commonSubGraph.containsEdge(edge1)){
-			commonSubGraph.addEdge(edge1, edge1.getStartNode(), edge1.getEndNode());
+		// Insert the common edge. It doesn't matter which vertices 
+		// we add edge1 or edge2 since they are the same.
+		if (!commonSubGraph.containsEdge(comEdge)){
+			commonSubGraph.addEdge(comEdge, edge1.getStartNode(), edge1.getEndNode());
 			
 			Collection<MyEdge> nextEdges1 = graph1.getOutEdges(edge1.getEndNode());
 			Collection<MyEdge> nextEdges2 = graph2.getOutEdges(edge2.getEndNode());
 			for (MyEdge next1 : nextEdges1){
 				for (MyEdge next2: nextEdges2){
-					if(next1.equals(next2)){
-						appendNextEdgesToCommonSubGraph(commonSubGraph,graph1,graph2,next1,next2);
+					MyEdge nextComEdge = getMyEdgeFromThreshold(next1, next2, threshold);
+					if(nextComEdge != null){
+						appendNextEdgesToCommonSubGraph(commonSubGraph,
+								graph1,graph2,next1,next2, nextComEdge,threshold);
 					}
 				}
 			}
@@ -331,24 +338,29 @@ public class GraphQueriesAPI {
 	 * @param graph2
 	 * @param edge1
 	 * @param edge2
+	 * @param threshold 
+	 * @param comEdge 
 	 */
 	private static void appendPreviousEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
-			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, MyEdge edge1, MyEdge edge2) {
+			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, 
+			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold) {
 		// TODO Auto-generated method stub
 		//this has to be here because when going backward to see previous edges these edges may
 		//have more than 1 next edges. So need to search these branches first before going backwards
 		//again. If the next edges are already in the commonSubGraph then "appendNextEdgesToCommonSubGraph"
 		// will do nothing
-		appendNextEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2);
+		appendNextEdgesToCommonSubGraph(commonSubGraph, 
+				graph1, graph2, edge1, edge2, comEdge, threshold);
 
 		// Here we append only the previous ones.
 		Collection<MyEdge> previousEdges1 = graph1.getInEdges(edge1.getStartNode());
 		Collection<MyEdge> previousEdges2 = graph2.getInEdges(edge2.getStartNode());
 		for (MyEdge previous1 : previousEdges1){
 			for (MyEdge previous2: previousEdges2){
-				if(previous1.equals(previous2)){
+				MyEdge prevComEdge = getMyEdgeFromThreshold(previous1, previous2, threshold);
+				if(prevComEdge !=null){
 					appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, 
-							previous1, previous2);
+							previous1, previous2, prevComEdge, threshold);
 				}
 			}
 		}
@@ -507,10 +519,11 @@ public class GraphQueriesAPI {
 				continue;
 			}
 			else{
+				// TODO maybe instead of threshold 1 pass the real threshold???
 				List<DirectedGraph<Integer, MyEdge>> commonSubGraph = 
 						findCommonSubGraphsBetweenTwoGraphs(
 								getSubGraphList().get(testingRow), 
-								getSubGraphList().get(row));
+								getSubGraphList().get(row),1);
 				// no common patterns
 				if (commonSubGraph.size() == 0){
 					continue;
@@ -793,7 +806,7 @@ public class GraphQueriesAPI {
 	 * @param myEdge
 	 * @return
 	 */
-	public List<List<String>> parseEdgeNames(MyEdge myEdge){
+	public static List<List<String>> parseEdgeNames(MyEdge myEdge){
 		//System.out.println(myEdge);
 		String[] eCNumbers = myEdge.getECNumber();
 		//System.out.println("Length is: "+eCNumbers.length);

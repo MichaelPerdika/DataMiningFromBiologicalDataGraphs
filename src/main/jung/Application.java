@@ -48,6 +48,7 @@ public class Application {
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
 			graphQueries.findPatternsInGraphs();
 			visualizeListOfSubGraphs(graphQueries.getSubGraphList());
+			graphQueries.printPatternTable();
 			
 			
 			

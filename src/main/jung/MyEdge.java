@@ -36,6 +36,26 @@ public class MyEdge {
 	}
 	
 	/**
+	 * this constructor is used only for testing
+	 * it has to be erased later on!!!!!!!!
+	 * @param edge 
+	 * @param startNode
+	 * @param endNode
+	 */
+	public MyEdge(String[] edgeName, Integer startNode, Integer endNode){
+		//TODO erase this constructor.
+		this.edgeRDFid = edgeName[0];
+		this.startNodes = null;
+		this.endNodes = null;
+		this.eCNumber = edgeName;
+		this.edgeName = edgeName[0];
+		this.nextStepRDFids = null;
+		this.stepConversion = null;
+		this.startNode = startNode;
+		this.endNode = endNode;
+	}
+	
+	/**
 	 * this constructor takes a BioPaxGraph edge entry and converts it to MyEdge
 	 * @param entry
 	 */
@@ -53,14 +73,19 @@ public class MyEdge {
 	@Override
 	public String toString() {
 		//TODO
-        
+		String temp = "";
+		for (String t : eCNumber){
+			temp += t+" ";
+		}
+		return temp;
+        /*
 		String temp = "[";
 		for (String t : eCNumber){
 			temp += t+" ";
 		}
 		temp += "]";
-		return temp; //eCNumber
-		//return edgeName.substring(1,edgeName.length()-1);//remove the []
+		return temp
+		*/
     }
 
 	public String getEdgeRDFid() {

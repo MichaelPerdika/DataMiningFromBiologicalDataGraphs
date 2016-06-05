@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
@@ -43,6 +44,7 @@ public class GraphQueriesAPI {
 	 */
 	public void findPatternsInGraphs(){
 		//TODO add min_support sigma = {0, 1}
+		//TODO and add tolerance for "graph matching" for example 2.2.2.2 = 2.2.1.1. with 50%
 		if (this.graphList.size() < 2){
 			System.out.println("ERROR!!! The size of graphSet must have at least"
 					+ " two instances. You gave: "+this.graphList.size()+". Exiting");
@@ -191,8 +193,6 @@ public class GraphQueriesAPI {
 	}
 	
 
-	
-	
 	/**
 	 * this method merges a list of subGraphs to the global subGraphList. 
 	 * And updated the patternTable
@@ -201,6 +201,29 @@ public class GraphQueriesAPI {
 	 * @param graph2ID second graph ID. Is going to needed to fill the patternTable
 	 */
 	public void mergeSubGraphsToGlobalSubGraphList(
+			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs, int graph1ID, int graph2ID) {
+		// TODO maybe use IsSubGraphInPatternTable here???
+		// TODO do the above
+		
+		for(Object curTempSubGraph : tempSubGraphs.toArray()){
+			DirectedGraph<Integer, MyEdge> prev = (DirectedGraph<Integer, MyEdge>)curTempSubGraph;
+			int subGraphIndex = isSubGraphInPatternTable(prev);
+			if (subGraphIndex < 0){
+				this.subGraphList.add(prev);
+				appendNewRowInPatternTable(graph1ID, graph2ID);
+			}
+			else{
+				updateExistingRowInPatternTable(subGraphIndex, graph1ID, graph2ID);
+			}
+		}
+		
+	}
+	
+	/**
+	 * TBE!!!
+	 * if the mergeSubGraphsToGlobalSubGraphList is not working replace with that
+	 */
+	private void mergeSubGraphsToGlobalSubGraphListOLD(
 			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs, int graph1ID, int graph2ID) {
 		// TODO maybe use IsSubGraphInPatternTable here???
 		// TODO do the above
@@ -601,6 +624,33 @@ public class GraphQueriesAPI {
 	    Collections.sort(one);
 	    Collections.sort(two);      
 	    return one.equals(two);
+	}
+	
+	/**
+	 * there are still some errors when i give two empty strings
+	 * @param myEdge
+	 * @return
+	 */
+	public List<List<String>> parseEdgeNames(MyEdge myEdge){
+		System.out.println(myEdge);
+		String[] eCNumbers = myEdge.getECNumber();
+		System.out.println("Length is: "+eCNumbers.length);
+		ArrayList<List<String>> listOfStrings = 
+				new ArrayList<List<String>>();
+		//iterate through the ECNumbers
+		for ( int i=0 ;i<eCNumbers.length;i++){
+			System.out.println("HI");
+			ArrayList<String> tempList = new ArrayList<String>();
+			String[] subECNum = eCNumbers[i].split(Pattern.quote(".")); // Split on period.
+			//System.out.println("Length of sub is: "+subECNum.length);
+			//iterate inside an ECNumber
+			for (int j=0;j<subECNum.length;j++){
+				tempList.add(subECNum[j]);
+			}
+			listOfStrings.add(tempList);
+		}
+		//System.out.println(listOfStrings);
+		return listOfStrings;
 	}
 	
 	public List<DirectedGraph<Integer, MyEdge>> getGraphList() {

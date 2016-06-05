@@ -15,7 +15,7 @@ public class ApplicationTest {
 		List<DirectedGraph<Integer, MyEdge>> graphTestSet = 
 				fetchTestSet1();
 		GraphQueriesAPI testGraphQueries = new GraphQueriesAPI(graphTestSet);
-		testGraphQueries.findPatternsInGraphs();
+		testGraphQueries.findPatternsInGraphs(1);
 		//Application.visualizeListOfSubGraphs(testGraphQueries.getSubGraphList());
 		//Application.printListOfSubGraphs(testGraphQueries.getSubGraphList());
 		testGraphQueries.printPatternTable();

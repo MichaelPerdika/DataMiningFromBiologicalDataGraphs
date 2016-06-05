@@ -37,7 +37,7 @@ public class MyEdge {
 	
 	/**
 	 * this constructor is used only for testing
-	 * it has to be erased later on!!!!!!!!
+	 * I can keep it because is used in getMyEdgeFromThreshold
 	 * @param edge 
 	 * @param startNode
 	 * @param endNode

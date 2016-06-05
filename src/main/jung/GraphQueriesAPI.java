@@ -41,9 +41,11 @@ public class GraphQueriesAPI {
 	/**
 	 * This is the main method of this API that finds all the 
 	 * subgraphs and fills the patternTable and subGraphList
+	 * @param threshold is a number between 0% and 100% and is the threshold to
+	 * define if edge names (ECNumbers) are equal/similar
 	 */
-	public void findPatternsInGraphs(){
-		//TODO add min_support sigma = {0, 1}
+	public void findPatternsInGraphs(double threshold){
+		//TODO add min_support sigma = {0, 1} used in pattern table
 		//TODO and add tolerance for "graph matching" for example 2.2.2.2 = 2.2.1.1. with 50%
 		if (this.graphList.size() < 2){
 			System.out.println("ERROR!!! The size of graphSet must have at least"
@@ -54,7 +56,7 @@ public class GraphQueriesAPI {
 		for (int i=0;i<graphList.size();i++){
 			for (int j=i+1;j<graphList.size();j++){
 				mergeSubGraphsToGlobalSubGraphList(
-						findCommonSubGraphsBetweenTwoGraphs(graphList.get(i), graphList.get(j)), 
+						findCommonSubGraphsBetweenTwoGraphs(graphList.get(i), graphList.get(j), threshold), 
 						i, j);
 			}
 		}
@@ -66,23 +68,25 @@ public class GraphQueriesAPI {
 	 * This method returns a List of common subGraphs between graph1, graph2
 	 * @param graph1 the first graph to be checked
 	 * @param graph2 the second graph to be checked
+	 * @param threshold the threshold for the equality/similarity of edge names
 	 * @return the common subGraphs as a list of DirectedGraphs.
 	 */
 	public List<DirectedGraph<Integer, MyEdge>> findCommonSubGraphsBetweenTwoGraphs(
 			DirectedGraph<Integer, MyEdge> graph1, 
-			DirectedGraph<Integer, MyEdge> graph2){
+			DirectedGraph<Integer, MyEdge> graph2, double threshold){
 		//TODO this method is useless for now. Either erase it or utilize it
-		return findCommonEdges(graph1, graph2);
+		return findCommonEdges(graph1, graph2, threshold);
 	}
 	
 	/**
 	 * insert description
 	 * @param graph1
 	 * @param graph2
+	 * @param threshold 
 	 */
 	 public List<DirectedGraph<Integer, MyEdge>> findCommonEdges(
 			DirectedGraph<Integer, MyEdge> graph1, 
-			DirectedGraph<Integer, MyEdge> graph2) {
+			DirectedGraph<Integer, MyEdge> graph2, double threshold) {
 
 		List<DirectedGraph<Integer, MyEdge>> commonSubGraphList = 
 				new ArrayList<DirectedGraph<Integer, MyEdge>>();
@@ -94,10 +98,11 @@ public class GraphQueriesAPI {
 				for (MyEdge edge2 : colEdges2){
 					//TODO instead of equals use something like "similarity" that takes
 					// as argument min_support sigma = 0 - 100 %
-					if (edge1.equals(edge2)){ 
+					MyEdge comEdge = getMyEdgeFromThreshold(edge1, edge2, threshold);
+					if (comEdge != null){ 
 						DirectedGraph<Integer, MyEdge> commonSubGraph = 
 								new DirectedSparseMultigraph<Integer, MyEdge>();
-						appendNextEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2);
+						appendNextEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2, comEdge);
 						appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, edge1, edge2);
 						//this might need rework
 						commonSubGraphList.add(commonSubGraph);
@@ -107,6 +112,163 @@ public class GraphQueriesAPI {
 			
 		}
 		return commonSubGraphList;
+	}
+	 
+	 /**
+	  * this method returns the common MyEdge from edge1, edge2 that "passes" the 
+	  * threshold.
+	  * @param edge1
+	  * @param edge2
+	  * @param threshold
+	  * @return MyEdge if there is a common edge or null if there is none 
+	  * (instead of true or false)
+	  */
+	 public MyEdge getMyEdgeFromThreshold(MyEdge edge1, MyEdge edge2, double threshold) {
+		// TODO Auto-generated method stub
+		MyEdge comEdge;
+		List<List<String>> e1 = parseEdgeNames(edge1);
+		List<List<String>> e2 = parseEdgeNames(edge2);
+		if ((e1 == null && e2 == null) || 
+				(e1.size()==0 && e2.size()==0) ){
+			comEdge = new MyEdge(new String[] {edge1.toString()}, 
+					edge1.getStartNode(), edge1.getEndNode());
+	        return comEdge;
+	    }
+		if((e1 == null && e2 != null) 
+			      || (e1 != null && e2 == null)
+			      || (e1.size()==0 && e2.size() !=0)
+			      || (e1.size()!=0 && e2.size() ==0)){
+			        return null;
+		}
+		
+		double maxScore = -1, avgScore = 0;
+		String[] comName = new String[e1.size()];
+		for (int i=0;i<e1.size();i++){
+			maxScore = -1;
+			String tempComName = "";
+			for (int j=0;j<e2.size();j++){
+				double tempScore = getParsedEdgeScore(e1.get(i), e2.get(j));
+				String tempName = getParsedEdgeName(e1.get(i), e2.get(j));
+				if (maxScore < tempScore){
+					maxScore = tempScore;
+					tempComName = tempName;
+				}
+			}
+			avgScore += maxScore;
+			comName[i] = tempComName;
+		}
+		if (e1.size()==0 && e2.size() !=0)
+			return null;
+		else
+			avgScore = avgScore/e1.size();
+		if (avgScore >= threshold){ 
+			comEdge = new MyEdge(comName, edge1.getStartNode(), edge1.getEndNode());
+	        return comEdge;
+		}
+		else
+			return null;
+	}
+	 
+	 /**
+	  * returns the common subString in the form 2.2.1.* or "" if empty
+	  * but match or null if no match at all
+	  * @param subStr1
+	  * @param subStr2
+	  * @return
+	  */
+	 public String getParsedEdgeName(List<String> subStr1, List<String> subStr2) {
+		// TODO Auto-generated method stub
+		int length1 = subStr1.size(), length2 = subStr2.size();
+		int maxLength = length1, minLength = length1;
+		if (maxLength < length2) maxLength = length2;
+		if (minLength > length2) minLength = length2;
+		// they are equal to empty lists
+		if (length1 == 0 && length2 == 0) return "";
+		// one is empty the other not then they have nothing in common
+		if ((length1 == 0 && length2!=0) || (length1 !=0 && length2==0)) return null;
+		String parsedName ="";
+		for (int i=0; i<minLength;i++){
+			if (subStr1.get(i).equals(subStr2.get(i))){
+				if (i==0){
+					parsedName = subStr1.get(i);
+				}
+				else{
+					//there might be problem with dot because is used in regular expresion
+					parsedName += "."+subStr1.get(i);
+				}
+			}
+			else{
+				parsedName += ".*";
+				break;
+			}
+		}
+		return parsedName;
+	}
+
+	/**
+	 * This method may have to be deleted. Replaced from getMyEdgeFromThreshold
+	 * @param edge1
+	 * @param edge2
+	 * @param threshold value from 0% to 100%
+	 * @return true if the edges pass the equality according to threshold
+	 */
+	private boolean edgeEquality(MyEdge edge1, MyEdge edge2, double threshold) {
+		// TODO Auto-generated method stub
+		List<List<String>> e1 = parseEdgeNames(edge1);
+		List<List<String>> e2 = parseEdgeNames(edge2);
+		if ((e1 == null && e2 == null) || 
+				(e1.size()==0 && e2.size()==0) ){
+	        return true;
+	    }
+		if((e1 == null && e2 != null) 
+			      || (e1 != null && e2 == null)){
+			        return false;
+		}
+		
+		double maxScore = -1, avgScore = 0;
+		for (int i=0;i<e1.size();i++){
+			maxScore = -1;
+			for (int j=0;j<e2.size();j++){
+				double tempScore = getParsedEdgeScore(e1.get(i), e2.get(j));
+				if (maxScore < tempScore){
+					maxScore = tempScore;
+				}
+			}
+			avgScore += maxScore;
+		}
+		if (e1.size()==0 && e2.size() !=0)
+			return false;
+		else
+			avgScore = avgScore/e1.size();
+		if (avgScore >= threshold) 
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * This method may have to be deleted. Replaced from getMyEdgeFromThreshold
+	 * gets two parsed lists of eCnumbers and returns the similarity score
+	 * @param subStr1
+	 * @param subStr2
+	 * @return
+	 */
+	public double getParsedEdgeScore(List<String> subStr1, List<String> subStr2) {
+		// TODO Auto-generated method stub
+		int length1 = subStr1.size(), length2 = subStr2.size();
+		int maxLength = length1, minLength = length1;
+		if (maxLength < length2) maxLength = length2;
+		if (minLength > length2) minLength = length2;
+		// they are equal to empty lists
+		if (length1 == 0 && length2 == 0) return 1;
+		// one is empty the other not then they have nothing in common
+		if ((length1 == 0 && length2!=0) || (length1 !=0 && length2==0)) return 0;
+		double numOfMatches =0;
+		for (int i=0; i<minLength;i++){
+			if (subStr1.get(i).equals(subStr2.get(i))) numOfMatches++;
+			else break;
+		}
+		return numOfMatches/maxLength;
 	}
 
 	/**
@@ -632,14 +794,14 @@ public class GraphQueriesAPI {
 	 * @return
 	 */
 	public List<List<String>> parseEdgeNames(MyEdge myEdge){
-		System.out.println(myEdge);
+		//System.out.println(myEdge);
 		String[] eCNumbers = myEdge.getECNumber();
-		System.out.println("Length is: "+eCNumbers.length);
+		//System.out.println("Length is: "+eCNumbers.length);
 		ArrayList<List<String>> listOfStrings = 
 				new ArrayList<List<String>>();
 		//iterate through the ECNumbers
 		for ( int i=0 ;i<eCNumbers.length;i++){
-			System.out.println("HI");
+			//System.out.println("HI");
 			ArrayList<String> tempList = new ArrayList<String>();
 			String[] subECNum = eCNumbers[i].split(Pattern.quote(".")); // Split on period.
 			//System.out.println("Length of sub is: "+subECNum.length);

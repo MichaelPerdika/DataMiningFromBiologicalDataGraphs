@@ -345,7 +345,7 @@ public class GraphQueriesAPI {
 		System.out.println("    edgesVS = "+ edge1 + edge2);
 		System.out.println("    comEdge = "+ comEdge + "start:"+comEdge.getStartNode()+"end:"+comEdge.getEndNode());
 		System.out.println("    Before commonSubGraph = "+ commonSubGraph);
-		System.out.println("    trueOrFalse = "+ commonSubGraph.containsEdge(comEdge));
+		System.out.println("    trueOrFalse = "+ graphContainsEdge(commonSubGraph, comEdge)+" "+ commonSubGraph.containsEdge(comEdge));
 		//if (!commonSubGraph.containsEdge(comEdge)){
 		if (!graphContainsEdge(commonSubGraph, comEdge)){
 			commonSubGraph.addEdge(comEdge, edge1.getStartNode(), edge1.getEndNode());

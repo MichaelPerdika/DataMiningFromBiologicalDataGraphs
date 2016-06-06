@@ -32,12 +32,12 @@ public class Application {
 			
 			System.out.println("The TCA cycle I (prokaryotic) graph: "+fileName1);
 			DirectedGraph<Integer, MyEdge> graph1 = createGraphFromBiopaxFile(fileName1);
-			//visualizeGraph(graph1);
+			visualizeGraph(graph1);
 			
 			
 			System.out.println("The TCA cycle, aerobic respiration graph: "+fileName2);
 			DirectedGraph<Integer, MyEdge> graph2 = createGraphFromBiopaxFile(fileName2);
-			//visualizeGraph(graph2);
+			visualizeGraph(graph2);
 			//findMetrics(graph1, graph2);
 			
 			
@@ -46,9 +46,10 @@ public class Application {
 			graphSet.add(graph1);
 			graphSet.add(graph2);
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
-			graphQueries.findPatternsInGraphs(0.5);
-			visualizeListOfSubGraphs(graphQueries.getSubGraphList());
+			graphQueries.findPatternsInGraphs(1);
 			graphQueries.printPatternTable();
+			visualizeListOfSubGraphs(graphQueries.getSubGraphList());
+			
 			
 			
 			
@@ -342,12 +343,23 @@ public class Application {
 	 * @return The convenient Graph<Integer, String>
 	 */
 	private static Graph<Integer, String> convertGraphForVisualization(DirectedGraph<Integer, MyEdge> graph) {
-		Graph<Integer, String> covGraph = new DirectedSparseMultigraph<Integer, String>();
+		Graph<Integer, String> convGraph = new DirectedSparseMultigraph<Integer, String>();
 		Collection<MyEdge> collection = graph.getEdges();
+		String emptyEdgeNameIter = "";
 		for (MyEdge myEdge : collection){
-			covGraph.addEdge(myEdge.getEdgeName(), myEdge.getStartNode(), myEdge.getEndNode());
+			//TODO
+			//this is used for now because there might be edges with empty name "" but different start and 
+			// end points. If it exists then add a "_". This has to be changed
+			if (convGraph.containsEdge("")){
+				emptyEdgeNameIter += "_";
+				convGraph.addEdge(emptyEdgeNameIter, myEdge.getStartNode(), myEdge.getEndNode());
+			}
+			else{
+				// before it was only this line without the if/else
+				convGraph.addEdge(myEdge.getEdgeName(), myEdge.getStartNode(), myEdge.getEndNode());
+			}
 		}
-		return covGraph;
+		return convGraph;
 	}
 
 }

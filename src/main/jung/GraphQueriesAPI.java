@@ -205,7 +205,8 @@ public class GraphQueriesAPI {
 				}
 			}
 			else{
-				parsedName += ".*";
+				if (parsedName.length()>0) parsedName += ".*";
+				// else do nothing don't return ".*" just return ""
 				break;
 			}
 		}
@@ -213,7 +214,7 @@ public class GraphQueriesAPI {
 	}
 
 	/**
-	 * This method may have to be deleted. Replaced from getMyEdgeFromThreshold
+	 * This method may have to be deleted. Replaced from getCommonEdgeFromThreshold
 	 * @param edge1
 	 * @param edge2
 	 * @param threshold value from 0% to 100%
@@ -312,10 +313,13 @@ public class GraphQueriesAPI {
 		// TODO Auto-generated method stub
 		Collection<MyEdge> graphEdges = graph.getEdges();
 		for (MyEdge curEdge : graphEdges){
+			/*
 			if(edge.equals(curEdge) && edge.getStartNode()==curEdge.getStartNode()
 					&& edge.getEndNode() == curEdge.getEndNode()){
 				return true;
 			}
+			*/
+			if(edge.isIdentical(curEdge)) return true;
 		}
 		// if none found then return false
 		return false;

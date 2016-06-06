@@ -11,7 +11,7 @@ import org.junit.Test;
 import main.jung.GraphQueriesAPI;
 import main.jung.MyEdge;
 
-public class ParsedEdgeScoreTest {
+public class GetParsedEdgeScoreTest {
 	GraphQueriesAPI gQueris;
 	MyEdge edge1;
 	MyEdge edge2;
@@ -41,8 +41,9 @@ public class ParsedEdgeScoreTest {
 	public void oneNameEqual50() {
 		edge1 = new MyEdge("2.3.3.1", 0, 1);
 		edge2 = new MyEdge("2.3.5.5", 0, 1);
-		List<List<String>> e1 = gQueris.parseEdgeNames(edge1);
-		List<List<String>> e2 = gQueris.parseEdgeNames(edge2);
-		assertTrue(gQueris.parsedEdgeScore(e1.get(0), e2.get(0)) >= 0.5);
+		List<List<String>> e1 = GraphQueriesAPI.parseEdgeNames(edge1);
+		List<List<String>> e2 = GraphQueriesAPI.parseEdgeNames(edge2);
+		assertFalse(GraphQueriesAPI.getParsedEdgeScore(e1.get(0), e2.get(0)) >= 0.51);
+		assertTrue(GraphQueriesAPI.getParsedEdgeScore(e1.get(0), e2.get(0)) >= 0.50);
 	}
 }

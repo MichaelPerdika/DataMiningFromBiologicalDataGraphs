@@ -81,13 +81,14 @@ public class ApplicationTest {
 		TestingUtils.addEdge(graph2, "5.5.5.5",2, 3);
 		TestingUtils.addEdge(graph2, "2.3.4.5",3, 0);
 		graphList.add(graph2);
-		/*******graph3**********/
+		/*******graph3**********
 		DirectedGraph<Integer, MyEdge> graph3 = new
 				DirectedSparseMultigraph<Integer, MyEdge>();
 		TestingUtils.addEdge(graph3, "1.2.3.4",0, 1);
 		TestingUtils.addEdge(graph3, "3.3.3.3",1, 2);
 		TestingUtils.addEdge(graph3, "2.3.5.5",3, 0);
 		graphList.add(graph3);
+		*/
 		
 		return graphList;
 	}

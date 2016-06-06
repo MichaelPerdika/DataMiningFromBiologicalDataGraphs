@@ -117,6 +117,9 @@ public class MyEdge {
 		this.endNode = endNode;
 	}
 	
+	/**
+	 * as long as they have the same name. Don't worry for start and end nodes
+	 */
 	@Override
 	public boolean equals(Object other){
 	    if (other == null) return false;
@@ -124,6 +127,20 @@ public class MyEdge {
 	    if (!(other instanceof MyEdge))return false;
 	    MyEdge otherMyEdge = (MyEdge)other;
 	    if (this.edgeName.equals(otherMyEdge.getEdgeName())) return true;
+		return false;
+	}
+	
+	/**
+	 * same as equals but here we want the edges to be identical
+	 */
+	public boolean isIdentical(Object other){
+	    if (other == null) return false;
+	    if (other == this) return true;
+	    if (!(other instanceof MyEdge))return false;
+	    MyEdge otherMyEdge = (MyEdge)other;
+	    if (this.edgeName.equals(otherMyEdge.getEdgeName())
+	    		&& this.startNode == otherMyEdge.getStartNode()
+	    		&& this.endNode == otherMyEdge.getEndNode()) return true;
 		return false;
 	}
 }

@@ -95,11 +95,14 @@ public class GraphQueriesAPI {
 		for (MyEdge edge1 : colEdges1){
 			//if already found then skip checking. Go to another edge1.
 			if(!checkIfEdgeAlreadyFoundInCommonSubGraphList(commonSubGraphList, edge1)){
+				System.out.println("edge1 = " +edge1);
+				System.out.println("Before commonSubGraphList = " +commonSubGraphList);
 				for (MyEdge edge2 : colEdges2){
 					//TODO instead of equals use something like "similarity" that takes
 					// as argument min_support sigma = 0 - 100 %
-					MyEdge comEdge = getMyEdgeFromThreshold(edge1, edge2, threshold);
+					MyEdge comEdge = getCommonEdgeFromThreshold(edge1, edge2, threshold);
 					if (comEdge != null){ 
+						System.out.println("edge2 = " +edge2);
 						DirectedGraph<Integer, MyEdge> commonSubGraph = 
 								new DirectedSparseMultigraph<Integer, MyEdge>();
 						appendNextEdgesToCommonSubGraph(commonSubGraph, 
@@ -108,6 +111,8 @@ public class GraphQueriesAPI {
 								graph1, graph2, edge1, edge2, comEdge, threshold);
 						//this might need rework
 						commonSubGraphList.add(commonSubGraph);
+						System.out.println("After commonSubGraphList = " +commonSubGraphList);
+
 					}
 				}
 			}
@@ -125,7 +130,7 @@ public class GraphQueriesAPI {
 	  * @return MyEdge if there is a common edge or null if there is none 
 	  * (instead of true or false)
 	  */
-	 public static MyEdge getMyEdgeFromThreshold(MyEdge edge1, MyEdge edge2, double threshold) {
+	 public static MyEdge getCommonEdgeFromThreshold(MyEdge edge1, MyEdge edge2, double threshold) {
 		// TODO Auto-generated method stub
 		MyEdge comEdge;
 		List<List<String>> e1 = parseEdgeNames(edge1);
@@ -196,11 +201,11 @@ public class GraphQueriesAPI {
 				}
 				else{
 					//there might be problem with dot because is used in regular expression
-					parsedName += "x"+subStr1.get(i);
+					parsedName += "."+subStr1.get(i);
 				}
 			}
 			else{
-				parsedName += "xM";
+				parsedName += ".*";
 				break;
 			}
 		}
@@ -286,10 +291,33 @@ public class GraphQueriesAPI {
 		for (Object curObj : commonSubGraphList.toArray()){
 			DirectedGraph<Integer, MyEdge> curSubGraph = 
 					(DirectedGraph<Integer, MyEdge>)curObj;
-			if(curSubGraph.containsEdge(edge)){
+			//if(curSubGraph.containsEdge(edge)){
+			if(graphContainsEdge(curSubGraph, edge)){
 				return true;
 			}
 		}
+		return false;
+	}
+	
+	/**
+	 * This method tries to replace graph.containsEdge(MyEdge myEdge) because i Have found a bug.
+	 * if edge "A"[0,1] already in graph if I do graph.containsEdge("A"[0,1]) it might return
+	 * false (even though it exists). I think it is because it checks hashcode.
+	 * @param graph
+	 * @param edge
+	 * @return true if graph "really" contains edge.
+	 */
+	public static boolean graphContainsEdge(DirectedGraph<Integer, MyEdge> graph, 
+			MyEdge edge) {
+		// TODO Auto-generated method stub
+		Collection<MyEdge> graphEdges = graph.getEdges();
+		for (MyEdge curEdge : graphEdges){
+			if(edge.equals(curEdge) && edge.getStartNode()==curEdge.getStartNode()
+					&& edge.getEndNode() == curEdge.getEndNode()){
+				return true;
+			}
+		}
+		// if none found then return false
 		return false;
 	}
 
@@ -309,15 +337,20 @@ public class GraphQueriesAPI {
 			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold) {
 		// TODO Auto-generated method stub
 		// Insert the common edge. It doesn't matter which vertices 
-		// we add edge1 or edge2 since they are the same.
-		if (!commonSubGraph.containsEdge(comEdge)){
+		// we add edge1 or edge2. Add edge1 vertices as convention
+		System.out.println("    edgesVS = "+ edge1 + edge2);
+		System.out.println("    comEdge = "+ comEdge + "start:"+comEdge.getStartNode()+"end:"+comEdge.getEndNode());
+		System.out.println("    Before commonSubGraph = "+ commonSubGraph);
+		System.out.println("    trueOrFalse = "+ commonSubGraph.containsEdge(comEdge));
+		//if (!commonSubGraph.containsEdge(comEdge)){
+		if (!graphContainsEdge(commonSubGraph, comEdge)){
 			commonSubGraph.addEdge(comEdge, edge1.getStartNode(), edge1.getEndNode());
 			
 			Collection<MyEdge> nextEdges1 = graph1.getOutEdges(edge1.getEndNode());
 			Collection<MyEdge> nextEdges2 = graph2.getOutEdges(edge2.getEndNode());
 			for (MyEdge next1 : nextEdges1){
 				for (MyEdge next2: nextEdges2){
-					MyEdge nextComEdge = getMyEdgeFromThreshold(next1, next2, threshold);
+					MyEdge nextComEdge = getCommonEdgeFromThreshold(next1, next2, threshold);
 					if(nextComEdge != null){
 						appendNextEdgesToCommonSubGraph(commonSubGraph,
 								graph1,graph2,next1,next2, nextComEdge,threshold);
@@ -327,7 +360,8 @@ public class GraphQueriesAPI {
 		}
 		//else do nothing just return from the method
 	}
-	
+
+
 	/**
 	 * recursive method that will add all the previous edges to commonSubGraph.
 	 * The previous edges are added indirectly because they are added in the call 
@@ -349,6 +383,7 @@ public class GraphQueriesAPI {
 		//have more than 1 next edges. So need to search these branches first before going backwards
 		//again. If the next edges are already in the commonSubGraph then "appendNextEdgesToCommonSubGraph"
 		// will do nothing
+		System.out.println("                        mpika");
 		appendNextEdgesToCommonSubGraph(commonSubGraph, 
 				graph1, graph2, edge1, edge2, comEdge, threshold);
 
@@ -357,7 +392,7 @@ public class GraphQueriesAPI {
 		Collection<MyEdge> previousEdges2 = graph2.getInEdges(edge2.getStartNode());
 		for (MyEdge previous1 : previousEdges1){
 			for (MyEdge previous2: previousEdges2){
-				MyEdge prevComEdge = getMyEdgeFromThreshold(previous1, previous2, threshold);
+				MyEdge prevComEdge = getCommonEdgeFromThreshold(previous1, previous2, threshold);
 				if(prevComEdge !=null){
 					appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, 
 							previous1, previous2, prevComEdge, threshold);
@@ -536,9 +571,14 @@ public class GraphQueriesAPI {
 						// if not it is an error thats why it must never enter the if statement
 						int foundIndex = isSubGraphInPatternTable(tempSubGraph);
 						if (foundIndex <= 0){
-							System.out.println("error in updateColumnOfPatternTable."
+							//TODO I need to re-check this code
+							//this.subGraphList.add(tempSubGraph);
+							//appendNewRowInPatternTable(columnGraph, columnGraph);
+							System.out.println("error/Warning in updateColumnOfPatternTable."
 									+ "This pattern was found and it wasn't on the patternTable");
 							System.out.println(tempObject);
+							//continue;
+							// TODO
 							System.exit(0);
 						}
 						// if found then update -1 to 1
@@ -548,7 +588,8 @@ public class GraphQueriesAPI {
 						}
 						else{
 							if(getPatternTable().get(foundIndex).get(columnGraph) == -1){
-								System.out.println("Warning 1 in updateColumnOfPatternTable. check this out");
+								System.out.println("Warning 1 in updateColumnOfPatternTable. "
+										+ "check this out");
 							}
 							else if(getPatternTable().get(foundIndex).get(columnGraph) == 0){
 								System.out.println("error in updateColumnOfPatternTable."

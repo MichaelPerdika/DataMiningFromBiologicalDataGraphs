@@ -19,6 +19,7 @@ public class ApplicationTest {
 		//Application.visualizeListOfSubGraphs(testGraphQueries.getSubGraphList());
 		//Application.printListOfSubGraphs(testGraphQueries.getSubGraphList());
 		testGraphQueries.printPatternTable();
+		
 	}
 	
 	public static List<DirectedGraph<Integer, MyEdge>> fetchTestSet1() {
@@ -75,11 +76,18 @@ public class ApplicationTest {
 		/*******graph2**********/
 		DirectedGraph<Integer, MyEdge> graph2 = new
 				DirectedSparseMultigraph<Integer, MyEdge>();
-		TestingUtils.addEdge(graph2, "1.2.3.4",4, 5);
-		TestingUtils.addEdge(graph2, "3.1.1.1",5, 6);
-		TestingUtils.addEdge(graph2, "5.5.5.5",7, 6);
-		TestingUtils.addEdge(graph2, "2.3.4.5",4, 7);
+		TestingUtils.addEdge(graph2, "1.2.3.4",0, 1);
+		TestingUtils.addEdge(graph2, "3.3.1.1",1, 2);
+		TestingUtils.addEdge(graph2, "5.5.5.5",2, 3);
+		TestingUtils.addEdge(graph2, "2.3.4.5",3, 0);
 		graphList.add(graph2);
+		/*******graph3**********/
+		DirectedGraph<Integer, MyEdge> graph3 = new
+				DirectedSparseMultigraph<Integer, MyEdge>();
+		TestingUtils.addEdge(graph3, "1.2.3.4",0, 1);
+		TestingUtils.addEdge(graph3, "3.3.3.3",1, 2);
+		TestingUtils.addEdge(graph3, "2.3.5.5",3, 0);
+		graphList.add(graph3);
 		
 		return graphList;
 	}

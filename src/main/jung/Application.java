@@ -32,12 +32,12 @@ public class Application {
 			
 			System.out.println("The TCA cycle I (prokaryotic) graph: "+fileName1);
 			DirectedGraph<Integer, MyEdge> graph1 = createGraphFromBiopaxFile(fileName1);
-			visualizeGraph(graph1);
+			//visualizeGraph(graph1);
 			
 			
 			System.out.println("The TCA cycle, aerobic respiration graph: "+fileName2);
 			DirectedGraph<Integer, MyEdge> graph2 = createGraphFromBiopaxFile(fileName2);
-			visualizeGraph(graph2);
+			//visualizeGraph(graph2);
 			//findMetrics(graph1, graph2);
 			
 			
@@ -46,7 +46,7 @@ public class Application {
 			graphSet.add(graph1);
 			graphSet.add(graph2);
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
-			graphQueries.findPatternsInGraphs(0.25);
+			graphQueries.findPatternsInGraphs(0.75);
 			graphQueries.printPatternTable();
 			visualizeListOfSubGraphs(graphQueries.getSubGraphList());
 			

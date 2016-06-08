@@ -311,6 +311,7 @@ public class GraphQueriesAPI {
 	public static boolean graphContainsEdge(DirectedGraph<Integer, MyEdge> graph, 
 			MyEdge edge) {
 		// TODO Auto-generated method stub
+		if (graph == null || edge == null) return false;
 		Collection<MyEdge> graphEdges = graph.getEdges();
 		for (MyEdge curEdge : graphEdges){
 			/*
@@ -383,16 +384,21 @@ public class GraphQueriesAPI {
 		// will do nothing
 		appendNextEdgesToCommonSubGraph(commonSubGraph, 
 				graph1, graph2, edge1, edge2, comEdge, threshold);
-
+		
 		// Here we append only the previous ones.
 		Collection<MyEdge> previousEdges1 = graph1.getInEdges(edge1.getStartNode());
 		Collection<MyEdge> previousEdges2 = graph2.getInEdges(edge2.getStartNode());
 		for (MyEdge previous1 : previousEdges1){
 			for (MyEdge previous2: previousEdges2){
+				//TODO the bellow line
 				MyEdge prevComEdge = getCommonEdgeFromThreshold(previous1, previous2, threshold);
-				if(prevComEdge !=null){
-					appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, 
-							previous1, previous2, prevComEdge, threshold);
+				if (!graphContainsEdge(commonSubGraph, prevComEdge)){
+					if(prevComEdge !=null){
+						System.out.println("commonSubGraph");
+						System.out.println(commonSubGraph);
+						appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, 
+								previous1, previous2, prevComEdge, threshold);
+					}
 				}
 			}
 		}

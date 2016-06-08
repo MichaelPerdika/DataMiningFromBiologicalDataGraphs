@@ -15,7 +15,7 @@ public class ApplicationTest {
 		List<DirectedGraph<Integer, MyEdge>> graphTestSet = 
 				fetchTestSet2();
 		GraphQueriesAPI testGraphQueries = new GraphQueriesAPI(graphTestSet);
-		testGraphQueries.findPatternsInGraphs(0.25);
+		testGraphQueries.findPatternsInGraphs(0.5);
 		//Application.visualizeListOfSubGraphs(testGraphQueries.getSubGraphList());
 		//Application.printListOfSubGraphs(testGraphQueries.getSubGraphList());
 		testGraphQueries.printPatternTable();
@@ -64,7 +64,29 @@ public class ApplicationTest {
 	public static List<DirectedGraph<Integer, MyEdge>> fetchTestSet2() {
 		List<DirectedGraph<Integer, MyEdge>> graphList = 
 				new ArrayList<DirectedGraph<Integer, MyEdge>>();
-		
+		/** desired results
+		g0 = Vertices:0,1,2,3
+		Edges:4.4.4.4 [2,3] 2.3.4.1 [3,0] 1.2.3.4 [0,1] 3.3.3.3 [1,2] 
+		g1 = Vertices:10,11,12,13
+		Edges:2.3.4.5 [13,10] 1.2.3.4 [10,11] 3.3.1.1 [11,12] 5.5.5.5 [12,13] 
+		g2 = Vertices:20,21,22,23
+		Edges:3.3.3.3 [21,22] 3.3.1.1 [23,20] 1.2.3.4 [20,21] 1.2.3.4 [22,23] 
+
+		p0 = Vertices:0,1,2,3
+		Edges:2.3.4.* [3,0] 1.2.3.4 [0,1] 3.3.* [1,2] 
+		p1 = Vertices:0,1,2
+		Edges:1.2.3.4 [0,1] 3.3.3.3 [1,2] 
+		p2 = Vertices:0,1,2
+		Edges:1.2.3.4 [0,1] 3.3.* [1,2] 
+		p3 = Vertices:10,11,12
+		Edges:1.2.3.4 [10,11] 3.3.1.1 [11,12] 
+
+		   g0 g1 g2 
+		p0  1  1  0  
+		p1  1  0  1  
+		p2  1  1  2  
+		p3  0  1  1 
+		*/
 		/*******graph1**********/
 		DirectedGraph<Integer, MyEdge> graph1 = new
 				DirectedSparseMultigraph<Integer, MyEdge>();
@@ -76,19 +98,19 @@ public class ApplicationTest {
 		/*******graph2**********/
 		DirectedGraph<Integer, MyEdge> graph2 = new
 				DirectedSparseMultigraph<Integer, MyEdge>();
-		TestingUtils.addEdge(graph2, "1.2.3.4",0, 1);
-		TestingUtils.addEdge(graph2, "3.3.1.1",1, 2);
-		TestingUtils.addEdge(graph2, "5.5.5.5",2, 3);
-		TestingUtils.addEdge(graph2, "2.3.4.5",3, 0);
+		TestingUtils.addEdge(graph2, "1.2.3.4",10, 11);
+		TestingUtils.addEdge(graph2, "3.3.1.1",11, 12);
+		TestingUtils.addEdge(graph2, "5.5.5.5",12, 13);
+		TestingUtils.addEdge(graph2, "2.3.4.5",13, 10);
 		graphList.add(graph2);
-		/*******graph3**********
+		/*******graph3**********/
 		DirectedGraph<Integer, MyEdge> graph3 = new
 				DirectedSparseMultigraph<Integer, MyEdge>();
-		TestingUtils.addEdge(graph3, "1.2.3.4",0, 1);
-		TestingUtils.addEdge(graph3, "3.3.3.3",1, 2);
-		TestingUtils.addEdge(graph3, "2.3.5.5",3, 0);
+		TestingUtils.addEdge(graph3, "1.2.3.4",20, 21);
+		TestingUtils.addEdge(graph3, "3.3.3.3",21, 22);
+		TestingUtils.addEdge(graph3, "1.2.3.4",22, 23);
+		TestingUtils.addEdge(graph3, "3.3.1.1",23, 20);
 		graphList.add(graph3);
-		*/
 		
 		return graphList;
 	}

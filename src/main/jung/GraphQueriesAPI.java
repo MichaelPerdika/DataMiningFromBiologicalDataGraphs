@@ -56,11 +56,12 @@ public class GraphQueriesAPI {
 		for (int i=0;i<graphList.size();i++){
 			for (int j=i+1;j<graphList.size();j++){
 				mergeSubGraphsToGlobalSubGraphList(
-						findCommonSubGraphsBetweenTwoGraphs(graphList.get(i), graphList.get(j), threshold), 
-						i, j);
+						findCommonSubGraphsBetweenTwoGraphs(
+								graphList.get(i), graphList.get(j), threshold));
 			}
 		}
-		fillTheCompletePatternTable();
+		//TODO
+		//fillTheCompletePatternTable();
 	}
 
 
@@ -93,16 +94,11 @@ public class GraphQueriesAPI {
 		Collection<MyEdge> colEdges1 = graph1.getEdges();
 		Collection<MyEdge> colEdges2 = graph2.getEdges();
 		for (MyEdge edge1 : colEdges1){
-			//if already found then skip checking. Go to another edge1.
-			if(!checkIfEdgeAlreadyFoundInCommonSubGraphList(commonSubGraphList, edge1)){
-				System.out.println("edge1 = " +edge1);
-				System.out.println("Before commonSubGraphList = " +commonSubGraphList);
+			// this is used to avoid calculating again the same subGraph
+			if (!checkIfEdgeAlreadyFoundInCommonSubGraphList(commonSubGraphList, edge1)){
 				for (MyEdge edge2 : colEdges2){
-					//TODO instead of equals use something like "similarity" that takes
-					// as argument min_support sigma = 0 - 100 %
 					MyEdge comEdge = getCommonEdgeFromThreshold(edge1, edge2, threshold);
-					if (comEdge != null){ 
-						System.out.println("edge2 = " +edge2);
+					if(comEdge != null){
 						DirectedGraph<Integer, MyEdge> commonSubGraph = 
 								new DirectedSparseMultigraph<Integer, MyEdge>();
 						appendNextEdgesToCommonSubGraph(commonSubGraph, 
@@ -111,12 +107,9 @@ public class GraphQueriesAPI {
 								graph1, graph2, edge1, edge2, comEdge, threshold);
 						//this might need rework
 						commonSubGraphList.add(commonSubGraph);
-						System.out.println("After commonSubGraphList = " +commonSubGraphList);
-
 					}
 				}
-			}
-			
+			}		
 		}
 		return commonSubGraphList;
 	}
@@ -280,7 +273,10 @@ public class GraphQueriesAPI {
 	}
 
 	/**
-	 * checks if an edge is contained in the list of SubGraphs.
+	 * checks if an edge with the same starting and ending vertices 
+	 * is contained in the list of SubGraphs (not necessary the same edge name they
+	 * can have a similar name).
+	 * This is used to avoid calculating again the same subGraph in the commonSubGraphList
 	 * @param commonSubGraphList
 	 * @param edge
 	 * @return true if the edge is found in at least one subGraph from the list
@@ -289,12 +285,16 @@ public class GraphQueriesAPI {
 			List<DirectedGraph<Integer, MyEdge>> commonSubGraphList, MyEdge edge) {
 		// TODO Auto-generated method stub
 		
+		if (commonSubGraphList.isEmpty()) return false;
 		for (Object curObj : commonSubGraphList.toArray()){
 			DirectedGraph<Integer, MyEdge> curSubGraph = 
 					(DirectedGraph<Integer, MyEdge>)curObj;
-			//if(curSubGraph.containsEdge(edge)){
-			if(graphContainsEdge(curSubGraph, edge)){
-				return true;
+			Collection<MyEdge> graphEdges = curSubGraph.getEdges();
+			for (MyEdge curEdge : graphEdges){
+				if(edge.getStartNode() == curEdge.getStartNode()
+						&& edge.getEndNode() == curEdge.getEndNode()){
+					return true;
+				}
 			}
 		}
 		return false;
@@ -339,14 +339,8 @@ public class GraphQueriesAPI {
 	private static void appendNextEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
 			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, 
 			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold) {
-		// TODO Auto-generated method stub
 		// Insert the common edge. It doesn't matter which vertices 
 		// we add edge1 or edge2. Add edge1 vertices as convention
-		System.out.println("    edgesVS = "+ edge1 + edge2);
-		System.out.println("    comEdge = "+ comEdge + "start:"+comEdge.getStartNode()+"end:"+comEdge.getEndNode());
-		System.out.println("    Before commonSubGraph = "+ commonSubGraph);
-		System.out.println("    trueOrFalse = "+ graphContainsEdge(commonSubGraph, comEdge)+" "+ commonSubGraph.containsEdge(comEdge));
-		//if (!commonSubGraph.containsEdge(comEdge)){
 		if (!graphContainsEdge(commonSubGraph, comEdge)){
 			commonSubGraph.addEdge(comEdge, edge1.getStartNode(), edge1.getEndNode());
 			
@@ -387,7 +381,6 @@ public class GraphQueriesAPI {
 		//have more than 1 next edges. So need to search these branches first before going backwards
 		//again. If the next edges are already in the commonSubGraph then "appendNextEdgesToCommonSubGraph"
 		// will do nothing
-		System.out.println("                        mpika");
 		appendNextEdgesToCommonSubGraph(commonSubGraph, 
 				graph1, graph2, edge1, edge2, comEdge, threshold);
 
@@ -408,78 +401,38 @@ public class GraphQueriesAPI {
 
 	/**
 	 * this method merges a list of subGraphs to the global subGraphList. 
-	 * And updated the patternTable
+	 * And updates the patternTable
 	 * @param tempSubGraphs is the comonSubGraphs between the comparison of graph1ID and graph2ID
-	 * @param graph1ID first graph ID. Is going to needed to fill the patternTable
-	 * @param graph2ID second graph ID. Is going to needed to fill the patternTable
 	 */
 	public void mergeSubGraphsToGlobalSubGraphList(
-			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs, int graph1ID, int graph2ID) {
-		// TODO maybe use IsSubGraphInPatternTable here???
-		// TODO do the above
+			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs) {
 		
 		for(Object curTempSubGraph : tempSubGraphs.toArray()){
-			DirectedGraph<Integer, MyEdge> prev = (DirectedGraph<Integer, MyEdge>)curTempSubGraph;
+			DirectedGraph<Integer, MyEdge> prev = 
+					(DirectedGraph<Integer, MyEdge>)curTempSubGraph;
 			int subGraphIndex = isSubGraphInPatternTable(prev);
 			if (subGraphIndex < 0){
 				this.subGraphList.add(prev);
-				appendNewRowInPatternTable(graph1ID, graph2ID);
+				appendNewRowInPatternTable();
 			}
+			//TODO the following must be erased
+			/*
 			else{
 				updateExistingRowInPatternTable(subGraphIndex, graph1ID, graph2ID);
 			}
+			*/
 		}
 		
 	}
 	
 	/**
-	 * TBE!!!
-	 * if the mergeSubGraphsToGlobalSubGraphList is not working replace with that
+	 * this method adds a new row in the patternTable with -1 which is undefined for now
 	 */
-	private void mergeSubGraphsToGlobalSubGraphListOLD(
-			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs, int graph1ID, int graph2ID) {
-		// TODO maybe use IsSubGraphInPatternTable here???
-		// TODO do the above
-		
-		for(Object curTempSubGraph : tempSubGraphs.toArray()){
-			DirectedGraph<Integer, MyEdge> prev = (DirectedGraph<Integer, MyEdge>)curTempSubGraph;
-			boolean alreadyExists = false;
-			if (getSubGraphList().isEmpty()){
-				this.subGraphList.add(prev);
-				appendNewRowInPatternTable(graph1ID, graph2ID);
-				continue;
-			}
-			else{
-				int subGraphId = 0;
-				for(Object curSubGraph : getSubGraphList().toArray()){
-					DirectedGraph<Integer, MyEdge> next = (DirectedGraph<Integer, MyEdge>)curSubGraph;
-					if(graphEquality(prev,next)){
-						alreadyExists = true;
-						updateExistingRowInPatternTable(subGraphId, graph1ID, graph2ID);
-					}
-					subGraphId++;
-				}
-			}
-			if(!alreadyExists){
-				this.subGraphList.add(prev);
-				appendNewRowInPatternTable(graph1ID, graph2ID);
-			}
-		}
-		
-	}
-
-	/**
-	 * this method adds a new row in the patternTable with 1 for the graphs that 
-	 * "match" with the two graph id's and -1 elsewhere
-	 * @param graph1id
-	 * @param graph2id
-	 */
-	private void appendNewRowInPatternTable(int graph1id, int graph2id) {
+	private void appendNewRowInPatternTable() {
 		// TODO Auto-generated method stub
 		List<Integer> newRow = new ArrayList<Integer>(graphList.size()); 
 		for (int index=0; index<graphList.size();index++){
-			if (index==graph1id || index==graph2id) newRow.add(index, 1);
-			else newRow.add(index, -1);
+			newRow.add(index, -1);
 		}
 		this.patternTable.add(newRow);
 		
@@ -628,7 +581,8 @@ public class GraphQueriesAPI {
 		else{
 			int index = 0;
 			for(Object curObj : getSubGraphList().toArray()){
-				DirectedGraph<Integer, MyEdge> curSubGraph = (DirectedGraph<Integer, MyEdge>)curObj;
+				DirectedGraph<Integer, MyEdge> curSubGraph = 
+						(DirectedGraph<Integer, MyEdge>)curObj;
 				if(graphEquality(subGraph,curSubGraph)){
 					return index;
 				}
@@ -677,9 +631,7 @@ public class GraphQueriesAPI {
 	 */
 	public boolean graphEquality(DirectedGraph<Integer, MyEdge> graph1, 
 			DirectedGraph<Integer, MyEdge> graph2) {
-		// TODO This method needs better implementation. 
-		// For example A->B is not same as B->A
-		// but this method will return True. Do this in the future.
+
 		if (graph1 == null && graph2 == null){
 	        return true;
 	    }

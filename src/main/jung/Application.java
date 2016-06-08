@@ -46,7 +46,7 @@ public class Application {
 			graphSet.add(graph1);
 			graphSet.add(graph2);
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
-			graphQueries.findPatternsInGraphs(1);
+			graphQueries.findPatternsInGraphs(0.25);
 			graphQueries.printPatternTable();
 			visualizeListOfSubGraphs(graphQueries.getSubGraphList());
 			

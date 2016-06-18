@@ -126,6 +126,20 @@ public class GraphQueriesAPI {
 			// tempGraphList is the commonGraphList for the next iteration.
 			System.out.println("DEEP COPY OCCURED");
 			//commonGraphList = DeepClone.deepClone(tempGraphList);
+			/*
+			for (DirectedGraph<Integer, MyEdge> tempG: tempGraphList){
+				boolean matchFound = false;
+				for (DirectedGraph<Integer, MyEdge> comG: commonGraphList){
+					if (graphsAreIdentical(tempG, comG)){
+						matchFound = true;
+						break;
+					}
+				}
+				if (matchFound){
+					
+				}
+			}
+			*/
 			commonGraphList = tempGraphList;
 		}
 		System.out.println("FINALLY!!!");
@@ -267,7 +281,9 @@ public class GraphQueriesAPI {
 			comEdge = new MyEdge(new String[] {edge1.toString()}, 
 					edge1.getStartNode(), edge1.getEndNode());
 	        return comEdge;
+			
 	    }
+
 		if((e1 == null && e2 != null) 
 			      || (e1 != null && e2 == null)
 			      || (e1.size()==0 && e2.size() !=0)
@@ -281,6 +297,12 @@ public class GraphQueriesAPI {
 			maxScore = -1;
 			String tempComName = "";
 			for (int j=0;j<e2.size();j++){
+				/*******this is the case of "" == ""
+				 * it is unequal for now but in the future fix this.
+				 */
+				if (e1.get(i).get(0).isEmpty() && e2.get(j).get(0).isEmpty()) 
+					return null;
+				/******/
 				double tempScore = getParsedEdgeScore(e1.get(i), e2.get(j));
 				String tempName = getParsedEdgeName(e1.get(i), e2.get(j));
 				if (maxScore < tempScore){

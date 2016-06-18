@@ -46,10 +46,56 @@ public class Application {
 			graphSet.add(graph1);
 			graphSet.add(graph2);
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
-			graphQueries.findPatternsInGraphs(0.75);
+			graphQueries.findPatternsInGraphs(1);
 			graphQueries.printPatternTable();
 			visualizeListOfSubGraphs(graphQueries.getSubGraphList());
-			
+			/**
+			 * expected results:
+	g0 = Vertices:0,1,2,3,4,5,6,7,8
+	Edges:1.3.5.1 [3,6]  [1,7] 1.1.5.4 [4,5] 4.2.1.2 [6,4]  [0,1] 1.1.1.37 [4,5] 2.3.3.1 2.3.3.16 [5,0] 1.1.1.42 [7,8]  [8,2] 6.2.1.5 [2,3] 
+	g1 = Vertices:0,1,2,3,4,5,6,7,8
+	Edges: [6,7]  [7,3] 1.1.1.41 [3,2] 1.1.1.37 [1,5] 6.2.1.5 [3,4] 1.3.5.1 [4,0] 4.2.1.2 [0,1] 6.4.1.1 [8,5]  [2,3] 2.3.3.1 2.3.3.16 [5,6] 
+	
+	tolerance 100%:
+	p0 = Vertices:0,2,3,4,5,6
+	Edges:1.1.1.37 [4,5] 1.3.5.1 [3,6] 2.3.3.1 2.3.3.16 [5,0] 4.2.1.2 [6,4] 6.2.1.5 [2,3] 
+	
+	   g0 g1 
+	p0 1  1 
+	
+	tolerance 75%:
+	p0 = Vertices:0,2,3,4,5,6
+	Edges:1.1.1.37 [4,5] 1.3.5.1 [3,6] 2.3.3.1 2.3.3.16 [5,0] 4.2.1.2 [6,4] 6.2.1.5 [2,3] 
+	p1 = Vertices:7,8
+	Edges:1.1.1.* [7,8] 
+	
+	   g0 g1 
+	p0 1  1  
+	p1 2  2
+	 
+	tolerance 50%:
+	p0 = Vertices:0,2,3,4,5,6
+	Edges:1.1.* [4,5] 6.2.1.5 [2,3] 1.3.5.1 [3,6] 2.3.3.1 2.3.3.16 [5,0] 4.2.1.2 [6,4] 1.1.1.37 [4,5] 
+	p1 = Vertices:7,8
+	Edges:1.1.1.* [7,8] 
+	
+	   g0 g1 
+	p0 2  1  
+	p1 2  2
+	
+	tolerance 25%:
+	p0 = Vertices:3,6
+	Edges:1.* [3,6] 
+	p1 = Vertices:0,2,3,4,5,6
+	Edges:6.2.1.5 [2,3] 1.3.5.1 [3,6] 2.3.3.1 2.3.3.16 [5,0] 4.2.1.2 [6,4] 1.1.1.37 [4,5] 1.1.* [4,5] 
+	p2 = Vertices:7,8
+	Edges:1.1.1.* [7,8] 
+	
+	   g0 g1 
+	p0 4  3  
+	p1 2  1  
+	p2 2  2
+	*/
 			
 			
 			

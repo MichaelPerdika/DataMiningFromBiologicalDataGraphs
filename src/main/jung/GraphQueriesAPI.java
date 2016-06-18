@@ -61,9 +61,115 @@ public class GraphQueriesAPI {
 			}
 		}
 		//TODO
-		//fillTheCompletePatternTable();
+		fillTheCompletePatternTable();
 	}
 
+	/**
+	 * Before this method call the subGraphList is full and we want to fill the pattern table
+	 * with the correct numbers >=0 (eliminate all -1).
+	 */
+	private void fillTheCompletePatternTable() {
+		// TODO Auto-generated method stub
+		// we iterate through the rows (subGraphs) and columns (graphs) and check
+		// the number of occurrences of every subGraph/pattern in every graph and fill the 
+		// Corresponding cell on patternTable. 
+		for (int row=0; row<getSubGraphList().size(); row++){	
+			for (int col=0; col<getGraphList().size(); col++){
+				if (getPatternTableCell(row,col) != -1){
+					System.out.println("Error in fillTheCompletePatternTable cell "+row+", "+col+"is -1");
+					System.exit(1);
+				}
+				int occurrences = getOccurrencesOfPatternInGraph(getSubGraphList().get(row),getGraphList().get(col));
+				insertPatternTableCell(row, col, occurrences);
+			}
+		}
+	}
+
+	public int getOccurrencesOfPatternInGraph(
+			DirectedGraph<Integer, MyEdge> subGraph,
+			DirectedGraph<Integer, MyEdge> graph) {
+		// TODO Auto-generated method stub		
+		// pattern must be smaller than the graph.
+		if (subGraph.getEdgeCount()>graph.getEdgeCount() 
+				|| subGraph.getVertexCount() > graph.getVertexCount())
+			return 0;
+		List<DirectedGraph<Integer, MyEdge>> commonGraphList = 
+				new ArrayList<DirectedGraph<Integer, MyEdge>>();
+		Collection<MyEdge> subEdges = subGraph.getEdges();
+		Collection<MyEdge> graphEdges = graph.getEdges();
+		for (MyEdge sEdge : subEdges){
+			List<DirectedGraph<Integer, MyEdge>> tempGraphList = 
+					new ArrayList<DirectedGraph<Integer, MyEdge>>();
+					//DeepClone.deepClone(commonGraphList);
+			for (MyEdge gEdge : graphEdges){
+				//maybe i have to pass the threshold as well. For now it is irrelevant
+				MyEdge comEdge = getCommonEdgeFromThreshold(sEdge, gEdge, 0);
+				// if there is no comEdge (null) or it doesn't match the patEdge return
+				if (comEdge== null || !comEdge.isIdentical(sEdge)) continue;//do nothing
+				// there is a match. Create or append in graph list.
+				System.out.println("comEdge: " + comEdge);
+				System.out.println("tempGraphList before ");
+				System.out.println(tempGraphList);
+				concat2GraphLists(tempGraphList, getGraphListWithNewEdge(commonGraphList, comEdge, gEdge));
+				System.out.println("tempGraphList after ");
+				System.out.println(tempGraphList);
+			}
+			// tempGraphList is the commonGraphList for the next iteration.
+			commonGraphList = tempGraphList;
+		}
+		System.out.println("FINALLY!!!");
+		System.out.println(commonGraphList);
+		if (commonGraphList.isEmpty()) return 0;
+		int occurences = 0;
+		for (DirectedGraph<Integer, MyEdge> comGraph : commonGraphList){
+			if (graphEquality(comGraph, subGraph)) occurences++;
+		}
+		return occurences;
+	}
+
+	/**
+	 * this method is used in getOccurrencesOfPatternInGraph. this method joins two list
+	 * of graphLists. It appends the sourceList to the existing distList. distList is 
+	 * mutated with this function
+	 * @param distList
+	 * @param sourceList
+	 */
+	private void concat2GraphLists(List<DirectedGraph<Integer, MyEdge>> distList,
+			List<DirectedGraph<Integer, MyEdge>> sourceList) {
+		// TODO Auto-generated method stub
+		System.out.println("sourceList :");
+		System.out.println(sourceList);
+		for (DirectedGraph<Integer, MyEdge> graph : sourceList){
+			distList.add(graph);
+		}
+	}
+
+	/**
+	 * this method is used in getOccurrencesOfPatternInGraph. It inserts the given edge to 
+	 * every graph of the prevGraphList and return this new list of graphs.
+	 * @param prevGraphList
+	 * @param edge
+	 * @param gEdge 
+	 */
+	private List<DirectedGraph<Integer, MyEdge>> getGraphListWithNewEdge(
+			List<DirectedGraph<Integer, MyEdge>> prevGraphList, MyEdge edge, MyEdge gEdge) {
+		// TODO Auto-generated method stub
+		List<DirectedGraph<Integer, MyEdge>> nextGraphList = 
+				new ArrayList<DirectedGraph<Integer, MyEdge>>();
+		if (prevGraphList.isEmpty()) {
+			DirectedGraph<Integer, MyEdge> tempGraph = 
+					new DirectedSparseMultigraph<Integer, MyEdge>();
+			tempGraph.addEdge(edge, gEdge.getStartNode(), gEdge.getEndNode());
+			nextGraphList.add(tempGraph);
+		}
+		else{
+			for (DirectedGraph<Integer, MyEdge> tempGraph : prevGraphList){
+				tempGraph.addEdge(edge, gEdge.getStartNode(), gEdge.getEndNode());
+				nextGraphList.add(tempGraph);
+			}
+		}	
+		return nextGraphList;
+	}
 
 	/**
 	 * This method returns a List of common subGraphs between graph1, graph2
@@ -475,33 +581,7 @@ public class GraphQueriesAPI {
 		
 	}
 	
-	/**
-	 * In this method the patternTable has created all possible rows.
-	 * But there are still -1 so search for all -1 and alter them to 0 or 1.
-	 */
-	private void fillTheCompletePatternTable() {
-		// TODO Auto-generated method stub
-		// we iterate through the columns (graphs) and check the patterns with
-		// -1 if they match with any other pattern of graph(col)
-		for (int col=0; col<getGraphList().size(); col++){
-			for (int row=0; row<getSubGraphList().size(); row++){
-				if (getPatternTable().get(row).get(col) >= 1){
-					continue; // go to the next row (pattern)
-				}
-				// need to check this -1 and do it 1 or 0.
-				else if (getPatternTable().get(row).get(col) == -1 ){
-					// need to check if pattern (row,col) match any from (*,col).
-					updateColumnOfPatternTable(row, col);
-				}
-				else{//it should never enter here (value ==0)
-					System.out.println("error in fillTheCompletePatternTable, cell ("
-							+ row +", "+col+") is 0");
-					System.exit(0);
-				}
-			}
-		}
-		
-	}
+
 	
 	/**
 	 * we want to check the testingRow (with value -1) of the pattern table
@@ -854,6 +934,10 @@ public class GraphQueriesAPI {
 
 	public List<List<Integer>> getPatternTable() {
 		return patternTable;
+	}
+	
+	public Integer getPatternTableCell(int row, int col) {
+		return patternTable.get(row).get(col);
 	}
 
 	public void setPatternTable(List<List<Integer>> patternTable) {

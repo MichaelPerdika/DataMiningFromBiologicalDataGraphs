@@ -52,6 +52,21 @@ public class GraphEqualityTest {
 	}
 	
 	@Test
+	public void sameGraphsDiffDirection() {
+		/** graph1Edges = [A ][0,1] [B ][1,2] 
+		 *  graph2Edges = [A ][6,7] [B ][5,6] **/
+		graph1 = new DirectedSparseMultigraph<Integer, MyEdge>();
+		graph2 = new DirectedSparseMultigraph<Integer, MyEdge>();
+		/*********graph1***********/
+		TestingUtils.addEdge(graph1, "A", 0, 1);
+		TestingUtils.addEdge(graph1, "B", 1, 2);
+		/*********graph2***********/
+		TestingUtils.addEdge(graph2, "A", 6, 7);
+		TestingUtils.addEdge(graph2, "B", 5, 6);
+		assertFalse(gQueris.graphEquality(graph1, graph2));
+	}
+	
+	@Test
 	public void sameGraphsAtLeastOneDifferentDirection() {
 		TestingUtils.addEdge(graph1, "c", 2, 3);
 		TestingUtils.addEdge(graph2, "c", 7, 8); // this is A-->d

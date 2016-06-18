@@ -100,21 +100,32 @@ public class GraphQueriesAPI {
 		for (MyEdge sEdge : subEdges){
 			List<DirectedGraph<Integer, MyEdge>> tempGraphList = 
 					new ArrayList<DirectedGraph<Integer, MyEdge>>();
-					//DeepClone.deepClone(commonGraphList);
 			for (MyEdge gEdge : graphEdges){
 				//maybe i have to pass the threshold as well. For now it is irrelevant
 				MyEdge comEdge = getCommonEdgeFromThreshold(sEdge, gEdge, 0);
 				// if there is no comEdge (null) or it doesn't match the patEdge return
 				if (comEdge== null || !comEdge.isIdentical(sEdge)) continue;//do nothing
 				// there is a match. Create or append in graph list.
-				System.out.println("comEdge: " + comEdge);
+				System.out.println("comEdge: " + comEdge +
+						"["+ comEdge.getStartNode() +", "+ comEdge.getEndNode()+"] --> " +
+						"["+ gEdge.getStartNode() +", "+ gEdge.getEndNode()+"]");
+				System.out.println("commonGraphList before ");
+				System.out.println(commonGraphList);
 				System.out.println("tempGraphList before ");
 				System.out.println(tempGraphList);
-				concat2GraphLists(tempGraphList, getGraphListWithNewEdge(commonGraphList, comEdge, gEdge));
+				List<DirectedGraph<Integer, MyEdge>> TBE = 
+						getGraphListWithNewEdge(new ArrayList<DirectedGraph<Integer, MyEdge>>(commonGraphList), comEdge, gEdge);
+				System.out.println("commonGraphList AFTER 1");
+				System.out.println(commonGraphList);
+				concat2GraphLists(tempGraphList, TBE);
+				System.out.println("commonGraphList AFTER 2");
+				System.out.println(commonGraphList);
 				System.out.println("tempGraphList after ");
 				System.out.println(tempGraphList);
 			}
 			// tempGraphList is the commonGraphList for the next iteration.
+			System.out.println("DEEP COPY OCCURED");
+			//commonGraphList = DeepClone.deepClone(tempGraphList);
 			commonGraphList = tempGraphList;
 		}
 		System.out.println("FINALLY!!!");
@@ -159,12 +170,29 @@ public class GraphQueriesAPI {
 		if (prevGraphList.isEmpty()) {
 			DirectedGraph<Integer, MyEdge> tempGraph = 
 					new DirectedSparseMultigraph<Integer, MyEdge>();
-			tempGraph.addEdge(edge, gEdge.getStartNode(), gEdge.getEndNode());
+			//tempGraph.addEdge(edge, gEdge.getStartNode(), gEdge.getEndNode());
+			tempGraph.addEdge(new MyEdge(edge, gEdge.getStartNode(), gEdge.getEndNode()),
+					gEdge.getStartNode(), gEdge.getEndNode());
 			nextGraphList.add(tempGraph);
 		}
 		else{
-			for (DirectedGraph<Integer, MyEdge> tempGraph : prevGraphList){
-				tempGraph.addEdge(edge, gEdge.getStartNode(), gEdge.getEndNode());
+			for (DirectedGraph<Integer, MyEdge> prevGraph : prevGraphList){
+				DirectedGraph<Integer, MyEdge> tempGraph =
+						DeepClone.deepClone(prevGraph);
+				System.out.println("                                                         "
+						+ "prevGraph BEFORE");
+				System.out.println(prevGraph);
+				System.out.println("                                                         "
+						+ "tempGraph BEFORE");
+				System.out.println(tempGraph);
+				tempGraph.addEdge(new MyEdge(edge, gEdge.getStartNode(), gEdge.getEndNode()),
+						gEdge.getStartNode(), gEdge.getEndNode());
+				System.out.println("                                                         "
+						+ "prevGraph AFTER");
+				System.out.println(prevGraph);
+				System.out.println("                                                         "
+						+ "tempGraph AFTER");
+				System.out.println(tempGraph);
 				nextGraphList.add(tempGraph);
 			}
 		}	
@@ -735,6 +763,10 @@ public class GraphQueriesAPI {
 					getCanonicalLabelAdjList(graph1);
 			Map<Integer, Map<Integer, List<String>>> canLabAdjList2 = 
 					getCanonicalLabelAdjList(graph2);
+			System.out.println("CL1 : ");
+			System.out.println(canLabAdjList1);
+			System.out.println("CL2 : ");
+			System.out.println(canLabAdjList2);
 			return canonicalLabelEquality(canLabAdjList1, canLabAdjList2);
 		}
 	}

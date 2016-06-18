@@ -58,11 +58,11 @@ public class GraphEqualityTest {
 		graph1 = new DirectedSparseMultigraph<Integer, MyEdge>();
 		graph2 = new DirectedSparseMultigraph<Integer, MyEdge>();
 		/*********graph1***********/
-		TestingUtils.addEdge(graph1, "A", 0, 1);
-		TestingUtils.addEdge(graph1, "B", 1, 2);
+		TestingUtils.addEdge(graph1, "1.2.3.4", 0, 1);
+		TestingUtils.addEdge(graph1, "3.3.3.3", 1, 2);
 		/*********graph2***********/
-		TestingUtils.addEdge(graph2, "A", 6, 7);
-		TestingUtils.addEdge(graph2, "B", 5, 6);
+		TestingUtils.addEdge(graph2, "1.2.3.4", 2, 3);
+		TestingUtils.addEdge(graph2, "3.3.3.3", 1, 2);
 		assertFalse(gQueris.graphEquality(graph1, graph2));
 	}
 	

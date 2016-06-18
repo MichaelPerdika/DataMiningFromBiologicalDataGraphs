@@ -9,6 +9,10 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import edu.uci.ics.jung.graph.DirectedGraph;
+import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
+
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -29,10 +33,14 @@ public final class DeepClone {
             return (X) deepCloneObjectArray((Object[]) input);
         } else if (input.getClass().isArray()) {
             return (X) clonePrimitiveArray((Object) input);
+        } else if (input instanceof DirectedGraph<?, ?>) {
+            return (X) deepCloneDirectedGraph((DirectedGraph<Integer, MyEdge>) input);
         }
+        
 
         return input;
     }
+    
 
     private static Object clonePrimitiveArray(final Object input) {
         final int length = Array.getLength(input);
@@ -88,4 +96,26 @@ public final class DeepClone {
 
         return clone;
     }
+    
+    private static DirectedGraph<Integer, MyEdge> deepCloneDirectedGraph(
+    		final DirectedGraph<Integer, MyEdge> graph) {
+    	DirectedGraph<Integer, MyEdge> clone;
+    	// this is of course far from comprehensive. extend this as needed
+        if (graph instanceof DirectedSparseMultigraph<?, ?>) {
+            clone = new DirectedSparseMultigraph<Integer, MyEdge>();
+        } else {
+        	System.out.println("error in deep clone for DirectedGraph");
+            System.exit(1);
+            return null;
+        }
+        
+        Collection<MyEdge> edgeCollection = graph.getEdges();
+        for ( MyEdge curEdge : edgeCollection) {
+            clone.addEdge(curEdge, curEdge.getStartNode(), curEdge.getEndNode());
+            System.out.println("curEdge"+"["+ curEdge.getStartNode() +", "+ curEdge.getEndNode()+"]");
+            System.out.println("clone"+"["+ clone.findEdge(curEdge.getStartNode(), curEdge.getEndNode()).getStartNode() +", "+ clone.findEdge(curEdge.getStartNode(), curEdge.getEndNode()).getEndNode()+"]");
+        }
+
+        return clone;
+	}
 }

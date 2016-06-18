@@ -36,6 +36,25 @@ public class MyEdge {
 	}
 	
 	/**
+	 * this constructor is used in method getGraphListWithNewEdge.
+	 * @param edge 
+	 * @param startNode
+	 * @param endNode
+	 */
+	public MyEdge(MyEdge edge, Integer startNode, Integer endNode){
+		//This function gets a copy edge but with different start and end Nodes
+		this.edgeRDFid = edge.getEdgeRDFid();
+		this.startNodes = edge.startNodes;
+		this.endNodes = edge.endNodes;
+		this.eCNumber = edge.getECNumber();
+		this.edgeName = edge.getEdgeName();
+		this.nextStepRDFids = edge.getNextStepRDFids();
+		this.stepConversion = edge.stepConversion;
+		this.startNode = startNode;
+		this.endNode = endNode;
+	}
+	
+	/**
 	 * this constructor is used only for testing
 	 * I can keep it because is used in getMyEdgeFromThreshold
 	 * @param edge 

@@ -63,6 +63,25 @@ public class CanonicalLabelEqualityTest {
 	}
 	
 	@Test
+	public void sameAdjListsWithDifferentDirection() {
+		graph1 = new DirectedSparseMultigraph<Integer, MyEdge>();
+		graph2 = new DirectedSparseMultigraph<Integer, MyEdge>();
+		/*********graph1***********/
+		TestingUtils.addEdge(graph1, "A", 0, 1);
+		TestingUtils.addEdge(graph1, "B", 1, 2);
+		/*********graph2***********/
+		TestingUtils.addEdge(graph2, "A", 12, 13);
+		TestingUtils.addEdge(graph2, "B", 11, 12);
+		canLabAdjList1 = gQueris.getCanonicalLabelAdjList(graph1);
+		canLabAdjList2 = gQueris.getCanonicalLabelAdjList(graph2);
+		System.out.println(canLabAdjList1);
+		System.out.println(canLabAdjList2);
+		/** canLabAdjList1 = {0={1=[A ]}, 1={2=[B ]}, 2={}} 
+		 *  canLabAdjList2 = {11={12=[B ]}, 12={13=[A ]}, 13={}}**/
+		assertFalse(gQueris.canonicalLabelEquality(canLabAdjList1, canLabAdjList2));
+	}
+	
+	@Test
 	public void allNullOptions() {
 		canLabAdjList1 = gQueris.getCanonicalLabelAdjList(graph1);
 		assertFalse(gQueris.canonicalLabelEquality(canLabAdjList1, null));

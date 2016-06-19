@@ -27,27 +27,48 @@ public class Application {
 	public static void main(String[] args)  {
 			
 			System.out.println("hello World!");
+			//http://www.biocyc.org/ECOLI/NEW-IMAGE?type=PATHWAY&object=TCA&detail-level=2
 			String fileName1 = "src/data/TCA cycle I (prokaryotic).biopax";
+			//http://www.biocyc.org/YEAST/NEW-IMAGE?type=PATHWAY&object=TCA-EUK-PWY-YEAST&detail-level=2
 			String fileName2 = "src/data/TCA cycle, aerobic respiration.biopax";
+			//http://www.biocyc.org/ARA/NEW-IMAGE?type=PATHWAY&object=PWY-5690&detail-level=2
+			String fileName3 = "src/data/TCA cycle II (plants and fungi).biopax";
+			//http://www.biocyc.org/LEISH/NEW-IMAGE?type=PATHWAY&object=TCA&detail-level=2
+			String fileName4 = "src/data/TCA cycle.biopax";
 			
 			System.out.println("The TCA cycle I (prokaryotic) graph: "+fileName1);
 			DirectedGraph<Integer, MyEdge> graph1 = createGraphFromBiopaxFile(fileName1);
 			//visualizeGraph(graph1);
-			
 			
 			System.out.println("The TCA cycle, aerobic respiration graph: "+fileName2);
 			DirectedGraph<Integer, MyEdge> graph2 = createGraphFromBiopaxFile(fileName2);
 			//visualizeGraph(graph2);
 			//findMetrics(graph1, graph2);
 			
+			System.out.println("The TCA cycle II (plants and fungi) graph: "+fileName3);
+			DirectedGraph<Integer, MyEdge> graph3 = createGraphFromBiopaxFile(fileName3);
+			//visualizeGraph(graph3);
+			
+			System.out.println("The TCA cycle graph: "+fileName4);
+			DirectedGraph<Integer, MyEdge> graph4 = createGraphFromBiopaxFile(fileName4);
+			//visualizeGraph(graph4);
+			
 			
 			//initialize the graphQueries API
 			List<DirectedGraph<Integer, MyEdge>> graphSet = new ArrayList<DirectedGraph<Integer, MyEdge>>();
 			graphSet.add(graph1);
 			graphSet.add(graph2);
+			graphSet.add(graph3);
+			graphSet.add(graph4);
+			// initialize the API
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
-			graphQueries.findPatternsInGraphs(1);
+			// find patterns in graphs. The main algorithm.
+			graphQueries.findPatternsInGraphs(0.75);
+			// print the pattern table
 			graphQueries.printPatternTable();
+			// calculate the hierarchical clustering
+			//TODO
+			
 			visualizeListOfSubGraphs(graphQueries.getSubGraphList());
 			/**
 			 * expected results:

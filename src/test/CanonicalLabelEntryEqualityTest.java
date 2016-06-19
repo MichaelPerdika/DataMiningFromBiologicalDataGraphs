@@ -56,6 +56,15 @@ public class CanonicalLabelEntryEqualityTest {
 	}
 	
 	@Test
+	public void emptyEntries() {
+		entry1 = new HashMap<Integer, List<String>>();
+		entry2 = new HashMap<Integer, List<String>>();
+		/** entry1 = {} 
+		 *  entry2 = {}**/
+		assertFalse("different size", gQueris.canonicalLabelEntryEquality(entry1, entry2));
+	}
+	
+	@Test
 	public void sameMaps() {
 		//System.out.println(entry1);
 		//System.out.println(entry2);

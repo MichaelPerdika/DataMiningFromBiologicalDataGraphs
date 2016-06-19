@@ -61,14 +61,14 @@ public class GraphQueriesAPI {
 			}
 		}
 		//TODO
-		fillTheCompletePatternTable();
+		fillTheCompletePatternTable(threshold);
 	}
 
 	/**
 	 * Before this method call the subGraphList is full and we want to fill the pattern table
 	 * with the correct numbers >=0 (eliminate all -1).
 	 */
-	private void fillTheCompletePatternTable() {
+	private void fillTheCompletePatternTable(double threshold) {
 		// TODO Auto-generated method stub
 		// we iterate through the rows (subGraphs) and columns (graphs) and check
 		// the number of occurrences of every subGraph/pattern in every graph and fill the 
@@ -79,7 +79,8 @@ public class GraphQueriesAPI {
 					System.out.println("Error in fillTheCompletePatternTable cell "+row+", "+col+"is -1");
 					System.exit(1);
 				}
-				int occurrences = getOccurrencesOfPatternInGraph(getSubGraphList().get(row),getGraphList().get(col));
+				int occurrences = getOccurrencesOfPatternInGraph(
+						getSubGraphList().get(row),getGraphList().get(col), threshold);
 				insertPatternTableCell(row, col, occurrences);
 			}
 		}
@@ -87,7 +88,7 @@ public class GraphQueriesAPI {
 
 	public int getOccurrencesOfPatternInGraph(
 			DirectedGraph<Integer, MyEdge> subGraph,
-			DirectedGraph<Integer, MyEdge> graph) {
+			DirectedGraph<Integer, MyEdge> graph, double threshold) {
 		// TODO Auto-generated method stub		
 		// pattern must be smaller than the graph.
 		if (subGraph.getEdgeCount()>graph.getEdgeCount() 
@@ -102,7 +103,7 @@ public class GraphQueriesAPI {
 					new ArrayList<DirectedGraph<Integer, MyEdge>>();
 			for (MyEdge gEdge : graphEdges){
 				//maybe i have to pass the threshold as well. For now it is irrelevant
-				MyEdge comEdge = getCommonEdgeFromThreshold(sEdge, gEdge, 0);
+				MyEdge comEdge = getCommonEdgeFromThreshold(sEdge, gEdge, threshold);
 				// if there is no comEdge (null) or it doesn't match the patEdge return
 				if (comEdge== null || !comEdge.isIdentical(sEdge)) continue;//do nothing
 				// there is a match. Create or append in graph list.
@@ -317,7 +318,15 @@ public class GraphQueriesAPI {
 			return null;
 		else
 			avgScore = avgScore/e1.size();
+		// the bellow if returns >= threshold
+		/*
 		if (avgScore >= threshold){ 
+			comEdge = new MyEdge(comName, edge1.getStartNode(), edge1.getEndNode());
+	        return comEdge;
+		}
+		*/
+		// the bellow if returns == threshold
+		if (avgScore == threshold){ 
 			comEdge = new MyEdge(comName, edge1.getStartNode(), edge1.getEndNode());
 	        return comEdge;
 		}
@@ -860,11 +869,14 @@ public class GraphQueriesAPI {
 			Entry<Integer, Map<Integer, List<String>>> entry1 = adjList1.entrySet().iterator().next();
 			// iterate all the entries of the 2nd list to see if it match.
 			for (Entry<Integer, Map<Integer, List<String>>> entry2 : adjList2.entrySet()){
+				// check if they are empty if they come from the same edge.
+				if (entry1.getValue().isEmpty() && entry2.getValue().isEmpty())
+					System.out.println("Both Entries are empty");
 				if(canonicalLabelEntryEquality(entry1.getValue(), entry2.getValue())){
 					adjList1.remove(entry1.getKey());
 					adjList2.remove(entry2.getKey());
 					matchFound = true;
-					break;
+					break;// TODO there musn't be a break here. Check how many you find.
 				}
 			}
 			// if the break from the above for loop is not reached then 

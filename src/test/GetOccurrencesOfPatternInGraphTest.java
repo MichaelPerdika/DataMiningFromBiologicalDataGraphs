@@ -48,7 +48,7 @@ public class GetOccurrencesOfPatternInGraphTest {
 		TestingUtils.addEdge(pattern, "1.2.3.4", 10, 11);
 		TestingUtils.addEdge(pattern, "1.2.3.3", 10, 12);
 		
-		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph)==0);
+		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph, 1)==0);
 	}
 	
 	@Test
@@ -64,8 +64,8 @@ public class GetOccurrencesOfPatternInGraphTest {
 		TestingUtils.addEdge(pattern, "2.3.4.*", 3, 0);
 
 		
-		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph));
-		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph)==1);
+		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1 ));
+		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1)==1);
 	}
 	
 	@Test
@@ -79,8 +79,8 @@ public class GetOccurrencesOfPatternInGraphTest {
 		TestingUtils.addEdge(pattern, "1.2.3.4", 10, 11);
 		TestingUtils.addEdge(pattern, "3.3.3.3", 11, 12);
 		
-		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph));
-		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph)==1);
+		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1 ));
+		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1 )==1);
 	}
 	
 	@Test
@@ -94,8 +94,8 @@ public class GetOccurrencesOfPatternInGraphTest {
 		TestingUtils.addEdge(pattern, "1.2.3.4", 10, 11);
 		TestingUtils.addEdge(pattern, "3.3.*", 11, 12);
 		
-		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph));
-		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph)==2);
+		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1 ));
+		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1)==2);
 	}
 	
 	@Test
@@ -109,8 +109,8 @@ public class GetOccurrencesOfPatternInGraphTest {
 		TestingUtils.addEdge(pattern, "1.2.3.4", 10, 11);
 		TestingUtils.addEdge(pattern, "3.3.1.1", 11, 12);
 		
-		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph));
-		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph)==1);
+		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1));
+		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1)==1);
 	}
 	
 	@Test
@@ -125,7 +125,7 @@ public class GetOccurrencesOfPatternInGraphTest {
 		TestingUtils.addEdge(pattern, "1.2.3.4", 10, 11);
 		
 		
-		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph)==2);
+		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1)==2);
 	}
 	
 	@Test
@@ -140,7 +140,7 @@ public class GetOccurrencesOfPatternInGraphTest {
 		TestingUtils.addEdge(pattern, "5.5.5.5", 0, 1);
 		TestingUtils.addEdge(pattern, "1.2.3.4", 1, 2);
 		TestingUtils.addEdge(pattern, "3.3.3.3", 2, 3);
-		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph));
-		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph)==4);
+		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1));
+		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1)==4);
 	}
 }

@@ -44,9 +44,9 @@ public class GetCommonEdgeFromThresholdTest {
 		edge2 = new MyEdge("2.3.3.1", 0, 1);
 		resultEdge = new MyEdge("2.3.3.1", 0, 1);
 		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 1)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.6)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.25)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.6)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.25)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
 	}
 	
 	@Test
@@ -57,8 +57,8 @@ public class GetCommonEdgeFromThresholdTest {
 		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 1)));
 		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.75)));
 		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.5)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.25)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.25)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
 	}
 	
 	@Test
@@ -67,8 +67,8 @@ public class GetCommonEdgeFromThresholdTest {
 		edge2 = new MyEdge(new String[] {"2.3.3.1", "4.1.1.1"}, 0, 1);
 		resultEdge = new MyEdge(new String[] {"2.3.3.1", "4.1.1.1"}, 0, 1);
 		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 1)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.5)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.5)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
 	}
 	
 	@Test
@@ -79,7 +79,7 @@ public class GetCommonEdgeFromThresholdTest {
 		// 0.75 * 1/2 + 0*1/2 = 0.375
 		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.376)));
 		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.375)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ public class GetCommonEdgeFromThresholdTest {
 		// 0.5 *1/2 + 0.75 * 1/2 = 0.625
 		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.63)));
 		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.625)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
 	}
 	
 	@Test
@@ -100,7 +100,7 @@ public class GetCommonEdgeFromThresholdTest {
 		resultEdge = new MyEdge(new String[] {"2.3.*", "4.4.*"}, 0, 1);
 		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.6)));
 		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0.5)));
-		assertTrue(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
+		assertFalse(resultEdge.isIdentical(GraphQueriesAPI.getCommonEdgeFromThreshold(edge1, edge2, 0)));
 	}
 	
 	@Test

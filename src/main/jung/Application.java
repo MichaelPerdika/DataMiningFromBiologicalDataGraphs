@@ -55,7 +55,8 @@ public class Application {
 			
 			
 			//initialize the graphQueries API
-			List<DirectedGraph<Integer, MyEdge>> graphSet = new ArrayList<DirectedGraph<Integer, MyEdge>>();
+			List<DirectedGraph<Integer, MyEdge>> graphSet = 
+					new ArrayList<DirectedGraph<Integer, MyEdge>>();
 			graphSet.add(graph1);
 			graphSet.add(graph2);
 			graphSet.add(graph3);

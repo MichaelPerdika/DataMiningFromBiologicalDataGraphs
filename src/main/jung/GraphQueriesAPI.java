@@ -790,9 +790,9 @@ public class GraphQueriesAPI {
 		}
 		else{
 			
-			Map<Integer, Map<Integer, List<String>>> canLabAdjList1 = 
+			Map<Integer, Map<String, Map<Integer, List<String>>>> canLabAdjList1 = 
 					getCanonicalLabelAdjList(graph1);
-			Map<Integer, Map<Integer, List<String>>> canLabAdjList2 = 
+			Map<Integer, Map<String, Map<Integer, List<String>>>> canLabAdjList2 = 
 					getCanonicalLabelAdjList(graph2);
 			System.out.println("CL1 : ");
 			System.out.println(canLabAdjList1);
@@ -808,26 +808,48 @@ public class GraphQueriesAPI {
 	 * @param graph
 	 * @return the "canonical label" adjacent list.
 	 */
-	public Map<Integer, Map<Integer, List<String>>> getCanonicalLabelAdjList(
+	public Map<Integer, Map<String, Map<Integer, List<String>>>> getCanonicalLabelAdjList(
 			DirectedGraph<Integer, MyEdge> graph){
 
-		Map<Integer, Map<Integer, List<String>>> cLAdjList = 
-				new HashMap<Integer, Map<Integer, List<String>>>();
+		Map<Integer, Map<String, Map<Integer, List<String>>>> cLAdjList = 
+				new HashMap<Integer, Map<String, Map<Integer, List<String>>>>();
 		for (Integer vertex : graph.getVertices()){
-			Map<Integer, List<String>> tempMap = new HashMap<Integer, List<String>>();
-			for (MyEdge edge : graph.getOutEdges(vertex)){
-				Integer endNode = edge.getEndNode();
-				String edgeName = edge.toString();
-				if (tempMap.containsKey(endNode)){
-					tempMap.get(endNode).add(edgeName);
+			
+			Map<String, Map<Integer, List<String>>> tempSubMap = 
+					new HashMap<String, Map<Integer, List<String>>>();
+			/*for 'next' edges*/
+			Map<Integer, List<String>> tempNextMap = new HashMap<Integer, List<String>>();
+			for (MyEdge outEdge : graph.getOutEdges(vertex)){
+				Integer endNode = outEdge.getEndNode();
+				String edgeName = outEdge.toString();
+				if (tempNextMap.containsKey(endNode)){
+					tempNextMap.get(endNode).add(edgeName);
 				}
 				else{
 					ArrayList<String> tempArray = new ArrayList<String>();
 					tempArray.add(edgeName);
-					tempMap.put(endNode, tempArray);
+					tempNextMap.put(endNode, tempArray);
 				}
 			}
-			cLAdjList.put(vertex, tempMap);
+			/*for 'previous' edges*/
+			Map<Integer, List<String>> tempPreviousMap = new HashMap<Integer, List<String>>();
+			for (MyEdge inEdge : graph.getInEdges(vertex)){
+				Integer startNode = inEdge.getStartNode();
+				String edgeName = inEdge.toString();
+				if (tempPreviousMap.containsKey(startNode)){
+					tempPreviousMap.get(startNode).add(edgeName);
+				}
+				else{
+					ArrayList<String> tempArray = new ArrayList<String>();
+					tempArray.add(edgeName);
+					tempPreviousMap.put(startNode, tempArray);
+				}
+			}
+			//add next Map
+			tempSubMap.put("next", tempNextMap);
+			//add previous Map
+			tempSubMap.put("previous", tempPreviousMap);
+			cLAdjList.put(vertex, tempSubMap);
 		}
 		
 		return cLAdjList;
@@ -840,8 +862,9 @@ public class GraphQueriesAPI {
 	 * @param canLabAdjList2
 	 * @return
 	 */
-	public boolean canonicalLabelEquality(Map<Integer, Map<Integer, List<String>>> canLabAdjList1,
-			Map<Integer, Map<Integer, List<String>>> canLabAdjList2) {
+	public boolean canonicalLabelEquality(
+			Map<Integer, Map<String, Map<Integer, List<String>>>> canLabAdjList1,
+			Map<Integer, Map<String, Map<Integer, List<String>>>> canLabAdjList2) {
 		
 		if (canLabAdjList1 == null && canLabAdjList2 == null){
 	        return true;
@@ -853,35 +876,52 @@ public class GraphQueriesAPI {
 		}
 		// create a deep copy of both of them because we are going 
 		// to mutate them
-		Map<Integer, Map<Integer, List<String>>> adjList1 = DeepClone.deepClone(canLabAdjList1);
-		Map<Integer, Map<Integer, List<String>>> adjList2 = DeepClone.deepClone(canLabAdjList2);
+		Map<Integer, Map<String, Map<Integer, List<String>>>> adjList1 = 
+				DeepClone.deepClone(canLabAdjList1);
+		Map<Integer, Map<String, Map<Integer, List<String>>>> adjList2 = 
+				DeepClone.deepClone(canLabAdjList2);
 		// if they haven't the same size or are empty return false.
 		if (adjList1.size() != adjList2.size() || adjList2.isEmpty() || adjList1.isEmpty()){
 			return false;
 		}
 		// as equality we denote two CL that have the same "form of vertices"
-		// that have the same edge names. For example: 
-		// {1 : {2:['a', 'm'],3:['b']}, 2: { 3:['c']}} is equal to
-		// {4 : {5:['a', 'm'],6:['b']}, 5: { 6:['c']}}
+		// that have the same edge names.
 		while (!adjList1.isEmpty() ){
-			boolean matchFound = false;
+			System.out.println(adjList1);
+			boolean nextMatchFound = false;
+			boolean previousMatchFound = false;
 			// get the next entry from adjList1
-			Entry<Integer, Map<Integer, List<String>>> entry1 = adjList1.entrySet().iterator().next();
+			Entry<Integer, Map<String, Map<Integer, List<String>>>> entry1 = 
+					adjList1.entrySet().iterator().next();
 			// iterate all the entries of the 2nd list to see if it match.
-			for (Entry<Integer, Map<Integer, List<String>>> entry2 : adjList2.entrySet()){
+			for (Entry<Integer, Map<String, Map<Integer, List<String>>>> entry2 : adjList2.entrySet()){
 				// check if they are empty if they come from the same edge.
 				if (entry1.getValue().isEmpty() && entry2.getValue().isEmpty())
 					System.out.println("Both Entries are empty");
-				if(canonicalLabelEntryEquality(entry1.getValue(), entry2.getValue())){
+				/** check if next Maps are equal **/
+				if(canonicalLabelEntryEquality(
+						entry1.getValue().get("next"), entry2.getValue().get("next"))){
+					nextMatchFound = true;
+				}
+				/** check if previous Maps are equal **/
+				if(canonicalLabelEntryEquality(
+						entry1.getValue().get("previous"), entry2.getValue().get("previous"))){
+					previousMatchFound = true;
+				}
+				if (nextMatchFound && previousMatchFound){
 					adjList1.remove(entry1.getKey());
 					adjList2.remove(entry2.getKey());
-					matchFound = true;
 					break;// TODO there musn't be a break here. Check how many you find.
 				}
+				else{
+					nextMatchFound = false;
+					previousMatchFound = false;
+				}
+				
 			}
 			// if the break from the above for loop is not reached then 
 			// entry1 dind't find a map from entry 2 to match
-			if (!matchFound) return false;
+			if (!(previousMatchFound && nextMatchFound)) return false;
 		}
 		// if it exits normally the while then the two lists are the same so return true
 		return true;

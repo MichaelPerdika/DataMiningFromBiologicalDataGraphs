@@ -15,8 +15,8 @@ import main.jung.MyEdge;
 public class CanonicalLabelEqualityTest {
 
 	GraphQueriesAPI gQueris;
-	Map<Integer, Map<Integer, List<String>>> canLabAdjList1; 
-	Map<Integer, Map<Integer, List<String>>> canLabAdjList2;
+	Map<Integer, Map<String,Map<Integer, List<String>>>> canLabAdjList1; 
+	Map<Integer, Map<String,Map<Integer, List<String>>>> canLabAdjList2;
 	DirectedGraph<Integer, MyEdge> graph1;
 	DirectedGraph<Integer, MyEdge> graph2;
 	

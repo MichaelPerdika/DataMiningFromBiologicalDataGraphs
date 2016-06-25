@@ -61,7 +61,7 @@ public class CanonicalLabelEntryEqualityTest {
 		entry2 = new HashMap<Integer, List<String>>();
 		/** entry1 = {} 
 		 *  entry2 = {}**/
-		assertFalse("different size", gQueris.canonicalLabelEntryEquality(entry1, entry2));
+		assertTrue("different size", gQueris.canonicalLabelEntryEquality(entry1, entry2));
 	}
 	
 	@Test

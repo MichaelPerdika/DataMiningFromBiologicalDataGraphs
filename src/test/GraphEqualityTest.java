@@ -67,6 +67,38 @@ public class GraphEqualityTest {
 	}
 	
 	@Test
+	public void differentWithMultigraph(){
+		
+		graph1 = new DirectedSparseMultigraph<Integer, MyEdge>();
+		graph2 = new DirectedSparseMultigraph<Integer, MyEdge>();
+		/*********graph1***********/
+		TestingUtils.addEdge(graph1, "1.2.3.4", 0, 1);
+		TestingUtils.addEdge(graph1, "3.3.3.3", 1, 2);
+		TestingUtils.addEdge(graph1, "4.4.3.3", 0, 1);
+		/*********graph2***********/
+		TestingUtils.addEdge(graph2, "1.2.3.4", 5, 6);
+		TestingUtils.addEdge(graph2, "3.3.3.3", 4, 5);
+		TestingUtils.addEdge(graph2, "4.4.3.3", 5, 6);
+		assertFalse(gQueris.graphEquality(graph1, graph2));
+	}
+	
+	@Test
+	public void sameWithMultigraph(){
+		
+		graph1 = new DirectedSparseMultigraph<Integer, MyEdge>();
+		graph2 = new DirectedSparseMultigraph<Integer, MyEdge>();
+		/*********graph1***********/
+		TestingUtils.addEdge(graph1, "1.2.3.4", 0, 1);
+		TestingUtils.addEdge(graph1, "3.3.3.3", 1, 2);
+		TestingUtils.addEdge(graph1, "4.4.3.3", 0, 1);
+		/*********graph2***********/
+		TestingUtils.addEdge(graph2, "1.2.3.4", 5, 6);
+		TestingUtils.addEdge(graph2, "3.3.3.3", 6, 7);
+		TestingUtils.addEdge(graph2, "4.4.3.3", 5, 6);
+		assertTrue(gQueris.graphEquality(graph1, graph2));
+	}
+	
+	@Test
 	public void sameGraphsAtLeastOneDifferentDirection() {
 		TestingUtils.addEdge(graph1, "c", 2, 3);
 		TestingUtils.addEdge(graph2, "c", 7, 8); // this is A-->d

@@ -60,8 +60,8 @@ public class GetOccurrencesOfPatternInGraphTest {
 
 		/*********pattern***********/
 		TestingUtils.addEdge(pattern, "1.2.3.4", 0, 1);
-		TestingUtils.addEdge(pattern, "3.3.*", 1, 2);
-		TestingUtils.addEdge(pattern, "2.3.4.*", 3, 0);
+		TestingUtils.addEdge(pattern, "3.3.1.1", 1, 2);
+		TestingUtils.addEdge(pattern, "2.3.4.5", 3, 0);
 
 		
 		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1 ));
@@ -92,10 +92,10 @@ public class GetOccurrencesOfPatternInGraphTest {
 
 		/*********pattern***********/
 		TestingUtils.addEdge(pattern, "1.2.3.4", 10, 11);
-		TestingUtils.addEdge(pattern, "3.3.*", 11, 12);
+		TestingUtils.addEdge(pattern, "3.3.3.3", 11, 12);
 		
 		System.out.println(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1 ));
-		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1)==2);
+		assertTrue(gQueris.getOccurrencesOfPatternInGraph(pattern, graph,1)==1);
 	}
 	
 	@Test

@@ -27,6 +27,8 @@ public class Application {
 	public static void main(String[] args)  {
 			
 			System.out.println("hello World!");
+			/** the parsing from the biopax files should be in a .properties file **/
+			/** there is a build in parser **/
 			//http://www.biocyc.org/ECOLI/NEW-IMAGE?type=PATHWAY&object=TCA&detail-level=2
 			String fileName1 = "src/data/TCA cycle I (prokaryotic).biopax";
 			//http://www.biocyc.org/YEAST/NEW-IMAGE?type=PATHWAY&object=TCA-EUK-PWY-YEAST&detail-level=2
@@ -64,16 +66,19 @@ public class Application {
 			// initialize the API
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphSet);
 			// find patterns in graphs. The main algorithm.
-			graphQueries.findPatternsInGraphs(1);
+			graphQueries.findPatternsInGraphs(1.0);
 			// print the pattern table
 			graphQueries.printPatternTable();
 			//visualizeListOfSubGraphs(graphQueries.getSubGraphList());
 			// calculate the hierarchical clustering
 			//TODO
-			
+			ClusteringAlgorithm clustAlg = new ClusteringAlgorithm(graphQueries);
+			clustAlg.calculateDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
+			clustAlg.printDistanceMatrix();
 			
 			/**
 			 * expected results:
+			 * tolerance 100%:
 	g0 = Vertices:0,1,2,3,4,5,6,7,8
 	Edges:1.3.5.1 [3,6]  [1,7] 1.1.5.4 [4,5] 4.2.1.2 [6,4]  [0,1] 1.1.1.37 [4,5] 2.3.3.1 2.3.3.16 [5,0] 1.1.1.42 [7,8]  [8,2] 6.2.1.5 [2,3] 
 	g1 = Vertices:0,1,2,3,4,5,6,7,8

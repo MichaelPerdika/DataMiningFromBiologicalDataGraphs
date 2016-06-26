@@ -107,44 +107,12 @@ public class GraphQueriesAPI {
 				// if there is no comEdge (null) or it doesn't match the patEdge return
 				if (comEdge== null || !comEdge.isIdentical(sEdge)) continue;//do nothing
 				// there is a match. Create or append in graph list.
-				System.out.println("comEdge: " + comEdge +
-						"["+ comEdge.getStartNode() +", "+ comEdge.getEndNode()+"] --> " +
-						"["+ gEdge.getStartNode() +", "+ gEdge.getEndNode()+"]");
-				System.out.println("commonGraphList before ");
-				System.out.println(commonGraphList);
-				System.out.println("tempGraphList before ");
-				System.out.println(tempGraphList);
 				List<DirectedGraph<Integer, MyEdge>> TBE = 
 						getGraphListWithNewEdge(new ArrayList<DirectedGraph<Integer, MyEdge>>(commonGraphList), comEdge, gEdge);
-				System.out.println("commonGraphList AFTER 1");
-				System.out.println(commonGraphList);
 				concat2GraphLists(tempGraphList, TBE);
-				System.out.println("commonGraphList AFTER 2");
-				System.out.println(commonGraphList);
-				System.out.println("tempGraphList after ");
-				System.out.println(tempGraphList);
 			}
-			// tempGraphList is the commonGraphList for the next iteration.
-			System.out.println("DEEP COPY OCCURED");
-			//commonGraphList = DeepClone.deepClone(tempGraphList);
-			/*
-			for (DirectedGraph<Integer, MyEdge> tempG: tempGraphList){
-				boolean matchFound = false;
-				for (DirectedGraph<Integer, MyEdge> comG: commonGraphList){
-					if (graphsAreIdentical(tempG, comG)){
-						matchFound = true;
-						break;
-					}
-				}
-				if (matchFound){
-					
-				}
-			}
-			*/
 			commonGraphList = tempGraphList;
 		}
-		System.out.println("FINALLY!!!");
-		System.out.println(commonGraphList);
 		if (commonGraphList.isEmpty()) return 0;
 		int occurences = 0;
 		for (DirectedGraph<Integer, MyEdge> comGraph : commonGraphList){
@@ -163,8 +131,6 @@ public class GraphQueriesAPI {
 	private void concat2GraphLists(List<DirectedGraph<Integer, MyEdge>> distList,
 			List<DirectedGraph<Integer, MyEdge>> sourceList) {
 		// TODO Auto-generated method stub
-		System.out.println("sourceList :");
-		System.out.println(sourceList);
 		for (DirectedGraph<Integer, MyEdge> graph : sourceList){
 			distList.add(graph);
 		}
@@ -194,20 +160,8 @@ public class GraphQueriesAPI {
 			for (DirectedGraph<Integer, MyEdge> prevGraph : prevGraphList){
 				DirectedGraph<Integer, MyEdge> tempGraph =
 						DeepClone.deepClone(prevGraph);
-				System.out.println("                                                         "
-						+ "prevGraph BEFORE");
-				System.out.println(prevGraph);
-				System.out.println("                                                         "
-						+ "tempGraph BEFORE");
-				System.out.println(tempGraph);
 				tempGraph.addEdge(new MyEdge(edge, gEdge.getStartNode(), gEdge.getEndNode()),
 						gEdge.getStartNode(), gEdge.getEndNode());
-				System.out.println("                                                         "
-						+ "prevGraph AFTER");
-				System.out.println(prevGraph);
-				System.out.println("                                                         "
-						+ "tempGraph AFTER");
-				System.out.println(tempGraph);
 				nextGraphList.add(tempGraph);
 			}
 		}	
@@ -559,8 +513,6 @@ public class GraphQueriesAPI {
 				MyEdge prevComEdge = getCommonEdgeFromThreshold(previous1, previous2, threshold);
 				if (!graphContainsEdge(commonSubGraph, prevComEdge)){
 					if(prevComEdge !=null){
-						System.out.println("commonSubGraph");
-						System.out.println(commonSubGraph);
 						appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, 
 								previous1, previous2, prevComEdge, threshold);
 					}
@@ -794,10 +746,6 @@ public class GraphQueriesAPI {
 					getCanonicalLabelAdjList(graph1);
 			Map<Integer, Map<String, Map<Integer, List<String>>>> canLabAdjList2 = 
 					getCanonicalLabelAdjList(graph2);
-			System.out.println("CL1 : ");
-			System.out.println(canLabAdjList1);
-			System.out.println("CL2 : ");
-			System.out.println(canLabAdjList2);
 			return canonicalLabelEquality(canLabAdjList1, canLabAdjList2);
 		}
 	}
@@ -887,7 +835,6 @@ public class GraphQueriesAPI {
 		// as equality we denote two CL that have the same "form of vertices"
 		// that have the same edge names.
 		while (!adjList1.isEmpty() ){
-			System.out.println(adjList1);
 			boolean nextMatchFound = false;
 			boolean previousMatchFound = false;
 			// get the next entry from adjList1
@@ -996,24 +943,19 @@ public class GraphQueriesAPI {
 	 * @return
 	 */
 	public static List<List<String>> parseEdgeNames(MyEdge myEdge){
-		//System.out.println(myEdge);
 		String[] eCNumbers = myEdge.getECNumber();
-		//System.out.println("Length is: "+eCNumbers.length);
 		ArrayList<List<String>> listOfStrings = 
 				new ArrayList<List<String>>();
 		//iterate through the ECNumbers
 		for ( int i=0 ;i<eCNumbers.length;i++){
-			//System.out.println("HI");
 			ArrayList<String> tempList = new ArrayList<String>();
 			String[] subECNum = eCNumbers[i].split(Pattern.quote(".")); // Split on period.
-			//System.out.println("Length of sub is: "+subECNum.length);
 			//iterate inside an ECNumber
 			for (int j=0;j<subECNum.length;j++){
 				tempList.add(subECNum[j]);
 			}
 			listOfStrings.add(tempList);
 		}
-		//System.out.println(listOfStrings);
 		return listOfStrings;
 	}
 	

@@ -112,8 +112,6 @@ public final class DeepClone {
         Collection<MyEdge> edgeCollection = graph.getEdges();
         for ( MyEdge curEdge : edgeCollection) {
             clone.addEdge(curEdge, curEdge.getStartNode(), curEdge.getEndNode());
-            System.out.println("curEdge"+"["+ curEdge.getStartNode() +", "+ curEdge.getEndNode()+"]");
-            System.out.println("clone"+"["+ clone.findEdge(curEdge.getStartNode(), curEdge.getEndNode()).getStartNode() +", "+ clone.findEdge(curEdge.getStartNode(), curEdge.getEndNode()).getEndNode()+"]");
         }
 
         return clone;

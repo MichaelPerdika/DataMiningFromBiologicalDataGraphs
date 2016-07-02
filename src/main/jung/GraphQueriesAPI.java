@@ -1,5 +1,10 @@
 package main.jung;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Paint;
+import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -9,8 +14,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
+import javax.swing.JFrame;
+
+import org.apache.commons.collections15.Transformer;
+
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
+import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.visualization.BasicVisualizationServer;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
 public class GraphQueriesAPI {
 
@@ -695,17 +710,20 @@ public class GraphQueriesAPI {
 	 */
 	public void printPatternTable(){
 		
+		System.out.println("\nThe Graphs");
 		/**** print the graphs ***/
 		for (int i=0; i<graphList.size();i++){
 			System.out.println("g"+i+" = "+graphList.get(i));
 		}
 		System.out.println("");
 		/**** print the patterns */
+		System.out.println("The Patterns");
 		for (int i=0; i<subGraphList.size();i++){
 			System.out.println("p"+i+" = "+subGraphList.get(i));
 		}
 		System.out.println("");
 		/**** print the grid******/
+		System.out.println("The Pattern Table");
 		System.out.print("   ");
 		for (int num=0; num<graphList.size();num++){
 			System.out.print("g"+num+" ");
@@ -957,6 +975,101 @@ public class GraphQueriesAPI {
 			listOfStrings.add(tempList);
 		}
 		return listOfStrings;
+	}
+	
+	/**
+	 * static method that can visualize a List of Directed graphs
+	 * @param graphList
+	 */
+	public static void visualizeListOfGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
+		for (Object temp : graphList.toArray()){
+			visualizeGraph((DirectedGraph<Integer, MyEdge>) temp);
+		}
+	}
+	
+	/**
+	 * method that visualizes the list of patterns subGraphList
+	 * @param graphList
+	 */
+	public void visualizeSubGraphList() {
+		visualizeListOfGraphs(getSubGraphList());
+	}
+	
+	/**
+	 * method that visualizes the list of graphs graphList
+	 * @param graphList
+	 */
+	public void visualizeGraphList() {
+		visualizeListOfGraphs(getGraphList());
+	}
+	
+	/**
+	 * This method visualizes a graph
+	 * @param graph
+	 */
+	public static void visualizeGraph(DirectedGraph<Integer, MyEdge> graph) {
+		// The visualization. Code from JUNG
+		Graph<Integer, String> covGraph = convertGraphForVisualization(graph);
+		
+		// Layout<V, E>, VisualizationComponent<V,E>
+        Layout<Integer, String> layout = new CircleLayout(covGraph);
+        layout.setSize(new Dimension(800,600));
+        BasicVisualizationServer<Integer,String> vv = new BasicVisualizationServer<Integer,String>(layout);
+        vv.setPreferredSize(new Dimension(850,650));       
+        // Setup up a new vertex to paint transformer...
+        Transformer<Integer,Paint> vertexPaint = new Transformer<Integer,Paint>() {
+            public Paint transform(Integer i) {
+                return Color.GREEN;
+            }
+        };  
+        // Set up a new stroke Transformer for the edges
+        float dash[] = {10.0f};
+        final Stroke edgeStroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
+             BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f);
+        Transformer<String, Stroke> edgeStrokeTransformer = new Transformer<String, Stroke>() {
+            public Stroke transform(String s) {
+                return edgeStroke;
+            }
+        };
+        vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
+        vv.getRenderContext().setEdgeStrokeTransformer(edgeStrokeTransformer);
+        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+        vv.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);        
+        
+        JFrame frame = new JFrame("Simple Graph View 2");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(vv);
+        frame.pack();
+        frame.setVisible(true); 
+		
+	}
+	
+	/**
+	 * used in method visualizeGraph. Converts a graph from <Integer, MyEdge> to
+	 * Graph<Integer, String> for convenience. 
+	 * @param graph
+	 * @return The convenient Graph<Integer, String>
+	 */
+	private static Graph<Integer, String> convertGraphForVisualization(
+			DirectedGraph<Integer, MyEdge> graph) {
+		Graph<Integer, String> convGraph = new DirectedSparseMultigraph<Integer, String>();
+		Collection<MyEdge> collection = graph.getEdges();
+		String emptyEdgeNameIter = "";
+		for (MyEdge myEdge : collection){
+			//TODO
+			//this is used for now because there might be edges with empty name "" but different start and 
+			// end points. If it exists then add a "_". This has to be changed
+			if (convGraph.containsEdge("")){
+				emptyEdgeNameIter += "_";
+				convGraph.addEdge(emptyEdgeNameIter, myEdge.getStartNode(), myEdge.getEndNode());
+			}
+			else{
+				// before it was only this line without the if/else
+				convGraph.addEdge(myEdge.getEdgeName(), myEdge.getStartNode(), myEdge.getEndNode());
+			}
+		}
+		return convGraph;
 	}
 	
 	public List<DirectedGraph<Integer, MyEdge>> getGraphList() {

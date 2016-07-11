@@ -40,18 +40,22 @@ public class Application {
 			// initialize the API
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphList);
 			// find patterns in graphs. The main algorithm.
-			graphQueries.findPatternsInGraphs(1.0);
+			graphQueries.findPatternsInGraphs(1);
 			// print the pattern table
 			graphQueries.printPatternTable();
 			//visualize graphList
 			graphQueries.visualizeGraphList();
 			//visualize subGraphList
 			graphQueries.visualizeSubGraphList();
+			
 			// calculate the hierarchical clustering
-			//TODO
+			//TODO clustering Algorithm
 			ClusteringAlgorithm clustAlg = new ClusteringAlgorithm(graphQueries);
 			clustAlg.calculateDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
 			clustAlg.printDistanceMatrix();
+			
+			// find if some patterns are unique in graphs or not 
+			//TODO clustering Algorithm
 			
 			/**
 			 * expected results:
@@ -144,7 +148,7 @@ public class Application {
 			
 			
 			System.out.println("Goodbye");		
-		}
+	}
 	
 
 	/**

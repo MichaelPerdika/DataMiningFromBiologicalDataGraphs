@@ -141,13 +141,21 @@ public class BioPAXGraphAdjList {
 	 */
 	private void addBiochemicalPathwayStep( Set<BioPAXElement> elementSet) {
 		
-		String bioPathStepRDFid;
+		String bioPathStepRDFid = new String();
 		
 		for (BioPAXElement currentElement : elementSet)
 		{
-			bioPathStepRDFid = currentElement.getRDFId();
+			System.out.println("cE "+currentElement);
+			try{
+				bioPathStepRDFid = currentElement.getRDFId();
+				System.out.println("B "+bioPathStepRDFid);
+			}
+			catch(NullPointerException e ){
+				System.out.println("["+currentElement+"]");
+			}
 			
-			if (!this.bioPathStepsGraph.containsKey(bioPathStepRDFid)){
+			if (!this.bioPathStepsGraph.containsKey(bioPathStepRDFid)
+					&& bioPathStepRDFid != null){
 
 				addBioPathStepSubMap(bioPathStepRDFid);	
 			}			
@@ -194,6 +202,7 @@ public class BioPAXGraphAdjList {
 		this.bioPathStepsGraph.put(bioPathStepRDFid, valuesMap); 
 		
 		Set<BioPAXElement> nextElementSet = filterBioPAXElementsByHttps(extractHttps(getPropertyInfo(bioPathStepRDFid, "nextStep")));
+		System.out.println(nextElementSet);
 		addBiochemicalPathwayStep(nextElementSet);
 		
 	}
@@ -251,17 +260,22 @@ public class BioPAXGraphAdjList {
 	 */
 	public String getPropertyInfo(String RDFid, String property) {
 		
-		BioPAXElement bpe = this.model.getByID(RDFid);
-		String[][] properties = getlistPropertiesFromBPE(bpe);
-		for (int i=0;i < properties.length;i++)
-		{
-			if (properties[i][0].equals(property)){
-				return properties[i][1];
+		try{
+			BioPAXElement bpe = this.model.getByID(RDFid);
+			String[][] properties = getlistPropertiesFromBPE(bpe);
+			for (int i=0;i < properties.length;i++)
+			{
+				if (properties[i][0].equals(property)){
+					return properties[i][1];
+				}
+				
 			}
 			
+			return "property not found";
 		}
-		
-		return "property not found";
+		catch(NullPointerException e ){
+			return "property not found";
+		}
 	}
 	
 	/**

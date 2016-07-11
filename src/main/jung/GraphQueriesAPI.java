@@ -1060,7 +1060,7 @@ public class GraphQueriesAPI {
 			//TODO
 			//this is used for now because there might be edges with empty name "" but different start and 
 			// end points. If it exists then add a "_". This has to be changed
-			if (convGraph.containsEdge("")){
+			if (convGraph.containsEdge(myEdge.getEdgeName())){
 				emptyEdgeNameIter += "_";
 				convGraph.addEdge(emptyEdgeNameIter, myEdge.getStartNode(), myEdge.getEndNode());
 			}

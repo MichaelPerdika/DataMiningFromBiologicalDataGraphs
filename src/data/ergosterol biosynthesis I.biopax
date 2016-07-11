@@ -1,0 +1,2485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+ xml:base="http://http://BioCyc.org//META/pathway-biopax?type=3%38object=PWY-6075"
+ xmlns:owl="http://www.w3.org/2002/07/owl#"
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema#"
+ xmlns:bp="http://www.biopax.org/release/biopax-level3.owl#"
+>
+ <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://www.biopax.org/release/biopax-level3.owl"/>
+ <rdfs:comment>This%32BioPAX%32Level%323%32output%32for%32organism%32MetaCyc%44%32pathway%32ergosterol%3732biosynthesis%3732I%10was%32automatically%32generated%32from%32URL%32http%58%47%47http%58%47%47BioCyc%46org%47%47META%47pathway%45biopax%63type%613%3738object%61PWY%456075%32on%3211%45Jul%452016%32%3212%5812%5821%46%32%32Note%32that%32all%32IDs%32are%32auto%45generated%44%10and%32are%32valid%32in%32the%32scope%32of%32this%32file%32only%46%32%32If%32the%32data%32is%32regenerated%32at%32some%32later%10time%44%32or%32data%32for%32another%32pathway%32is%32generated%32from%32this%32same%32site%44%32there%32are%32no%32%10guarantees%32that%32the%32same%32IDs%32will%32refer%32to%32the%32same%32objects%46%32%32To%32retrieve%32a%32file%32%10containing%32a%32complete%32list%32of%32pathways%32for%32this%32organism%32in%32BioPAX%32format%44%32please%10visit%32http%58%47%47biocyc%46org%47download%45flatfiles%46shtml</rdfs:comment>
+ </owl:Ontology>
+  <bp:UnificationXref rdf:ID="UnificationXref26512">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MONOMER3O-188</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26511">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P25087</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26510">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MINT-537879</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mint</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26509">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIP-3816N</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Database of Interacting Proteins</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26508">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P25087</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWISS-MODEL</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26507">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P25087</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Protein Model Portal</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26500">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FungiDB:YML008C</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eukaryotic Pathogen Database Resources</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26497">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CPLX-7686</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26495">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENZRXN3O-190</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26483">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADENOSYL-HOMO-CYS</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26482">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">979-92-0</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26481">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00021</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26480">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:57856</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26479">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33543</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IAF1260</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26478">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB00939</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26477">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MTBLC57856</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaboLights</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26476">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">25246222</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26470">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZYMOSTEROL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26469">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">128-33-6</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26468">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C05437</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26467">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB06271</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26466">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:18252</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26465">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">92746</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26459">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S-ADENOSYLMETHIONINE</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26458">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">29908-03-0</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26457">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00019</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26456">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:59789</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26455">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33530</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IAF1260</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26454">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB01185</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26453">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MTBLC59789</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaboLights</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26452">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24762165</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26449">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RXN3O-178</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26438">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RELATED-TO</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BioCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26436">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R04427</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26435">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21128</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rhea</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26430">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">YMR202W-MONOMER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26429">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P32352</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26428">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MINT-515226</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mint</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26427">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIP-5068N</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Database of Interacting Proteins</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26426">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P32352</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Protein Model Portal</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26423">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FungiDB:YMR202W</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eukaryotic Pathogen Database Resources</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26421">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENZRXN3O-207</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26412">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FECOSTEROL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26411">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C04525</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26410">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:17038</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26409">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LMST01030095</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LIPID MAPS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26408">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">440371</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26405">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RXN3O-203</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26404">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R07497</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26403">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33435</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rhea</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26396">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CARBON-MONOXIDE</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26395">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">630-08-0</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26394">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00237</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26393">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">281</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26392">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:17245</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26391">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">275</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChemSpider</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26390">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB01361</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26389">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MTBLC17245</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaboLights</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26385">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MONOMER3O-232</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26384">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P54781</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26383">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MINT-1323986</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mint</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26382">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P54781</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Protein Model Portal</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26375">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P54781</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWISS-MODEL</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26374">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FungiDB:YMR015C</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eukaryotic Pathogen Database Resources</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26372">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENZRXN3O-233</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26369">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IDA-PURIFIED-PROTEIN</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://brg.ai.sri.com/evidence-ontology/</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26361">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RXN3O-227</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26360">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33467</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rhea</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26359">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R07506</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26354">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">YGL012W-MONOMER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26353">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P25340</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26352">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MINT-1364010</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mint</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26351">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIP-7177N</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Database of Interacting Proteins</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26350">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P25340</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Protein Model Portal</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26344">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FungiDB:YGL012W</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eukaryotic Pathogen Database Resources</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26343">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P25340</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWISS-MODEL</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26341">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GO:0005788</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GO</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26339">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENZRXN-5501</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26336">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IMP-REACTION-BLOCKED</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://brg.ai.sri.com/evidence-ontology/</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26331">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IMP-REACTION-ENHANCED</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://brg.ai.sri.com/evidence-ontology/</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26322">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADPH</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26321">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00005</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26320">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2646-71-1</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26319">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">15983949</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26318">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:57783</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26317">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10239199</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChemSpider</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26316">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33486</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IAF1260</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26315">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB00221</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26314">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MTBLC57783</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaboLights</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26308">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">57222428-ERGOSTATETRAENOL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26307">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C05440</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26306">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:18249</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26305">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4444350</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChemSpider</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26304">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11090531</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26298">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26297">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">53-59-8</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26296">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00006</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26295">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">15938972</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26294">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:58349</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26293">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10239198</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChemSpider</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26292">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33488</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IAF1260</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26291">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB00217</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26290">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MTBLC58349</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaboLights</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26284">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ERGOSTEROL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26283">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C01694</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26282">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">57-87-4</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26281">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10477914</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChemSpider</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26280">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:16933</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26279">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DB04038</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DrugBank</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26278">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LMST01030093</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LIPID MAPS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26277">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB00878</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26276">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MTBLC16933</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaboLights</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26275">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">444679</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26272">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.3.1.71-RXN</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26271">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R05641</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26270">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">18501</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rhea</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26265">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4932</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NCBI Taxonomy</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26263">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">YLR056W-MONOMER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26262">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P32353</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26261">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MINT-481056</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mint</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26260">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIP-4136N</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Database of Interacting Proteins</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26259">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P32353</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Protein Model Portal</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26258">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FungiDB:YLR056W</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eukaryotic Pathogen Database Resources</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26256">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENZRXN3O-222</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26249">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3055</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NCBI Taxonomy</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26247">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MONOMER-17808</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26246">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A8JFB0</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26245">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">XP_001701457</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NCBI-Protein</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26242">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IN-FAMILY</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BioCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26239">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENZRXN-21128</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26231">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AT3G02580-MONOMER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26229">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENZRXN1F-2550</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26226">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IGI-FUNC-COMPLEMENTATION</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://brg.ai.sri.com/evidence-ontology/</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26219">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FERRICYTOCHROME-B5</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26218">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00996</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26212">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">WATER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26211">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">7732-18-5</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26210">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00001</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26209">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">962</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26208">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:15377</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26207">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">937</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChemSpider</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26206">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33474</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IAF1260</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26205">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB02111</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26204">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MTBLC15377</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaboLights</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26198">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CPD-700</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26197">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB06848</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26196">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10894570</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26195">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C15780</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26194">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:52972</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26188">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROTON</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26187">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00080</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26186">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12408-02-5</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26185">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:15378</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26184">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1038</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26183">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1010</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChemSpider</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26182">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33778</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IAF1260</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26181">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB59597</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26176">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FERROCYTOCHROME-B5</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26175">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00999</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26169">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OXYGEN-MOLECULE</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26168">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">7782-44-7</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAS</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26167">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C00007</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26166">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:15379</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26165">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">977</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26164">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">952</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChemSpider</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26163">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33493</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IAF1260</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26162">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB01377</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26161">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MTBLC15379</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaboLights</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26158">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BioCyc-ID</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BioCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26153">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EPISTEROL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26152">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C15777</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG LIGAND</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26151">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHEBI:50586</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChEBI</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26150">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB06847</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HMDB</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26149">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23724571</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubChem-compound</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26147">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GO:0005829</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GO</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26144">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RXN3O-218</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26143">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">33463</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rhea</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26142">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R07491</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26141">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R07505</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KEGG</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26137">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PWY-6075</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:UnificationXref>
+  <bp:UnificationXref rdf:ID="UnificationXref26131">
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IDA</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://brg.ai.sri.com/evidence-ontology/</bp:db>
+  </bp:UnificationXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26514">
+    <bp:relationshipType>
+      <bp:RelationshipTypeVocabulary rdf:ID="RelationshipTypeVocabulary26157">
+        <bp:xref rdf:resource="#UnificationXref26158"/>
+        <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BioCyc-ID</bp:term>
+      </bp:RelationshipTypeVocabulary>
+    </bp:relationshipType>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MONOMER3O-188</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26506">
+    <bp:relationshipType>
+      <bp:RelationshipTypeVocabulary rdf:ID="RelationshipTypeVocabulary26241">
+        <bp:xref rdf:resource="#UnificationXref26242"/>
+        <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IN-FAMILY</bp:term>
+      </bp:RelationshipTypeVocabulary>
+    </bp:relationshipType>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR013216</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26505">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR013705</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26504">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PF08241</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pfam</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26503">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PF08498</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pfam</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26502">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PS51685</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prosite</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26501">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR029063</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26499">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR030384</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26486">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADENOSYL-HOMO-CYS</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26473">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZYMOSTEROL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26462">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S-ADENOSYLMETHIONINE</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26448">
+    <bp:relationshipType>
+      <bp:RelationshipTypeVocabulary rdf:ID="RelationshipTypeVocabulary26437">
+        <bp:xref rdf:resource="#UnificationXref26438"/>
+        <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RELATED-TO</bp:term>
+      </bp:RelationshipTypeVocabulary>
+    </bp:relationshipType>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O14321</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26447">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O24328</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26446">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Q41586</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26445">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Q43445</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26444">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P93852</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26443">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O24154</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26442">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O24153</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26441">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O49215</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26440">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Q39227</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26439">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26437"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P25087</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UniProt</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26432">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">YMR202W-MONOMER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26425">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR006716</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26424">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PF04622</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pfam</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26415">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FECOSTEROL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26399">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CARBON-MONOXIDE</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26387">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MONOMER3O-232</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26381">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PR00465</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prints</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26380">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR001128</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26379">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR017972</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26378">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR002403</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26377">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PF00067</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pfam</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26376">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PS00086</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prosite</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26356">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">YGL012W-MONOMER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26349">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR001171</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26348">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR018083</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26347">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PF01222</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pfam</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26346">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PS01017</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prosite</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26345">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PS01018</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prosite</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26325">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADPH</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26311">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">57222428-ERGOSTATETRAENOL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26301">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26287">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ERGOSTEROL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26267">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">YLR056W-MONOMER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26251">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MONOMER-17808</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26244">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IPR006694</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InterPro</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26243">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26241"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PF04116</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pfam</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26234">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AT3G02580-MONOMER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26221">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FERRICYTOCHROME-B5</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26215">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">WATER</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26201">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CPD-700</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26191">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROTON</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26178">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FERROCYTOCHROME-B5</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26172">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OXYGEN-MOLECULE</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:RelationshipXref rdf:ID="RelationshipXref26156">
+    <bp:relationshipType rdf:resource="#RelationshipTypeVocabulary26157"/>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EPISTEROL</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc</bp:db>
+  </bp:RelationshipXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26492">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1998</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Overexpression, purification, and stereochemical studies of the recombinant (S)-adenosyl-L-methionine: delta 24(25)- to delta 24(28)-sterol methyl transferase enzyme from &lt;i&lt;Saccharomyces cerevisiae&lt;/i&gt;.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Arch Biochem Biophys 353(2);297-311</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">9606964</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nes WD</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">McCourt BS</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Zhou WX</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ma J</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Marshall JA</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Peek LA</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Brennan M</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26489">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1969</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Isolation and purification of an S-adenosylmethionine: delta 24-sterol methyltransferase from yeast.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J Biol Chem 244(23);6334-40</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5354959</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Moore JT</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gaylor JL</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26418">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1991</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cloning and disruption of the yeast C-8 sterol isomerase gene.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lipids 26(8);628-32</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1779709</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ashman WH</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Barbuch RJ</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ulbright CE</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jarrett HW</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bard M</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26367">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1995</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Purification and reconstitution of activity of Saccharomyces cerevisiae P450 61, a sterol delta 22-desaturase.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FEBS Lett 377(2);217-20</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8543054</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kelly SL</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lamb DC</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corran AJ</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Baldwin BC</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Parks LW</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kelly DE</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26364">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1996</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cloning and characterization of the &lt;i&gt;Saccharomyces cerevisiae&lt;/i&gt; C-22 sterol desaturase gene, encoding a second cytochrome P-450 involved in ergosterol biosynthesis.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gene 169(1);105-9</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8635732</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Skaggs BA</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alexander JF</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pierson CA</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Schweitzer KS</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chun KT</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Koegel C</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Barbuch R</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bard M</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26334">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2000</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biochemical characterization and subcellular localization of the sterol C-24(28) reductase, erg4p, from the yeast saccharomyces cerevisiae.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FEBS Lett 470(1);83-7</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10722850</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Zweytick D</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hrastnik C</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kohlwein SD</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Daum G</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26329">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2003</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Overexpression of a sterol C-24(28) reductase increases ergosterol production in Saccharomyces cerevisiae.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biotechnol Lett 25(10);773-8</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12882006</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">He X</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Zhang B</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tan H</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26253">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1991</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cloning, disruption and sequence of the gene encoding yeast C-5 sterol desaturase.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gene 102(1);39-44</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1864507</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Arthington BA</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bennett LG</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Skatrud PL</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Guynn CJ</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Barbuch RJ</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ulbright CE</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bard M</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26236">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2010</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Functional characterization of the Chlamydomonas reinhardtii ERG3 ortholog, a gene involved in the biosynthesis of ergosterol.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PLoS One 5(1);e8659</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20084111</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Brumfield KM</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Moroney JV</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Moore TS</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Simms TA</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Donze D</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26224">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1999</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Delta7-sterol-C5-desaturase: molecular characterization and functional expression of wild-type and mutant alleles.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Plant Mol Biol 39(5);891-906</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10344195</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Husselstein T</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Schaller H</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gachotte D</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Benveniste P</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26134">
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[Characteristics of the final stages of ergosterol biosynthesis in Saccharomyces cerevisiae yeasts]</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Izv Akad Nauk SSSR Biol (1);95-101</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2654239</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Zhakovskaia ZA</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mikhailova NP</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kamilova TA</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ogorodnikova TE</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">V&apos;iunov KA</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26129">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1978</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ergosterol biosynthesis in yeast. Pathways in the late stages and their variation under various conditions.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J Biochem 83(3);681-91</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">346585</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Osumi T</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Taketani S</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Katsuki H</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kuhara T</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Matsumoto I</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26128">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1995</bp:year>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Physiological implications of sterol biosynthesis in yeast.</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annu Rev Microbiol 49;95-116</bp:source>
+    <bp:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8561481</bp:id>
+    <bp:db rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PubMed</bp:db>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Parks LW</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Casey WM</bp:author>
+  </bp:PublicationXref>
+  <bp:PublicationXref rdf:ID="PublicationXref26127">
+    <bp:year rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1992</bp:year>
+    <bp:url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://db.yeastgenome.org/cgi-bin/reference/reference.pl?dbid=S000058496</bp:url>
+    <bp:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Regulation and compartmentalization of lipid synthesis in yeast</bp:title>
+    <bp:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Molecular and Cellular Biology of the yeast
+Saccharomyces: Gene Expression, Vol. 2, pp.415 - 500.</bp:source>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Paltauf, F</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kohlwein, S</bp:author>
+    <bp:author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Henry, SA</bp:author>
+  </bp:PublicationXref>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26515">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:Protein rdf:ID="Protein26513">
+        <bp:xref rdf:resource="#RelationshipXref26514"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sterol 24-C-methyltransferase subunit</bp:standardName>
+        <bp:entityReference>
+          <bp:ProteinReference rdf:ID="ProteinReference26498">
+            <bp:organism>
+              <bp:BioSource rdf:ID="BioSource26264">
+                <bp:xref rdf:resource="#UnificationXref26265"/>
+                <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Saccharomyces cerevisiae</bp:name>
+              </bp:BioSource>
+            </bp:organism>
+            <bp:xref rdf:resource="#UnificationXref26512"/>
+            <bp:xref rdf:resource="#UnificationXref26511"/>
+            <bp:xref rdf:resource="#UnificationXref26510"/>
+            <bp:xref rdf:resource="#UnificationXref26509"/>
+            <bp:xref rdf:resource="#UnificationXref26508"/>
+            <bp:xref rdf:resource="#UnificationXref26507"/>
+            <bp:xref rdf:resource="#RelationshipXref26506"/>
+            <bp:xref rdf:resource="#RelationshipXref26505"/>
+            <bp:xref rdf:resource="#RelationshipXref26504"/>
+            <bp:xref rdf:resource="#RelationshipXref26503"/>
+            <bp:xref rdf:resource="#RelationshipXref26502"/>
+            <bp:xref rdf:resource="#RelationshipXref26501"/>
+            <bp:xref rdf:resource="#UnificationXref26500"/>
+            <bp:xref rdf:resource="#RelationshipXref26499"/>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sterol 24-C-methyltransferase subunit</bp:standardName>
+          </bp:ProteinReference>
+        </bp:entityReference>
+        <bp:dataSource>
+          <bp:Provenance rdf:ID="Provenance26138">
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MetaCyc (http://metacyc.org)</bp:name>
+          </bp:Provenance>
+        </bp:dataSource>
+      </bp:Protein>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26487">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26485">
+        <bp:xref rdf:resource="#RelationshipXref26486"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-L-homocysteine</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S-adenosylhomocysteine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2-S-adenosyl-L-homocysteine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AdoHcy</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2-&lt;i&gt;S&lt;/i&gt;-adenosyl-L-homocysteine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-homocysteine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosylhomocysteine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">adenosyl-homo-cys</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">adenosylhomocysteine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">adenosylhomo-cys</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAH</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26475">
+            <bp:xref rdf:resource="#UnificationXref26483"/>
+            <bp:xref rdf:resource="#UnificationXref26482"/>
+            <bp:xref rdf:resource="#UnificationXref26481"/>
+            <bp:xref rdf:resource="#UnificationXref26480"/>
+            <bp:xref rdf:resource="#UnificationXref26479"/>
+            <bp:xref rdf:resource="#UnificationXref26478"/>
+            <bp:xref rdf:resource="#UnificationXref26477"/>
+            <bp:xref rdf:resource="#UnificationXref26476"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26484">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C14H20N6O5S/c15-6(14(23)24)1-2-26-3-7-9(21)10(22)13(25-7)20-5-19-8-11(16)17-4-18-12(8)20/h4-7,9-10,13,21-22H,1-3,15H2,(H,23,24)(H2,16,17,18)/t6-,7+,9+,10+,13+/m0/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-L-homocysteine</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S-adenosylhomocysteine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2-S-adenosyl-L-homocysteine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AdoHcy</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2-&lt;i&gt;S&lt;/i&gt;-adenosyl-L-homocysteine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-homocysteine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosylhomocysteine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">adenosyl-homo-cys</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">adenosylhomocysteine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">adenosylhomo-cys</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAH</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">384.409</bp:molecularWeight>
+            <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAH</bp:displayName>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAH</bp:displayName>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation>
+          <bp:CellularLocationVocabulary rdf:ID="CellularLocationVocabulary26146">
+            <bp:xref rdf:resource="#UnificationXref26147"/>
+            <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cytosol</bp:term>
+          </bp:CellularLocationVocabulary>
+        </bp:cellularLocation>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26474">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26472">
+        <bp:xref rdf:resource="#RelationshipXref26473"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">zymosterol</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5&amp;alpha;-cholesta-8,24-dien-3&amp;beta;-ol</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;delta;8, 24-cholestadien-3&amp;beta;-ol</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26464">
+            <bp:xref rdf:resource="#UnificationXref26470"/>
+            <bp:xref rdf:resource="#UnificationXref26469"/>
+            <bp:xref rdf:resource="#UnificationXref26468"/>
+            <bp:xref rdf:resource="#UnificationXref26467"/>
+            <bp:xref rdf:resource="#UnificationXref26466"/>
+            <bp:xref rdf:resource="#UnificationXref26465"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26471">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C27H44O/c1-18(2)7-6-8-19(3)23-11-12-24-22-10-9-20-17-21(28)13-15-26(20,4)25(22)14-16-27(23,24)5/h7,19-21,23-24,28H,6,8-17H2,1-5H3/t19-,20+,21+,23-,24+,26+,27-/m1/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">zymosterol</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5&amp;alpha;-cholesta-8,24-dien-3&amp;beta;-ol</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;delta;8, 24-cholestadien-3&amp;beta;-ol</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">384.644</bp:molecularWeight>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26463">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26461">
+        <bp:xref rdf:resource="#RelationshipXref26462"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-L-methionine</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AdoMet</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAM</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2-&lt;i&gt;S&lt;/i&gt;-adenosyl-L-methionine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-methionine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">adenosylmethionine</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosylmethionine</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26451">
+            <bp:xref rdf:resource="#UnificationXref26459"/>
+            <bp:xref rdf:resource="#UnificationXref26458"/>
+            <bp:xref rdf:resource="#UnificationXref26457"/>
+            <bp:xref rdf:resource="#UnificationXref26456"/>
+            <bp:xref rdf:resource="#UnificationXref26455"/>
+            <bp:xref rdf:resource="#UnificationXref26454"/>
+            <bp:xref rdf:resource="#UnificationXref26453"/>
+            <bp:xref rdf:resource="#UnificationXref26452"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26460">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C15H22N6O5S/c1-27(3-2-7(16)15(24)25)4-8-10(22)11(23)14(26-8)21-6-20-9-12(17)18-5-19-13(9)21/h5-8,10-11,14,22-23H,2-4,16H2,1H3,(H2-,17,18,19,24,25)/p+1/t7-,8+,10+,11+,14+,27?/m0/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-L-methionine</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AdoMet</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAM</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2-&lt;i&gt;S&lt;/i&gt;-adenosyl-L-methionine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-methionine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">adenosylmethionine</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosylmethionine</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">399.444</bp:molecularWeight>
+            <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAM</bp:displayName>
+            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: S-ADENOSYLMETHIONINE| (AdoMet) is a sulfonium compound in which each of the carbons attached to the sulfur is activated toward nucleophilic attack.</bp:comment>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAM</bp:displayName>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: S-ADENOSYLMETHIONINE| (AdoMet) is a sulfonium compound in which each of the carbons attached to the sulfur is activated toward nucleophilic attack.</bp:comment>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26416">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26414">
+        <bp:xref rdf:resource="#RelationshipXref26415"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fecosterol</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24-methylene-5&amp;alpha;-cholest-8-en-3&amp;beta;-ol</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26407">
+            <bp:xref rdf:resource="#UnificationXref26412"/>
+            <bp:xref rdf:resource="#UnificationXref26411"/>
+            <bp:xref rdf:resource="#UnificationXref26410"/>
+            <bp:xref rdf:resource="#UnificationXref26409"/>
+            <bp:xref rdf:resource="#UnificationXref26408"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26413">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C28H46O/c1-18(2)19(3)7-8-20(4)24-11-12-25-23-10-9-21-17-22(29)13-15-27(21,5)26(23)14-16-28(24,25)6/h18,20-22,24-25,29H,3,7-17H2,1-2,4-6H3/t20-,21+,22+,24-,25+,27+,28-/m1/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fecosterol</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24-methylene-5&amp;alpha;-cholest-8-en-3&amp;beta;-ol</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">398.671</bp:molecularWeight>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26327">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26190">
+        <bp:xref rdf:resource="#RelationshipXref26191"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H&lt;SUP&gt;+&lt;/SUP&gt;</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hydrogen ion</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">proton</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26180">
+            <bp:xref rdf:resource="#UnificationXref26188"/>
+            <bp:xref rdf:resource="#UnificationXref26187"/>
+            <bp:xref rdf:resource="#UnificationXref26186"/>
+            <bp:xref rdf:resource="#UnificationXref26185"/>
+            <bp:xref rdf:resource="#UnificationXref26184"/>
+            <bp:xref rdf:resource="#UnificationXref26183"/>
+            <bp:xref rdf:resource="#UnificationXref26182"/>
+            <bp:xref rdf:resource="#UnificationXref26181"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26189">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/p+1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H&lt;SUP&gt;+&lt;/SUP&gt;</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hydrogen ion</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">proton</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1.0078</bp:molecularWeight>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26326">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26324">
+        <bp:xref rdf:resource="#RelationshipXref26325"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADPH</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reduced nicotinamide adenine dinucleotide phosphate</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADPH2</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADPH&lt;SUB&gt;2&lt;/SUB&gt;</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dihydrotriphosphopyridine nucleotide</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reduced dihydrotriphosphopyridine nucleotide</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dihydronicotinamide adenine dinucleotide phosphate</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dihydronicotinamide adenine dinucleotide phosphate reduced</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reduced NADP</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP-red</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TPNH</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dihydronicotinamide adenine dinucleotide-P</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;beta;-NADPH</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26313">
+            <bp:xref rdf:resource="#UnificationXref26322"/>
+            <bp:xref rdf:resource="#UnificationXref26321"/>
+            <bp:xref rdf:resource="#UnificationXref26320"/>
+            <bp:xref rdf:resource="#UnificationXref26319"/>
+            <bp:xref rdf:resource="#UnificationXref26318"/>
+            <bp:xref rdf:resource="#UnificationXref26317"/>
+            <bp:xref rdf:resource="#UnificationXref26316"/>
+            <bp:xref rdf:resource="#UnificationXref26315"/>
+            <bp:xref rdf:resource="#UnificationXref26314"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26323">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C21H30N7O17P3/c22-17-12-19(25-7-24-17)28(8-26-12)21-16(44-46(33,34)35)14(30)11(43-21)6-41-48(38,39)45-47(36,37)40-5-10-13(29)15(31)20(42-10)27-3-1-2-9(4-27)18(23)32/h1,3-4,7-8,10-11,13-16,20-21,29-31H,2,5-6H2,(H2,23,32)(H,36,37)(H,38,39)(H2,22,24,25)(H2,33,34,35)/p-4/t10-,11-,13-,14-,15-,16-,20-,21-/m1/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADPH</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reduced nicotinamide adenine dinucleotide phosphate</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADPH2</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADPH&lt;SUB&gt;2&lt;/SUB&gt;</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dihydrotriphosphopyridine nucleotide</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reduced dihydrotriphosphopyridine nucleotide</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dihydronicotinamide adenine dinucleotide phosphate</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dihydronicotinamide adenine dinucleotide phosphate reduced</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reduced NADP</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP-red</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TPNH</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dihydronicotinamide adenine dinucleotide-P</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;beta;-NADPH</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">741.394</bp:molecularWeight>
+            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: NAD| and |FRAME: NADP| are dinucleotides containing one |FRAME: NIACINAMIDE| base and one |FRAME: ADENINE| base. Each nucleotide is connected to a ribose sugar at position 1, and the two riboses are connected at their 5 position via a diphosphate. The only difference between the two is that in NADP there is an additional phosphate group at the 2&apos; position of the ribose that carries the adenine moiety.
+
+These molecules are biological carriers of reductive equivalents (i.e. high potential electrons). They are often referred to as coenzymes, although in most of their reactions they function as cosubstrates rather than true coenzymes.
+
+The most common function of  |FRAME: NAD| is to accept two electrons and a proton (a hydride ion) from a substrate that is being oxidized. This reduction converts |FRAME: NAD| to |FRAME: NADH|, the reduced form. NADH then diffuses or is transported to a terminal oxidase, where the electrons are passed on, regenerating the oxidized form.
+
+|FRAME: NADPH|, on the other hand, is mostly involved in biosynthetic reactions, where it serves as an electron donor. NADPH is formed by reduction of |FRAME: NADP|, which occurs by different mechanisms in different types of organisms. In photosynthetic organisms |FRAME: NADP| is reduced by |FRAME: CPLX-84|. In heterotrophic organisms it is reduced by central metabolism processes such as the pentose phosphate pathway (see |FRAME: OXIDATIVEPENT-PWY|).</bp:comment>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: NAD| and |FRAME: NADP| are dinucleotides containing one |FRAME: NIACINAMIDE| base and one |FRAME: ADENINE| base. Each nucleotide is connected to a ribose sugar at position 1, and the two riboses are connected at their 5 position via a diphosphate. The only difference between the two is that in NADP there is an additional phosphate group at the 2&apos; position of the ribose that carries the adenine moiety.
+
+These molecules are biological carriers of reductive equivalents (i.e. high potential electrons). They are often referred to as coenzymes, although in most of their reactions they function as cosubstrates rather than true coenzymes.
+
+The most common function of  |FRAME: NAD| is to accept two electrons and a proton (a hydride ion) from a substrate that is being oxidized. This reduction converts |FRAME: NAD| to |FRAME: NADH|, the reduced form. NADH then diffuses or is transported to a terminal oxidase, where the electrons are passed on, regenerating the oxidized form.
+
+|FRAME: NADPH|, on the other hand, is mostly involved in biosynthetic reactions, where it serves as an electron donor. NADPH is formed by reduction of |FRAME: NADP|, which occurs by different mechanisms in different types of organisms. In photosynthetic organisms |FRAME: NADP| is reduced by |FRAME: CPLX-84|. In heterotrophic organisms it is reduced by central metabolism processes such as the pentose phosphate pathway (see |FRAME: OXIDATIVEPENT-PWY|).</bp:comment>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26312">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26310">
+        <bp:xref rdf:resource="#RelationshipXref26311"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,22,24(28)-tetraen-3-&amp;beta;-ol</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5,7,22,24(28)-ergostatetraenol</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,22,23(28)-tetraen-3-&amp;beta;-ol</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,22,24(24(1))-tetraen-3-&amp;beta;-ol</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26303">
+            <bp:xref rdf:resource="#UnificationXref26308"/>
+            <bp:xref rdf:resource="#UnificationXref26307"/>
+            <bp:xref rdf:resource="#UnificationXref26306"/>
+            <bp:xref rdf:resource="#UnificationXref26305"/>
+            <bp:xref rdf:resource="#UnificationXref26304"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26309">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C28H42O/c1-18(2)19(3)7-8-20(4)24-11-12-25-23-10-9-21-17-22(29)13-15-27(21,5)26(23)14-16-28(24,25)6/h7-10,18,20,22,24-26,29H,3,11-17H2,1-2,4-6H3/b8-7+/t20-,22+,24-,25+,26+,27+,28-/m1/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,22,24(28)-tetraen-3-&amp;beta;-ol</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5,7,22,24(28)-ergostatetraenol</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,22,23(28)-tetraen-3-&amp;beta;-ol</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,22,24(24(1))-tetraen-3-&amp;beta;-ol</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">394.639</bp:molecularWeight>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26302">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26300">
+        <bp:xref rdf:resource="#RelationshipXref26301"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP&lt;sup&gt;+&lt;/sup&gt;</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">coenzyme II</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">triphosphopyridine nucleotide</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nicotinamide adenine dinucleotide phosphate</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP-oxidized</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP-ox</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TPN</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TPN+</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TPN-ox</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nicotinamide adenine dinucleotide-P</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP(+)</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;beta;-NADP&lt;sup&gt;+&lt;/sup&gt;</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26289">
+            <bp:xref rdf:resource="#UnificationXref26298"/>
+            <bp:xref rdf:resource="#UnificationXref26297"/>
+            <bp:xref rdf:resource="#UnificationXref26296"/>
+            <bp:xref rdf:resource="#UnificationXref26295"/>
+            <bp:xref rdf:resource="#UnificationXref26294"/>
+            <bp:xref rdf:resource="#UnificationXref26293"/>
+            <bp:xref rdf:resource="#UnificationXref26292"/>
+            <bp:xref rdf:resource="#UnificationXref26291"/>
+            <bp:xref rdf:resource="#UnificationXref26290"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26299">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C21H28N7O17P3/c22-17-12-19(25-7-24-17)28(8-26-12)21-16(44-46(33,34)35)14(30)11(43-21)6-41-48(38,39)45-47(36,37)40-5-10-13(29)15(31)20(42-10)27-3-1-2-9(4-27)18(23)32/h1-4,7-8,10-11,13-16,20-21,29-31H,5-6H2,(H7-,22,23,24,25,32,33,34,35,36,37,38,39)/p-3/t10-,11-,13-,14-,15-,16-,20-,21-/m1/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP&lt;sup&gt;+&lt;/sup&gt;</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">coenzyme II</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">triphosphopyridine nucleotide</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nicotinamide adenine dinucleotide phosphate</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP-oxidized</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP-ox</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TPN</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TPN+</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TPN-ox</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nicotinamide adenine dinucleotide-P</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP(+)</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NADP</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;beta;-NADP&lt;sup&gt;+&lt;/sup&gt;</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">740.386</bp:molecularWeight>
+            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: NAD| and |FRAME: NADP| are dinucleotides containing one |FRAME: NIACINAMIDE| base and one |FRAME: ADENINE| base. Each nucleotide is connected to a ribose sugar at position 1, and the two riboses are connected at their 5 position via a diphosphate. The only difference between the two is that in NADP there is an additional phosphate group at the 2&apos; position of the ribose that carries the adenine moiety.
+
+These molecules are biological carriers of reductive equivalents (i.e. high potential electrons). They are often referred to as coenzymes, although in most of their reactions they function as cosubstrates rather than true coenzymes.
+
+The most common function of  |FRAME: NAD| is to accept two electrons and a proton (a hydride ion) from a substrate that is being oxidized. This reduction converts |FRAME: NAD| to |FRAME: NADH|, the reduced form. NADH then diffuses or is transported to a terminal oxidase, where the electrons are passed on, regenerating the oxidized form.
+
+|FRAME: NADPH|, on the other hand, is mostly involved in biosynthetic reactions, where it serves as an electron donor. NADPH is formed by reduction of |FRAME: NADP|, which occurs by different mechanisms in different types of organisms. In photosynthetic organisms |FRAME: NADP| is reduced by |FRAME: CPLX-84|. In heterotrophic organisms it is reduced by central metabolism processes such as the pentose phosphate pathway (see |FRAME: OXIDATIVEPENT-PWY|).</bp:comment>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: NAD| and |FRAME: NADP| are dinucleotides containing one |FRAME: NIACINAMIDE| base and one |FRAME: ADENINE| base. Each nucleotide is connected to a ribose sugar at position 1, and the two riboses are connected at their 5 position via a diphosphate. The only difference between the two is that in NADP there is an additional phosphate group at the 2&apos; position of the ribose that carries the adenine moiety.
+
+These molecules are biological carriers of reductive equivalents (i.e. high potential electrons). They are often referred to as coenzymes, although in most of their reactions they function as cosubstrates rather than true coenzymes.
+
+The most common function of  |FRAME: NAD| is to accept two electrons and a proton (a hydride ion) from a substrate that is being oxidized. This reduction converts |FRAME: NAD| to |FRAME: NADH|, the reduced form. NADH then diffuses or is transported to a terminal oxidase, where the electrons are passed on, regenerating the oxidized form.
+
+|FRAME: NADPH|, on the other hand, is mostly involved in biosynthetic reactions, where it serves as an electron donor. NADPH is formed by reduction of |FRAME: NADP|, which occurs by different mechanisms in different types of organisms. In photosynthetic organisms |FRAME: NADP| is reduced by |FRAME: CPLX-84|. In heterotrophic organisms it is reduced by central metabolism processes such as the pentose phosphate pathway (see |FRAME: OXIDATIVEPENT-PWY|).</bp:comment>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26288">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26286">
+        <bp:xref rdf:resource="#RelationshipXref26287"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosterol</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">provitamin D2</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26274">
+            <bp:xref rdf:resource="#UnificationXref26284"/>
+            <bp:xref rdf:resource="#UnificationXref26283"/>
+            <bp:xref rdf:resource="#UnificationXref26282"/>
+            <bp:xref rdf:resource="#UnificationXref26281"/>
+            <bp:xref rdf:resource="#UnificationXref26280"/>
+            <bp:xref rdf:resource="#UnificationXref26279"/>
+            <bp:xref rdf:resource="#UnificationXref26278"/>
+            <bp:xref rdf:resource="#UnificationXref26277"/>
+            <bp:xref rdf:resource="#UnificationXref26276"/>
+            <bp:xref rdf:resource="#UnificationXref26275"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26285">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C28H44O/c1-18(2)19(3)7-8-20(4)24-11-12-25-23-10-9-21-17-22(29)13-15-27(21,5)26(23)14-16-28(24,25)6/h7-10,18-20,22,24-26,29H,11-17H2,1-6H3/b8-7+/t19-,20+,22-,24+,25-,26-,27-,28+/m0/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosterol</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">provitamin D2</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">396.655</bp:molecularWeight>
+            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ergosterol is the predominant sterol component in the plasma membrane of fungi, and is similar to cholesterol of mammals
+in the structure and functions. Ergosterol is responsible to some of the features features of structural membranes, 
+such as fluidity and permeability.
+
+Ergosterol is used as a precursor for vitamin D2, cortisone and progesterone industrial synthesis.</bp:comment>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ergosterol is the predominant sterol component in the plasma membrane of fungi, and is similar to cholesterol of mammals
+in the structure and functions. Ergosterol is responsible to some of the features features of structural membranes, 
+such as fluidity and permeability.
+
+Ergosterol is used as a precursor for vitamin D2, cortisone and progesterone industrial synthesis.</bp:comment>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26222">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:Protein rdf:ID="Protein26220">
+        <bp:xref rdf:resource="#RelationshipXref26221"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a ferricytochrome &lt;i&gt;b&lt;sub&gt;5&lt;/sub&gt;&lt;/i&gt;</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">an oxidized cytochrome &lt;i&gt;b&lt;sub&gt;5&lt;/sub&gt;&lt;/i&gt;</bp:name>
+        <bp:entityReference>
+          <bp:ProteinReference rdf:ID="ProteinReference26217">
+            <bp:xref rdf:resource="#UnificationXref26219"/>
+            <bp:xref rdf:resource="#UnificationXref26218"/>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a ferricytochrome &lt;i&gt;b&lt;sub&gt;5&lt;/sub&gt;&lt;/i&gt;</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">an oxidized cytochrome &lt;i&gt;b&lt;sub&gt;5&lt;/sub&gt;&lt;/i&gt;</bp:name>
+            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cytochromes &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; are ubiquitous electron transport hemoproteins found in animals, plants, fungi and purple phototrophic bacteria. The microsomal and mitochondrial variants are membrane-bound, while bacterial and those from erythrocytes and other animal tissues are water-soluble. 
+
+In addition to cytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; itself, the family includes hemoprotein domains covalently associated with other redox proteins, as is the case in flavocytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; (|FRAME: L-LACTATE-DEHYDROGENASE-CYTOCHROME-RXN &quot;EC 1.1.2.3, L-lactate dehydrogenase&quot;|), sulfite oxidase (|FRAME: SULFITE-OXIDASE-RXN &quot;EC 1.8.3.1&quot;|), assimilatory nitrate reductase (|FRAME: NITRATE-REDUCTASE-NADH-RXN &quot;EC 1.7.1.1&quot;|, |FRAME: NITRATE-REDUCTASE-NADPORNOPH-RXN &quot;EC 1.7.1.2&quot;| and |FRAME: NITRATE-REDUCTASE-NADPH-RXN &quot;EC 1.7.1.3&quot;|)  |CITS: [7893819]| and various microsomal desaturases |CITS: [12538077]|.
+
+Cytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; can be reduced by |FRAME: EC-1.6.2.2| or |FRAME: EC-1.6.2.4|.</bp:comment>
+          </bp:ProteinReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cytochromes &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; are ubiquitous electron transport hemoproteins found in animals, plants, fungi and purple phototrophic bacteria. The microsomal and mitochondrial variants are membrane-bound, while bacterial and those from erythrocytes and other animal tissues are water-soluble. 
+
+In addition to cytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; itself, the family includes hemoprotein domains covalently associated with other redox proteins, as is the case in flavocytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; (|FRAME: L-LACTATE-DEHYDROGENASE-CYTOCHROME-RXN &quot;EC 1.1.2.3, L-lactate dehydrogenase&quot;|), sulfite oxidase (|FRAME: SULFITE-OXIDASE-RXN &quot;EC 1.8.3.1&quot;|), assimilatory nitrate reductase (|FRAME: NITRATE-REDUCTASE-NADH-RXN &quot;EC 1.7.1.1&quot;|, |FRAME: NITRATE-REDUCTASE-NADPORNOPH-RXN &quot;EC 1.7.1.2&quot;| and |FRAME: NITRATE-REDUCTASE-NADPH-RXN &quot;EC 1.7.1.3&quot;|)  |CITS: [7893819]| and various microsomal desaturases |CITS: [12538077]|.
+
+Cytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; can be reduced by |FRAME: EC-1.6.2.2| or |FRAME: EC-1.6.2.4|.</bp:comment>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:Protein>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26216">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26214">
+        <bp:xref rdf:resource="#RelationshipXref26215"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H&lt;sub&gt;2&lt;/sub&gt;O</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H2O</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hydrogen oxide</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">water</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26203">
+            <bp:xref rdf:resource="#UnificationXref26212"/>
+            <bp:xref rdf:resource="#UnificationXref26211"/>
+            <bp:xref rdf:resource="#UnificationXref26210"/>
+            <bp:xref rdf:resource="#UnificationXref26209"/>
+            <bp:xref rdf:resource="#UnificationXref26208"/>
+            <bp:xref rdf:resource="#UnificationXref26207"/>
+            <bp:xref rdf:resource="#UnificationXref26206"/>
+            <bp:xref rdf:resource="#UnificationXref26205"/>
+            <bp:xref rdf:resource="#UnificationXref26204"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26213">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/H2O/h1H2</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H&lt;sub&gt;2&lt;/sub&gt;O</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H2O</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hydrogen oxide</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">water</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">18.015</bp:molecularWeight>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26202">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26200">
+        <bp:xref rdf:resource="#RelationshipXref26201"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,24(28)-trien-3&amp;beta;-ol</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5,7,24(28)-ergostatrienol</bp:name>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5-dehydro episterol</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26193">
+            <bp:xref rdf:resource="#UnificationXref26198"/>
+            <bp:xref rdf:resource="#UnificationXref26197"/>
+            <bp:xref rdf:resource="#UnificationXref26196"/>
+            <bp:xref rdf:resource="#UnificationXref26195"/>
+            <bp:xref rdf:resource="#UnificationXref26194"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26199">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C28H44O/c1-18(2)19(3)7-8-20(4)24-11-12-25-23-10-9-21-17-22(29)13-15-27(21,5)26(23)14-16-28(24,25)6/h9-10,18,20,22,24-26,29H,3,7-8,11-17H2,1-2,4-6H3/t20-,22+,24-,25+,26+,27+,28-/m1/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,24(28)-trien-3&amp;beta;-ol</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5,7,24(28)-ergostatrienol</bp:name>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5-dehydro episterol</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">396.655</bp:molecularWeight>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26192">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</bp:stoichiometricCoefficient>
+    <bp:physicalEntity rdf:resource="#SmallMolecule26190"/>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26179">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:Protein rdf:ID="Protein26177">
+        <bp:xref rdf:resource="#RelationshipXref26178"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a ferrocytochrome &lt;i&gt;b&lt;SUB&gt;5&lt;/SUB&gt;&lt;/i&gt;</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a reduced cytochrome &lt;i&gt;b&lt;SUB&gt;5&lt;/SUB&gt;&lt;/i&gt;</bp:name>
+        <bp:entityReference>
+          <bp:ProteinReference rdf:ID="ProteinReference26174">
+            <bp:xref rdf:resource="#UnificationXref26176"/>
+            <bp:xref rdf:resource="#UnificationXref26175"/>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a ferrocytochrome &lt;i&gt;b&lt;SUB&gt;5&lt;/SUB&gt;&lt;/i&gt;</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a reduced cytochrome &lt;i&gt;b&lt;SUB&gt;5&lt;/SUB&gt;&lt;/i&gt;</bp:name>
+            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cytochromes &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; are ubiquitous electron transport hemoproteins found in animals, plants, fungi and purple phototrophic bacteria. The microsomal and mitochondrial variants are membrane-bound, while bacterial and those from erythrocytes and other animal tissues are water-soluble. 
+
+In addition to cytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; itself, the family includes hemoprotein domains covalently associated with other redox proteins, as is the case in flavocytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; (|FRAME: L-LACTATE-DEHYDROGENASE-CYTOCHROME-RXN &quot;EC 1.1.2.3, L-lactate dehydrogenase&quot;|), sulfite oxidase (|FRAME: SULFITE-OXIDASE-RXN &quot;EC 1.8.3.1&quot;|), assimilatory nitrate reductase (|FRAME: NITRATE-REDUCTASE-NADH-RXN &quot;EC 1.7.1.1&quot;|, |FRAME: NITRATE-REDUCTASE-NADPORNOPH-RXN &quot;EC 1.7.1.2&quot;| and |FRAME: NITRATE-REDUCTASE-NADPH-RXN &quot;EC 1.7.1.3&quot;|)  |CITS: [7893819]| and various microsomal desaturases |CITS: [12538077]|.
+
+Cytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; can be reduced by |FRAME: EC-1.6.2.2| or |FRAME: EC-1.6.2.4|.</bp:comment>
+          </bp:ProteinReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cytochromes &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; are ubiquitous electron transport hemoproteins found in animals, plants, fungi and purple phototrophic bacteria. The microsomal and mitochondrial variants are membrane-bound, while bacterial and those from erythrocytes and other animal tissues are water-soluble. 
+
+In addition to cytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; itself, the family includes hemoprotein domains covalently associated with other redox proteins, as is the case in flavocytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; (|FRAME: L-LACTATE-DEHYDROGENASE-CYTOCHROME-RXN &quot;EC 1.1.2.3, L-lactate dehydrogenase&quot;|), sulfite oxidase (|FRAME: SULFITE-OXIDASE-RXN &quot;EC 1.8.3.1&quot;|), assimilatory nitrate reductase (|FRAME: NITRATE-REDUCTASE-NADH-RXN &quot;EC 1.7.1.1&quot;|, |FRAME: NITRATE-REDUCTASE-NADPORNOPH-RXN &quot;EC 1.7.1.2&quot;| and |FRAME: NITRATE-REDUCTASE-NADPH-RXN &quot;EC 1.7.1.3&quot;|)  |CITS: [7893819]| and various microsomal desaturases |CITS: [12538077]|.
+
+Cytochrome &lt;i&gt;b&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt; can be reduced by |FRAME: EC-1.6.2.2| or |FRAME: EC-1.6.2.4|.</bp:comment>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:Protein>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26173">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26171">
+        <bp:xref rdf:resource="#RelationshipXref26172"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oxygen</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oxygen molecule</bp:name>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26160">
+            <bp:xref rdf:resource="#UnificationXref26169"/>
+            <bp:xref rdf:resource="#UnificationXref26168"/>
+            <bp:xref rdf:resource="#UnificationXref26167"/>
+            <bp:xref rdf:resource="#UnificationXref26166"/>
+            <bp:xref rdf:resource="#UnificationXref26165"/>
+            <bp:xref rdf:resource="#UnificationXref26164"/>
+            <bp:xref rdf:resource="#UnificationXref26163"/>
+            <bp:xref rdf:resource="#UnificationXref26162"/>
+            <bp:xref rdf:resource="#UnificationXref26161"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26170">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/O2/c1-2</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oxygen</bp:standardName>
+            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oxygen molecule</bp:name>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">31.999</bp:molecularWeight>
+            <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O&lt;SUB&gt;2&lt;/SUB&gt;</bp:displayName>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O&lt;SUB&gt;2&lt;/SUB&gt;</bp:displayName>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:Stoichiometry rdf:ID="Stoichiometry26159">
+    <bp:stoichiometricCoefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</bp:stoichiometricCoefficient>
+    <bp:physicalEntity>
+      <bp:SmallMolecule rdf:ID="SmallMolecule26155">
+        <bp:xref rdf:resource="#RelationshipXref26156"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">episterol</bp:standardName>
+        <bp:entityReference>
+          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26148">
+            <bp:xref rdf:resource="#UnificationXref26153"/>
+            <bp:xref rdf:resource="#UnificationXref26152"/>
+            <bp:xref rdf:resource="#UnificationXref26151"/>
+            <bp:xref rdf:resource="#UnificationXref26150"/>
+            <bp:xref rdf:resource="#UnificationXref26149"/>
+            <bp:structure>
+              <bp:ChemicalStructure rdf:ID="ChemicalStructure26154">
+                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/C28H46O/c1-18(2)19(3)7-8-20(4)24-11-12-25-23-10-9-21-17-22(29)13-15-27(21,5)26(23)14-16-28(24,25)6/h10,18,20-22,24-26,29H,3,7-9,11-17H2,1-2,4-6H3/t20-,21+,22+,24-,25+,26?,27+,28-/m1/s1</bp:structureData>
+              </bp:ChemicalStructure>
+            </bp:structure>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">episterol</bp:standardName>
+            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">398.671</bp:molecularWeight>
+          </bp:SmallMoleculeReference>
+        </bp:entityReference>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:cellularLocation rdf:resource="#CellularLocationVocabulary26146"/>
+      </bp:SmallMolecule>
+    </bp:physicalEntity>
+  </bp:Stoichiometry>
+  <bp:BiochemicalPathwayStep rdf:ID="BiochemicalPathwayStep26433">
+    <bp:stepProcess>
+      <bp:Catalysis rdf:ID="Catalysis26488">
+        <bp:xref rdf:resource="#UnificationXref26495"/>
+        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAM:C-24 sterol methyltransferase</bp:standardName>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sterol 24-C-methyltransferase</bp:name>
+        <bp:evidence>
+          <bp:Evidence rdf:ID="Evidence26494">
+            <bp:xref rdf:resource="#PublicationXref26492"/>
+            <bp:evidenceCode>
+              <bp:EvidenceCodeVocabulary rdf:ID="EvidenceCodeVocabulary26368">
+                <bp:xref rdf:resource="#UnificationXref26369"/>
+                <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IDA-PURIFIED-PROTEIN</bp:term>
+              </bp:EvidenceCodeVocabulary>
+            </bp:evidenceCode>
+          </bp:Evidence>
+        </bp:evidence>
+        <bp:evidence>
+          <bp:Evidence rdf:ID="Evidence26491">
+            <bp:xref rdf:resource="#PublicationXref26489"/>
+            <bp:evidenceCode rdf:resource="#EvidenceCodeVocabulary26368"/>
+          </bp:Evidence>
+        </bp:evidence>
+        <bp:dataSource rdf:resource="#Provenance26138"/>
+        <bp:controlType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+        <bp:controller>
+          <bp:Complex rdf:ID="Complex26496">
+            <bp:xref rdf:resource="#UnificationXref26497"/>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAM:C-24 sterol methyltransferase</bp:standardName>
+            <bp:dataSource rdf:resource="#Provenance26138"/>
+            <bp:componentStoichiometry rdf:resource="#Stoichiometry26515"/>
+            <bp:component rdf:resource="#Protein26513"/>
+            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: MONOMER3O-188|, an enzyme involved in the late stage of |FRAME: ERGOSTEROL| biosynthesis, has been
+purified from |FRAME: TAX-4932| and characterized back in 1969 |CITS: [5354959]|.
+Enzyme activity was found in three separate fractions: mitochondria, microsomes, and the &quot;floating lipid layer&quot; |CITS: [6363386]|.
+
+Mutants in this activity were mapped to a single locus, named |FRAME: YML008C| |CITS: [6363386]|, and the gene was
+eventually sequenced |CITS: [8203167]|.
+The |FRAME: YML008C| gene was subsequently cloned, expressed in |FRAME:TAX-562|, and purified to homogeneity |CITS: [9606964]|.
+The protein exists as a homotetramer of 172 kDa. 
+Studies with the purified enzyme confirmed the reaction mechanism of sterol methylation to involve a 1,2-hydride
+shift of H-24 to C-25 from the Re-face of the original 24,25- double bond.
+
+Two Km values were obtained for |FRAME: S-ADENOSYLMETHIONINE|  (13 and 24 mM) and for |FRAME: ZYMOSTEROL|
+(22 and 45 mM), representing different T- and R-state conformations of the enzyme.</bp:comment>
+          </bp:Complex>
+        </bp:controller>
+        <bp:controlled>
+          <bp:BiochemicalReaction rdf:ID="BiochemicalReaction26434">
+            <bp:xref rdf:resource="#UnificationXref26449"/>
+            <bp:xref rdf:resource="#RelationshipXref26448"/>
+            <bp:xref rdf:resource="#RelationshipXref26447"/>
+            <bp:xref rdf:resource="#RelationshipXref26446"/>
+            <bp:xref rdf:resource="#RelationshipXref26445"/>
+            <bp:xref rdf:resource="#RelationshipXref26444"/>
+            <bp:xref rdf:resource="#RelationshipXref26443"/>
+            <bp:xref rdf:resource="#RelationshipXref26442"/>
+            <bp:xref rdf:resource="#RelationshipXref26441"/>
+            <bp:xref rdf:resource="#RelationshipXref26440"/>
+            <bp:xref rdf:resource="#RelationshipXref26439"/>
+            <bp:xref rdf:resource="#UnificationXref26436"/>
+            <bp:xref rdf:resource="#UnificationXref26435"/>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;i&gt;S&lt;/i&gt;-adenosyl-L-methionine + zymosterol  &amp;rarr;  &lt;i&gt;S&lt;/i&gt;-adenosyl-L-homocysteine + fecosterol + H&lt;SUP&gt;+&lt;/SUP&gt;</bp:standardName>
+            <bp:right rdf:resource="#SmallMolecule26190"/>
+            <bp:right rdf:resource="#SmallMolecule26485"/>
+            <bp:right rdf:resource="#SmallMolecule26414"/>
+            <bp:participantStoichiometry rdf:resource="#Stoichiometry26416"/>
+            <bp:participantStoichiometry rdf:resource="#Stoichiometry26487"/>
+            <bp:participantStoichiometry rdf:resource="#Stoichiometry26327"/>
+            <bp:participantStoichiometry rdf:resource="#Stoichiometry26474"/>
+            <bp:participantStoichiometry rdf:resource="#Stoichiometry26463"/>
+            <bp:left rdf:resource="#SmallMolecule26461"/>
+            <bp:left rdf:resource="#SmallMolecule26472"/>
+            <bp:eCNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2.1.1.41</bp:eCNumber>
+            <bp:deltaG>
+              <bp:DeltaG rdf:ID="DeltaG26450">
+                <bp:deltaGPrime0 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">-19.86</bp:deltaGPrime0>
+              </bp:DeltaG>
+            </bp:deltaG>
+            <bp:dataSource rdf:resource="#Provenance26138"/>
+          </bp:BiochemicalReaction>
+        </bp:controlled>
+      </bp:Catalysis>
+    </bp:stepProcess>
+    <bp:stepDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LEFT-TO-RIGHT</bp:stepDirection>
+    <bp:stepConversion rdf:resource="#BiochemicalReaction26434"/>
+    <bp:nextStep>
+      <bp:BiochemicalPathwayStep rdf:ID="BiochemicalPathwayStep26401">
+        <bp:stepProcess>
+          <bp:Catalysis rdf:ID="Catalysis26417">
+            <bp:xref rdf:resource="#UnificationXref26421"/>
+            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-8 sterol isomerase</bp:standardName>
+            <bp:evidence>
+              <bp:Evidence rdf:ID="Evidence26420">
+                <bp:xref rdf:resource="#PublicationXref26418"/>
+                <bp:evidenceCode>
+                  <bp:EvidenceCodeVocabulary rdf:ID="EvidenceCodeVocabulary26225">
+                    <bp:xref rdf:resource="#UnificationXref26226"/>
+                    <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IGI-FUNC-COMPLEMENTATION</bp:term>
+                  </bp:EvidenceCodeVocabulary>
+                </bp:evidenceCode>
+              </bp:Evidence>
+            </bp:evidence>
+            <bp:dataSource rdf:resource="#Provenance26138"/>
+            <bp:controlType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+            <bp:controller>
+              <bp:Protein rdf:ID="Protein26431">
+                <bp:xref rdf:resource="#RelationshipXref26432"/>
+                <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-8 sterol isomerase</bp:standardName>
+                <bp:entityReference>
+                  <bp:ProteinReference rdf:ID="ProteinReference26422">
+                    <bp:organism rdf:resource="#BioSource26264"/>
+                    <bp:xref rdf:resource="#UnificationXref26430"/>
+                    <bp:xref rdf:resource="#UnificationXref26429"/>
+                    <bp:xref rdf:resource="#UnificationXref26428"/>
+                    <bp:xref rdf:resource="#UnificationXref26427"/>
+                    <bp:xref rdf:resource="#UnificationXref26426"/>
+                    <bp:xref rdf:resource="#RelationshipXref26425"/>
+                    <bp:xref rdf:resource="#RelationshipXref26424"/>
+                    <bp:xref rdf:resource="#UnificationXref26423"/>
+                    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-8 sterol isomerase</bp:standardName>
+                    <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The yeast |FRAME: YMR202W| gene codes for the |FRAME: YMR202W-MONOMER|, an enzyme required for the
+isomerization of the delta 8 double bond to the delta 7 position in |FRAME: ERGOSTEROL| biosynthesis.
+The |FRAME: YMR202W| gene was cloned by complementation of a C-8 sterol isomerase mutant strain, and found
+to be not essential for yeast cell viability |CITS: [1779709]|. The gene was subsequently sequenced |CITS: [1743517]|.</bp:comment>
+                  </bp:ProteinReference>
+                </bp:entityReference>
+                <bp:dataSource rdf:resource="#Provenance26138"/>
+                <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The yeast |FRAME: YMR202W| gene codes for the |FRAME: YMR202W-MONOMER|, an enzyme required for the
+isomerization of the delta 8 double bond to the delta 7 position in |FRAME: ERGOSTEROL| biosynthesis.
+The |FRAME: YMR202W| gene was cloned by complementation of a C-8 sterol isomerase mutant strain, and found
+to be not essential for yeast cell viability |CITS: [1779709]|. The gene was subsequently sequenced |CITS: [1743517]|.</bp:comment>
+              </bp:Protein>
+            </bp:controller>
+            <bp:controlled>
+              <bp:BiochemicalReaction rdf:ID="BiochemicalReaction26402">
+                <bp:xref rdf:resource="#UnificationXref26405"/>
+                <bp:xref rdf:resource="#UnificationXref26404"/>
+                <bp:xref rdf:resource="#UnificationXref26403"/>
+                <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fecosterol  &amp;rarr;  episterol</bp:standardName>
+                <bp:right rdf:resource="#SmallMolecule26155"/>
+                <bp:participantStoichiometry rdf:resource="#Stoichiometry26159"/>
+                <bp:participantStoichiometry rdf:resource="#Stoichiometry26416"/>
+                <bp:left rdf:resource="#SmallMolecule26414"/>
+                <bp:deltaG>
+                  <bp:DeltaG rdf:ID="DeltaG26406">
+                    <bp:deltaGPrime0 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">24.629</bp:deltaGPrime0>
+                  </bp:DeltaG>
+                </bp:deltaG>
+                <bp:dataSource rdf:resource="#Provenance26138"/>
+              </bp:BiochemicalReaction>
+            </bp:controlled>
+          </bp:Catalysis>
+        </bp:stepProcess>
+        <bp:stepDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LEFT-TO-RIGHT</bp:stepDirection>
+        <bp:stepConversion rdf:resource="#BiochemicalReaction26402"/>
+        <bp:nextStep>
+          <bp:BiochemicalPathwayStep rdf:ID="BiochemicalPathwayStep26139">
+            <bp:stepProcess>
+              <bp:Catalysis rdf:ID="Catalysis26252">
+                <bp:xref rdf:resource="#UnificationXref26256"/>
+                <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-5 sterol desaturase</bp:standardName>
+                <bp:evidence>
+                  <bp:Evidence rdf:ID="Evidence26255">
+                    <bp:xref rdf:resource="#PublicationXref26253"/>
+                    <bp:evidenceCode rdf:resource="#EvidenceCodeVocabulary26225"/>
+                  </bp:Evidence>
+                </bp:evidence>
+                <bp:dataSource rdf:resource="#Provenance26138"/>
+                <bp:controlType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+                <bp:controller>
+                  <bp:Protein rdf:ID="Protein26266">
+                    <bp:xref rdf:resource="#RelationshipXref26267"/>
+                    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-5 sterol desaturase</bp:standardName>
+                    <bp:entityReference>
+                      <bp:ProteinReference rdf:ID="ProteinReference26257">
+                        <bp:organism rdf:resource="#BioSource26264"/>
+                        <bp:xref rdf:resource="#UnificationXref26263"/>
+                        <bp:xref rdf:resource="#UnificationXref26262"/>
+                        <bp:xref rdf:resource="#UnificationXref26261"/>
+                        <bp:xref rdf:resource="#UnificationXref26260"/>
+                        <bp:xref rdf:resource="#UnificationXref26259"/>
+                        <bp:xref rdf:resource="#RelationshipXref26244"/>
+                        <bp:xref rdf:resource="#RelationshipXref26243"/>
+                        <bp:xref rdf:resource="#UnificationXref26258"/>
+                        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-5 sterol desaturase</bp:standardName>
+                        <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The |FRAME: YLR056W-MONOMER| enzyme catalyzes the introduction of a C-5 double bond in the B ring of
+|FRAME: ERGOSTEROL|.
+
+Several independent allelic isolates of ERG3 have been isolated and were all mapped to a single locus
+|CITS: [4559817][4562308]|.
+The |FRAME: YLR056W| gene from |FRAME: TAX-4932| has been cloned by complementation of a mutation. 
+Elimination of the |FRAME: YLR056W| gene is not lethal, but results in membrane C-5 desaturated sterol deficiencies,
+resistance to syringomycin and sensitivity to high |FRAME: CA+2| |CITS: [1864507][8180700]|.</bp:comment>
+                      </bp:ProteinReference>
+                    </bp:entityReference>
+                    <bp:dataSource rdf:resource="#Provenance26138"/>
+                    <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The |FRAME: YLR056W-MONOMER| enzyme catalyzes the introduction of a C-5 double bond in the B ring of
+|FRAME: ERGOSTEROL|.
+
+Several independent allelic isolates of ERG3 have been isolated and were all mapped to a single locus
+|CITS: [4559817][4562308]|.
+The |FRAME: YLR056W| gene from |FRAME: TAX-4932| has been cloned by complementation of a mutation. 
+Elimination of the |FRAME: YLR056W| gene is not lethal, but results in membrane C-5 desaturated sterol deficiencies,
+resistance to syringomycin and sensitivity to high |FRAME: CA+2| |CITS: [1864507][8180700]|.</bp:comment>
+                  </bp:Protein>
+                </bp:controller>
+                <bp:controlled>
+                  <bp:BiochemicalReaction rdf:ID="BiochemicalReaction26140">
+                    <bp:xref rdf:resource="#UnificationXref26144"/>
+                    <bp:xref rdf:resource="#UnificationXref26143"/>
+                    <bp:xref rdf:resource="#UnificationXref26142"/>
+                    <bp:xref rdf:resource="#UnificationXref26141"/>
+                    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">episterol + 2 a ferrocytochrome &lt;i&gt;b&lt;SUB&gt;5&lt;/SUB&gt;&lt;/i&gt; + oxygen + 2 H&lt;SUP&gt;+&lt;/SUP&gt;  &amp;rarr;  ergosta-5,7,24(28)-trien-3&amp;beta;-ol + 2 a ferricytochrome &lt;i&gt;b&lt;sub&gt;5&lt;/sub&gt;&lt;/i&gt; + 2 H&lt;sub&gt;2&lt;/sub&gt;O</bp:standardName>
+                    <bp:right rdf:resource="#SmallMolecule26200"/>
+                    <bp:right rdf:resource="#SmallMolecule26214"/>
+                    <bp:right rdf:resource="#Protein26220"/>
+                    <bp:participantStoichiometry rdf:resource="#Stoichiometry26222"/>
+                    <bp:participantStoichiometry rdf:resource="#Stoichiometry26216"/>
+                    <bp:participantStoichiometry rdf:resource="#Stoichiometry26202"/>
+                    <bp:participantStoichiometry rdf:resource="#Stoichiometry26192"/>
+                    <bp:participantStoichiometry rdf:resource="#Stoichiometry26179"/>
+                    <bp:participantStoichiometry rdf:resource="#Stoichiometry26173"/>
+                    <bp:participantStoichiometry rdf:resource="#Stoichiometry26159"/>
+                    <bp:left rdf:resource="#SmallMolecule26155"/>
+                    <bp:left rdf:resource="#SmallMolecule26171"/>
+                    <bp:left rdf:resource="#Protein26177"/>
+                    <bp:left rdf:resource="#SmallMolecule26190"/>
+                    <bp:eCNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.14.19.20</bp:eCNumber>
+                    <bp:deltaG>
+                      <bp:DeltaG rdf:ID="DeltaG26145">
+                        <bp:deltaGPrime0 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">-86.2876</bp:deltaGPrime0>
+                      </bp:DeltaG>
+                    </bp:deltaG>
+                    <bp:dataSource rdf:resource="#Provenance26138"/>
+                  </bp:BiochemicalReaction>
+                </bp:controlled>
+              </bp:Catalysis>
+            </bp:stepProcess>
+            <bp:stepDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LEFT-TO-RIGHT</bp:stepDirection>
+            <bp:stepConversion rdf:resource="#BiochemicalReaction26140"/>
+            <bp:nextStep>
+              <bp:BiochemicalPathwayStep rdf:ID="BiochemicalPathwayStep26357">
+                <bp:stepProcess>
+                  <bp:Catalysis rdf:ID="Catalysis26363">
+                    <bp:xref rdf:resource="#UnificationXref26372"/>
+                    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-22 sterol desaturase</bp:standardName>
+                    <bp:evidence>
+                      <bp:Evidence rdf:ID="Evidence26371">
+                        <bp:xref rdf:resource="#PublicationXref26367"/>
+                        <bp:evidenceCode rdf:resource="#EvidenceCodeVocabulary26368"/>
+                      </bp:Evidence>
+                    </bp:evidence>
+                    <bp:evidence>
+                      <bp:Evidence rdf:ID="Evidence26366">
+                        <bp:xref rdf:resource="#PublicationXref26364"/>
+                        <bp:evidenceCode rdf:resource="#EvidenceCodeVocabulary26225"/>
+                      </bp:Evidence>
+                    </bp:evidence>
+                    <bp:dataSource rdf:resource="#Provenance26138"/>
+                    <bp:controlType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+                    <bp:controller>
+                      <bp:Protein rdf:ID="Protein26386">
+                        <bp:xref rdf:resource="#RelationshipXref26387"/>
+                        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sterol C-22 desaturase</bp:standardName>
+                        <bp:entityReference>
+                          <bp:ProteinReference rdf:ID="ProteinReference26373">
+                            <bp:organism rdf:resource="#BioSource26264"/>
+                            <bp:xref rdf:resource="#UnificationXref26385"/>
+                            <bp:xref rdf:resource="#UnificationXref26384"/>
+                            <bp:xref rdf:resource="#UnificationXref26383"/>
+                            <bp:xref rdf:resource="#UnificationXref26382"/>
+                            <bp:xref rdf:resource="#RelationshipXref26381"/>
+                            <bp:xref rdf:resource="#RelationshipXref26380"/>
+                            <bp:xref rdf:resource="#RelationshipXref26379"/>
+                            <bp:xref rdf:resource="#RelationshipXref26378"/>
+                            <bp:xref rdf:resource="#RelationshipXref26377"/>
+                            <bp:xref rdf:resource="#RelationshipXref26376"/>
+                            <bp:xref rdf:resource="#UnificationXref26375"/>
+                            <bp:xref rdf:resource="#UnificationXref26374"/>
+                            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sterol C-22 desaturase</bp:standardName>
+                            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Two P450 enzymes are involved in |FRAME: ERGOSTEROL| biosynthesis in yeast. The first such enzyme to be studied was |FRAME: YHR007C-MONOMER|, encoded by |FRAME: YHR007C| |CITS: [6357195]|.
+When a cytochrome P450 protein was purified from microsomal fractions of a strain of |FRAME: TAX-4932| defective in
+|FRAME: YHR007C|, it was found to be a different P450 enzyme involved in |FRAME: ERGOSTEROL| biosynthesis that functions as a sterol &amp;Delta; 22-desaturase |CITS: [8543054]|.
+
+The |FRAME: YMR015C| gene encoding the enzyme was subsequently cloned and its molecular function demonstrated by functional complementation. The enzyme is not essential for cell viability |CITS: [8635732]|.</bp:comment>
+                          </bp:ProteinReference>
+                        </bp:entityReference>
+                        <bp:dataSource rdf:resource="#Provenance26138"/>
+                        <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Two P450 enzymes are involved in |FRAME: ERGOSTEROL| biosynthesis in yeast. The first such enzyme to be studied was |FRAME: YHR007C-MONOMER|, encoded by |FRAME: YHR007C| |CITS: [6357195]|.
+When a cytochrome P450 protein was purified from microsomal fractions of a strain of |FRAME: TAX-4932| defective in
+|FRAME: YHR007C|, it was found to be a different P450 enzyme involved in |FRAME: ERGOSTEROL| biosynthesis that functions as a sterol &amp;Delta; 22-desaturase |CITS: [8543054]|.
+
+The |FRAME: YMR015C| gene encoding the enzyme was subsequently cloned and its molecular function demonstrated by functional complementation. The enzyme is not essential for cell viability |CITS: [8635732]|.</bp:comment>
+                      </bp:Protein>
+                    </bp:controller>
+                    <bp:controlled>
+                      <bp:BiochemicalReaction rdf:ID="BiochemicalReaction26358">
+                        <bp:xref rdf:resource="#UnificationXref26361"/>
+                        <bp:xref rdf:resource="#UnificationXref26360"/>
+                        <bp:xref rdf:resource="#UnificationXref26359"/>
+                        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosta-5,7,24(28)-trien-3&amp;beta;-ol + NADPH + H&lt;SUP&gt;+&lt;/SUP&gt; + oxygen  &amp;rarr;  ergosta-5,7,22,24(28)-tetraen-3-&amp;beta;-ol + NADP&lt;sup&gt;+&lt;/sup&gt; + 2 H&lt;sub&gt;2&lt;/sub&gt;O</bp:standardName>
+                        <bp:right rdf:resource="#SmallMolecule26310"/>
+                        <bp:right rdf:resource="#SmallMolecule26214"/>
+                        <bp:right rdf:resource="#SmallMolecule26300"/>
+                        <bp:participantStoichiometry rdf:resource="#Stoichiometry26302"/>
+                        <bp:participantStoichiometry rdf:resource="#Stoichiometry26216"/>
+                        <bp:participantStoichiometry rdf:resource="#Stoichiometry26312"/>
+                        <bp:participantStoichiometry rdf:resource="#Stoichiometry26326"/>
+                        <bp:participantStoichiometry rdf:resource="#Stoichiometry26173"/>
+                        <bp:participantStoichiometry rdf:resource="#Stoichiometry26202"/>
+                        <bp:participantStoichiometry rdf:resource="#Stoichiometry26327"/>
+                        <bp:left rdf:resource="#SmallMolecule26190"/>
+                        <bp:left rdf:resource="#SmallMolecule26200"/>
+                        <bp:left rdf:resource="#SmallMolecule26171"/>
+                        <bp:left rdf:resource="#SmallMolecule26324"/>
+                        <bp:eCNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.14.19.41</bp:eCNumber>
+                        <bp:deltaG>
+                          <bp:DeltaG rdf:ID="DeltaG26362">
+                            <bp:deltaGPrime0 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">-91.567505</bp:deltaGPrime0>
+                          </bp:DeltaG>
+                        </bp:deltaG>
+                        <bp:dataSource rdf:resource="#Provenance26138"/>
+                      </bp:BiochemicalReaction>
+                    </bp:controlled>
+                  </bp:Catalysis>
+                </bp:stepProcess>
+                <bp:stepProcess>
+                  <bp:Modulation rdf:ID="Modulation26400">
+                    <bp:xref rdf:resource="#PublicationXref26367"/>
+                    <bp:controlType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INHIBITION-OTHER</bp:controlType>
+                    <bp:controller>
+                      <bp:SmallMolecule rdf:ID="SmallMolecule26398">
+                        <bp:xref rdf:resource="#RelationshipXref26399"/>
+                        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">carbon monoxide</bp:standardName>
+                        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CO</bp:name>
+                        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">carbon monooxide</bp:name>
+                        <bp:entityReference>
+                          <bp:SmallMoleculeReference rdf:ID="SmallMoleculeReference26388">
+                            <bp:xref rdf:resource="#UnificationXref26396"/>
+                            <bp:xref rdf:resource="#UnificationXref26395"/>
+                            <bp:xref rdf:resource="#UnificationXref26394"/>
+                            <bp:xref rdf:resource="#UnificationXref26393"/>
+                            <bp:xref rdf:resource="#UnificationXref26392"/>
+                            <bp:xref rdf:resource="#UnificationXref26391"/>
+                            <bp:xref rdf:resource="#UnificationXref26390"/>
+                            <bp:xref rdf:resource="#UnificationXref26389"/>
+                            <bp:structure>
+                              <bp:ChemicalStructure rdf:ID="ChemicalStructure26397">
+                                <bp:structureFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI</bp:structureFormat>
+                                <bp:structureData rdf:datatype="http://www.w3.org/2001/XMLSchema#string">InChI=1S/CO/c1-2</bp:structureData>
+                              </bp:ChemicalStructure>
+                            </bp:structure>
+                            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">carbon monoxide</bp:standardName>
+                            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CO</bp:name>
+                            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">carbon monooxide</bp:name>
+                            <bp:molecularWeight rdf:datatype="http://www.w3.org/2001/XMLSchema#float">29.018</bp:molecularWeight>
+                          </bp:SmallMoleculeReference>
+                        </bp:entityReference>
+                        <bp:dataSource rdf:resource="#Provenance26138"/>
+                      </bp:SmallMolecule>
+                    </bp:controller>
+                    <bp:controlled rdf:resource="#Catalysis26363"/>
+                  </bp:Modulation>
+                </bp:stepProcess>
+                <bp:stepDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LEFT-TO-RIGHT</bp:stepDirection>
+                <bp:stepConversion rdf:resource="#BiochemicalReaction26358"/>
+                <bp:nextStep>
+                  <bp:BiochemicalPathwayStep rdf:ID="BiochemicalPathwayStep26268">
+                    <bp:stepProcess>
+                      <bp:Catalysis rdf:ID="Catalysis26328">
+                        <bp:xref rdf:resource="#UnificationXref26339"/>
+                        <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-24 sterol reductase</bp:standardName>
+                        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sterol C-24(28) reductase</bp:name>
+                        <bp:evidence>
+                          <bp:Evidence rdf:ID="Evidence26338">
+                            <bp:xref rdf:resource="#PublicationXref26334"/>
+                            <bp:evidenceCode>
+                              <bp:EvidenceCodeVocabulary rdf:ID="EvidenceCodeVocabulary26335">
+                                <bp:xref rdf:resource="#UnificationXref26336"/>
+                                <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IMP-REACTION-BLOCKED</bp:term>
+                              </bp:EvidenceCodeVocabulary>
+                            </bp:evidenceCode>
+                          </bp:Evidence>
+                        </bp:evidence>
+                        <bp:evidence>
+                          <bp:Evidence rdf:ID="Evidence26333">
+                            <bp:xref rdf:resource="#PublicationXref26329"/>
+                            <bp:evidenceCode>
+                              <bp:EvidenceCodeVocabulary rdf:ID="EvidenceCodeVocabulary26330">
+                                <bp:xref rdf:resource="#UnificationXref26331"/>
+                                <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IMP-REACTION-ENHANCED</bp:term>
+                              </bp:EvidenceCodeVocabulary>
+                            </bp:evidenceCode>
+                          </bp:Evidence>
+                        </bp:evidence>
+                        <bp:dataSource rdf:resource="#Provenance26138"/>
+                        <bp:controlType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+                        <bp:controller>
+                          <bp:Protein rdf:ID="Protein26355">
+                            <bp:xref rdf:resource="#RelationshipXref26356"/>
+                            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-24 sterol reductase</bp:standardName>
+                            <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Erg4p</bp:name>
+                            <bp:entityReference>
+                              <bp:ProteinReference rdf:ID="ProteinReference26342">
+                                <bp:organism rdf:resource="#BioSource26264"/>
+                                <bp:xref rdf:resource="#UnificationXref26354"/>
+                                <bp:xref rdf:resource="#UnificationXref26353"/>
+                                <bp:xref rdf:resource="#UnificationXref26352"/>
+                                <bp:xref rdf:resource="#UnificationXref26351"/>
+                                <bp:xref rdf:resource="#UnificationXref26350"/>
+                                <bp:xref rdf:resource="#RelationshipXref26349"/>
+                                <bp:xref rdf:resource="#RelationshipXref26348"/>
+                                <bp:xref rdf:resource="#RelationshipXref26347"/>
+                                <bp:xref rdf:resource="#RelationshipXref26346"/>
+                                <bp:xref rdf:resource="#RelationshipXref26345"/>
+                                <bp:xref rdf:resource="#UnificationXref26344"/>
+                                <bp:xref rdf:resource="#UnificationXref26343"/>
+                                <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-24 sterol reductase</bp:standardName>
+                                <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Erg4p</bp:name>
+                                <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Erg4p</bp:displayName>
+                                <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: YGL012W-MONOMER|, encoded by the |FRAME: YGL012W| gene, catalyzes the final step in
+|FRAME: ERGOSTEROL| biosynthesis.
+Deletion of |FRAME: YGL012W| resulted in a complete lack of ergosterol and accumulation of the precursor
+|FRAME: 57222428-ERGOSTATETRAENOL| |CITS: [10722850]|..
+The enzyme is located in the endoplasmic reticulum, suggesting that |FRAME: ERGOSTEROL| is produced in the ER,
+and is transported from there to its membranous destinations |CITS: [10722850]|.</bp:comment>
+                              </bp:ProteinReference>
+                            </bp:entityReference>
+                            <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Erg4p</bp:displayName>
+                            <bp:dataSource rdf:resource="#Provenance26138"/>
+                            <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME: YGL012W-MONOMER|, encoded by the |FRAME: YGL012W| gene, catalyzes the final step in
+|FRAME: ERGOSTEROL| biosynthesis.
+Deletion of |FRAME: YGL012W| resulted in a complete lack of ergosterol and accumulation of the precursor
+|FRAME: 57222428-ERGOSTATETRAENOL| |CITS: [10722850]|..
+The enzyme is located in the endoplasmic reticulum, suggesting that |FRAME: ERGOSTEROL| is produced in the ER,
+and is transported from there to its membranous destinations |CITS: [10722850]|.</bp:comment>
+                            <bp:cellularLocation>
+                              <bp:CellularLocationVocabulary rdf:ID="CellularLocationVocabulary26340">
+                                <bp:xref rdf:resource="#UnificationXref26341"/>
+                                <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">endoplasmic reticulum lumen</bp:term>
+                              </bp:CellularLocationVocabulary>
+                            </bp:cellularLocation>
+                          </bp:Protein>
+                        </bp:controller>
+                        <bp:controlled>
+                          <bp:BiochemicalReaction rdf:ID="BiochemicalReaction26269">
+                            <bp:xref rdf:resource="#UnificationXref26272"/>
+                            <bp:xref rdf:resource="#UnificationXref26271"/>
+                            <bp:xref rdf:resource="#UnificationXref26270"/>
+                            <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosterol + NADP&lt;sup&gt;+&lt;/sup&gt;  &amp;larr;  ergosta-5,7,22,24(28)-tetraen-3-&amp;beta;-ol + NADPH + H&lt;SUP&gt;+&lt;/SUP&gt;</bp:standardName>
+                            <bp:right rdf:resource="#SmallMolecule26310"/>
+                            <bp:right rdf:resource="#SmallMolecule26324"/>
+                            <bp:right rdf:resource="#SmallMolecule26190"/>
+                            <bp:participantStoichiometry rdf:resource="#Stoichiometry26327"/>
+                            <bp:participantStoichiometry rdf:resource="#Stoichiometry26326"/>
+                            <bp:participantStoichiometry rdf:resource="#Stoichiometry26312"/>
+                            <bp:participantStoichiometry rdf:resource="#Stoichiometry26302"/>
+                            <bp:participantStoichiometry rdf:resource="#Stoichiometry26288"/>
+                            <bp:left rdf:resource="#SmallMolecule26286"/>
+                            <bp:left rdf:resource="#SmallMolecule26300"/>
+                            <bp:eCNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.3.1.71</bp:eCNumber>
+                            <bp:deltaG>
+                              <bp:DeltaG rdf:ID="DeltaG26273">
+                                <bp:deltaGPrime0 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">8.13353</bp:deltaGPrime0>
+                              </bp:DeltaG>
+                            </bp:deltaG>
+                            <bp:dataSource rdf:resource="#Provenance26138"/>
+                          </bp:BiochemicalReaction>
+                        </bp:controlled>
+                      </bp:Catalysis>
+                    </bp:stepProcess>
+                    <bp:stepDirection rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIGHT-TO-LEFT</bp:stepDirection>
+                    <bp:stepConversion rdf:resource="#BiochemicalReaction26269"/>
+                  </bp:BiochemicalPathwayStep>
+                </bp:nextStep>
+              </bp:BiochemicalPathwayStep>
+            </bp:nextStep>
+          </bp:BiochemicalPathwayStep>
+        </bp:nextStep>
+      </bp:BiochemicalPathwayStep>
+    </bp:nextStep>
+  </bp:BiochemicalPathwayStep>
+  <bp:Evidence rdf:ID="Evidence26493">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26490">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26419">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26370">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26365">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26337">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26332">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26254">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26238">
+    <bp:xref rdf:resource="#PublicationXref26236"/>
+    <bp:evidenceCode rdf:resource="#EvidenceCodeVocabulary26225"/>
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26237">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26228">
+    <bp:xref rdf:resource="#PublicationXref26224"/>
+    <bp:evidenceCode rdf:resource="#EvidenceCodeVocabulary26225"/>
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26227">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26136">
+    <bp:xref rdf:resource="#PublicationXref26134"/>
+    <bp:evidenceCode>
+      <bp:EvidenceCodeVocabulary rdf:ID="EvidenceCodeVocabulary26130">
+        <bp:xref rdf:resource="#UnificationXref26131"/>
+        <bp:term rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EV-EXP-IDA</bp:term>
+      </bp:EvidenceCodeVocabulary>
+    </bp:evidenceCode>
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26135">
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26133">
+    <bp:xref rdf:resource="#PublicationXref26129"/>
+    <bp:evidenceCode rdf:resource="#EvidenceCodeVocabulary26130"/>
+  </bp:Evidence>
+  <bp:Evidence rdf:ID="Evidence26132">
+  </bp:Evidence>
+  <bp:ProteinReference rdf:ID="ProteinReference26240">
+    <bp:organism>
+      <bp:BioSource rdf:ID="BioSource26248">
+        <bp:xref rdf:resource="#UnificationXref26249"/>
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chlamydomonas reinhardtii</bp:name>
+      </bp:BioSource>
+    </bp:organism>
+    <bp:xref rdf:resource="#UnificationXref26247"/>
+    <bp:xref rdf:resource="#UnificationXref26246"/>
+    <bp:xref rdf:resource="#UnificationXref26245"/>
+    <bp:xref rdf:resource="#RelationshipXref26244"/>
+    <bp:xref rdf:resource="#RelationshipXref26243"/>
+    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sterol C-5 desaturase</bp:standardName>
+    <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ERG3 (CrERG3 in &lt;i&gt;|FRAME: TAX-3055|&lt;/i&gt;) is a sterol C-5 desaturase that introduces a double bond in the B ring of the sterol backbone. Based on functional complementation of a yeast &lt;i&gt;erg3&amp;Delta;&lt;/i&gt; mutant, CrERG3 was originally believed to act on |FRAME: EPISTEROL| |CITS: [20084111]|. However, based on radiotracer experiments in &lt;i&gt;|FRAME: TAX-3055|&lt;/i&gt; it seems more likely that CrERG3 acts on |FRAME: CPD-14893| and |FRAME: CPD-14901|, two intermediate compounds in the |FRAME: PWY-7154 algal ergosterol biosynthesis| and |FRAME:PWY-7155| pathways |CITS: [22591742]|. These two compounds are important components of Chlamydomonas cell membranes |CITS: [GEALT81]|. The hypothesized differences in the substrate preferences of ScERG3 and CrERG3 may explain the incomplete complementation that was observed |CITS: [20084111]|, but further experiments will be required to determing the &lt;i&gt;in vivo&lt;/i&gt; substrates of CrERG3.</bp:comment>
+  </bp:ProteinReference>
+  <bp:ProteinReference rdf:ID="ProteinReference26230">
+    <bp:organism>
+      <bp:BioSource rdf:ID="BioSource26232">
+        <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Arabidopsis thaliana col</bp:name>
+      </bp:BioSource>
+    </bp:organism>
+    <bp:xref rdf:resource="#UnificationXref26231"/>
+    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;Delta;&lt;sup&gt;7&lt;/sup&gt;-sterol-C5-desaturase</bp:standardName>
+    <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DWF7</bp:name>
+    <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DWF7</bp:displayName>
+    <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The &lt;i&gt;STE1&lt;/i&gt; gene has been cloned from |FRAME:TAX-3701| |CITS:[10344195]| and used to complement the mutant phenotype of the &lt;i&gt;ste1&lt;/i&gt; |FRAME:TAX-3701| plants defective in the &amp;Delta;&lt;sup&gt;7&lt;/sup&gt; sterol C-5 desaturation step, as well as that of the yeast &lt;i&gt;&amp;Delta;erg3&lt;/i&gt; strain also defective in &amp;Delta;&lt;sup&gt;7&lt;/sup&gt; sterol C-5 desaturase |CITS:[10344195]|. No purified form of this enzyme has yet been described to assess enzymatic characteristics. The main substrate of STE1 is episterol (found both in |FRAME:TAX-3701| and yeast), however, it is most likely able to convert avenasterol as well. Indeed, the &lt;i&gt;ste1&lt;/i&gt; |FRAME:TAX-3701| mutant is affected in both branches of the sterols biosynthesis pathway and is deficient in both campesterol and sitosterol. Plants expressing the transgenic &lt;i&gt;STE1&lt;/i&gt; gene have wild-type levels of both compounds, showing that the &amp;Delta;&lt;sup&gt;7&lt;/sup&gt; sterol C-5 desaturase activity of STE1 affects both branches of the pathway |CITS:[10344195]|.
+</bp:comment>
+  </bp:ProteinReference>
+  <bp:Protein rdf:ID="Protein26250">
+    <bp:xref rdf:resource="#RelationshipXref26251"/>
+    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sterol C-5 desaturase</bp:standardName>
+    <bp:entityReference rdf:resource="#ProteinReference26240"/>
+    <bp:dataSource rdf:resource="#Provenance26138"/>
+    <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ERG3 (CrERG3 in &lt;i&gt;|FRAME: TAX-3055|&lt;/i&gt;) is a sterol C-5 desaturase that introduces a double bond in the B ring of the sterol backbone. Based on functional complementation of a yeast &lt;i&gt;erg3&amp;Delta;&lt;/i&gt; mutant, CrERG3 was originally believed to act on |FRAME: EPISTEROL| |CITS: [20084111]|. However, based on radiotracer experiments in &lt;i&gt;|FRAME: TAX-3055|&lt;/i&gt; it seems more likely that CrERG3 acts on |FRAME: CPD-14893| and |FRAME: CPD-14901|, two intermediate compounds in the |FRAME: PWY-7154 algal ergosterol biosynthesis| and |FRAME:PWY-7155| pathways |CITS: [22591742]|. These two compounds are important components of Chlamydomonas cell membranes |CITS: [GEALT81]|. The hypothesized differences in the substrate preferences of ScERG3 and CrERG3 may explain the incomplete complementation that was observed |CITS: [20084111]|, but further experiments will be required to determing the &lt;i&gt;in vivo&lt;/i&gt; substrates of CrERG3.</bp:comment>
+  </bp:Protein>
+  <bp:Protein rdf:ID="Protein26233">
+    <bp:xref rdf:resource="#RelationshipXref26234"/>
+    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;Delta;&lt;sup&gt;7&lt;/sup&gt;-sterol-C5-desaturase</bp:standardName>
+    <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DWF7</bp:name>
+    <bp:entityReference rdf:resource="#ProteinReference26230"/>
+    <bp:displayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DWF7</bp:displayName>
+    <bp:dataSource rdf:resource="#Provenance26138"/>
+    <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The &lt;i&gt;STE1&lt;/i&gt; gene has been cloned from |FRAME:TAX-3701| |CITS:[10344195]| and used to complement the mutant phenotype of the &lt;i&gt;ste1&lt;/i&gt; |FRAME:TAX-3701| plants defective in the &amp;Delta;&lt;sup&gt;7&lt;/sup&gt; sterol C-5 desaturation step, as well as that of the yeast &lt;i&gt;&amp;Delta;erg3&lt;/i&gt; strain also defective in &amp;Delta;&lt;sup&gt;7&lt;/sup&gt; sterol C-5 desaturase |CITS:[10344195]|. No purified form of this enzyme has yet been described to assess enzymatic characteristics. The main substrate of STE1 is episterol (found both in |FRAME:TAX-3701| and yeast), however, it is most likely able to convert avenasterol as well. Indeed, the &lt;i&gt;ste1&lt;/i&gt; |FRAME:TAX-3701| mutant is affected in both branches of the sterols biosynthesis pathway and is deficient in both campesterol and sitosterol. Plants expressing the transgenic &lt;i&gt;STE1&lt;/i&gt; gene have wild-type levels of both compounds, showing that the &amp;Delta;&lt;sup&gt;7&lt;/sup&gt; sterol C-5 desaturase activity of STE1 affects both branches of the pathway |CITS:[10344195]|.
+</bp:comment>
+  </bp:Protein>
+  <bp:Pathway rdf:ID="Pathway26126">
+    <bp:xref rdf:resource="#UnificationXref26137"/>
+    <bp:xref rdf:resource="#PublicationXref26128"/>
+    <bp:xref rdf:resource="#PublicationXref26127"/>
+    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosterol biosynthesis I</bp:standardName>
+    <bp:pathwayOrder rdf:resource="#BiochemicalPathwayStep26433"/>
+    <bp:pathwayOrder rdf:resource="#BiochemicalPathwayStep26401"/>
+    <bp:pathwayOrder rdf:resource="#BiochemicalPathwayStep26357"/>
+    <bp:pathwayOrder rdf:resource="#BiochemicalPathwayStep26268"/>
+    <bp:pathwayOrder rdf:resource="#BiochemicalPathwayStep26139"/>
+    <bp:pathwayComponent rdf:resource="#Catalysis26488"/>
+    <bp:pathwayComponent rdf:resource="#BiochemicalReaction26434"/>
+    <bp:pathwayComponent rdf:resource="#Catalysis26417"/>
+    <bp:pathwayComponent rdf:resource="#BiochemicalReaction26402"/>
+    <bp:pathwayComponent rdf:resource="#Modulation26400"/>
+    <bp:pathwayComponent rdf:resource="#Catalysis26363"/>
+    <bp:pathwayComponent rdf:resource="#BiochemicalReaction26358"/>
+    <bp:pathwayComponent rdf:resource="#Catalysis26328"/>
+    <bp:pathwayComponent rdf:resource="#BiochemicalReaction26269"/>
+    <bp:pathwayComponent rdf:resource="#BiochemicalReaction26140"/>
+    <bp:pathwayComponent rdf:resource="#Catalysis26252"/>
+    <bp:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ergosterol biosynthesis I (fungi)</bp:name>
+    <bp:evidence rdf:resource="#Evidence26136"/>
+    <bp:evidence rdf:resource="#Evidence26133"/>
+    <bp:dataSource rdf:resource="#Provenance26138"/>
+    <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">|FRAME:ERGOSTEROL Ergosterol| is a major constituent of the fungal plasma membrane |CITS:[Paltauf][8561481]|.
+In other organisms the plasma membranes contain other types of sterols, such as |FRAME: CHOLESTEROL| in mammals.
+
+|FRAME: CHOLESTEROL| and |FRAME: ERGOSTEROL| share most of their biosythesis pathway, up to
+|FRAME: ZYMOSTEROL|. From this intermediate different paths lead to synthesis of different sterols in different organisms.
+
+The pathway from |FRAME: ZYMOSTEROL| to |FRAME: ERGOSTEROL|, which is described here, is fungal-specific, although
+not all fungi possess it. For example, |FRAME: TAX-4754| plasma membranes lack ergosterol |CITS:[12531182]|.
+The pathway has been best studied in |FRAME: TAX-4932|, in which most steps are not essential for viability
+|CITS:[8277826][9294256]|.
+
+The pathway consists of five enzymatic steps, catalyzed by enzymes encoded by the |FRAME:YML008C|,
+|FRAME:YMR202W|, |FRAME: YLR056W|, |FRAME: YMR015C| and |FRAME: YGL012W|, not necessarily in this order.
+
+To learn about the full pathway for the biosynthesis of ergosterol, see |FRAME: ERGOSTEROL-SYN-PWY|.</bp:comment>
+  </bp:Pathway>
+  <bp:Catalysis rdf:ID="Catalysis26235">
+    <bp:xref rdf:resource="#UnificationXref26239"/>
+    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">episterol C-5 desaturase</bp:standardName>
+    <bp:evidence rdf:resource="#Evidence26238"/>
+    <bp:dataSource rdf:resource="#Provenance26138"/>
+    <bp:controlType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+    <bp:controller rdf:resource="#Protein26250"/>
+    <bp:controlled rdf:resource="#BiochemicalReaction26140"/>
+  </bp:Catalysis>
+  <bp:Catalysis rdf:ID="Catalysis26223">
+    <bp:xref rdf:resource="#UnificationXref26229"/>
+    <bp:standardName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">epi-sterol-desaturase</bp:standardName>
+    <bp:evidence rdf:resource="#Evidence26228"/>
+    <bp:dataSource rdf:resource="#Provenance26138"/>
+    <bp:controlType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+    <bp:controller rdf:resource="#Protein26233"/>
+    <bp:controlled rdf:resource="#BiochemicalReaction26140"/>
+    <bp:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Although episterol is thought to be the primary substrate for STE1, it can also convert avenasterol |CITS:[10344195]|</bp:comment>
+  </bp:Catalysis>
+</rdf:RDF>

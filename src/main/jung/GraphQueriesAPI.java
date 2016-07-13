@@ -332,7 +332,7 @@ public class GraphQueriesAPI {
 				}
 			}
 			else{
-				if (parsedName.length()>0) parsedName += ".*";
+				if (parsedName.length()>0) parsedName += ".-";
 				// else do nothing don't return ".*" just return ""
 				break;
 			}

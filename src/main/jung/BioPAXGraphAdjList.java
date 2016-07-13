@@ -145,18 +145,20 @@ public class BioPAXGraphAdjList {
 		
 		for (BioPAXElement currentElement : elementSet)
 		{
-			System.out.println("cE "+currentElement);
+			//TODO it has been noticed that if currentElement is null
+			//it means that it shows to a another (whole) pathway instead of
+			//another [BiochemicalPathwayStep]. For now just ignore. For future 
+			//try to load and expand this new pathway. (if possible)
 			try{
 				bioPathStepRDFid = currentElement.getRDFId();
-				System.out.println("B "+bioPathStepRDFid);
 			}
 			catch(NullPointerException e ){
-				System.out.println("["+currentElement+"]");
+				//Do nothing and go to next iteration
+				bioPathStepRDFid = null;
 			}
 			
 			if (!this.bioPathStepsGraph.containsKey(bioPathStepRDFid)
-					&& bioPathStepRDFid != null){
-
+					&& bioPathStepRDFid != null && bioPathStepRDFid.length() != 0){
 				addBioPathStepSubMap(bioPathStepRDFid);	
 			}			
 		}
@@ -202,7 +204,6 @@ public class BioPAXGraphAdjList {
 		this.bioPathStepsGraph.put(bioPathStepRDFid, valuesMap); 
 		
 		Set<BioPAXElement> nextElementSet = filterBioPAXElementsByHttps(extractHttps(getPropertyInfo(bioPathStepRDFid, "nextStep")));
-		System.out.println(nextElementSet);
 		addBiochemicalPathwayStep(nextElementSet);
 		
 	}
@@ -216,7 +217,8 @@ public class BioPAXGraphAdjList {
 	 * @param bioPathStepRDFid is the RDFid of the BiochemicalPathwayStep
 	 * @param stepConversionRDFid is the RDFid of the stepConversion of the corresponding BiochemicalPathwayStep
 	 */
-	private void addStartAndEndNodesToMap(Map<String, String[]> valuesMap, String bioPathStepRDFid, String stepConversionRDFid) {
+	private void addStartAndEndNodesToMap(Map<String, String[]> valuesMap, 
+			String bioPathStepRDFid, String stepConversionRDFid) {
 		String direction = getPropertyInfo(bioPathStepRDFid, "stepDirection");
 		//remove the [ and ] from LEFT_TO_RIGHT or RIGHT_TO_LEFT
 		direction = direction.substring(1,direction.length()-1);

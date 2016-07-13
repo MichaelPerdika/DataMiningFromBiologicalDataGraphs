@@ -3,13 +3,6 @@ package main.jung;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.biopax.paxtools.model.level3.BiochemicalPathwayStep;
-import org.biopax.paxtools.model.level3.BiochemicalReaction;
-import org.biopax.paxtools.model.level3.Interaction;
-import org.biopax.paxtools.model.level3.Pathway;
-import org.biopax.paxtools.model.level3.Protein;
-import org.biopax.paxtools.model.level3.SmallMolecule;
-
 import edu.uci.ics.jung.graph.DirectedGraph;
 
 enum distMetric {

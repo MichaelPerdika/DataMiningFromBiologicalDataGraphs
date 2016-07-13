@@ -13,6 +13,7 @@ public class Biopax2JungConverter {
 	/**
 	 * never to be called
 	 */
+	@SuppressWarnings("unused")
 	private Biopax2JungConverter(){
 		
 	}

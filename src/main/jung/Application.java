@@ -11,9 +11,10 @@ public class Application {
 
 	public static void main(String[] args)  {
 			
-			System.out.println("hello World!");
+			
 			// assign the path to the .bpinit file that the .biopax files are stored
 			String biopaxLoader = "src/data/biopaxLoader.bpinit";
+			System.out.println("Launching Application, reading .biopax data from: "+biopaxLoader);
 			// load all .biopax files from a .bpinit and create the graphList
 			List<DirectedGraph<Integer, MyEdge>> graphList =
 					loadGraphListFromBiopaxLoaderBPINIT(biopaxLoader);
@@ -21,15 +22,18 @@ public class Application {
 			// initialize the API
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphList);
 			// find patterns in graphs. The main algorithm.
-			graphQueries.findPatternsInGraphs(0.75);
+			graphQueries.findPatternsInGraphs(1.0);
 			// print the pattern table
 			graphQueries.printWholePatternTable();
+			/*
 			//visualize graphList
 			graphQueries.visualizeGraphList();
 			//visualize subGraphList
 			graphQueries.visualizeSubGraphList();
 			//visualize subGraphListComplementary
-			//graphQueries.visualizeComplementarySubGraphList();
+			graphQueries.visualizeComplementarySubGraphList();
+			*/
+			
 			
 			// calculate the hierarchical clustering
 			//TODO clustering Algorithm
@@ -133,7 +137,7 @@ public class Application {
 			
 			
 			
-			System.out.println("Goodbye");		
+			System.out.println("Application ran succesfully...");		
 	}
 	
 
@@ -166,8 +170,13 @@ public class Application {
 		try(BufferedReader br = new BufferedReader(new FileReader(biopaxLoader))) {
 		    for(String line; (line = br.readLine()) != null; ) {
 		        // process the line.
-		    	if(line.contains(".biopax")) 
+		    	// the path must end to ".biopax". 
+		    	// A line is "commented" if it starts with "#"
+		    	if(line.contains(".biopax") && !line.startsWith("#")) 
 		    		 biopaxFiles.add(line);
+		    	else if (line.startsWith("#"))
+		    		// this is a commented line.
+		    		continue; 
 		    	else{
 		    		System.out.println("Warning, File "+" must contain only lines with "
 		    				+ "<name>.biopax");

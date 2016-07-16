@@ -113,7 +113,11 @@ public class GraphQueriesAPI {
 			for (int row=0; row< subGraphList.size();row++){
 				// if the cell has >0 value then it means that this pattern
 				// is contained in the current graph so subtract it.
-				if (getPatternTableCell(row, col) > 0){
+				if (getPatternTableCell(row, col) >= 0){ 
+					// this could be >0 and not >=0. But if a graph has no 1's then
+					// it won't be checked thus not filtering the empty ECNumbers
+					// (that are erased in the eraseCommonEdgesBetweenTwoGraphs method)
+					// TODO in the future >=0  to >0 and resolve the empty ECNumbers problem.
 					DirectedGraph<Integer, MyEdge> curSubGraph = 
 							DeepClone.deepClone(getSubGraphList().get(row));
 					eraseCommonEdgesBetweenTwoGraphs(newSubGraph, curSubGraph, threshold);
@@ -150,22 +154,59 @@ public class GraphQueriesAPI {
 	private void eraseCommonEdgesBetweenTwoGraphs(
 			DirectedGraph<Integer, MyEdge> destSubGraph,
 			DirectedGraph<Integer, MyEdge> sourceSubGraph, double threshold) {
-		// TODO Auto-generated method stub
-		
+	
 		// deep clone since we are going to erase things here
 		for (MyEdge destEdge : DeepClone.deepClone(destSubGraph.getEdges())){
+			// TODO for now ignore the edges with empty ECNumber. Resolve this in the future
+			
+			if (parseEdgeNames(destEdge).get(0).get(0).isEmpty()){
+			//Alternative use 
+			//if (destEdge.toString().equals(" ")){
+				// remove the empty name edge
+				destSubGraph.removeEdge(destEdge);
+				// after the remove of the edge check if there are vertexes that are not
+				// connected to any edge
+				removeReduntantVertex(destSubGraph, destEdge);
+				continue; // since it is removed no need to check further
+			}
 			for (MyEdge sourceEdge : sourceSubGraph.getEdges()){
 				MyEdge commonEdge = getCommonEdgeFromThreshold(
 								sourceEdge, destEdge, threshold);
 				// we have a match therefore erase that edge from destSubGraph
 				if (commonEdge != null){
 					destSubGraph.removeEdge(destEdge);
+					removeReduntantVertex(destSubGraph, destEdge);
 					continue; // since it is removed no need to check further
 				}
 			}
 		}
 		
 		
+	}
+
+	/**
+	 * this method removes the vertexes of graph that are not connected to any edge.
+	 * So graph is mutated (if there are "hanging" vertexes)
+	 * @param graph
+	 * @param edge 
+	 */
+	private void removeReduntantVertex(DirectedGraph<Integer, MyEdge> graph, MyEdge edge) {
+		
+		Integer startVertex = edge.getStartNode();
+		Integer endVertex = edge.getEndNode();
+		// check for the starting vertex of the edge
+		if (graph.containsVertex(startVertex)){
+			if (graph.getIncidentEdges(startVertex).isEmpty()){
+				graph.removeVertex(startVertex);
+			}
+		}
+		
+		// check for the ending vertex of the edge
+		if (graph.containsVertex(endVertex)){
+			if (graph.getIncidentEdges(endVertex).isEmpty()){
+				graph.removeVertex(endVertex);
+			}
+		}
 	}
 
 	/**

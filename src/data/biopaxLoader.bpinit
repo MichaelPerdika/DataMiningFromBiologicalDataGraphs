@@ -5,4 +5,4 @@ src/data/TCA cycle.biopax
 src/data/brassinosteroid biosynthesis I.biopax
 src/data/ergosterol biosynthesis I.biopax
 src/data/sterol:steryl ester interconversion.biopax
-src/data/sterol:steryl ester interconversion (yeast).biopax
+#src/data/sterol:steryl ester interconversion (yeast).biopax

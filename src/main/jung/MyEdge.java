@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class MyEdge {
-	private int edgeId;
 	private String edgeRDFid;
 	private String[] startNodes;
 	private String[] endNodes;

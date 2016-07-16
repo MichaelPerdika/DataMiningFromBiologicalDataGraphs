@@ -6,7 +6,7 @@ import java.util.List;
 import edu.uci.ics.jung.graph.DirectedGraph;
 
 enum distMetric {
-	   EUCLIDEAN, EUCLIDEAN_WITH_WEIGHTS //TODO
+	   EUCLIDEAN, EUCLIDEAN_WITH_WEIGHTS, BIOPAX_METRIC //TODO
 	}
 
 public class ClusteringAlgorithm {
@@ -42,6 +42,21 @@ public class ClusteringAlgorithm {
 		}
 	}
 
+	/** 
+	 * initializes distanceMatrix with all null elements.
+	 */
+	private void initializeDistanceMatrix() {
+		// TODO Auto-generated method stub
+		distanceMatrix = new ArrayList<List<Double>>();
+		for (int i=0;i<graphSizes.size();i++){
+			List<Double> rowList = new ArrayList<Double>();
+			for (int j=0;j<graphSizes.size();j++){
+				rowList.add(null);
+			}
+			distanceMatrix.add(rowList);
+		}
+	}
+	
 	/**
 	 * this method calculates the distance matrix between every pair of graphs.
 	 * A distance metric (distMetric enum) must be passed.
@@ -105,6 +120,12 @@ public class ClusteringAlgorithm {
 				dist += Math.sqrt(Math.pow(cellI - cellJ, 2));
 			}
 			break;
+		case BIOPAX_METRIC:
+			for (int index=0;index<gQAPI.getSubGraphList().size();index++){
+				//TODO
+				continue;
+			}
+			break;
 		default:
 			//TODO do EUCLIDEAN_WITH_WEIGHTS
 		}
@@ -112,20 +133,6 @@ public class ClusteringAlgorithm {
 		return dist;
 	}
 
-	/** 
-	 * initializes distanceMatrix with all null elements.
-	 */
-	private void initializeDistanceMatrix() {
-		// TODO Auto-generated method stub
-		distanceMatrix = new ArrayList<List<Double>>();
-		for (int i=0;i<graphSizes.size();i++){
-			List<Double> rowList = new ArrayList<Double>();
-			for (int j=0;j<graphSizes.size();j++){
-				rowList.add(null);
-			}
-			distanceMatrix.add(rowList);
-		}
-	}
 
 	/**
 	 * this method prints the distanceMatrix

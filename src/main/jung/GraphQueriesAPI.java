@@ -31,15 +31,19 @@ public class GraphQueriesAPI {
 
 	private List<DirectedGraph<Integer, MyEdge>> graphList;
 	private List<DirectedGraph<Integer, MyEdge>> subGraphList;
+	private List<DirectedGraph<Integer, MyEdge>> subGraphListComplementary;
 	private List<List<Integer>> patternTable;
+	private List<List<Integer>> patternTableComplementary;
 	
 	/**
-	 * empty constructor initialize to null
+	 * empty constructor initialize to null 
 	 */
 	public GraphQueriesAPI(){
 		setGraphList(new ArrayList<DirectedGraph<Integer, MyEdge>>());
 		setSubGraphList(new ArrayList<DirectedGraph<Integer, MyEdge>>());
+		setSubGraphListComplementary(new ArrayList<DirectedGraph<Integer, MyEdge>>());
 		setPatternTable(new ArrayList<List<Integer>>());
+		setPatternTableComplementary(new ArrayList<List<Integer>>());
 	}
 	
 	/**
@@ -50,7 +54,9 @@ public class GraphQueriesAPI {
 		//TODO
 		setGraphList(graphSet);
 		setSubGraphList(new ArrayList<DirectedGraph<Integer, MyEdge>>());
+		setSubGraphListComplementary(new ArrayList<DirectedGraph<Integer, MyEdge>>());
 		setPatternTable(new ArrayList<List<Integer>>());
+		setPatternTableComplementary(new ArrayList<List<Integer>>());
 	}
 	
 	/**
@@ -75,15 +81,98 @@ public class GraphQueriesAPI {
 								graphList.get(i), graphList.get(j), threshold));
 			}
 		}
-		//TODO
 		fillTheCompletePatternTable(threshold);
+	}
+
+	/**
+	 * this method fills both the pattern table and the complementary one
+	 * It basically calls the methods fillPatternTable(threshold) 
+	 * and fillComplementaryPatternTable()
+	 * @param threshold
+	 */
+	private void fillTheCompletePatternTable(double threshold) {
+		
+		// fill pattern table
+		fillPatternTable(threshold);
+		// fill complementary pattern table
+		fillComplementaryPatternTable(threshold);
+	}
+
+	/**
+	 * this method fills the complementary pattern table.
+	 * This table has all the patterns that are unique.
+	 * @param threshold 
+	 */
+	private void fillComplementaryPatternTable(double threshold) {
+		
+		// fill the subGraphListComplementary table and patternTableComplementary.
+		// To do so do subGraphListComplementary = GraphList - subGraphList (more or less)
+		for (int col=0; col< graphList.size();col++){
+			DirectedGraph<Integer, MyEdge> newSubGraph = 
+					DeepClone.deepClone(getGraphList().get(col));
+			for (int row=0; row< subGraphList.size();row++){
+				// if the cell has >0 value then it means that this pattern
+				// is contained in the current graph so subtract it.
+				if (getPatternTableCell(row, col) > 0){
+					DirectedGraph<Integer, MyEdge> curSubGraph = 
+							DeepClone.deepClone(getSubGraphList().get(row));
+					eraseCommonEdgesBetweenTwoGraphs(newSubGraph, curSubGraph, threshold);
+				}
+			}
+			// now the newSubGraph is ready to append it.
+			if (newSubGraph.getEdgeCount() > 0){
+				this.subGraphListComplementary.add(newSubGraph);
+				// append the new row in patternTableComplementary
+				List<Integer> newRow = new ArrayList<Integer>(graphList.size()); 
+				for (int index=0; index<graphList.size();index++){
+					if (index == col){
+						newRow.add(index, 1);
+						//TODO maybe its not 1 here.
+					}
+					else{
+						newRow.add(index, 0);
+					}
+				}
+				this.patternTableComplementary.add(newRow);
+			}
+		}		
+	}
+
+	/**
+	 * this method does the "destSubGraph = destSubGraph - sourceSubGraph" using threshold for the
+	 * edge equality.
+	 * @param destSubGraph this is mutated through the method. Is the graph that we want 
+	 * to subtract the curSubGraph
+	 * @param sourceSubGraph the pattern/subGraph which is the reference. We want to subtract
+	 * all its matching edges to destSubGraph
+	 * @param threshold
+	 */
+	private void eraseCommonEdgesBetweenTwoGraphs(
+			DirectedGraph<Integer, MyEdge> destSubGraph,
+			DirectedGraph<Integer, MyEdge> sourceSubGraph, double threshold) {
+		// TODO Auto-generated method stub
+		
+		// deep clone since we are going to erase things here
+		for (MyEdge destEdge : DeepClone.deepClone(destSubGraph.getEdges())){
+			for (MyEdge sourceEdge : sourceSubGraph.getEdges()){
+				MyEdge commonEdge = getCommonEdgeFromThreshold(
+								sourceEdge, destEdge, threshold);
+				// we have a match therefore erase that edge from destSubGraph
+				if (commonEdge != null){
+					destSubGraph.removeEdge(destEdge);
+					continue; // since it is removed no need to check further
+				}
+			}
+		}
+		
+		
 	}
 
 	/**
 	 * Before this method call the subGraphList is full and we want to fill the pattern table
 	 * with the correct numbers >=0 (eliminate all -1).
 	 */
-	private void fillTheCompletePatternTable(double threshold) {
+	private void fillPatternTable(double threshold) {
 		// TODO Auto-generated method stub
 		// we iterate through the rows (subGraphs) and columns (graphs) and check
 		// the number of occurrences of every subGraph/pattern in every graph and fill the 
@@ -379,11 +468,9 @@ public class GraphQueriesAPI {
 		// TODO Auto-generated method stub
 		
 		if (commonSubGraphList.isEmpty()) return false;
-		for (Object curObj : commonSubGraphList.toArray()){
-			DirectedGraph<Integer, MyEdge> curSubGraph = 
-					(DirectedGraph<Integer, MyEdge>)curObj;
-			Collection<MyEdge> graphEdges = curSubGraph.getEdges();
-			for (MyEdge curEdge : graphEdges){
+
+		for (DirectedGraph<Integer, MyEdge> curSubGraph : commonSubGraphList){
+			for (MyEdge curEdge : curSubGraph.getEdges()){
 				if(edge.getStartNode() == curEdge.getStartNode()
 						&& edge.getEndNode() == curEdge.getEndNode()){
 					return true;
@@ -504,20 +591,14 @@ public class GraphQueriesAPI {
 	public void mergeSubGraphsToGlobalSubGraphList(
 			List<DirectedGraph<Integer, MyEdge>> tempSubGraphs) {
 		
-		for(Object curTempSubGraph : tempSubGraphs.toArray()){
-			DirectedGraph<Integer, MyEdge> prev = 
-					(DirectedGraph<Integer, MyEdge>)curTempSubGraph;
+		for(DirectedGraph<Integer, MyEdge> prev : tempSubGraphs){
+
 			int subGraphIndex = isSubGraphInPatternTable(prev);
 			if (subGraphIndex < 0){
 				this.subGraphList.add(prev);
 				appendNewRowInPatternTable();
 			}
-			//TODO the following must be erased
-			/*
-			else{
-				updateExistingRowInPatternTable(subGraphIndex, graph1ID, graph2ID);
-			}
-			*/
+
 		}
 		
 	}
@@ -550,9 +631,7 @@ public class GraphQueriesAPI {
 		}
 		else{
 			int index = 0;
-			for(Object curObj : getSubGraphList().toArray()){
-				DirectedGraph<Integer, MyEdge> curSubGraph = 
-						(DirectedGraph<Integer, MyEdge>)curObj;
+			for(DirectedGraph<Integer, MyEdge> curSubGraph : getSubGraphList()){
 				if(graphEquality(subGraph,curSubGraph)){
 					return index;
 				}
@@ -564,21 +643,46 @@ public class GraphQueriesAPI {
 	}
 
 	/**
-	 * prints the pattern table
+	 * this method prints the pattern table as the complementary one.
+	 * It calls the methods printGraphs(), printSubGraphs(), 
+	 * printPatternTable() and printComplementaryPatternTable()
 	 */
-	public void printPatternTable(){
-		
+	public void printWholePatternTable(){
+		printGraphs();
+		printSubGraphs();
+		printPatternTable();
+		printComplementarySubGraphs();
+		printComplementaryPatternTable();
+	}
+
+	/**
+	 * this method prints the graphList
+	 */
+	public void printGraphs() {
 		System.out.println("\nThe Graphs");
 		/**** print the graphs ***/
 		for (int i=0; i<graphList.size();i++){
 			System.out.println("g"+i+" = "+graphList.get(i));
 		}
+	}
+	
+	/**
+	 * this method prints the subGraphList
+	 */
+	public void printSubGraphs() {
 		System.out.println("");
 		/**** print the patterns */
 		System.out.println("The Patterns");
 		for (int i=0; i<subGraphList.size();i++){
 			System.out.println("p"+i+" = "+subGraphList.get(i));
 		}
+	}
+
+	/**
+	 * prints the pattern table
+	 */
+	public void printPatternTable(){
+	
 		System.out.println("");
 		/**** print the grid******/
 		System.out.println("The Pattern Table");
@@ -595,7 +699,41 @@ public class GraphQueriesAPI {
 			System.out.println("");
 		}
 	}
+	
+	/**
+	 * this method prints the subGraphListComplementary
+	 */
+	public void printComplementarySubGraphs() {
+		System.out.println("");
+		/**** print the complementary patterns */
+		System.out.println("The Complementary Patterns");
+		for (int i=0; i<subGraphListComplementary.size();i++){
+			System.out.println("s"+i+" = "+subGraphListComplementary.get(i));
+		}
+	}
 
+	/**
+	 * prints the complementary pattern table
+	 */
+	public void printComplementaryPatternTable(){
+		
+		System.out.println("");
+		/**** print the grid******/
+		System.out.println("The complementary Pattern Table");
+		System.out.print("   ");
+		for (int num=0; num<graphList.size();num++){
+			System.out.print("g"+num+" ");
+		}
+		System.out.println("");
+		for (int i=0;i<patternTableComplementary.size();i++){
+			System.out.print("s"+i+" ");
+			for (int j=0;j<patternTableComplementary.get(i).size();j++){
+				System.out.print(patternTableComplementary.get(i).get(j)+"  ");
+			}
+			System.out.println("");
+		}
+	}
+	
 	/**
 	 * this function checks if two graphs are equal (have the same edges, vertices are irrelevant)
 	 * @param graph1
@@ -840,8 +978,9 @@ public class GraphQueriesAPI {
 	 * @param graphList
 	 */
 	public static void visualizeListOfGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
-		for (Object temp : graphList.toArray()){
-			visualizeGraph((DirectedGraph<Integer, MyEdge>) temp);
+
+		for (DirectedGraph<Integer, MyEdge> temp : graphList){
+			visualizeGraph(temp);
 		}
 	}
 	
@@ -859,6 +998,14 @@ public class GraphQueriesAPI {
 	 */
 	public void visualizeGraphList() {
 		visualizeListOfGraphs(getGraphList());
+	}
+	
+	/**
+	 * method that visualizes the list of patterns subGraphList
+	 * @param graphList
+	 */
+	public void visualizeComplementarySubGraphList() {
+		visualizeListOfGraphs(getSubGraphListComplementary());
 	}
 	
 	/**
@@ -934,10 +1081,6 @@ public class GraphQueriesAPI {
 		return graphList;
 	}
 
-	public void addGraphToGraphSet(DirectedGraph<Integer, MyEdge> graph){
-		this.graphList.add(graph);
-	}
-	
 	public void setGraphList(List<DirectedGraph<Integer, MyEdge>> graphSet) {
 		//create a copy of it
 		this.graphList = new ArrayList<DirectedGraph<Integer, MyEdge>> (graphSet);
@@ -965,6 +1108,22 @@ public class GraphQueriesAPI {
 	
 	public void insertPatternTableCell(int row, int col, int value) {
 		this.patternTable.get(row).set(col, value);
+	}
+
+	public List<List<Integer>> getPatternTableComplementary() {
+		return patternTableComplementary;
+	}
+
+	public void setPatternTableComplementary(List<List<Integer>> patternTableComplementary) {
+		this.patternTableComplementary = patternTableComplementary;
+	}
+
+	public List<DirectedGraph<Integer, MyEdge>> getSubGraphListComplementary() {
+		return subGraphListComplementary;
+	}
+
+	public void setSubGraphListComplementary(List<DirectedGraph<Integer, MyEdge>> subGraphListComplementary) {
+		this.subGraphListComplementary = subGraphListComplementary;
 	}
 
 }

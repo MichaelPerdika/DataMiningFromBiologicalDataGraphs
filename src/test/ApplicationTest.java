@@ -5,7 +5,6 @@ import java.util.List;
 
 import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
-import main.jung.Application;
 import main.jung.GraphQueriesAPI;
 import main.jung.MyEdge;
 
@@ -15,10 +14,13 @@ public class ApplicationTest {
 		List<DirectedGraph<Integer, MyEdge>> graphTestSet = 
 				fetchTestSet2();
 		GraphQueriesAPI testGraphQueries = new GraphQueriesAPI(graphTestSet);
-		testGraphQueries.findPatternsInGraphs(1);
+		testGraphQueries.findPatternsInGraphs(0.5);
 		//Application.visualizeListOfSubGraphs(testGraphQueries.getSubGraphList());
 		//Application.printListOfSubGraphs(testGraphQueries.getSubGraphList());
-		testGraphQueries.printPatternTable();
+		testGraphQueries.printWholePatternTable();
+		testGraphQueries.visualizeGraphList();
+		testGraphQueries.visualizeSubGraphList();
+		testGraphQueries.visualizeComplementarySubGraphList();
 		
 	}
 	

@@ -21,18 +21,23 @@ public class Application {
 			// initialize the API
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphList);
 			// find patterns in graphs. The main algorithm.
-			graphQueries.findPatternsInGraphs(1);
+			graphQueries.findPatternsInGraphs(0.75);
 			// print the pattern table
-			graphQueries.printPatternTable();
+			graphQueries.printWholePatternTable();
 			//visualize graphList
 			graphQueries.visualizeGraphList();
 			//visualize subGraphList
 			graphQueries.visualizeSubGraphList();
+			//visualize subGraphListComplementary
+			//graphQueries.visualizeComplementarySubGraphList();
 			
 			// calculate the hierarchical clustering
 			//TODO clustering Algorithm
+			// initialize the clustering Algorithm
 			ClusteringAlgorithm clustAlg = new ClusteringAlgorithm(graphQueries);
-			clustAlg.calculateDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
+			// calculate the distances 
+			clustAlg.calculateDistances(distMetric.BIOPAX_METRIC);
+			// print the distance matrix
 			clustAlg.printDistanceMatrix();
 			
 			// find if some patterns are unique in graphs or not 

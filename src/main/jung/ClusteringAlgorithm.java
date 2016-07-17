@@ -9,6 +9,10 @@ enum distMetric {
 	   EUCLIDEAN, EUCLIDEAN_WITH_WEIGHTS, BIOPAX_METRIC //TODO
 	}
 
+enum linkMetric {
+	   MIN, MAX //TODO
+	}
+
 public class ClusteringAlgorithm {
 
 	GraphQueriesAPI gQAPI;
@@ -16,6 +20,10 @@ public class ClusteringAlgorithm {
 	private List<List<Double>> distanceMatrixGraphs;
 	private List<Integer> patternSizes;
 	private List<List<Double>> distanceMatrixPatterns;
+	private List<Double> linkageDistancesPatterns;
+	private List<List<String>> linkageClustersPatterns;
+	private List<Double> linkageDistancesGraphs;
+	private List<List<String>> linkageClustersGraphs;
 
 	/**
 	 * never to be called
@@ -30,6 +38,10 @@ public class ClusteringAlgorithm {
 		this.gQAPI = graphQueries;
 		patternSizes = new ArrayList<Integer>();
 		graphSizes = new ArrayList<Integer>();
+		linkageDistancesPatterns = new ArrayList<Double>();
+		linkageClustersPatterns = new ArrayList<List<String>>();
+		linkageDistancesGraphs = new ArrayList<Double>();
+		linkageClustersGraphs = new ArrayList<List<String>>();
 		
 		// for the pattern distance matrix
 		fillPatternSizes();
@@ -278,4 +290,175 @@ public class ClusteringAlgorithm {
 		}
 		
 	}
+
+	/**
+	 * linkage in pattern distanceMatrixPatterns
+	 * @param metric
+	 */
+	public void linkagePattern(linkMetric metric) {
+		linkage("patterns", metric);
+	}
+	
+	/**
+	 * linkage in graph distanceMatrixGraphs
+	 * @param metric
+	 */
+	public void linkageGraph(linkMetric metric) {
+		linkage("graphs", metric);
+	}
+	
+	/**
+	 * this method performs linkage in the distanceMatrixPatterns or distanceMatrixGraphs
+	 * depending on type
+	 * @param type "pattern" or "graph" 
+	 * @param metric
+	 */
+	private void linkage(String type, linkMetric metric) {
+		// TODO Auto-generated method stub
+		List<List<Double>> distanceMatrix;
+		if (type.equals("patterns")){
+			distanceMatrix = distanceMatrixPatterns;
+		}
+		else if (type.equals("graphs")){
+			distanceMatrix = distanceMatrixGraphs;
+		}
+		else{
+			distanceMatrix = null;
+			System.exit(1);
+		}
+		List<String> rowCols = new ArrayList<String>(); 
+		for (int i=0; i <distanceMatrix.size();i++) rowCols.add(type.substring(0, 1)+i);// "p" or "g"
+		List<Double> linkageDistances = new ArrayList<Double>();
+		List<List<String>> linkageClusters = new ArrayList<List<String>>();
+		linkageDistances.add(0.0);
+		linkageClusters.add(new ArrayList<String>(rowCols));
+		
+		switch (metric)
+		{
+		case MIN:
+			
+			while(distanceMatrix.size()>1){
+				double min = Double.MAX_VALUE;
+				int row = -1;
+				int col = -1;
+				for (int i=0; i<distanceMatrix.size();i++){
+					// with j=i+1 we skip the main diagonal line
+					for (int j=i+1; j<distanceMatrix.get(i).size();j++){
+						if (distanceMatrix.get(i).get(j) < min){
+							row = i;
+							col = j;
+							min = distanceMatrix.get(i).get(j);
+						}
+					}
+				}
+	
+				String temp;
+				int left;
+				int right;
+				
+				// in the merge of two graphs put the result in the most left position
+				// and remove the rightmost
+				if (row<col){
+					left = row;
+					right = col;
+				}
+				else{
+					left = col;
+					right = row;
+				}
+				
+				temp = rowCols.get(left);
+				rowCols.set(left, temp+"-"+rowCols.get(right));
+				rowCols.remove(right);
+				
+				// in the 2 above columns put the minimum value in each cell
+				for (int i=0;i<distanceMatrix.size();i++){
+					Double leftVal = distanceMatrix.get(i).get(left);
+					Double rightVal = distanceMatrix.get(i).get(right);
+					if (leftVal < rightVal){
+						distanceMatrix.get(i).set(left, leftVal);
+						distanceMatrix.get(i).set(right,leftVal);
+					}
+					else{
+						distanceMatrix.get(i).set(left, rightVal);
+						distanceMatrix.get(i).set(right,rightVal);
+					}
+				}
+				linkageDistances.add(min);
+				linkageClusters.add(new ArrayList<String>(rowCols));
+				// remove the entire row
+				distanceMatrix.remove(right);
+				// remove the entire column
+				for (int i=0;i<distanceMatrix.size();i++){
+					distanceMatrix.get(i).remove(right);
+				}
+				
+			}
+			if (type.equals("patterns")){
+				linkageDistancesPatterns = linkageDistances;
+				linkageClustersPatterns = linkageClusters;
+			}
+			else if (type.equals("graphs")){
+				linkageDistancesGraphs = linkageDistances;
+				linkageClustersGraphs = linkageClusters;
+			}
+			
+			
+			break;
+		case MAX:
+			
+			break;
+		default:
+			//TODO MIN??? MAX???
+		}
+	}
+
+	/**
+	 * this method prints the pattern clusters created from the linkage method (linkagePattern)
+	 */
+	public void printPatternClusters() {
+		printClusters("patterns");
+	}
+	
+	/**
+	 * this method prints the graph clusters created from the linkage method (linkageGraph)
+	 */
+	public void printGraphClusters() {
+		printClusters("graphs");
+		
+	}
+	
+	/**
+	 * this method implements printPatternClusters and printGraphClusters
+	 * It prints the linkageDistances and linkageClusters arrays
+	 * @param type
+	 */
+	private void printClusters(String type) {
+		// TODO Auto-generated method stub
+		
+		List<Double> linkageDistances;
+		List<List<String>> linkageClusters;
+		
+		if (type.equals("patterns")){
+			linkageDistances = linkageDistancesPatterns;
+			linkageClusters = linkageClustersPatterns;
+		}
+		else if (type.equals("graphs")){
+			linkageDistances = linkageDistancesGraphs;
+			linkageClusters = linkageClustersGraphs;
+		}
+		else{
+			linkageDistances = null;
+			linkageClusters = null;
+			System.exit(1);
+		}
+		System.out.println("\nThe clusters created for "+type);
+		System.out.println("       Distance ::         Clusters");
+		for (int i=0;i<linkageDistances.size();i++){
+			System.out.print("lvl"+i+"-->  ");
+			System.out.println(linkageDistances.get(i)+" :: "+linkageClusters.get(i));
+		}
+		
+	}
+	
 }

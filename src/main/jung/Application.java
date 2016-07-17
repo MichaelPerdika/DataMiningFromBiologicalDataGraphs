@@ -48,9 +48,15 @@ public class Application {
 			// print the distance matrix of the graphs
 			clustAlg.printDistanceMatrixGraphs();
 			
-			// find if some patterns are unique in graphs or not 
-			//TODO clustering Algorithm
-			
+			// linkages
+			//linkage for patterns using MIN
+			clustAlg.linkagePattern(linkMetric.MIN);
+			// print clusters for Patterns
+			clustAlg.printPatternClusters();
+			//linkage for graphs using MIN
+			clustAlg.linkageGraph(linkMetric.MIN);
+			// print clusters for Graphs
+			clustAlg.printGraphClusters();
 			/**
 			 * expected results:
 			 * tolerance 100%:

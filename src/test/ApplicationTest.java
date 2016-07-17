@@ -15,7 +15,7 @@ public class ApplicationTest {
 				fetchTestSet2();
 		GraphQueriesAPI testGraphQueries = new GraphQueriesAPI(graphTestSet);
 		testGraphQueries.findPatternsInGraphs(1);
-		testGraphQueries.printWholePatternTable();
+		testGraphQueries.printApplicationOutput();
 		testGraphQueries.visualizeGraphList();
 		testGraphQueries.visualizeSubGraphList();
 		testGraphQueries.visualizeComplementarySubGraphList();

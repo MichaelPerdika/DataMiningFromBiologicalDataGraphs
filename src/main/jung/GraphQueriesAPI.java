@@ -34,6 +34,7 @@ public class GraphQueriesAPI {
 	private List<DirectedGraph<Integer, MyEdge>> subGraphListComplementary;
 	private List<List<Integer>> patternTable;
 	private List<List<Integer>> patternTableComplementary;
+	private List<List<Integer>> patternTableWhole;
 	
 	/**
 	 * empty constructor initialize to null 
@@ -44,6 +45,7 @@ public class GraphQueriesAPI {
 		setSubGraphListComplementary(new ArrayList<DirectedGraph<Integer, MyEdge>>());
 		setPatternTable(new ArrayList<List<Integer>>());
 		setPatternTableComplementary(new ArrayList<List<Integer>>());
+		setPatternTableWhole(new ArrayList<List<Integer>>());
 	}
 	
 	/**
@@ -57,6 +59,7 @@ public class GraphQueriesAPI {
 		setSubGraphListComplementary(new ArrayList<DirectedGraph<Integer, MyEdge>>());
 		setPatternTable(new ArrayList<List<Integer>>());
 		setPatternTableComplementary(new ArrayList<List<Integer>>());
+		setPatternTableWhole(new ArrayList<List<Integer>>());
 	}
 	
 	/**
@@ -82,6 +85,19 @@ public class GraphQueriesAPI {
 			}
 		}
 		fillTheCompletePatternTable(threshold);
+		fillWholePatternTable();
+		
+		
+	}
+
+	/**
+	 * this method concatinates pattern table and the complementary to a whole pattern table
+	 */
+	private void fillWholePatternTable() {
+		setPatternTableWhole(DeepClone.deepClone(getPatternTable()));
+		for (List<Integer> row : getPatternTableComplementary()){
+			this.patternTableWhole.add(row);
+		}
 	}
 
 	/**
@@ -688,12 +704,13 @@ public class GraphQueriesAPI {
 	 * It calls the methods printGraphs(), printSubGraphs(), 
 	 * printPatternTable() and printComplementaryPatternTable()
 	 */
-	public void printWholePatternTable(){
+	public void printApplicationOutput(){
 		printGraphs();
 		printSubGraphs();
 		printPatternTable();
 		printComplementarySubGraphs();
 		printComplementaryPatternTable();
+		printWholePatternTable();
 	}
 
 	/**
@@ -770,6 +787,28 @@ public class GraphQueriesAPI {
 			System.out.print("s"+i+" ");
 			for (int j=0;j<patternTableComplementary.get(i).size();j++){
 				System.out.print(patternTableComplementary.get(i).get(j)+"  ");
+			}
+			System.out.println("");
+		}
+	}
+	
+	/**
+	 * prints the complementary pattern table
+	 */
+	public void printWholePatternTable(){
+		
+		System.out.println("");
+		/**** print the grid******/
+		System.out.println("The Whole Pattern Table");
+		System.out.print("   ");
+		for (int num=0; num<graphList.size();num++){
+			System.out.print("g"+num+" ");
+		}
+		System.out.println("");
+		for (int i=0;i<patternTableWhole.size();i++){
+			System.out.print("p"+i+" ");
+			for (int j=0;j<patternTableWhole.get(i).size();j++){
+				System.out.print(patternTableWhole.get(i).get(j)+"  ");
 			}
 			System.out.println("");
 		}
@@ -1142,6 +1181,10 @@ public class GraphQueriesAPI {
 	public Integer getPatternTableCell(int row, int col) {
 		return patternTable.get(row).get(col);
 	}
+	
+	public Integer getPatternTableWholeCell(int row, int col) {
+		return patternTableWhole.get(row).get(col);
+	}
 
 	public void setPatternTable(List<List<Integer>> patternTable) {
 		this.patternTable = patternTable;
@@ -1165,6 +1208,14 @@ public class GraphQueriesAPI {
 
 	public void setSubGraphListComplementary(List<DirectedGraph<Integer, MyEdge>> subGraphListComplementary) {
 		this.subGraphListComplementary = subGraphListComplementary;
+	}
+
+	public List<List<Integer>> getPatternTableWhole() {
+		return patternTableWhole;
+	}
+
+	public void setPatternTableWhole(List<List<Integer>> patternTableWhole) {
+		this.patternTableWhole = patternTableWhole;
 	}
 
 }

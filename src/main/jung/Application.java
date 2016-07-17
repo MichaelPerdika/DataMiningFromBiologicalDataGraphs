@@ -24,7 +24,7 @@ public class Application {
 			// find patterns in graphs. The main algorithm.
 			graphQueries.findPatternsInGraphs(1.0);
 			// print the pattern table
-			graphQueries.printWholePatternTable();
+			graphQueries.printApplicationOutput();
 			/*
 			//visualize graphList
 			graphQueries.visualizeGraphList();
@@ -39,10 +39,14 @@ public class Application {
 			//TODO clustering Algorithm
 			// initialize the clustering Algorithm
 			ClusteringAlgorithm clustAlg = new ClusteringAlgorithm(graphQueries);
-			// calculate the distances 
-			clustAlg.calculateDistances(distMetric.BIOPAX_METRIC);
-			// print the distance matrix
-			clustAlg.printDistanceMatrix();
+			// calculate the pattern distances 
+			clustAlg.calculatePatternDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
+			// calculate the graph distances 
+			clustAlg.calculateGraphDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
+			// print the distance matrix of the patterns
+			clustAlg.printDistanceMatrixPatterns();
+			// print the distance matrix of the graphs
+			clustAlg.printDistanceMatrixGraphs();
 			
 			// find if some patterns are unique in graphs or not 
 			//TODO clustering Algorithm

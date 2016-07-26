@@ -29,14 +29,16 @@ public class Biopax2JungConverter {
 	 */
 	private DirectedGraph<Integer, MyEdge> biopax2jung() {
         
-        DirectedGraph<Integer, MyEdge> graph = new DirectedSparseMultigraph<Integer, MyEdge>();
+        DirectedGraph<Integer, MyEdge> graph = 
+        		new DirectedSparseMultigraph<Integer, MyEdge>();
         //MyNode startNode, endNode = null;
         Integer startNode, endNode = null;
         String edgeRDFid;
         String[] nextEdgesRDFids;
         int nodeID = 0;
         boolean thereIsStartNode;
-        Map<String, Map<String, Integer>> tempMap = new HashMap<String, Map<String, Integer>>();
+        Map<String, Map<String, Integer>> tempMap = 
+        		new HashMap<String, Map<String, Integer>>();
 		for (Map.Entry<String, Map<String, String[]>> entry : 
 			this.biopaxGraph.getBioPathStepsGraph().entrySet()){
 			MyEdge myEdge = new MyEdge(entry);
@@ -93,12 +95,9 @@ public class Biopax2JungConverter {
 				//finally add the edge
 				myEdge.setEdgeNodes(startNode, endNode);
 				graph.addEdge(myEdge, startNode, endNode);
-				//System.out.println(g.toString());
-				//System.out.println(edgeRDFid);
 				tempMap.get(edgeRDFid).put("complete", 1);	
 			}
 		}
-		//printTempMap(tempMap);
 		return graph;
 	}
 

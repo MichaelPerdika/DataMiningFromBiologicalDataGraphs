@@ -61,7 +61,7 @@ public class GraphQueriesAPI {
 		setPatternTableComplementary(new ArrayList<List<Integer>>());
 		setPatternTableWhole(new ArrayList<List<Integer>>());
 	}
-	
+
 	/**
 	 * This is the main method of this API that finds all the 
 	 * subgraphs and fills the patternTable and subGraphList
@@ -76,6 +76,9 @@ public class GraphQueriesAPI {
 					+ " two instances. You gave: "+this.graphList.size()+". Exiting");
 			System.exit(0);
 		}
+		// fill the empty ECNumbers with left and right node names
+		fillEmptyECNumberEdgesOnGraphs();
+		
 		// check all graphs with each other.
 		for (int i=0;i<graphList.size();i++){
 			for (int j=i+1;j<graphList.size();j++){
@@ -90,6 +93,27 @@ public class GraphQueriesAPI {
 		
 	}
 
+	/**
+	 * This method fills the empty ECNumber edges of graphList with the 
+	 * left and right node names.
+	 */
+	private void fillEmptyECNumberEdgesOnGraphs() {
+		// TODO Auto-generated method stub
+		for ( DirectedGraph<Integer, MyEdge> graph : getGraphList()){
+			for (MyEdge edge : graph.getEdges()){
+				if (edge.toString().equals(" ")){ 
+					System.out.println("hit"+edge.toString());
+					System.out.println(edge.getEdgeName());
+					System.out.println(edge.getStepDirection());
+					System.out.println(edge.getStartNodeNames());
+					System.out.println(edge.getEndNodeNames());
+					System.out.print("");
+				}
+			}
+		}
+		
+	}
+	
 	/**
 	 * this method concatinates pattern table and the complementary to a whole pattern table
 	 */

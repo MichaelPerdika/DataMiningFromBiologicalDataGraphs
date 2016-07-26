@@ -1,18 +1,23 @@
 package main.jung;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class MyEdge {
 	private String edgeRDFid;
-	private String[] startNodes;
-	private String[] endNodes;
+	private String[] startNodesRDFids;
+	private String[] endNodesRDFids;
+	private List<String> startNodeNames;
+	private List<String> endNodeNames;
 	private String[] eCNumber;
 	private String edgeName;
 	private String[] nextStepRDFids;
 	private String[] stepConversion;
 	private Integer startNode;
 	private Integer endNode;
+	private String stepDirection;
 	
 	/**
 	 * this constructor is used only for testing
@@ -24,14 +29,16 @@ public class MyEdge {
 	public MyEdge(String edgeName, Integer startNode, Integer endNode){
 		//TODO erase this constructor.
 		this.edgeRDFid = edgeName;
-		this.startNodes = null;
-		this.endNodes = null;
+		this.startNodesRDFids = null;
+		this.endNodesRDFids = null;
 		this.eCNumber = new String[] {edgeName};
 		this.edgeName = edgeName;
 		this.nextStepRDFids = null;
 		this.stepConversion = null;
 		this.startNode = startNode;
 		this.endNode = endNode;
+		this.stepDirection = null;
+		fillStartAndEndNames();
 	}
 	
 	/**
@@ -43,14 +50,16 @@ public class MyEdge {
 	public MyEdge(MyEdge edge, Integer startNode, Integer endNode){
 		//This function gets a copy edge but with different start and end Nodes
 		this.edgeRDFid = edge.getEdgeRDFid();
-		this.startNodes = edge.startNodes;
-		this.endNodes = edge.endNodes;
+		this.startNodesRDFids = edge.startNodesRDFids;
+		this.endNodesRDFids = edge.endNodesRDFids;
 		this.eCNumber = edge.getECNumber();
 		this.edgeName = edge.getEdgeName();
 		this.nextStepRDFids = edge.getNextStepRDFids();
 		this.stepConversion = edge.stepConversion;
 		this.startNode = startNode;
 		this.endNode = endNode;
+		this.stepDirection = edge.getStepDirection();
+		fillStartAndEndNames();
 	}
 	
 	/**
@@ -63,14 +72,16 @@ public class MyEdge {
 	public MyEdge(String[] edgeName, Integer startNode, Integer endNode){
 		//TODO erase this constructor.
 		this.edgeRDFid = edgeName[0];
-		this.startNodes = null;
-		this.endNodes = null;
+		this.startNodesRDFids = null;
+		this.endNodesRDFids = null;
 		this.eCNumber = edgeName;
 		this.edgeName = edgeName[0];
 		this.nextStepRDFids = null;
 		this.stepConversion = null;
 		this.startNode = startNode;
 		this.endNode = endNode;
+		this.stepDirection = null;
+		fillStartAndEndNames();
 	}
 	
 	/**
@@ -79,15 +90,72 @@ public class MyEdge {
 	 */
 	public MyEdge(Entry<String, Map<String, String[]>> entry) {
 		this.edgeRDFid = entry.getKey();
-		this.startNodes = entry.getValue().get("startNodes");
-		this.endNodes = entry.getValue().get("endNodes");
+		this.startNodesRDFids = entry.getValue().get("startNodes");
+		this.endNodesRDFids = entry.getValue().get("endNodes");
 		this.eCNumber = entry.getValue().get("eCNumber");
 		this.edgeName = entry.getValue().get("edgeName")[0];
 		this.nextStepRDFids = entry.getValue().get("nextStep");
 		this.stepConversion = entry.getValue().get("stepConversion");
-		
+		this.stepDirection = entry.getValue().get("stepDirection")[0];
+		fillStartAndEndNames();
 	}
 	
+	private void fillStartAndEndNames() {
+		List<String> start = new ArrayList<String>();
+		List<String> end = new ArrayList<String>();
+		
+		if (this.stepDirection != null){
+			// remove the [ and ] from the beginning and end.
+			String name = edgeName.substring(1, edgeName.length()-1);
+			
+			// remove the " &rarr; " or " &harr; " etc.
+			// regular expression for " &(anyCharacter4Times); "
+			// \\h --> a horizontal whitspace
+			// \\Q&\\E --> &
+			// .{4} --> any character four times
+			// //Q;//E --> ;
+			String[] leftAndRight = name.split("\\h\\Q&\\E.{4}\\Q;\\E\\h");
+			
+			if (leftAndRight.length != 2){
+				System.out.println("ERROR in fillStartAndEndNames/MyEdge, "
+						+ "leftAndRight has no length=2. It has: "
+						+leftAndRight.length+" with values:");
+				for (int i=0;i<leftAndRight.length;i++){
+					System.out.println(i+"-->"+leftAndRight[i]);
+				}
+				System.exit(1);
+			}
+			
+			String from = null, to = null;
+			if (stepDirection.equals("LEFT_TO_RIGHT")){
+				from = leftAndRight[0];
+				to = leftAndRight[1];
+			}
+			else if (stepDirection.equals("RIGHT_TO_LEFT")){
+				from = leftAndRight[1];
+				to = leftAndRight[0];
+			}
+			else{
+				System.out.println("ERROR in fillStartAndEndNodes/MyEdge, stepDirection is: "+stepDirection);
+				System.exit(1);
+			}
+			
+			// add to startNodesNames the names split with " + "
+			for (String f : from.split("\\h\\Q+\\E\\h")){
+				start.add(f);
+			}
+			// add to endNodesNames the names split with " + "
+			for (String t : to.split("\\h\\Q+\\E\\h")){
+				end.add(t);
+			}
+			
+		}
+		
+		this.startNodeNames = start;
+		this.endNodeNames = end;
+
+	}
+
 	@Override
 	public String toString() {
 		//TODO
@@ -160,5 +228,17 @@ public class MyEdge {
 	    		&& this.startNode == otherMyEdge.getStartNode()
 	    		&& this.endNode == otherMyEdge.getEndNode()) return true;
 		return false;
+	}
+
+	public List<String> getStartNodeNames() {
+		return startNodeNames;
+	}
+
+	public List<String> getEndNodeNames() {
+		return endNodeNames;
+	}
+
+	public String getStepDirection(){
+		return stepDirection;
 	}
 }

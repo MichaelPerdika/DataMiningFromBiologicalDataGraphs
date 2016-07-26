@@ -222,6 +222,8 @@ public class BioPAXGraphAdjList {
 		String direction = getPropertyInfo(bioPathStepRDFid, "stepDirection");
 		//remove the [ and ] from LEFT_TO_RIGHT or RIGHT_TO_LEFT
 		direction = direction.substring(1,direction.length()-1);
+		// add stepConversion
+		valuesMap.put("stepDirection", new String[] {direction});
 		
 		if (direction.equals("LEFT_TO_RIGHT")){
 			valuesMap.put("startNodes", extractHttps(getPropertyInfo(stepConversionRDFid, "left")));

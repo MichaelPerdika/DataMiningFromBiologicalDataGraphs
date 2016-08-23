@@ -1,8 +1,10 @@
 package main.jung;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import edu.uci.ics.jung.graph.DirectedGraph;
 
@@ -174,20 +176,212 @@ public class ClusteringAlgorithm {
 			DirectedGraph<Integer, MyEdge> pattern2) {
 		// TODO Auto-generated method stub
 		double similarity = 0.0;
+		// get both canonical label adjacent lists
 		Map<Integer, Map<String, Map<Integer, List<String>>>> cLA1 = 
 				gQAPI.getCanonicalLabelAdjList(pattern1);
 		Map<Integer, Map<String, Map<Integer, List<String>>>> cLA2 = 
 				gQAPI.getCanonicalLabelAdjList(pattern2);
 		
-		// get the vertix combinations of pattern1 and pattern2 
+		// get all the important info between these two patterns.
+		Map<String, Map<String, List<List<String>>>> combinations = 
+				createCombinationsBetween2CLA(cLA1, cLA2);
+		
+		
+		
+		/*
+		// get the vertex combinations of pattern1 and pattern2 
 		SimilarityBetweenPatternsUTILS vertexCombinations = 
 				new SimilarityBetweenPatternsUTILS(cLA1, cLA2);
 		// 
 		List<List<List<MyEdge>>> listOfEdgePairs = new ArrayList<List<List<MyEdge>>>();
-		
+		*/
 		return similarity;
 	}
 
+	/**
+	 * This method returns all
+	 * @param cLA1
+	 * @param cLA2
+	 * @return
+	 */
+	private Map<String, Map<String, List<List<String>>>> createCombinationsBetween2CLA(
+			Map<Integer, Map<String, Map<Integer, List<String>>>> cLA1,
+			Map<Integer, Map<String, Map<Integer, List<String>>>> cLA2) {
+		// TODO Auto-generated method stub
+		
+		Map<Integer, List<String>> vComb1 = createVertexCombinations(cLA1);
+		Map<Integer, List<String>> vComb2 = createVertexCombinations(cLA2);
+		
+		Map<String, Map<String, List<List<String>>>> combinations = 
+				new HashMap<String, Map<String, List<List<String>>>>(); 
+		for (Entry<Integer, List<String>> comb1 : vComb1.entrySet()){
+			for (Entry<Integer, List<String>> comb2 : vComb2.entrySet()){
+				Map<String, List<List<String>>> temp = 
+						getListOfPossiblePairs(comb1.getValue(), comb2.getValue());
+				combinations.put(comb1.getKey()+"-"+comb2.getKey(), temp);
+				System.out.println(temp);
+				
+			}
+		}
+		return combinations;
+	}
+	
+	/**
+	 * this method gets 
+	 * @param list1
+	 * @param list2
+	 * @return
+	 */
+	private Map<String, List<List<String>>> getListOfPossiblePairs(
+			List<String> list1, List<String> list2) {
+		// TODO Auto-generated method stub
+		int len1 = list1.size();
+		int len2 = list2.size();
+		int minLen, maxLen;
+		List<String> possibilities, result;
+		String alias1, alias2;
+		if (len1 < len2){
+	        minLen = len1;
+	        maxLen = len2;
+	        //copy
+	        possibilities = DeepClone.deepClone(list2);
+	        result = list1;
+	        alias1 = "second";
+	        alias2 = "first";
+		}
+	    else{
+	        minLen = len2;
+	        maxLen = len1;
+	        //copy
+	        possibilities = DeepClone.deepClone(list1);
+	        result = list2;
+	        alias1 = "first";
+	        alias2 = "second";
+	    }
+		List<Integer> tempNumbers = new ArrayList<Integer>();
+		for (int i=0;i<minLen;i++){
+			tempNumbers.add(maxLen-i);
+		}
+		tempNumbers.add(1);
+		System.out.println("tempNumbers");
+		System.out.println(tempNumbers);
+		List<Integer> numbers = new ArrayList<Integer>();
+		for (int i=0;i<minLen;i++) 
+			numbers.add(0);
+		
+		for (int i=1;  i<tempNumbers.size();i++){
+			
+	        int mult = 1;
+	        for (int j=i;j<tempNumbers.size();j++){ 
+	        	mult = mult * tempNumbers.get(j);
+	        }
+	        numbers.set(i-1, mult);
+		}
+		
+		int maxIter = 1;
+		for (int i=0; i<tempNumbers.size()-1;i++){
+			int x = tempNumbers.get(i);
+			maxIter *= x;
+		}
+	    // pair = maxIter * minLen
+		List<String> tempPair = new ArrayList<String>();
+    	for (int j=0;j<minLen;j++){
+    		tempPair.add(null);
+    	}
+	    List<List<String>> pair = new ArrayList<List<String>>();
+	    for (int i=0;i<maxIter;i++){
+	    	pair.add(new ArrayList<String>(tempPair));
+	    }
+	    
+	    // on first call row must be 0!!! and curLen!!!
+	    // rename row to startingRow
+	    extendPairs(0, maxIter, numbers, minLen, 0, pair, possibilities);
+	    //print 
+		for (List<String> p  : pair)
+	    	System.out.println(p+" :: "+ result);
+		
+		Map<String,List<List<String>>> returnMap = new HashMap<String,List<List<String>>>();
+		returnMap.put(alias1, DeepClone.deepClone(pair));
+		List<List<String>> tempResult = new ArrayList<List<String>>();
+		for (int i=0;i<pair.size();i++)
+			tempResult.add(DeepClone.deepClone(result));
+		returnMap.put(alias2, DeepClone.deepClone(tempResult));
+		return returnMap;
+	}
+	
+	
+	private void extendPairs(int row, int maxIter, 
+			List<Integer> numbers, int minLen, int curLen, 
+			List<List<String>> pair,
+			List<String> possibilities) {
+		// TODO Auto-generated method stub
+		if (curLen != minLen){
+			
+			for (int i=0;i<maxIter;i++){
+				int index = (int)(i/numbers.get(curLen));
+				if (curLen == 0)
+					pair.get(i).set(curLen, possibilities.get(index));
+				else{
+					pair.get(row+i).set(curLen, possibilities.get(index));
+				}
+				List<String> newPosibilities = new ArrayList<String>();
+				for (int j=0; j<possibilities.size();j++)
+					if (j != index)
+	                    newPosibilities.add(possibilities.get(j));
+				if (i%numbers.get(curLen) == 0)
+					extendPairs(row + i, numbers.get(curLen), numbers, minLen, curLen +1,
+	                     pair, newPosibilities);
+			}
+	    }
+	}
+
+	/**
+	 * This method returns all the possible combinations of previous
+	 * and next vertices passing through a specific vertex.
+	 * @param cLA
+	 * @return combination of vertices
+	 */
+	private Map<Integer, List<String>> createVertexCombinations(
+			Map<Integer, Map<String, Map<Integer, List<String>>>> cLA) {
+		// TODO Auto-generated method stub
+		
+		Map<Integer, List<String>> vComb = new HashMap<Integer, List<String>>();
+		for (Entry<Integer, Map<String, Map<Integer, List<String>>>> c :cLA.entrySet()){
+
+			vComb.put(c.getKey(), new ArrayList<String>() );
+			Map<Integer, List<String>> next = c.getValue().get("next");
+			Map<Integer, List<String>> previous = c.getValue().get("previous");
+			if (next.isEmpty()){
+				List<String> tempList = new ArrayList<String>();
+				tempList.add("x");
+				next.put(-1, tempList);
+			}
+			if (previous.isEmpty()){
+				List<String> tempList = new ArrayList<String>();
+				tempList.add("x");
+				previous.put(-1, tempList);
+			}
+			for (Entry<Integer, List<String>> p : previous.entrySet()){
+				for (Entry<Integer, List<String>> n : next.entrySet()){
+					String name = p.getKey()+"-->"+c.getKey()+"-->"+n.getKey();
+					
+					vComb.get(c.getKey()).add(name);
+				}
+			}
+	
+		}
+		//System.out.println(vComb);
+		return vComb;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * this method calculates the distance matrix between every pair of graphs.
 	 * A distance metric (distMetric enum) must be passed.

@@ -44,9 +44,10 @@ public class Application {
 			// calculate the graph distances 
 			clustAlg.calculateGraphDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
 			// print the distance matrix of the patterns
+			clustAlg.printSimilarityMatrixPatterns();
 			clustAlg.printDistanceMatrixPatterns();
 			// print the distance matrix of the graphs
-			clustAlg.printDistanceMatrixGraphs();
+			//clustAlg.printDistanceMatrixGraphs();
 			
 			// linkages
 			//linkage for patterns using MIN

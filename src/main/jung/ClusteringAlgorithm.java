@@ -2,6 +2,7 @@ package main.jung;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import edu.uci.ics.jung.graph.DirectedGraph;
 
@@ -20,10 +21,12 @@ public class ClusteringAlgorithm {
 	private List<List<Double>> distanceMatrixGraphs;
 	private List<Integer> patternSizes;
 	private List<List<Double>> distanceMatrixPatterns;
+	private List<List<Double>> similarityMatrixPatterns;
 	private List<Double> linkageDistancesPatterns;
 	private List<List<String>> linkageClustersPatterns;
 	private List<Double> linkageDistancesGraphs;
 	private List<List<String>> linkageClustersGraphs;
+	private List<DirectedGraph<Integer, MyEdge>> subGraphListWhole;
 
 	/**
 	 * never to be called
@@ -42,10 +45,12 @@ public class ClusteringAlgorithm {
 		linkageClustersPatterns = new ArrayList<List<String>>();
 		linkageDistancesGraphs = new ArrayList<Double>();
 		linkageClustersGraphs = new ArrayList<List<String>>();
+		subGraphListWhole = new ArrayList<DirectedGraph<Integer, MyEdge>>();
 		
 		// for the pattern distance matrix
-		fillPatternSizes();
+		fillPatternSizesAndWholeSubGraphList();
 		initializeDistanceMatrixPatterns();
+		initializeSimilarityMatrixPatterns();
 		
 		// for the graph distance matrix
 		fillGraphSizes();
@@ -56,15 +61,17 @@ public class ClusteringAlgorithm {
 	 * this method fills patternSizes List which is the edge count 
 	 * of every subGraph/pattern and the complementary ones.
 	 */
-	private void fillPatternSizes() {
+	private void fillPatternSizesAndWholeSubGraphList() {
 		// TODO Auto-generated method stub
 		// for patterns
 		for (DirectedGraph<Integer, MyEdge> subGraph : gQAPI.getSubGraphList()){
 			patternSizes.add(subGraph.getEdgeCount());
+			subGraphListWhole.add(subGraph);
 		}
 		// for complementary patterns
 		for (DirectedGraph<Integer, MyEdge> subGraphCom : gQAPI.getSubGraphListComplementary()){
 			patternSizes.add(subGraphCom.getEdgeCount());
+			subGraphListWhole.add(subGraphCom);
 		}
 	}
 	
@@ -97,6 +104,21 @@ public class ClusteringAlgorithm {
 	/** 
 	 * initializes distanceMatrix with all null elements.
 	 */
+	private void initializeSimilarityMatrixPatterns() {
+		// TODO Auto-generated method stub
+		similarityMatrixPatterns = new ArrayList<List<Double>>();
+		for (int i=0;i<patternSizes.size();i++){
+			List<Double> rowList = new ArrayList<Double>();
+			for (int j=0;j<patternSizes.size();j++){
+				rowList.add(null);
+			}
+			similarityMatrixPatterns.add(rowList);
+		}
+	}
+	
+	/** 
+	 * initializes distanceMatrix with all null elements.
+	 */
 	private void initializeDistanceMatrixGraphs() {
 		// TODO Auto-generated method stub
 		distanceMatrixGraphs = new ArrayList<List<Double>>();
@@ -116,17 +138,56 @@ public class ClusteringAlgorithm {
 	 */
 	public void calculatePatternDistances(distMetric metric) {
 		//Iterate through all patterns.
+		// distance matrix is symmetric so find for upper right and assign
+		// the same values for the lower left
 		for(int col=0;col<distanceMatrixPatterns.size();col++){
-			for(int row=0;row<distanceMatrixPatterns.size();row++){
+			for(int row=col;row<distanceMatrixPatterns.size();row++){
 				// the main diagonal line has all zeros.
-				if (col==row) distanceMatrixPatterns.get(col).set(row, 0.0);
+				if (col==row) {
+					distanceMatrixPatterns.get(col).set(row, 0.0);
+					similarityMatrixPatterns.get(col).set(row, 0.0);
+					}
 				else{
-					distanceMatrixPatterns.get(col).set(row, calculatePatternDistancesCell(col,row, metric));
+					double dist = calculatePatternDistancesCell(col,row, metric);
+					double similarity = getSimilarityScoreBetweenTwoPatterns(
+							subGraphListWhole.get(row), subGraphListWhole.get(col));
+					// upper right
+					distanceMatrixPatterns.get(col).set(row, (1-similarity)*dist);
+					similarityMatrixPatterns.get(col).set(row, similarity);
+					// lower left
+					distanceMatrixPatterns.get(row).set(col, (1-similarity)*dist);
+					similarityMatrixPatterns.get(row).set(col, similarity);
 				}
 			}
 		}
 	}
 	
+	/**
+	 * this method gets two patterns/subGraphs and returns the similarity between them.
+	 * 0 means that the patterns have nothing in common and 1 that they are the same
+	 * @param pattern1
+	 * @param pattern2
+	 * @return the similarity between pattern1 and 2 a number from 0. to 1.
+	 */
+	public double getSimilarityScoreBetweenTwoPatterns(
+			DirectedGraph<Integer, MyEdge> pattern1,
+			DirectedGraph<Integer, MyEdge> pattern2) {
+		// TODO Auto-generated method stub
+		double similarity = 0.0;
+		Map<Integer, Map<String, Map<Integer, List<String>>>> cLA1 = 
+				gQAPI.getCanonicalLabelAdjList(pattern1);
+		Map<Integer, Map<String, Map<Integer, List<String>>>> cLA2 = 
+				gQAPI.getCanonicalLabelAdjList(pattern2);
+		
+		// get the vertix combinations of pattern1 and pattern2 
+		SimilarityBetweenPatternsUTILS vertexCombinations = 
+				new SimilarityBetweenPatternsUTILS(cLA1, cLA2);
+		// 
+		List<List<List<MyEdge>>> listOfEdgePairs = new ArrayList<List<List<MyEdge>>>();
+		
+		return similarity;
+	}
+
 	/**
 	 * this method calculates the distance matrix between every pair of graphs.
 	 * A distance metric (distMetric enum) must be passed.
@@ -262,6 +323,29 @@ public class ClusteringAlgorithm {
 			System.out.print("p"+row+"  ");
 			for (int col=0;col<distanceMatrixPatterns.get(row).size();col++){
 				System.out.print(distanceMatrixPatterns.get(row).get(col)+"  ");
+			}
+			System.out.println("");
+		}
+		
+	}
+	
+	/**
+	 * this method prints the distanceMatrixPatterns
+	 */
+	public void printSimilarityMatrixPatterns() {
+		// TODO Auto-generated method stub
+		
+		/**** print the grid******/
+		System.out.println("\nThe Similarity Matrix of the patterns");
+		System.out.print("    ");
+		for (int num=0; num<similarityMatrixPatterns.size();num++){
+			System.out.print("p"+num+"   ");
+		}
+		System.out.println("");
+		for (int row=0;row<similarityMatrixPatterns.size();row++){
+			System.out.print("p"+row+"  ");
+			for (int col=0;col<similarityMatrixPatterns.get(row).size();col++){
+				System.out.print(similarityMatrixPatterns.get(row).get(col)+"  ");
 			}
 			System.out.println("");
 		}

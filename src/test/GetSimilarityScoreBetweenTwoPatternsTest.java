@@ -63,7 +63,7 @@ public class GetSimilarityScoreBetweenTwoPatternsTest {
 		//This has to be done every time
 		gQAPI = new GraphQueriesAPI(patternList);
 		clustAlg = new ClusteringAlgorithm(gQAPI);
-		assertTrue(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2) == 1.0);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2), 1.0, 0.0001);
 	}
 
 	@Test
@@ -82,7 +82,7 @@ public class GetSimilarityScoreBetweenTwoPatternsTest {
 		//This has to be done every time
 		gQAPI = new GraphQueriesAPI(patternList);
 		clustAlg = new ClusteringAlgorithm(gQAPI);
-		assertTrue(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2) == 1.0);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2), 1.0, 0.0001);
 	}
 	
 	@Test
@@ -99,7 +99,7 @@ public class GetSimilarityScoreBetweenTwoPatternsTest {
 		//This has to be done every time
 		gQAPI = new GraphQueriesAPI(patternList);
 		clustAlg = new ClusteringAlgorithm(gQAPI);
-		assertTrue(Math.abs(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2) - 0.333333) < 0.01);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2), 0.333333, 0.0001);
 	}
 	
 	@Test
@@ -118,7 +118,7 @@ public class GetSimilarityScoreBetweenTwoPatternsTest {
 		clustAlg = new ClusteringAlgorithm(gQAPI);
 		
 		//basically ==2/3
-		assertTrue(Math.abs(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2) - 0.666666) < 0.01);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2), 0.666666, 0.0001);
 
 	}
 	
@@ -139,7 +139,7 @@ public class GetSimilarityScoreBetweenTwoPatternsTest {
 		clustAlg = new ClusteringAlgorithm(gQAPI);
 		
 		// now they are 1/4 + 1/4 + 0 + 1/4*0.5 = 0,625
-		assertTrue(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2) == 0.625);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2), 0.625, 0.0001);
 	}
 	
 	@Test
@@ -147,9 +147,9 @@ public class GetSimilarityScoreBetweenTwoPatternsTest {
 		//This has to be done every time
 		gQAPI = new GraphQueriesAPI(patternList);
 		clustAlg = new ClusteringAlgorithm(gQAPI);
-		assertTrue(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, null) == 0.0);
-		assertTrue(clustAlg.getSimilarityScoreBetweenTwoPatterns(null, pattern2) == 0.0);
-		assertTrue(clustAlg.getSimilarityScoreBetweenTwoPatterns(null, null) == 0.0);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, null), 0.0, 0.0);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(null, pattern2), 0.0, 0.0);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(null, null), 0.0, 0.0);
 	}
 }
 

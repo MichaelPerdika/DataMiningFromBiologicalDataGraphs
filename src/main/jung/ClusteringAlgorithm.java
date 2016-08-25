@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.hp.hpl.jena.sparql.function.library.max;
+
 import edu.uci.ics.jung.graph.DirectedGraph;
 
 enum distMetric {
@@ -175,6 +177,9 @@ public class ClusteringAlgorithm {
 			DirectedGraph<Integer, MyEdge> pattern1,
 			DirectedGraph<Integer, MyEdge> pattern2) {
 		// TODO Auto-generated method stub
+		
+		if (pattern1 == null || pattern2 == null)
+			return 0.0;
 		double similarity = 0.0;
 		// get both canonical label adjacent lists
 		Map<Integer, Map<String, Map<Integer, List<String>>>> cLA1 = 
@@ -185,17 +190,277 @@ public class ClusteringAlgorithm {
 		// get all the important info between these two patterns.
 		Map<String, Map<String, List<List<String>>>> combinations = 
 				createCombinationsBetween2CLA(cLA1, cLA2);
+		System.out.println("combinations are: "+combinations);
 		
-		
-		
-		/*
-		// get the vertex combinations of pattern1 and pattern2 
-		SimilarityBetweenPatternsUTILS vertexCombinations = 
-				new SimilarityBetweenPatternsUTILS(cLA1, cLA2);
-		// 
-		List<List<List<MyEdge>>> listOfEdgePairs = new ArrayList<List<List<MyEdge>>>();
-		*/
+		List<List<String[]>> edgePairList = new ArrayList<List<String[]>>();
+	    
+		for (Integer k1 : cLA1.keySet()){
+	        for (Integer k2 : cLA2.keySet()){
+	            edgePairList.add(getEdgePairList(k1, k2, combinations));
+	        }
+	    }
+		 
+		int maxNum = Math.max(pattern1.getEdgeCount(), pattern2.getEdgeCount());
+		similarity = getSimilarity(edgePairList, maxNum);
+		System.out.println("similarity is: "+similarity);
 		return similarity;
+	}
+
+	/**
+	 * this method returns the similarity given an edgePairList to compare
+	 * @param edgePairList
+	 * @param maxNum
+	 * @return
+	 */
+	private double getSimilarity(List<List<String[]>> edgePairList, int maxNum) {
+		// TODO Auto-generated method stub
+		double maxSimilarity = 0.;
+	    // max equals the getEdgeCount from graph
+	    System.out.println("final edgePairList:");
+	    //for e1 in edgePairList:
+	    for (int i=0; i<edgePairList.size();i++){
+	        List<String[]> listOfPairs = edgePairList.get(i);
+	        double tempSimilarity = 0;
+	        //for e2 in listOfPairs:
+	    	for (int j=0; j<listOfPairs.size();j++){
+	    		String[] pair = listOfPairs.get(j);
+	            System.out.println( "\n"+pair[0] + pair[1]);
+	            if (pair[0].equals(pair[1]))
+	                tempSimilarity += 1./maxNum;
+	    	}
+	        if (maxSimilarity < tempSimilarity)
+	            maxSimilarity = tempSimilarity;
+	        if (Math.abs(maxSimilarity-1) < 0.0001)
+	            return maxSimilarity;
+	    }
+	    return maxSimilarity;
+	}
+
+	/**
+	 * this method returns a new edgePairList to be checked later on.
+	 * @param vertex1 id of first vertex
+	 * @param vertex2 id of second vertex
+	 * @param combinations a Map that has all the appropriate info.
+	 * @return
+	 */
+	private List<String[]> getEdgePairList(Integer vertex1,	Integer vertex2,
+			Map<String, Map<String, List<List<String>>>> combinations) {
+		// TODO Auto-generated method stub
+		Map<String, Map<String, List<List<String>>>> curCombinations = 
+				DeepClone.deepClone(combinations);
+		List<String[]> edgePairList = new ArrayList<String[]>();
+	    List<List<String>> firstList = 
+	    		DeepClone.deepClone(curCombinations.get(vertex1+"-"+vertex2).get("first"));
+	    List<List<String>> secondList = 
+	    		DeepClone.deepClone(curCombinations.get(vertex1+"-"+vertex2).get("second"));
+	    List<String> visitedVertices = new ArrayList<String>();
+	    int i = 0;
+	    int j = 0;
+	    while (true){
+	        List<String> firstPairList, secondPairList;
+			try{
+	            firstPairList = firstList.get(i);
+	            secondPairList = secondList.get(i);
+	        }
+	        catch(IndexOutOfBoundsException e){
+	            //out of bounds then return from loop
+	            break;
+	        }
+	        while (true){
+	        	String f,s;
+	            try{
+	                f = firstPairList.get(j);
+	                s = secondPairList.get(j);
+	            }
+	            catch(IndexOutOfBoundsException e){
+	                //out of bounds then return from loop
+	                break;
+	            }
+	            
+	            //real code here
+	            System.out.println(firstPairList);
+	            System.out.println(secondPairList);
+	            String[] beforeV =  { f.split("-->")[0], s.split("-->")[0] };
+	            String[] afterV = { f.split("-->")[2], s.split("-->")[2] };
+	            String[] curV = { f.split("-->")[1], s.split("-->")[1] };
+	            //before vertices
+	            System.out.println("suka"+beforeV[0]);
+	            if ( !(beforeV[0].equals("-1") || beforeV[1].equals("-1")) && 
+	            		(!visitedVertices.contains(beforeV[0]+"-"+beforeV[1])) ){
+	            	System.out.println("gotcha"+f+s);
+	                List<List<List<String>>> newCheckings = 
+	                		checkBefore(beforeV, curV, combinations, edgePairList);
+	                appendNewCheckList(newCheckings, firstList, secondList, firstPairList, secondPairList);
+	            }
+	            //after vertices
+	            System.out.println("suka2"+afterV[0]);
+	            if (!(afterV[0].equals("-1") || afterV[1].equals("-1")) && 
+	            		(!visitedVertices.contains(afterV[0]+"-"+afterV[1])) ){
+	            	List<List<List<String>>> newCheckings = 
+	            			checkAfter(afterV, curV, combinations, edgePairList);
+	            	appendNewCheckList(newCheckings, firstList, secondList, firstPairList, secondPairList);
+	            }
+	            if (!visitedVertices.contains(curV[0]+"-"+curV[1])) 
+	            	visitedVertices.add(curV[0]+"-"+curV[1]);
+	            j++;
+	        }
+	        i++;
+	    }
+	    System.out.println("finally");
+	    for (int k=0;i<edgePairList.size();i++)
+	    	for (int l=0;l<edgePairList.get(k).length;l++) 
+	    		System.out.println(edgePairList.get(k)[l]);
+	    return edgePairList;
+	}
+
+	private List<List<List<String>>> checkAfter(String[] afterV, String[] currentV,
+			Map<String, Map<String, List<List<String>>>> combinations, List<String[]> edgePairList) {
+		// TODO Auto-generated method stub
+		System.out.println("mjk2"+combinations);
+		System.out.println(afterV[0]+"-"+afterV[1]);
+		List<List<String>> firstList = combinations.get(afterV[0]+"-"+afterV[1]).get("first");
+	    List<List<String>> secondList = combinations.get(afterV[0]+"-"+afterV[1]).get("second"); 
+	    List<List<String>> edges1 = combinations.get(afterV[0]+"-"+afterV[1]).get("edgesFirst");
+	    List<List<String>> edges2 = combinations.get(afterV[0]+"-"+afterV[1]).get("edgesSecond");   
+	    List<List<String[]>> edgeList = new ArrayList<List<String[]>>();
+	    List<List<String>> newCheck1 = new ArrayList<List<String>>();
+	    List<List<String>> newCheck2 = new ArrayList<List<String>>();
+	    
+	    for (int i=0;i<firstList.size();i++){
+	    	List<String> fL = firstList.get(i);
+	    	List<String> sL = secondList.get(i);
+	    	List<String> edge1 = edges1.get(i);
+	    	List<String> edge2 = edges2.get(i);
+	    	
+	        List<String[]> edgeList1 = new ArrayList<String[]>();
+	        List<String> newCheck11 = new ArrayList<String>();
+	        List<String> newCheck22 = new ArrayList<String>();
+	        //for f, s, e1, e2 in zip(fL, sL, edge1, edge2):
+	        for (int j=0;j<fL.size();j++){
+	        	String f = fL.get(j);
+	        	String s = sL.get(j);
+	        	String e1 = edge1.get(j);
+	        	String e2 = edge2.get(j);
+	        	
+	        	String[] beforeV = {f.split("-->")[0], s.split("-->")[0]};
+	            if ( (beforeV[0].equals(currentV[0])) && (beforeV[1].equals(currentV[1])) ){
+	            	String[] temp = {e1.split("-->")[0], e2.split("-->")[0]};
+	            	edgeList1.add(temp);
+					for (int k=0; k<fL.size();k++) newCheck11.add(fL.get(k));
+					for (int k=0; k<sL.size();k++) newCheck22.add(sL.get(k));
+	            }
+	        }
+	        if (edgeList1.size() > 0){
+	            edgeList.add(edgeList1);
+	            newCheck1.add(newCheck11);
+	            newCheck2.add(newCheck22);
+	        }
+	    }
+	    // current edgeList is finished now. If it is size() = 1 then append as it is.
+	    // if size() >1 then do deep copy of edgePairList and then append.
+	    if (edgeList.size() == 1){
+            for (int k=0; k< edgeList.get(0).size();k++){
+	        	String[] pair = edgeList.get(0).get(k);
+	        	edgePairList.add(pair);
+	        }
+	    }
+	    else{
+	        System.out.println("hello there motherfucker checkAfter");
+	        System.out.println(edgeList);
+	    }
+	    List<List<List<String>>> newCheckings = new ArrayList<List<List<String>>>();
+		newCheckings.add(newCheck1);
+	    newCheckings.add(newCheck2);
+	    return newCheckings;
+	}
+
+	private void appendNewCheckList(List<List<List<String>>> newCheckings, 
+			List<List<String>> firstList,
+			List<List<String>> secondList, 
+			List<String> firstPairList, 
+			List<String> secondPairList) {
+		// TODO Auto-generated method stub
+		List<List<String>> newCheck1 = newCheckings.get(0);
+		List<List<String>> newCheck2 = newCheckings.get(1);
+		if (newCheck1.size() == 1) {
+	        for (int i=0;i<newCheck1.get(0).size();i++){	
+	            firstPairList.add(newCheck1.get(0).get(i)); //TODO why get(0) here???
+	            secondPairList.add(newCheck2.get(0).get(i));
+	        }
+		}
+	    else
+	        System.out.println("error in appendNewCheckList");
+	}
+
+	/**
+	 * this method returns a newCheck list that is going to be added to the 
+	 * outer loop (while) that checks for valid combinations.
+	 * @param beforeV
+	 * @param currentV
+	 * @param combinations
+	 * @param edgePairList
+	 * @return a new list to be appended
+	 */
+	private List<List<List<String>>> checkBefore(String[] beforeV, String[] currentV, 
+			Map<String, Map<String, List<List<String>>>> combinations,
+			List<String[]> edgePairList) {
+		
+		System.out.println("mjk"+combinations);
+		System.out.println(beforeV[0]+"-"+beforeV[1]);
+		List<List<String>> firstList = combinations.get(beforeV[0]+"-"+beforeV[1]).get("first");
+	    List<List<String>> secondList = combinations.get(beforeV[0]+"-"+beforeV[1]).get("second");
+	    List<List<String>> edges1 = combinations.get(beforeV[0]+"-"+beforeV[1]).get("edgesFirst");
+	    List<List<String>> edges2 = combinations.get(beforeV[0]+"-"+beforeV[1]).get("edgesSecond");  
+	    List<List<String[]>> edgeList = new ArrayList<List<String[]>>();
+	    List<List<String>> newCheck1 = new ArrayList<List<String>>();
+	    List<List<String>> newCheck2 = new ArrayList<List<String>>();
+	    for (int i=0;i<firstList.size();i++){
+	    	List<String> fL = firstList.get(i);
+	    	List<String> sL = secondList.get(i);
+	    	List<String> edge1 = edges1.get(i);
+	    	List<String> edge2 = edges2.get(i);
+	    	
+	        List<String[]> edgeList1 = new ArrayList<String[]>();
+	        List<String> newCheck11 = new ArrayList<String>();
+	        List<String> newCheck22 = new ArrayList<String>();
+	        for (int j=0;j<fL.size();j++){
+	        	String f = fL.get(j);
+	        	String s = sL.get(j);
+	        	String e1 = edge1.get(j);
+	        	String e2 = edge2.get(j);
+	        	
+	        	String[] afterV = {f.split("-->")[2], s.split("-->")[2]};
+	            if ( (afterV[0].equals(currentV[0])) && ( afterV[1].equals(currentV[1])) ){
+	            	
+	            	String[] temp = {e1.split("-->")[1], e2.split("-->")[1]};
+	            	edgeList1.add(temp);
+					for (int k=0; k<fL.size();k++) newCheck11.add(fL.get(k));
+					for (int k=0; k<sL.size();k++) newCheck22.add(sL.get(k));
+	            }
+	        }
+	        
+	        if (edgeList1.size() > 0){
+	            edgeList.add(edgeList1);
+	            newCheck1.add(newCheck11);
+	            newCheck2.add(newCheck22);
+	        }
+	    }
+	    // current edgeList is finished now. If it is size() = 1 then append as it is.
+	    // if size() >1 then do deep copy of edgePairList and then append.
+	    if (edgeList.size() == 1){
+	        for (int k=0; k< edgeList.get(0).size();k++){
+	        	String[] pair = edgeList.get(0).get(k);
+	        	edgePairList.add(pair);
+	        }
+	    }
+	    else{
+	        System.out.println("hello there motherfucker from checkBefore");
+	        System.out.println(edgeList);
+	    }
+	    List<List<List<String>>> newCheckings = new ArrayList<List<List<String>>>();
+		newCheckings.add(newCheck1);
+	    newCheckings.add(newCheck2);
+	    return newCheckings;
 	}
 
 	/**
@@ -219,10 +484,64 @@ public class ClusteringAlgorithm {
 				Map<String, List<List<String>>> temp = 
 						getListOfPossiblePairs(comb1.getValue(), comb2.getValue());
 				combinations.put(comb1.getKey()+"-"+comb2.getKey(), temp);
-				System.out.println(temp);
+				
+				List<List<String>> firstList = 
+						combinations.get(comb1.getKey()+"-"+comb2.getKey()).get("first");
+				List<List<String>> secondList = 
+						combinations.get(comb1.getKey()+"-"+comb2.getKey()).get("second");
+	            List<List<String>> edgesFirst = new ArrayList<List<String>>();
+	            List<List<String>> edgesSecond = new ArrayList<List<String>>();
+	            for (int i=0; i< firstList.size();i++){
+	            	List<String> first = firstList.get(i);
+	            	List<String> second = secondList.get(i);
+	            	
+	            	List<String> curEdge1 = new ArrayList<String>();
+	            	List<String> curEdge2 = new ArrayList<String>();
+	                for (int j=0; j<first.size();j++){
+	                	String f = first.get(j);
+	                	String s = second.get(j);
+	                	
+	                    String[] beforeV = {f.split("-->")[0], s.split("-->")[0]};
+	                    String[] afterV = {f.split("-->")[2], s.split("-->")[2]};
+	                    String[] prevName = new String[2], nextName = new String[2];
+	                    if ( !( (cLA1.get(comb1.getKey()).get("previous").containsKey(-1)) || 
+	                    		(cLA2.get(comb2.getKey()).get("previous").containsKey(-1))) ){ 
+	                    	prevName[0] = cLA1.get(comb1.getKey()).get("previous").get(Integer.parseInt(beforeV[0])).toString()+"-->";
+	                    	prevName[1] = cLA2.get(comb2.getKey()).get("previous").get(Integer.parseInt(beforeV[1])).toString()+"-->";
+	                    }
+	                    else{ 
+	                    	prevName[0] = "x-->";
+	                    	prevName[1] = "x-->";
+	                    }
+	                    if (! ((cLA1.get(comb1.getKey()).get("next").containsKey(-1)) || 
+	                    	   (cLA2.get(comb2.getKey()).get("next").containsKey(-1))) ){
+	                        nextName[0] = cLA1.get(comb1.getKey()).get("next").get(Integer.parseInt(afterV[0])).toString(); 
+	                        nextName[1] = cLA2.get(comb2.getKey()).get("next").get(Integer.parseInt(afterV[1])).toString();
+	                       }
+	                    else{
+	                        nextName[0] = "x";
+	                        nextName[1] = "x";
+	                    }
+	                    curEdge1.add(prevName[0]+nextName[0]);
+	                    curEdge2.add(prevName[1]+nextName[1]);
+	                }
+	                edgesFirst.add(curEdge1);
+	                edgesSecond.add(curEdge2);
+	            }
+	            combinations.get(comb1.getKey()+"-"+comb2.getKey()).put("edgesFirst", edgesFirst);
+	            combinations.get(comb1.getKey()+"-"+comb2.getKey()).put("edgesSecond", edgesSecond);
 				
 			}
 		}
+		
+	    for (Entry<String, Map<String, List<List<String>>>> c : 
+	    	combinations.entrySet()){
+	        System.out.println(c.getKey());
+	        System.out.println("  first :" + c.getValue().get("first"));
+	        System.out.println("  second:" + c.getValue().get("second"));
+	        System.out.println("  edgesFirst :" + c.getValue().get("edgesFirst"));
+	        System.out.println("  edgesFirst :" + c.getValue().get("edgesFirst"));
+	    }
 		return combinations;
 	}
 	
@@ -263,8 +582,8 @@ public class ClusteringAlgorithm {
 			tempNumbers.add(maxLen-i);
 		}
 		tempNumbers.add(1);
-		System.out.println("tempNumbers");
-		System.out.println(tempNumbers);
+		//System.out.println("tempNumbers");
+		//System.out.println(tempNumbers);
 		List<Integer> numbers = new ArrayList<Integer>();
 		for (int i=0;i<minLen;i++) 
 			numbers.add(0);
@@ -296,9 +615,8 @@ public class ClusteringAlgorithm {
 	    // on first call row must be 0!!! and curLen!!!
 	    // rename row to startingRow
 	    extendPairs(0, maxIter, numbers, minLen, 0, pair, possibilities);
-	    //print 
-		for (List<String> p  : pair)
-	    	System.out.println(p+" :: "+ result);
+		//for (List<String> p  : pair)
+	    	//System.out.println(p+" :: "+ result);
 		
 		Map<String,List<List<String>>> returnMap = new HashMap<String,List<List<String>>>();
 		returnMap.put(alias1, DeepClone.deepClone(pair));

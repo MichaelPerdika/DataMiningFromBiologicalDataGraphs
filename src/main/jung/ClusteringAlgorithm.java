@@ -896,7 +896,8 @@ public class ClusteringAlgorithm {
 		for (int row=0;row<distanceMatrixPatterns.size();row++){
 			System.out.print("p"+row+"  ");
 			for (int col=0;col<distanceMatrixPatterns.get(row).size();col++){
-				System.out.print(distanceMatrixPatterns.get(row).get(col)+"  ");
+				//System.out.print(distanceMatrixPatterns.get(row).get(col)+"  ");
+				System.out.printf("%.1f  ", distanceMatrixPatterns.get(row).get(col));
 			}
 			System.out.println("");
 		}
@@ -919,7 +920,8 @@ public class ClusteringAlgorithm {
 		for (int row=0;row<similarityMatrixPatterns.size();row++){
 			System.out.print("p"+row+"  ");
 			for (int col=0;col<similarityMatrixPatterns.get(row).size();col++){
-				System.out.print(similarityMatrixPatterns.get(row).get(col)+"  ");
+				//System.out.print(similarityMatrixPatterns.get(row).get(col)+"  ");
+				System.out.printf("%.1f  ", similarityMatrixPatterns.get(row).get(col));
 			}
 			System.out.println("");
 		}
@@ -1114,7 +1116,10 @@ public class ClusteringAlgorithm {
 		System.out.println("       Distance ::         Clusters");
 		for (int i=0;i<linkageDistances.size();i++){
 			System.out.print("lvl"+i+"-->  ");
-			System.out.println(linkageDistances.get(i)+" :: "+linkageClusters.get(i));
+			//System.out.println(linkageDistances.get(i)+" :: "+linkageClusters.get(i));
+			System.out.printf("%.1f :: ", linkageDistances.get(i));
+			System.out.println(linkageClusters.get(i));
+
 		}
 		
 	}

@@ -35,6 +35,7 @@ public class GraphQueriesAPI {
 	private List<List<Integer>> patternTable;
 	private List<List<Integer>> patternTableComplementary;
 	private List<List<Integer>> patternTableWhole;
+	private double globalThreshold;
 	
 	/**
 	 * empty constructor initialize to null 
@@ -46,6 +47,7 @@ public class GraphQueriesAPI {
 		setPatternTable(new ArrayList<List<Integer>>());
 		setPatternTableComplementary(new ArrayList<List<Integer>>());
 		setPatternTableWhole(new ArrayList<List<Integer>>());
+		setGlobalThreshold(1.0);
 	}
 	
 	/**
@@ -60,6 +62,7 @@ public class GraphQueriesAPI {
 		setPatternTable(new ArrayList<List<Integer>>());
 		setPatternTableComplementary(new ArrayList<List<Integer>>());
 		setPatternTableWhole(new ArrayList<List<Integer>>());
+		setGlobalThreshold(1.0);
 	}
 
 	/**
@@ -69,6 +72,7 @@ public class GraphQueriesAPI {
 	 * define if edge names (ECNumbers) are equal/similar
 	 */
 	public void findPatternsInGraphs(double threshold){
+		setGlobalThreshold(threshold);
 		//TODO add min_support sigma = {0, 1} used in pattern table
 		//TODO and add tolerance for "graph matching" for example 2.2.2.2 = 2.2.1.1. with 50%
 		if (this.graphList.size() < 2){
@@ -115,7 +119,7 @@ public class GraphQueriesAPI {
 	}
 	
 	/**
-	 * this method concatinates pattern table and the complementary to a whole pattern table
+	 * this method concatenates pattern table and the complementary to a whole pattern table
 	 */
 	private void fillWholePatternTable() {
 		setPatternTableWhole(DeepClone.deepClone(getPatternTable()));
@@ -1078,6 +1082,27 @@ public class GraphQueriesAPI {
 	}
 	
 	/**
+	 * there are still some errors when i give two empty strings
+	 * @param myEdge
+	 * @return
+	 */
+	public static List<List<String>> parseEdgeNames(String[] eCNumbers){
+		ArrayList<List<String>> listOfStrings = 
+				new ArrayList<List<String>>();
+		//iterate through the ECNumbers
+		for ( int i=0 ;i<eCNumbers.length;i++){
+			ArrayList<String> tempList = new ArrayList<String>();
+			String[] subECNum = eCNumbers[i].split(Pattern.quote(".")); // Split on period.
+			//iterate inside an ECNumber
+			for (int j=0;j<subECNum.length;j++){
+				tempList.add(subECNum[j]);
+			}
+			listOfStrings.add(tempList);
+		}
+		return listOfStrings;
+	}
+	
+	/**
 	 * static method that can visualize a List of Directed graphs
 	 * @param graphList
 	 */
@@ -1240,6 +1265,14 @@ public class GraphQueriesAPI {
 
 	public void setPatternTableWhole(List<List<Integer>> patternTableWhole) {
 		this.patternTableWhole = patternTableWhole;
+	}
+
+	public double getGlobalThreshold() {
+		return globalThreshold;
+	}
+
+	public void setGlobalThreshold(double globalThreshold) {
+		this.globalThreshold = globalThreshold;
 	}
 
 }

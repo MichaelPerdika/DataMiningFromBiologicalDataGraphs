@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.hp.hpl.jena.sparql.function.library.max;
-
 import edu.uci.ics.jung.graph.DirectedGraph;
 
 enum distMetric {
@@ -42,7 +40,7 @@ public class ClusteringAlgorithm {
 
 	public ClusteringAlgorithm(GraphQueriesAPI graphQueries) {
 		// TODO Auto-generated constructor stub
-		this.gQAPI = graphQueries;
+		gQAPI = graphQueries;
 		patternSizes = new ArrayList<Integer>();
 		graphSizes = new ArrayList<Integer>();
 		linkageDistancesPatterns = new ArrayList<Double>();
@@ -190,7 +188,7 @@ public class ClusteringAlgorithm {
 		// get all the important info between these two patterns.
 		Map<String, Map<String, List<List<String>>>> combinations = 
 				createCombinationsBetween2CLA(cLA1, cLA2);
-		System.out.println("combinations are: "+combinations);
+		//System.out.println("combinations are: "+combinations);
 		
 		List<List<String[]>> edgePairList = new ArrayList<List<String[]>>();
 	    
@@ -202,7 +200,7 @@ public class ClusteringAlgorithm {
 		 
 		int maxNum = Math.max(pattern1.getEdgeCount(), pattern2.getEdgeCount());
 		similarity = getSimilarity(edgePairList, maxNum);
-		System.out.println("similarity is: "+similarity);
+		//System.out.println("similarity is: "+similarity);
 		return similarity;
 	}
 
@@ -216,17 +214,19 @@ public class ClusteringAlgorithm {
 		// TODO Auto-generated method stub
 		double maxSimilarity = 0.;
 	    // max equals the getEdgeCount from graph
-	    System.out.println("final edgePairList:");
-	    //for e1 in edgePairList:
+	    //System.out.println("final edgePairList:");
 	    for (int i=0; i<edgePairList.size();i++){
 	        List<String[]> listOfPairs = edgePairList.get(i);
 	        double tempSimilarity = 0;
-	        //for e2 in listOfPairs:
+	        System.out.println("New PairList");
 	    	for (int j=0; j<listOfPairs.size();j++){
 	    		String[] pair = listOfPairs.get(j);
-	            System.out.println( "\n"+pair[0] + pair[1]);
-	            if (pair[0].equals(pair[1]))
-	                tempSimilarity += 1./maxNum;
+	            System.out.println( pair[0] + pair[1]);
+	            
+	            System.out.println("parsed : "+ getPairScore(pair[0], pair[1]));
+	            double tempPairScore = getPairScore(pair[0], pair[1]);
+	            
+	            tempSimilarity += tempPairScore/maxNum;
 	    	}
 	        if (maxSimilarity < tempSimilarity)
 	            maxSimilarity = tempSimilarity;
@@ -234,6 +234,64 @@ public class ClusteringAlgorithm {
 	            return maxSimilarity;
 	    }
 	    return maxSimilarity;
+	}
+
+	/**
+	 * this method takes two edge names and it checks how similar they are
+	 * @param pair1
+	 * @param pair2
+	 * @return score between 0.0 and 1.0
+	 */
+	private double getPairScore(String pair1, String pair2) {
+		// TODO Auto-generated method stub
+		String[] pai1 = pair1.substring(1, pair1.length() - 1).split(" ");
+		String[] pai2 = pair2.substring(1, pair2.length() - 1).split(" ");
+		System.out.print(pai1[0]+ ": "); System.out.println(pai1.length);
+		System.out.print(pai2[0]+ ": "); System.out.println(pai2.length);
+		List<List<String>> e1 = GraphQueriesAPI.parseEdgeNames(pai1);
+		List<List<String>> e2 = GraphQueriesAPI.parseEdgeNames(pai2);
+		
+		if ((e1 == null && e2 == null) || 
+				(e1.size()==0 && e2.size()==0) ){
+	        return 0.0;
+			
+	    }
+
+		if((e1 == null && e2 != null) 
+			      || (e1 != null && e2 == null)
+			      || (e1.size()==0 && e2.size() !=0)
+			      || (e1.size()!=0 && e2.size() ==0)){
+			        return 0.0;
+		}
+		
+		double maxScore = -1, avgScore = 0;
+		String[] comName = new String[e1.size()];
+		for (int i=0;i<e1.size();i++){
+			maxScore = -1;
+			String tempComName = "";
+			for (int j=0;j<e2.size();j++){
+				/*******this is the case of "" == ""
+				 * it is unequal for now but in the future fix this.
+				 */
+				if (e1.get(i).get(0).isEmpty() && e2.get(j).get(0).isEmpty()) 
+					return 0.0;
+				/******/
+				double tempScore = GraphQueriesAPI.getParsedEdgeScore(e1.get(i), e2.get(j));
+				String tempName = GraphQueriesAPI.getParsedEdgeName(e1.get(i), e2.get(j));
+				if (maxScore < tempScore){
+					maxScore = tempScore;
+					tempComName = tempName;
+				}
+			}
+			avgScore += maxScore;
+			comName[i] = tempComName;
+		}
+		if (e1.size()==0 && e2.size() !=0)
+			return 0.0;
+		else
+			avgScore = avgScore/e1.size();
+		
+		return avgScore;
 	}
 
 	/**
@@ -278,22 +336,22 @@ public class ClusteringAlgorithm {
 	            }
 	            
 	            //real code here
-	            System.out.println(firstPairList);
-	            System.out.println(secondPairList);
+	            //System.out.println(firstPairList);
+	            //System.out.println(secondPairList);
 	            String[] beforeV =  { f.split("-->")[0], s.split("-->")[0] };
 	            String[] afterV = { f.split("-->")[2], s.split("-->")[2] };
 	            String[] curV = { f.split("-->")[1], s.split("-->")[1] };
 	            //before vertices
-	            System.out.println("suka"+beforeV[0]);
+	            //System.out.println("suka"+beforeV[0]);
 	            if ( !(beforeV[0].equals("-1") || beforeV[1].equals("-1")) && 
 	            		(!visitedVertices.contains(beforeV[0]+"-"+beforeV[1])) ){
-	            	System.out.println("gotcha"+f+s);
+	            	//System.out.println("gotcha"+f+s);
 	                List<List<List<String>>> newCheckings = 
 	                		checkBefore(beforeV, curV, combinations, edgePairList);
 	                appendNewCheckList(newCheckings, firstList, secondList, firstPairList, secondPairList);
 	            }
 	            //after vertices
-	            System.out.println("suka2"+afterV[0]);
+	            //System.out.println("suka2"+afterV[0]);
 	            if (!(afterV[0].equals("-1") || afterV[1].equals("-1")) && 
 	            		(!visitedVertices.contains(afterV[0]+"-"+afterV[1])) ){
 	            	List<List<List<String>>> newCheckings = 
@@ -306,18 +364,20 @@ public class ClusteringAlgorithm {
 	        }
 	        i++;
 	    }
-	    System.out.println("finally");
+	    //System.out.println("finally");
+	    /*
 	    for (int k=0;i<edgePairList.size();i++)
 	    	for (int l=0;l<edgePairList.get(k).length;l++) 
 	    		System.out.println(edgePairList.get(k)[l]);
+	    */
 	    return edgePairList;
 	}
 
 	private List<List<List<String>>> checkAfter(String[] afterV, String[] currentV,
 			Map<String, Map<String, List<List<String>>>> combinations, List<String[]> edgePairList) {
 		// TODO Auto-generated method stub
-		System.out.println("mjk2"+combinations);
-		System.out.println(afterV[0]+"-"+afterV[1]);
+		//System.out.println("mjk2"+combinations);
+		//System.out.println(afterV[0]+"-"+afterV[1]);
 		List<List<String>> firstList = combinations.get(afterV[0]+"-"+afterV[1]).get("first");
 	    List<List<String>> secondList = combinations.get(afterV[0]+"-"+afterV[1]).get("second"); 
 	    List<List<String>> edges1 = combinations.get(afterV[0]+"-"+afterV[1]).get("edgesFirst");
@@ -405,8 +465,8 @@ public class ClusteringAlgorithm {
 			Map<String, Map<String, List<List<String>>>> combinations,
 			List<String[]> edgePairList) {
 		
-		System.out.println("mjk"+combinations);
-		System.out.println(beforeV[0]+"-"+beforeV[1]);
+		//System.out.println("mjk"+combinations);
+		//System.out.println(beforeV[0]+"-"+beforeV[1]);
 		List<List<String>> firstList = combinations.get(beforeV[0]+"-"+beforeV[1]).get("first");
 	    List<List<String>> secondList = combinations.get(beforeV[0]+"-"+beforeV[1]).get("second");
 	    List<List<String>> edges1 = combinations.get(beforeV[0]+"-"+beforeV[1]).get("edgesFirst");
@@ -534,6 +594,7 @@ public class ClusteringAlgorithm {
 			}
 		}
 		
+		/*
 	    for (Entry<String, Map<String, List<List<String>>>> c : 
 	    	combinations.entrySet()){
 	        System.out.println(c.getKey());
@@ -542,6 +603,7 @@ public class ClusteringAlgorithm {
 	        System.out.println("  edgesFirst :" + c.getValue().get("edgesFirst"));
 	        System.out.println("  edgesFirst :" + c.getValue().get("edgesFirst"));
 	    }
+	    */
 		return combinations;
 	}
 	

@@ -218,12 +218,12 @@ public class ClusteringAlgorithm {
 	    for (int i=0; i<edgePairList.size();i++){
 	        List<String[]> listOfPairs = edgePairList.get(i);
 	        double tempSimilarity = 0;
-	        System.out.println("New PairList");
+	        //System.out.println("New PairList");
 	    	for (int j=0; j<listOfPairs.size();j++){
 	    		String[] pair = listOfPairs.get(j);
-	            System.out.println( pair[0] + pair[1]);
+	            //System.out.println( pair[0] + pair[1]);
 	            
-	            System.out.println("parsed : "+ getPairScore(pair[0], pair[1]));
+	            //System.out.println("parsed : "+ getPairScore(pair[0], pair[1]));
 	            double tempPairScore = getPairScore(pair[0], pair[1]);
 	            
 	            tempSimilarity += tempPairScore/maxNum;
@@ -246,8 +246,8 @@ public class ClusteringAlgorithm {
 		// TODO Auto-generated method stub
 		String[] pai1 = pair1.substring(1, pair1.length() - 1).split(" ");
 		String[] pai2 = pair2.substring(1, pair2.length() - 1).split(" ");
-		System.out.print(pai1[0]+ ": "); System.out.println(pai1.length);
-		System.out.print(pai2[0]+ ": "); System.out.println(pai2.length);
+		//System.out.print(pai1[0]+ ": "); System.out.println(pai1.length);
+		//System.out.print(pai2[0]+ ": "); System.out.println(pai2.length);
 		List<List<String>> e1 = GraphQueriesAPI.parseEdgeNames(pai1);
 		List<List<String>> e2 = GraphQueriesAPI.parseEdgeNames(pai2);
 		

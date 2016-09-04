@@ -41,8 +41,8 @@ public class GetParsedEdgeScoreTest {
 	public void oneNameEqual50() {
 		edge1 = new MyEdge("2.3.3.1", 0, 1);
 		edge2 = new MyEdge("2.3.5.5", 0, 1);
-		List<List<String>> e1 = GraphQueriesAPI.parseEdgeNames(edge1);
-		List<List<String>> e2 = GraphQueriesAPI.parseEdgeNames(edge2);
+		List<List<String>> e1 = gQueris.parseEdgeNames(edge1);
+		List<List<String>> e2 = gQueris.parseEdgeNames(edge2);
 		assertFalse(GraphQueriesAPI.getParsedEdgeScore(e1.get(0), e2.get(0)) >= 0.51);
 		assertTrue(GraphQueriesAPI.getParsedEdgeScore(e1.get(0), e2.get(0)) >= 0.50);
 	}

@@ -25,14 +25,14 @@ public class Application {
 			graphQueries.findPatternsInGraphs(1.0);
 			// print the pattern table
 			graphQueries.printApplicationOutput();
-			/*
+			
 			//visualize graphList
 			graphQueries.visualizeGraphList();
 			//visualize subGraphList
 			graphQueries.visualizeSubGraphList();
 			//visualize subGraphListComplementary
 			graphQueries.visualizeComplementarySubGraphList();
-			*/
+			
 			
 			
 			// calculate the hierarchical clustering
@@ -58,6 +58,7 @@ public class Application {
 			clustAlg.linkageGraph(linkMetric.MIN);
 			// print clusters for Graphs
 			clustAlg.printGraphClusters();
+			
 			/**
 			 * expected results:
 			 * tolerance 100%:

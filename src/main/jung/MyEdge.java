@@ -241,4 +241,8 @@ public class MyEdge {
 	public String getStepDirection(){
 		return stepDirection;
 	}
+	
+	public void setECNumber(String name){
+		eCNumber = new String[] {name};;
+	}
 }

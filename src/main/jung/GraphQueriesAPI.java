@@ -36,6 +36,7 @@ public class GraphQueriesAPI {
 	private List<List<Integer>> patternTableComplementary;
 	private List<List<Integer>> patternTableWhole;
 	private double globalThreshold;
+	private Map<String, String> emptyECNumbersMap;
 	
 	/**
 	 * empty constructor initialize to null 
@@ -48,6 +49,7 @@ public class GraphQueriesAPI {
 		setPatternTableComplementary(new ArrayList<List<Integer>>());
 		setPatternTableWhole(new ArrayList<List<Integer>>());
 		setGlobalThreshold(1.0);
+		setEmptyECNumbersMap(new HashMap<String, String>());
 	}
 	
 	/**
@@ -63,6 +65,7 @@ public class GraphQueriesAPI {
 		setPatternTableComplementary(new ArrayList<List<Integer>>());
 		setPatternTableWhole(new ArrayList<List<Integer>>());
 		setGlobalThreshold(1.0);
+		setEmptyECNumbersMap(new HashMap<String, String>());
 	}
 
 	/**
@@ -73,8 +76,6 @@ public class GraphQueriesAPI {
 	 */
 	public void findPatternsInGraphs(double threshold){
 		setGlobalThreshold(threshold);
-		//TODO add min_support sigma = {0, 1} used in pattern table
-		//TODO and add tolerance for "graph matching" for example 2.2.2.2 = 2.2.1.1. with 50%
 		if (this.graphList.size() < 2){
 			System.out.println("ERROR!!! The size of graphSet must have at least"
 					+ " two instances. You gave: "+this.graphList.size()+". Exiting");
@@ -99,19 +100,23 @@ public class GraphQueriesAPI {
 
 	/**
 	 * This method fills the empty ECNumber edges of graphList with the 
-	 * left and right node names.
+	 * left and right node names. It also creates a map with the empty ECnumer names and
+	 * assigns artificial coding starting with *.Example *1, *2 etc... 
 	 */
 	private void fillEmptyECNumberEdgesOnGraphs() {
 		// TODO Auto-generated method stub
 		for ( DirectedGraph<Integer, MyEdge> graph : getGraphList()){
 			for (MyEdge edge : graph.getEdges()){
 				if (edge.toString().equals(" ")){ 
+					updateEmptyECNumbersMap(edge);
+					/*
 					System.out.println("hit"+edge.toString());
 					System.out.println(edge.getEdgeName());
 					System.out.println(edge.getStepDirection());
 					System.out.println(edge.getStartNodeNames());
 					System.out.println(edge.getEndNodeNames());
 					System.out.print("");
+					*/
 				}
 			}
 		}
@@ -278,6 +283,7 @@ public class GraphQueriesAPI {
 	public int getOccurrencesOfPatternInGraph(
 			DirectedGraph<Integer, MyEdge> subGraph,
 			DirectedGraph<Integer, MyEdge> graph, double threshold) {
+		System.out.println("ENTER");
 		// TODO Auto-generated method stub		
 		// pattern must be smaller than the graph.
 		if (subGraph.getEdgeCount()>graph.getEdgeCount() 
@@ -285,20 +291,21 @@ public class GraphQueriesAPI {
 			return 0;
 		List<DirectedGraph<Integer, MyEdge>> commonGraphList = 
 				new ArrayList<DirectedGraph<Integer, MyEdge>>();
-		Collection<MyEdge> subEdges = subGraph.getEdges();
-		Collection<MyEdge> graphEdges = graph.getEdges();
-		for (MyEdge sEdge : subEdges){
+		for (MyEdge sEdge : subGraph.getEdges()){
 			List<DirectedGraph<Integer, MyEdge>> tempGraphList = 
 					new ArrayList<DirectedGraph<Integer, MyEdge>>();
-			for (MyEdge gEdge : graphEdges){
-				//maybe i have to pass the threshold as well. For now it is irrelevant
+			for (MyEdge gEdge : graph.getEdges()){
 				MyEdge comEdge = getCommonEdgeFromThreshold(sEdge, gEdge, threshold);
 				// if there is no comEdge (null) or it doesn't match the patEdge return
+				System.out.println(sEdge.toString() +" : "+ gEdge.toString());
 				if (comEdge== null || !comEdge.isIdentical(sEdge)) continue;//do nothing
 				// there is a match. Create or append in graph list.
-				List<DirectedGraph<Integer, MyEdge>> TBE = 
-						getGraphListWithNewEdge(new ArrayList<DirectedGraph<Integer, MyEdge>>(commonGraphList), comEdge, gEdge);
-				concat2GraphLists(tempGraphList, TBE);
+				System.out.println("match");
+				List<DirectedGraph<Integer, MyEdge>> withNewEdge = 
+						getGraphListWithNewEdge(
+								new ArrayList<DirectedGraph<Integer, MyEdge>>(commonGraphList),
+								comEdge, gEdge);
+				concat2GraphLists(tempGraphList, withNewEdge);
 			}
 			commonGraphList = tempGraphList;
 		}
@@ -307,6 +314,9 @@ public class GraphQueriesAPI {
 		for (DirectedGraph<Integer, MyEdge> comGraph : commonGraphList){
 			if (graphEquality(comGraph, subGraph)) occurences++;
 		}
+		System.out.println("common: "+commonGraphList);
+		System.out.println("pattern: "+subGraph);
+		System.out.println("occurrences: "+occurences);
 		return occurences;
 	}
 
@@ -367,20 +377,6 @@ public class GraphQueriesAPI {
 	public List<DirectedGraph<Integer, MyEdge>> findCommonSubGraphsBetweenTwoGraphs(
 			DirectedGraph<Integer, MyEdge> graph1, 
 			DirectedGraph<Integer, MyEdge> graph2, double threshold){
-		//TODO this method is useless for now. Either erase it or utilize it
-		return findCommonEdges(graph1, graph2, threshold);
-	}
-	
-	/**
-	 * insert description
-	 * @param graph1
-	 * @param graph2
-	 * @param threshold 
-	 */
-	 public List<DirectedGraph<Integer, MyEdge>> findCommonEdges(
-			DirectedGraph<Integer, MyEdge> graph1, 
-			DirectedGraph<Integer, MyEdge> graph2, double threshold) {
-
 		List<DirectedGraph<Integer, MyEdge>> commonSubGraphList = 
 				new ArrayList<DirectedGraph<Integer, MyEdge>>();
 		Collection<MyEdge> colEdges1 = graph1.getEdges();
@@ -405,8 +401,8 @@ public class GraphQueriesAPI {
 		}
 		return commonSubGraphList;
 	}
-	 
-	 /**
+	
+	/**
 	  * this method returns the common MyEdge from edge1, edge2 that "passes" the 
 	  * threshold.
 	  * @param edge1
@@ -415,7 +411,7 @@ public class GraphQueriesAPI {
 	  * @return MyEdge if there is a common edge or null if there is none 
 	  * (instead of true or false)
 	  */
-	 public static MyEdge getCommonEdgeFromThreshold(MyEdge edge1, MyEdge edge2, double threshold) {
+	 public MyEdge getCommonEdgeFromThreshold(MyEdge edge1, MyEdge edge2, double threshold) {
 		// TODO Auto-generated method stub
 		MyEdge comEdge;
 		List<List<String>> e1 = parseEdgeNames(edge1);
@@ -434,6 +430,8 @@ public class GraphQueriesAPI {
 			      || (e1.size()!=0 && e2.size() ==0)){
 			        return null;
 		}
+		
+		// this is if the e1 and e2 are 
 		
 		double maxScore = -1, avgScore = 0;
 		String[] comName = new String[e1.size()];
@@ -602,7 +600,7 @@ public class GraphQueriesAPI {
 	 * @param comEdge 
 	 * @param threshold 
 	 */
-	private static void appendNextEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
+	private void appendNextEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
 			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, 
 			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold) {
 		// Insert the common edge. It doesn't matter which vertices 
@@ -639,7 +637,7 @@ public class GraphQueriesAPI {
 	 * @param threshold 
 	 * @param comEdge 
 	 */
-	private static void appendPreviousEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
+	private void appendPreviousEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
 			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, 
 			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold) {
 		// TODO Auto-generated method stub
@@ -734,6 +732,7 @@ public class GraphQueriesAPI {
 	 */
 	public void printApplicationOutput(){
 		printGraphs();
+		printEmptyECNumbersMap();
 		printSubGraphs();
 		printPatternTable();
 		printComplementarySubGraphs();
@@ -1064,10 +1063,20 @@ public class GraphQueriesAPI {
 	 * @param myEdge
 	 * @return
 	 */
-	public static List<List<String>> parseEdgeNames(MyEdge myEdge){
+	public List<List<String>> parseEdgeNames(MyEdge myEdge){
 		String[] eCNumbers = myEdge.getECNumber();
 		ArrayList<List<String>> listOfStrings = 
 				new ArrayList<List<String>>();
+		// Check if it has empty ECNumber then get from emptyECNumbersMap *ID
+		if ( (eCNumbers[0].length() > 0) && (eCNumbers[0].substring(0, 1).equals("*")) ){ 
+			//System.out.println(eCNumbers[0]);
+			//System.out.println(getEmptyECNumbersMap().get(eCNumbers[0]));
+			ArrayList<String> tempList = new ArrayList<String>();
+			tempList.add(eCNumbers[0]);
+			listOfStrings.add(tempList);
+			return listOfStrings;
+		}
+		
 		//iterate through the ECNumbers
 		for ( int i=0 ;i<eCNumbers.length;i++){
 			ArrayList<String> tempList = new ArrayList<String>();
@@ -1188,19 +1197,22 @@ public class GraphQueriesAPI {
 	private static Graph<Integer, String> convertGraphForVisualization(
 			DirectedGraph<Integer, MyEdge> graph) {
 		Graph<Integer, String> convGraph = new DirectedSparseMultigraph<Integer, String>();
-		Collection<MyEdge> collection = graph.getEdges();
 		String emptyEdgeNameIter = "";
-		for (MyEdge myEdge : collection){
+		for (MyEdge myEdge : graph.getEdges()){
 			//TODO
 			//this is used for now because there might be edges with empty name "" but different start and 
 			// end points. If it exists then add a "_". This has to be changed
 			if (convGraph.containsEdge(myEdge.getEdgeName())){
+			//if (convGraph.containsEdge(myEdge.toString())){
 				emptyEdgeNameIter += "_";
 				convGraph.addEdge(emptyEdgeNameIter, myEdge.getStartNode(), myEdge.getEndNode());
 			}
 			else{
 				// before it was only this line without the if/else
-				convGraph.addEdge(myEdge.getEdgeName(), myEdge.getStartNode(), myEdge.getEndNode());
+				// print edge name
+				//convGraph.addEdge(myEdge.getEdgeName(), myEdge.getStartNode(), myEdge.getEndNode());
+				// print edge eCNumber
+				convGraph.addEdge(myEdge.toString(), myEdge.getStartNode(), myEdge.getEndNode());
 			}
 		}
 		return convGraph;
@@ -1275,4 +1287,55 @@ public class GraphQueriesAPI {
 		this.globalThreshold = globalThreshold;
 	}
 
+	public Map<String, String> getEmptyECNumbersMap() {
+		return emptyECNumbersMap;
+	}
+
+	public void setEmptyECNumbersMap(Map<String, String> emptyECNumbersMap) {
+		this.emptyECNumbersMap = emptyECNumbersMap;
+	}
+	
+	/**
+	 * this map has a prefixed String (nextNameID) that is initiated to *0 and
+	 * is the ascending ID/key of the empty ECNumber names.
+	 * @param edge 
+	 * @param list vertices name the edge comes from (in the form of a list for every component)
+	 * @param list2 vertices name the edge goes to (in the form of a list for every component)
+	 */
+	public void updateEmptyECNumbersMap(MyEdge edge) {
+		List<String> from = edge.getStartNodeNames();
+		List<String> to = edge.getEndNodeNames();
+		
+		if (emptyECNumbersMap.isEmpty()){
+			emptyECNumbersMap.put("nextNameID", "*0");
+		}
+		String name = from.toString() + " --> " + to.toString();
+		if (!emptyECNumbersMap.containsValue(name)){
+			String nextID = emptyECNumbersMap.get("nextNameID");
+			// add the next name with nextID name
+			emptyECNumbersMap.put(nextID, name);
+			// nextNameID ++
+			int id = Integer.parseInt(nextID.substring(1)) + 1;
+			emptyECNumbersMap.replace("nextNameID", "*"+id);
+		}
+		
+		// change the emptyECNumber in the edge to *ID
+		for (Entry<String, String> entry: emptyECNumbersMap.entrySet()){
+			if (entry.getValue().equals(name)){
+				edge.setECNumber(entry.getKey());
+			}
+		}
+	}
+
+	/**
+	 * the output of emptyECNumbersMap
+	 */
+	public void printEmptyECNumbersMap() {
+		System.out.println("\nemptyECNumbersMap output is: ");
+		for (Entry<String, String> t : getEmptyECNumbersMap().entrySet()){
+			// don't print the auxiliary nextNameID entry.
+			if (t.getKey().equals("nextNameID")) continue;
+			System.out.println(t);
+		}
+	}
 }

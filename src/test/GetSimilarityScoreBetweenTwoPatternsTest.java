@@ -82,8 +82,7 @@ public class GetSimilarityScoreBetweenTwoPatternsTest {
 		//This has to be done every time
 		gQAPI = new GraphQueriesAPI(patternList);
 		clustAlg = new ClusteringAlgorithm(gQAPI);
-		System.out.println(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2));
-		assertEquals(0.0001, 1.0, 0.0001);
+		assertEquals(clustAlg.getSimilarityScoreBetweenTwoPatterns(pattern1, pattern2), 1.0, 0.0001);
 	}
 	
 	@Test

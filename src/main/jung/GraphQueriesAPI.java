@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
@@ -1115,10 +1117,12 @@ public class GraphQueriesAPI {
 	 * static method that can visualize a List of Directed graphs
 	 * @param graphList
 	 */
-	public static void visualizeListOfGraphs(List<DirectedGraph<Integer, MyEdge>> graphList) {
+	public static void visualizeListOfGraphs(
+			List<DirectedGraph<Integer, MyEdge>> graphList, String prefix) {
 
+		int num = 0;
 		for (DirectedGraph<Integer, MyEdge> temp : graphList){
-			visualizeGraph(temp);
+			visualizeGraph(temp, prefix+num++);
 		}
 	}
 	
@@ -1127,7 +1131,7 @@ public class GraphQueriesAPI {
 	 * @param graphList
 	 */
 	public void visualizeSubGraphList() {
-		visualizeListOfGraphs(getSubGraphList());
+		visualizeListOfGraphs(getSubGraphList(), "p");
 	}
 	
 	/**
@@ -1135,7 +1139,7 @@ public class GraphQueriesAPI {
 	 * @param graphList
 	 */
 	public void visualizeGraphList() {
-		visualizeListOfGraphs(getGraphList());
+		visualizeListOfGraphs(getGraphList(), "g");
 	}
 	
 	/**
@@ -1143,14 +1147,14 @@ public class GraphQueriesAPI {
 	 * @param graphList
 	 */
 	public void visualizeComplementarySubGraphList() {
-		visualizeListOfGraphs(getSubGraphListComplementary());
+		visualizeListOfGraphs(getSubGraphListComplementary(), "s");
 	}
 	
 	/**
 	 * This method visualizes a graph
 	 * @param graph
 	 */
-	public static void visualizeGraph(DirectedGraph<Integer, MyEdge> graph) {
+	public static void visualizeGraph(DirectedGraph<Integer, MyEdge> graph, String title) {
 		// The visualization. Code from JUNG
 		Graph<Integer, String> covGraph = convertGraphForVisualization(graph);
 		
@@ -1180,12 +1184,84 @@ public class GraphQueriesAPI {
         vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
         vv.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);        
         
-        JFrame frame = new JFrame("Simple Graph View 2");
+        JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(vv);
         frame.pack();
         frame.setVisible(true); 
 		
+	}
+	
+	public static void visualizePatternInGraph(
+			DirectedGraph<Integer, MyEdge> pattern, 
+			DirectedGraph<Integer, MyEdge> graph){
+		
+		Graph<Integer, String> covGraph = GraphQueriesAPI.convertGraphForVisualization(graph);
+		
+		List<Integer> patVertices = new ArrayList<Integer>();
+		Collection<MyEdge> patEdges = pattern.getEdges();
+		
+		// Layout<V, E>, VisualizationComponent<V,E>
+        Layout<Integer, String> layout = new CircleLayout(covGraph);
+        layout.setSize(new Dimension(800,600));
+        BasicVisualizationServer<Integer,String> vv = 
+        		new BasicVisualizationServer<Integer,String>(layout);
+        vv.setPreferredSize(new Dimension(850,650));       
+        // Set up a new stroke Transformer for the edges
+        float dash[] = {10.0f};
+        final Stroke edgeStroke1 = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
+             BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f);
+        Transformer<String, Stroke> edgeStrokeTransformer = new Transformer<String, Stroke>() {
+            public Stroke transform(String s) {
+            	return edgeStroke1;
+            }
+        };
+        // set up a new edge paint Transformer
+        Transformer<String, Paint> edgePaint = new Transformer<String, Paint>() {
+            public Paint transform(String s) {
+            	Collection<Integer> tempVertices = covGraph.getIncidentVertices(s);
+            	boolean match = false;
+            	for (MyEdge pEdge : patEdges){
+            		// the edge name (s) may have whitespaces in the end, so remove them. 
+            		//String rightTrimmed = s.replaceAll("\\s+$", "");
+            		if (s.replaceAll("\\s+$", "").equals(pEdge.toString().replaceAll("\\s+$", ""))){
+            			match = true;
+            			break;
+            		}
+            	}
+            	if (match){
+            		for (Integer vertex : tempVertices)
+            			patVertices.add(vertex);
+            		return Color.RED;
+            	}
+                else 
+                	return Color.BLACK;
+                }
+            };
+            
+         // Setup up a new vertex to paint transformer...
+        Transformer<Integer,Paint> vertexPaint = new Transformer<Integer,Paint>() {
+            public Paint transform(Integer i) {
+            	if (patVertices.contains(i))
+            		return Color.YELLOW;
+            	else
+            		return Color.GREEN;
+            }
+        };  
+            
+            
+        vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
+        vv.getRenderContext().setEdgeStrokeTransformer(edgeStrokeTransformer);
+        vv.getRenderContext().setEdgeDrawPaintTransformer(edgePaint);
+        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+        vv.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);        
+        
+        JFrame frame = new JFrame("Simple Graph View 2");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(vv);
+        frame.pack();
+        frame.setVisible(true); 
 	}
 	
 	/**
@@ -1194,7 +1270,7 @@ public class GraphQueriesAPI {
 	 * @param graph
 	 * @return The convenient Graph<Integer, String>
 	 */
-	private static Graph<Integer, String> convertGraphForVisualization(
+	public static Graph<Integer, String> convertGraphForVisualization(
 			DirectedGraph<Integer, MyEdge> graph) {
 		Graph<Integer, String> convGraph = new DirectedSparseMultigraph<Integer, String>();
 		String emptyEdgeNameIter = "";
@@ -1212,7 +1288,18 @@ public class GraphQueriesAPI {
 				// print edge name
 				//convGraph.addEdge(myEdge.getEdgeName(), myEdge.getStartNode(), myEdge.getEndNode());
 				// print edge eCNumber
-				convGraph.addEdge(myEdge.toString(), myEdge.getStartNode(), myEdge.getEndNode());
+				// in visualization if it contains two or more edges with same
+				// eCNumber it will throw exception. So just add a space for convenience.
+				if (convGraph.containsEdge(myEdge.toString())){
+					String tempEdge = myEdge.toString()+" ";
+					while(convGraph.containsEdge(tempEdge)){
+						tempEdge += " ";
+					}
+					convGraph.addEdge(tempEdge, myEdge.getStartNode(), myEdge.getEndNode());
+				}
+				else{
+					convGraph.addEdge(myEdge.toString(), myEdge.getStartNode(), myEdge.getEndNode());
+				}
 			}
 		}
 		return convGraph;

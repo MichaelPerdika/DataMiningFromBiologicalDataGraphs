@@ -59,6 +59,18 @@ public class Application {
 			// print clusters for Graphs
 			clustAlg.printGraphClusters();
 			
+			graphQueries.visualizePatternInGraph(
+					graphQueries.getSubGraphList().get(3),
+					graphQueries.getGraphList().get(0));
+			graphQueries.visualizePatternInGraph(
+					graphQueries.getSubGraphList().get(3),
+					graphQueries.getGraphList().get(1));
+			graphQueries.visualizePatternInGraph(
+					graphQueries.getSubGraphList().get(3),
+					graphQueries.getGraphList().get(2));
+			graphQueries.visualizePatternInGraph(
+					graphQueries.getSubGraphList().get(3),
+					graphQueries.getGraphList().get(3));
 			/**
 			 * expected results:
 			 * tolerance 100%:

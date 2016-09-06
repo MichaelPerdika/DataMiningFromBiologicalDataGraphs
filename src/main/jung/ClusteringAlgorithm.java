@@ -425,8 +425,8 @@ public class ClusteringAlgorithm {
 	        }
 	    }
 	    else{
-	        System.out.println("hello there motherfucker checkAfter");
-	        System.out.println(edgeList);
+	        System.out.println("hello there from checkAfter");
+	        //System.out.println(edgeList);
 	    }
 	    List<List<List<String>>> newCheckings = new ArrayList<List<List<String>>>();
 		newCheckings.add(newCheck1);
@@ -514,8 +514,8 @@ public class ClusteringAlgorithm {
 	        }
 	    }
 	    else{
-	        System.out.println("hello there motherfucker from checkBefore");
-	        System.out.println(edgeList);
+	        System.out.println("hello there from checkBefore");
+	        //System.out.println(edgeList);
 	    }
 	    List<List<List<String>>> newCheckings = new ArrayList<List<List<String>>>();
 		newCheckings.add(newCheck1);

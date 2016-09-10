@@ -194,7 +194,11 @@ public class ClusteringAlgorithm {
 	    
 		for (Integer k1 : cLA1.keySet()){
 	        for (Integer k2 : cLA2.keySet()){
-	            edgePairList.add(getEdgePairList(k1, k2, combinations));
+	        	List<List<String[]>> tempEdgePairList = 
+	        			getEdgePairList(k1, k2, combinations);
+	        	for (int k=0; k<tempEdgePairList.size();k++){
+	        		edgePairList.add(tempEdgePairList.get(k));
+	        	}
 	        }
 	    }
 		 
@@ -301,12 +305,12 @@ public class ClusteringAlgorithm {
 	 * @param combinations a Map that has all the appropriate info.
 	 * @return
 	 */
-	private List<String[]> getEdgePairList(Integer vertex1,	Integer vertex2,
+	private List<List<String[]>> getEdgePairList(Integer vertex1,	Integer vertex2,
 			Map<String, Map<String, List<List<String>>>> combinations) {
 		// TODO Auto-generated method stub
 		Map<String, Map<String, List<List<String>>>> curCombinations = 
 				DeepClone.deepClone(combinations);
-		List<String[]> edgePairList = new ArrayList<String[]>();
+		List<List<String[]>> edgePairList = new ArrayList<List<String[]>>();
 	    List<List<String>> firstList = 
 	    		DeepClone.deepClone(curCombinations.get(vertex1+"-"+vertex2).get("first"));
 	    List<List<String>> secondList = 
@@ -316,6 +320,8 @@ public class ClusteringAlgorithm {
 	    int j = 0;
 	    while (true){
 	        List<String> firstPairList, secondPairList;
+	        List<String[]> curEdgePairList = new ArrayList<String[]>();
+	        List<String> visitedPairs = new ArrayList<String>();
 			try{
 	            firstPairList = firstList.get(i);
 	            secondPairList = secondList.get(i);
@@ -347,16 +353,20 @@ public class ClusteringAlgorithm {
 	            		(!visitedVertices.contains(beforeV[0]+"-"+beforeV[1])) ){
 	            	//System.out.println("gotcha"+f+s);
 	                List<List<List<String>>> newCheckings = 
-	                		checkBefore(beforeV, curV, combinations, edgePairList);
-	                appendNewCheckList(newCheckings, firstList, secondList, firstPairList, secondPairList);
+	                		checkBefore(beforeV, curV, combinations, 
+	                				curEdgePairList, edgePairList, visitedPairs);
+	                appendNewCheckList(newCheckings, firstList, secondList, 
+	                		firstPairList, secondPairList);
 	            }
 	            //after vertices
 	            //System.out.println("suka2"+afterV[0]);
 	            if (!(afterV[0].equals("-1") || afterV[1].equals("-1")) && 
 	            		(!visitedVertices.contains(afterV[0]+"-"+afterV[1])) ){
 	            	List<List<List<String>>> newCheckings = 
-	            			checkAfter(afterV, curV, combinations, edgePairList);
-	            	appendNewCheckList(newCheckings, firstList, secondList, firstPairList, secondPairList);
+	            			checkAfter(afterV, curV, combinations, 
+	            					curEdgePairList, edgePairList, visitedPairs);
+	            	appendNewCheckList(newCheckings, firstList, secondList, 
+	            			firstPairList, secondPairList);
 	            }
 	            if (!visitedVertices.contains(curV[0]+"-"+curV[1])) 
 	            	visitedVertices.add(curV[0]+"-"+curV[1]);
@@ -364,17 +374,25 @@ public class ClusteringAlgorithm {
 	        }
 	        i++;
 	    }
-	    //System.out.println("finally");
-	    /*
-	    for (int k=0;i<edgePairList.size();i++)
-	    	for (int l=0;l<edgePairList.get(k).length;l++) 
-	    		System.out.println(edgePairList.get(k)[l]);
+	    /**
+	    System.out.println("finally " + vertex1 +"~"+ vertex2);
+	    for (int k=0;k<edgePairList.size();k++){
+	    	System.out.println("----");
+	    	for (int m=0;m<edgePairList.get(k).size();m++){
+	    		System.out.println("--");
+	    		for (int l=0;l<edgePairList.get(k).get(m).length;l++) 
+	    			System.out.print(edgePairList.get(k).get(m)[l]+" ");
+	    		System.out.print("\n");
+	    	}
+	    }
 	    */
 	    return edgePairList;
 	}
 
 	private List<List<List<String>>> checkAfter(String[] afterV, String[] currentV,
-			Map<String, Map<String, List<List<String>>>> combinations, List<String[]> edgePairList) {
+			Map<String, Map<String, List<List<String>>>> combinations, 
+			List<String[]> curEdgePairList,
+			List<List<String[]>> edgePairList, List<String> visitedPairs) {
 		// TODO Auto-generated method stub
 		//System.out.println("mjk2"+combinations);
 		//System.out.println(afterV[0]+"-"+afterV[1]);
@@ -385,6 +403,7 @@ public class ClusteringAlgorithm {
 	    List<List<String[]>> edgeList = new ArrayList<List<String[]>>();
 	    List<List<String>> newCheck1 = new ArrayList<List<String>>();
 	    List<List<String>> newCheck2 = new ArrayList<List<String>>();
+	    List<String> originalVisitedPairs = DeepClone.deepClone(visitedPairs);
 	    
 	    for (int i=0;i<firstList.size();i++){
 	    	List<String> fL = firstList.get(i);
@@ -404,6 +423,7 @@ public class ClusteringAlgorithm {
 	        	
 	        	String[] beforeV = {f.split("-->")[0], s.split("-->")[0]};
 	            if ( (beforeV[0].equals(currentV[0])) && (beforeV[1].equals(currentV[1])) ){
+	            	visitedPairs.add(beforeV[0]+"~"+currentV[0]);
 	            	String[] temp = {e1.split("-->")[0], e2.split("-->")[0]};
 	            	edgeList1.add(temp);
 					for (int k=0; k<fL.size();k++) newCheck11.add(fL.get(k));
@@ -418,16 +438,37 @@ public class ClusteringAlgorithm {
 	    }
 	    // current edgeList is finished now. If it is size() = 1 then append as it is.
 	    // if size() >1 then do deep copy of edgePairList and then append.
-	    if (edgeList.size() == 1){
-            for (int k=0; k< edgeList.get(0).size();k++){
-	        	String[] pair = edgeList.get(0).get(k);
-	        	edgePairList.add(pair);
+	    if (edgeList.size() > 0){
+	    	List<String[]> original = DeepClone.deepClone(curEdgePairList);
+	    	// for the first list(0) of edgeList add it to existing edgePairList
+	    	for (int i=0; i< edgeList.get(0).size();i++){
+	        	String[] pair = edgeList.get(0).get(i);
+	        	curEdgePairList.add(pair);
 	        }
+	    	// if there are more then deepCopy edgePairList and append the new
+	    	// potential combinations of edgeList starting from the second cell
+	    	if (edgeList.size() > 1){
+	    		// start from 1 and not 0 because for 0 we used first/secondPairList
+	    		for (int k=1; k < edgeList.size();k++){
+	    			List<String[]> temp = DeepClone.deepClone(original);
+	    			for (int i=0; i < edgeList.get(k).size();i++){
+	    	        	String[] pair = edgeList.get(0).get(i);
+	    	        	temp.add(pair);
+	    	        }
+	    			// append temp to edgePairList
+	    			edgePairList.add(temp);
+	    		}
+	    		
+	    	}
+	    	else{
+	    		if (edgePairList.isEmpty()){
+	    			edgePairList.add(curEdgePairList);
+	    		}
+	    	}
+	    	
 	    }
-	    else{
-	        System.out.println("hello there from checkAfter");
-	        //System.out.println(edgeList);
-	    }
+	    // else size == 0 do nothing for edgePairList
+	   
 	    List<List<List<String>>> newCheckings = new ArrayList<List<List<String>>>();
 		newCheckings.add(newCheck1);
 	    newCheckings.add(newCheck2);
@@ -442,14 +483,32 @@ public class ClusteringAlgorithm {
 		// TODO Auto-generated method stub
 		List<List<String>> newCheck1 = newCheckings.get(0);
 		List<List<String>> newCheck2 = newCheckings.get(1);
-		if (newCheck1.size() == 1) {
-	        for (int i=0;i<newCheck1.get(0).size();i++){	
-	            firstPairList.add(newCheck1.get(0).get(i)); //TODO why get(0) here???
-	            secondPairList.add(newCheck2.get(0).get(i));
+		
+		if (newCheck1.size()>0){
+			List<String> original1 = DeepClone.deepClone(firstPairList);
+	        List<String> original2 = DeepClone.deepClone(secondPairList);
+	        // for the first list(0) of newCheckx add it to first/secondPairList
+	        for (int j=0;j<newCheck1.get(0).size();j++){	
+	            firstPairList.add(newCheck1.get(0).get(j)); 
+	            secondPairList.add(newCheck2.get(0).get(j));
+	        }
+	        // if there are more then create new lists in first/secondList
+	        if (newCheck1.size() > 1){
+	        	// start from 1 and not 0 because for 0 we used first/secondPairList
+	        	for (int i=1; i<newCheck1.size();i++){
+	        		List<String> temp1 = DeepClone.deepClone(original1);
+	    	        List<String> temp2 = DeepClone.deepClone(original2);
+	    	        for (int j=0;j<newCheck1.get(i).size();j++){	
+	    	        	temp1.add(newCheck1.get(i).get(j)); 
+	    	        	temp2.add(newCheck2.get(i).get(j));
+	    	        }
+	        		firstList.add(temp1);
+			    	secondList.add(temp2);
+	        	}
+	        	
 	        }
 		}
-	    else
-	        System.out.println("error in appendNewCheckList");
+		// else if size == 0 do nothing
 	}
 
 	/**
@@ -458,12 +517,13 @@ public class ClusteringAlgorithm {
 	 * @param beforeV
 	 * @param currentV
 	 * @param combinations
-	 * @param edgePairList
+	 * @param curEdgePairList
 	 * @return a new list to be appended
 	 */
 	private List<List<List<String>>> checkBefore(String[] beforeV, String[] currentV, 
 			Map<String, Map<String, List<List<String>>>> combinations,
-			List<String[]> edgePairList) {
+			List<String[]> curEdgePairList, List<List<String[]>> edgePairList,
+			List<String> visitedPairs) {
 		
 		//System.out.println("mjk"+combinations);
 		//System.out.println(beforeV[0]+"-"+beforeV[1]);
@@ -490,8 +550,9 @@ public class ClusteringAlgorithm {
 	        	String e2 = edge2.get(j);
 	        	
 	        	String[] afterV = {f.split("-->")[2], s.split("-->")[2]};
-	            if ( (afterV[0].equals(currentV[0])) && ( afterV[1].equals(currentV[1])) ){
-	            	
+	            if ( (afterV[0].equals(currentV[0])) && ( afterV[1].equals(currentV[1])) 
+	            		&& (!visitedPairs.contains(currentV[0]+"~"+afterV[0]))){
+	            	visitedPairs.add(currentV[0]+"~"+afterV[0]);
 	            	String[] temp = {e1.split("-->")[1], e2.split("-->")[1]};
 	            	edgeList1.add(temp);
 					for (int k=0; k<fL.size();k++) newCheck11.add(fL.get(k));
@@ -507,16 +568,50 @@ public class ClusteringAlgorithm {
 	    }
 	    // current edgeList is finished now. If it is size() = 1 then append as it is.
 	    // if size() >1 then do deep copy of edgePairList and then append.
+	    if (edgeList.size() > 0){
+	    	List<String[]> original = DeepClone.deepClone(curEdgePairList);
+	    	// for the first list(0) of edgeList add it to existing edgePairList
+	    	for (int i=0; i< edgeList.get(0).size();i++){
+	    		String[] pair = edgeList.get(0).get(i);
+	    		curEdgePairList.add(pair);
+	    	}
+	    	// if there are more then deepCopy edgePairList and append the new
+	    	// potential combinations of edgeList starting from the second cell
+	    	if (edgeList.size() > 1){
+	    		// start from 1 and not 0 because for 0 we used first/secondPairList
+	    		for (int k=1; k < edgeList.size();k++){
+	    			List<String[]> temp = DeepClone.deepClone(original);
+	    			for (int i=0; i < edgeList.get(k).size();i++){
+	    				String[] pair = edgeList.get(0).get(i);
+	    				temp.add(pair);
+	    			}
+	    			// append temp to edgePairList
+	    			edgePairList.add(temp);
+	    		}
+	    		
+	    	}
+	    	else{
+	    		if (edgePairList.isEmpty()){
+	    			edgePairList.add(curEdgePairList);
+	    		}
+	    	}
+	    	
+	    }
+	    // else size == 0 do nothing for edgePairList
+	    
+	    /**
 	    if (edgeList.size() == 1){
 	        for (int k=0; k< edgeList.get(0).size();k++){
 	        	String[] pair = edgeList.get(0).get(k);
-	        	edgePairList.add(pair);
+	        	curEdgePairList.add(pair); //TODO
 	        }
 	    }
 	    else{
 	        System.out.println("hello there from checkBefore");
 	        //System.out.println(edgeList);
 	    }
+	    */
+	    
 	    List<List<List<String>>> newCheckings = new ArrayList<List<List<String>>>();
 		newCheckings.add(newCheck1);
 	    newCheckings.add(newCheck2);

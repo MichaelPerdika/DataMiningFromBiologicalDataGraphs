@@ -452,7 +452,7 @@ public class ClusteringAlgorithm {
 	    		for (int k=1; k < edgeList.size();k++){
 	    			List<String[]> temp = DeepClone.deepClone(original);
 	    			for (int i=0; i < edgeList.get(k).size();i++){
-	    	        	String[] pair = edgeList.get(0).get(i);
+	    	        	String[] pair = edgeList.get(k).get(i);
 	    	        	temp.add(pair);
 	    	        }
 	    			// append temp to edgePairList
@@ -582,7 +582,7 @@ public class ClusteringAlgorithm {
 	    		for (int k=1; k < edgeList.size();k++){
 	    			List<String[]> temp = DeepClone.deepClone(original);
 	    			for (int i=0; i < edgeList.get(k).size();i++){
-	    				String[] pair = edgeList.get(0).get(i);
+	    				String[] pair = edgeList.get(k).get(i);
 	    				temp.add(pair);
 	    			}
 	    			// append temp to edgePairList

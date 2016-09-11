@@ -1,10 +1,13 @@
 package main.jung;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import edu.uci.ics.jung.graph.DirectedGraph;
 
@@ -29,6 +32,8 @@ public class ClusteringAlgorithm {
 	private List<Double> linkageDistancesGraphs;
 	private List<List<String>> linkageClustersGraphs;
 	private List<DirectedGraph<Integer, MyEdge>> subGraphListWhole;
+	private List<String> joinsPerLevelPatterns;
+	private List<String> joinsPerLevelGraphs;
 
 	/**
 	 * never to be called
@@ -48,6 +53,8 @@ public class ClusteringAlgorithm {
 		linkageDistancesGraphs = new ArrayList<Double>();
 		linkageClustersGraphs = new ArrayList<List<String>>();
 		subGraphListWhole = new ArrayList<DirectedGraph<Integer, MyEdge>>();
+		joinsPerLevelPatterns = new ArrayList<String>();
+		joinsPerLevelGraphs = new ArrayList<String>();
 		
 		// for the pattern distance matrix
 		fillPatternSizesAndWholeSubGraphList();
@@ -1071,22 +1078,25 @@ public class ClusteringAlgorithm {
 	private void linkage(String type, linkMetric metric) {
 		// TODO Auto-generated method stub
 		List<List<Double>> distanceMatrix;
+		List<String> joinsPerLevel = new ArrayList<String>();
 		if (type.equals("patterns")){
-			distanceMatrix = distanceMatrixPatterns;
+			distanceMatrix = DeepClone.deepClone(distanceMatrixPatterns);
 		}
 		else if (type.equals("graphs")){
-			distanceMatrix = distanceMatrixGraphs;
+			distanceMatrix = DeepClone.deepClone(distanceMatrixGraphs);
 		}
 		else{
 			distanceMatrix = null;
 			System.exit(1);
 		}
 		List<String> rowCols = new ArrayList<String>(); 
-		for (int i=0; i <distanceMatrix.size();i++) rowCols.add(type.substring(0, 1)+i);// "p" or "g"
+		for (int i=0; i <distanceMatrix.size();i++) 
+			rowCols.add(type.substring(0, 1)+i);// "p" or "g"
 		List<Double> linkageDistances = new ArrayList<Double>();
 		List<List<String>> linkageClusters = new ArrayList<List<String>>();
 		linkageDistances.add(0.0);
 		linkageClusters.add(new ArrayList<String>(rowCols));
+		joinsPerLevel.add("none"); // initialize lvl0 to "none"
 		
 		switch (metric)
 		{
@@ -1123,6 +1133,7 @@ public class ClusteringAlgorithm {
 				}
 				
 				temp = rowCols.get(left);
+				joinsPerLevel.add(temp+"-"+rowCols.get(right));
 				rowCols.set(left, temp+"-"+rowCols.get(right));
 				rowCols.remove(right);
 				
@@ -1152,10 +1163,12 @@ public class ClusteringAlgorithm {
 			if (type.equals("patterns")){
 				linkageDistancesPatterns = linkageDistances;
 				linkageClustersPatterns = linkageClusters;
+				joinsPerLevelPatterns = joinsPerLevel;
 			}
 			else if (type.equals("graphs")){
 				linkageDistancesGraphs = linkageDistances;
 				linkageClustersGraphs = linkageClusters;
+				joinsPerLevelGraphs = joinsPerLevel;
 			}
 			
 			
@@ -1217,6 +1230,168 @@ public class ClusteringAlgorithm {
 
 		}
 		
+	}
+
+	/**
+	 * This method gets 2 graphs and visualizes/highlights the common patterns
+	 * from the first lvl of the clustering algorithm till the last.
+	 * @param index1 the index of the graph
+	 * @param index2 the index of the graph
+	 */
+	public void highlightPatternsInGraphPair(int index1, int index2) {
+		// patternTableWhole is stored in the order rows and columns.
+		// get the common patterns for graph1, graph2 to be highlighted 
+		// (the ones that have value >=1 for both graphs
+		List<List<Integer>> x = gQAPI.getPatternTableWhole();
+		List<String> commonPatterns = new ArrayList<String>();
+		for (int row=0; row<x.size(); row++){
+			if ( (x.get(row).get(index1)>0) && (x.get(row).get(index2) > 0) )
+				commonPatterns.add("p"+row);
+		}
+		// at first visualize graph1, graph2 in the lvl0 in which they have
+		// nothing in common
+		GraphQueriesAPI.visualizeGraph(gQAPI.getGraphList().get(index1),
+				"lvl0 of g"+index1);
+		GraphQueriesAPI.visualizeGraph(gQAPI.getGraphList().get(index2),
+				"lvl0 of g"+index2);
+		// get the levels we want to visualize.
+		/** TBE
+		List<String> mjk = new ArrayList<String>();
+		mjk.add("p1"); mjk.add("p2"); mjk.add("p3"); mjk.add("p0");
+		SortedMap<Integer, List<String>> joiningLvls = 
+				getLevelsOfJoining(mjk);
+		*/
+		SortedMap<Integer, List<String>> joiningLvls = 
+				getLevelsOfJoining(commonPatterns);
+	
+		System.out.println("JoiningLvls");
+		for (Integer lvl : joiningLvls.keySet()){
+			System.out.println( ""+lvl + joiningLvls.get(lvl));
+			
+			// common pattern should be the section 'U' of all patterns
+			// in joiningLvls.get(lvl) patterns. TODO
+			DirectedGraph<Integer, MyEdge> commonPattern = null;
+			// level lvl for graph1 
+			GraphQueriesAPI.visualizePatternInGraph(
+					commonPattern,
+					gQAPI.getGraphList().get(index1));
+			// level lvl for graph2 
+			GraphQueriesAPI.visualizePatternInGraph(
+					commonPattern,
+					gQAPI.getGraphList().get(index2));
+			
+			
+		}
+		
+		
+		
+	}
+
+	/**
+	 * this method gets the indexes of the patterns that two graphs have in common.
+	 * It should check in the clustering linkages when these patterns are joining and
+	 * return these levels.
+	 * @param commonPatterns
+	 * @return the levels in which the patterns are joining
+	 */
+	private SortedMap<Integer, List<String>> getLevelsOfJoining(List<String> commonPatterns) {
+		// TODO Auto-generated method stub
+		System.out.println(commonPatterns);
+		System.out.println(joinsPerLevelPatterns);
+		SortedMap<Integer, List<String>> joiningLvls = 
+				new TreeMap<Integer, List<String>>();
+		
+		
+		for (int lvl=0; lvl< joinsPerLevelPatterns.size();lvl++){
+			// items contains all the patterns of this levels cluster that have joined.
+			List<String> foundList = new ArrayList<String>();
+			List<String> patterns = Arrays.asList(
+					joinsPerLevelPatterns.get(lvl).split("-"));
+			// if it contains at least one pattern then add the lvl
+			for ( String pat : patterns){
+				if (commonPatterns.contains(pat)){
+					foundList.add(pat);
+				}
+			}
+			// if there have been found at least one pattern then the level is valid.
+			if (foundList.size() > 0){
+				joiningLvls.put(lvl, new ArrayList<String>(foundList));
+			}
+			if (foundList.size() == commonPatterns.size())
+				break;
+			
+		}
+		System.out.println("joining levels are "+joiningLvls);
+		return joiningLvls;
+	}
+	
+	
+	/**
+	 * Erase this method!!!!!!!
+	 * This one gets the level where there are at least two patterns connection
+	 */
+	private SortedMap<Integer, List<String>> getLevelsOfJoiningOLD(List<String> commonPatterns) {
+		// TODO Auto-generated method stub
+		System.out.println(commonPatterns);
+		System.out.println(joinsPerLevelPatterns);
+		SortedMap<Integer, List<String>> joiningLvls = 
+				new TreeMap<Integer, List<String>>();
+		// auxiliary variable
+		List<List<String>> foundList = new ArrayList<List<String>>();
+		
+		for (int lvl=0; lvl< joinsPerLevelPatterns.size();lvl++){
+			// items contains all the patterns of this levels cluster that have joined.
+			List<String> patterns = Arrays.asList(
+					joinsPerLevelPatterns.get(lvl).split("-"));
+			List<String> foundL = new ArrayList<String>();
+			// if it contains at least two patterns then add the lvl
+			for ( String pat : patterns){
+				if (commonPatterns.contains(pat)){
+					foundL.add(pat);
+				}
+			}
+			// if there have been found at least 2 then the level is valid.
+			if (foundL.size() >= 2){
+				// this is the last wanting result
+				if (foundL.size() == commonPatterns.size()){
+					joiningLvls.put(lvl, new ArrayList<String>(foundL));
+					//joiningLvls.add(lvl);
+					break;
+				}
+				if (foundList.isEmpty()){
+					joiningLvls.put(lvl, new ArrayList<String>(foundL));
+					//joiningLvls.add(lvl);
+					foundList.add(foundL);
+				}
+				else{
+					boolean uniqueCombination = true;
+					for (int i=0; i < foundList.size();i++){
+						boolean alreadyFound = false;
+						for (String pat: foundL){
+							if (foundList.get(i).contains(pat)){
+								alreadyFound = true;
+							}
+							else{
+								alreadyFound = false;
+								break; // no point to check further.
+							}
+						}
+						if (alreadyFound){
+							uniqueCombination = false;
+						}
+						
+					}
+					if (uniqueCombination){
+						joiningLvls.put(lvl, new ArrayList<String>(foundL));
+						//joiningLvls.add(lvl);
+						foundList.add(foundL);
+					}
+				}
+			}
+			
+		}
+		System.out.println("joining levels are "+joiningLvls);
+		return joiningLvls;
 	}
 	
 }

@@ -2,6 +2,7 @@ package main.jung;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1242,49 +1243,100 @@ public class ClusteringAlgorithm {
 		// patternTableWhole is stored in the order rows and columns.
 		// get the common patterns for graph1, graph2 to be highlighted 
 		// (the ones that have value >=1 for both graphs
-		List<List<Integer>> x = gQAPI.getPatternTableWhole();
+		List<List<Integer>> patTabWhole = gQAPI.getPatternTableWhole();
 		List<String> commonPatterns = new ArrayList<String>();
-		for (int row=0; row<x.size(); row++){
-			if ( (x.get(row).get(index1)>0) && (x.get(row).get(index2) > 0) )
+		for (int row=0; row<patTabWhole.size(); row++){
+			if ( (patTabWhole.get(row).get(index1)>0) && (patTabWhole.get(row).get(index2) > 0) )
 				commonPatterns.add("p"+row);
 		}
 		// at first visualize graph1, graph2 in the lvl0 in which they have
 		// nothing in common
-		GraphQueriesAPI.visualizeGraph(gQAPI.getGraphList().get(index1),
-				"lvl0 of g"+index1);
-		GraphQueriesAPI.visualizeGraph(gQAPI.getGraphList().get(index2),
-				"lvl0 of g"+index2);
+		highlightPatternsInGraphInSpecificLVL(
+				gQAPI.getGraphList().get(index1),
+				new ArrayList<String>(), "lvl0 of g"+index1);
+		highlightPatternsInGraphInSpecificLVL(
+				gQAPI.getGraphList().get(index2),
+				new ArrayList<String>(), "lvl0 of g"+index2);
 		// get the levels we want to visualize.
-		/** TBE
-		List<String> mjk = new ArrayList<String>();
-		mjk.add("p1"); mjk.add("p2"); mjk.add("p3"); mjk.add("p0");
-		SortedMap<Integer, List<String>> joiningLvls = 
-				getLevelsOfJoining(mjk);
-		*/
 		SortedMap<Integer, List<String>> joiningLvls = 
 				getLevelsOfJoining(commonPatterns);
-	
-		System.out.println("JoiningLvls");
+		//System.out.println("JoiningLvls");
 		for (Integer lvl : joiningLvls.keySet()){
-			System.out.println( ""+lvl + joiningLvls.get(lvl));
-			
+			//System.out.println( ""+lvl + joiningLvls.get(lvl));
 			// common pattern should be the section 'U' of all patterns
 			// in joiningLvls.get(lvl) patterns. TODO
-			DirectedGraph<Integer, MyEdge> commonPattern = null;
 			// level lvl for graph1 
-			GraphQueriesAPI.visualizePatternInGraph(
-					commonPattern,
-					gQAPI.getGraphList().get(index1));
+			highlightPatternsInGraphInSpecificLVL(
+					gQAPI.getGraphList().get(index1),
+					joiningLvls.get(lvl), "lvl"+lvl+" of g"+index1);
 			// level lvl for graph2 
+			highlightPatternsInGraphInSpecificLVL(
+					gQAPI.getGraphList().get(index2),
+					joiningLvls.get(lvl), "lvl"+lvl+" of g"+index2);
+		}
+	}
+
+	/**
+	 * this method gets a graph and a list of pattern Names in a specific
+	 * level of the clustering algorithm (linkage). And it visualizes the intersection
+	 * of the patterns in patNames onto graph with different color. 
+	 * It also has a title for the visualization
+	 * @param graph
+	 * @param patNames
+	 * @param title
+	 */
+	public void highlightPatternsInGraphInSpecificLVL(
+			DirectedGraph<Integer, MyEdge> graph,
+			List<String> patNames, String title) {
+		List<Integer> listOfIndexes = new ArrayList<Integer>();
+		
+		for (String pN : patNames){
+			// convert pID to ID
+			listOfIndexes.add(Integer.parseInt(pN.substring(1)));
+		}
+		if (listOfIndexes.size() == 0){
 			GraphQueriesAPI.visualizePatternInGraph(
-					commonPattern,
-					gQAPI.getGraphList().get(index2));
-			
-			
+					graph, new ArrayList<Integer>(), 
+					new ArrayList<MyEdge>(), title);
 		}
 		
-		
-		
+		else{
+			// check for every pattern and get the vertices and the edges
+			// that are common between graph and patNames
+			List<Integer> listOfVertices = new ArrayList<Integer>();
+			List<MyEdge> listOfEdges = new ArrayList<MyEdge>();
+			for (Integer index: listOfIndexes){
+				List<DirectedGraph<Integer, MyEdge>> listOfCommonPatterns =
+						gQAPI.findCommonSubGraphsBetweenTwoGraphs(
+								graph, subGraphListWhole.get(index), 
+								gQAPI.getGlobalThreshold());
+				for (DirectedGraph<Integer, MyEdge> pat: listOfCommonPatterns){
+					//System.out.println(pat);
+					Collection<Integer> vertices = pat.getVertices();
+					Collection<MyEdge> edges = pat.getEdges();
+					// append the new vertices to listOfVertices
+					for (Integer vertex: vertices){
+						if (!listOfVertices.contains(vertex))
+							listOfVertices.add(vertex);
+					// append the new edges to listOfVertices
+					for (MyEdge edge: edges){
+						boolean match = false;
+						for ( MyEdge e : listOfEdges){
+							if (e.isIdentical(edge)){
+								match = true;
+								break;
+							}
+						}
+						if (match)
+							listOfEdges.add(edge);
+					}
+					
+					}
+				}
+			}
+			GraphQueriesAPI.visualizePatternInGraph(
+				graph, listOfVertices, listOfEdges, title+" "+patNames.toString());
+		}
 	}
 
 	/**
@@ -1294,10 +1346,11 @@ public class ClusteringAlgorithm {
 	 * @param commonPatterns
 	 * @return the levels in which the patterns are joining
 	 */
-	private SortedMap<Integer, List<String>> getLevelsOfJoining(List<String> commonPatterns) {
+	private SortedMap<Integer, List<String>> getLevelsOfJoining(
+			List<String> commonPatterns) {
 		// TODO Auto-generated method stub
-		System.out.println(commonPatterns);
-		System.out.println(joinsPerLevelPatterns);
+		//System.out.println(commonPatterns);
+		//System.out.println(joinsPerLevelPatterns);
 		SortedMap<Integer, List<String>> joiningLvls = 
 				new TreeMap<Integer, List<String>>();
 		
@@ -1321,76 +1374,7 @@ public class ClusteringAlgorithm {
 				break;
 			
 		}
-		System.out.println("joining levels are "+joiningLvls);
-		return joiningLvls;
-	}
-	
-	
-	/**
-	 * Erase this method!!!!!!!
-	 * This one gets the level where there are at least two patterns connection
-	 */
-	private SortedMap<Integer, List<String>> getLevelsOfJoiningOLD(List<String> commonPatterns) {
-		// TODO Auto-generated method stub
-		System.out.println(commonPatterns);
-		System.out.println(joinsPerLevelPatterns);
-		SortedMap<Integer, List<String>> joiningLvls = 
-				new TreeMap<Integer, List<String>>();
-		// auxiliary variable
-		List<List<String>> foundList = new ArrayList<List<String>>();
-		
-		for (int lvl=0; lvl< joinsPerLevelPatterns.size();lvl++){
-			// items contains all the patterns of this levels cluster that have joined.
-			List<String> patterns = Arrays.asList(
-					joinsPerLevelPatterns.get(lvl).split("-"));
-			List<String> foundL = new ArrayList<String>();
-			// if it contains at least two patterns then add the lvl
-			for ( String pat : patterns){
-				if (commonPatterns.contains(pat)){
-					foundL.add(pat);
-				}
-			}
-			// if there have been found at least 2 then the level is valid.
-			if (foundL.size() >= 2){
-				// this is the last wanting result
-				if (foundL.size() == commonPatterns.size()){
-					joiningLvls.put(lvl, new ArrayList<String>(foundL));
-					//joiningLvls.add(lvl);
-					break;
-				}
-				if (foundList.isEmpty()){
-					joiningLvls.put(lvl, new ArrayList<String>(foundL));
-					//joiningLvls.add(lvl);
-					foundList.add(foundL);
-				}
-				else{
-					boolean uniqueCombination = true;
-					for (int i=0; i < foundList.size();i++){
-						boolean alreadyFound = false;
-						for (String pat: foundL){
-							if (foundList.get(i).contains(pat)){
-								alreadyFound = true;
-							}
-							else{
-								alreadyFound = false;
-								break; // no point to check further.
-							}
-						}
-						if (alreadyFound){
-							uniqueCombination = false;
-						}
-						
-					}
-					if (uniqueCombination){
-						joiningLvls.put(lvl, new ArrayList<String>(foundL));
-						//joiningLvls.add(lvl);
-						foundList.add(foundL);
-					}
-				}
-			}
-			
-		}
-		System.out.println("joining levels are "+joiningLvls);
+		//System.out.println("joining levels are "+joiningLvls);
 		return joiningLvls;
 	}
 	

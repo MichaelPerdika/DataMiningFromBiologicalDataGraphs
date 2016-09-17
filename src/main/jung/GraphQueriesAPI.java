@@ -381,12 +381,11 @@ public class GraphQueriesAPI {
 			DirectedGraph<Integer, MyEdge> graph2, double threshold){
 		List<DirectedGraph<Integer, MyEdge>> commonSubGraphList = 
 				new ArrayList<DirectedGraph<Integer, MyEdge>>();
-		Collection<MyEdge> colEdges1 = graph1.getEdges();
-		Collection<MyEdge> colEdges2 = graph2.getEdges();
-		for (MyEdge edge1 : colEdges1){
+		
+		for (MyEdge edge1 : graph1.getEdges()){
 			// this is used to avoid calculating again the same subGraph
 			if (!checkIfEdgeAlreadyFoundInCommonSubGraphList(commonSubGraphList, edge1)){
-				for (MyEdge edge2 : colEdges2){
+				for (MyEdge edge2 : graph2.getEdges()){
 					MyEdge comEdge = getCommonEdgeFromThreshold(edge1, edge2, threshold);
 					if(comEdge != null){
 						DirectedGraph<Integer, MyEdge> commonSubGraph = 
@@ -1191,7 +1190,7 @@ public class GraphQueriesAPI {
         frame.setVisible(true); 
 		
 	}
-	
+	/*
 	public static void visualizePatternInGraph(
 			DirectedGraph<Integer, MyEdge> pattern, 
 			DirectedGraph<Integer, MyEdge> graph){
@@ -1258,6 +1257,90 @@ public class GraphQueriesAPI {
         vv.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);        
         
         JFrame frame = new JFrame("Simple Graph View 2");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(vv);
+        frame.pack();
+        frame.setVisible(true); 
+	}
+	*/
+	
+	/**
+	 * this method gets a graph for visualization. It will highlight (with
+	 * different color) the vertices and edges in the listOfVertices and 
+	 * listOfEdges. 
+	 * @param graph
+	 * @param listOfVertices
+	 * @param listOfEdges
+	 * @param title
+	 */
+	public static void visualizePatternInGraph(
+			DirectedGraph<Integer, MyEdge> graph, 
+			List<Integer> listOfVertices, List<MyEdge> listOfEdges, String title){
+		
+		Graph<Integer, String> covGraph = 
+				GraphQueriesAPI.convertGraphForVisualization(graph);
+		
+		// Layout<V, E>, VisualizationComponent<V,E>
+        Layout<Integer, String> layout = new CircleLayout(covGraph);
+        layout.setSize(new Dimension(800,600));
+        BasicVisualizationServer<Integer,String> vv = 
+        		new BasicVisualizationServer<Integer,String>(layout);
+        vv.setPreferredSize(new Dimension(850,650));       
+        // Set up a new stroke Transformer for the edges
+        float dash[] = {10.0f};
+        final Stroke edgeStroke1 = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
+             BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f);
+        Transformer<String, Stroke> edgeStrokeTransformer = new Transformer<String, Stroke>() {
+            public Stroke transform(String s) {
+            	return edgeStroke1;
+            }
+        };
+        // set up a new edge paint Transformer
+        Transformer<String, Paint> edgePaint = new Transformer<String, Paint>() {
+            public Paint transform(String s) {
+            	boolean match = false;
+            	for (MyEdge pEdge : listOfEdges){
+            		// the edge name (s) may have whitespaces in the end, so remove them. 
+            		//String rightTrimmed = s.replaceAll("\\s+$", "");
+            		if (s.replaceAll("\\s+$", "").equals(pEdge.toString().replaceAll("\\s+$", ""))){
+            			// in this point the edge name is the same. now check if the 
+            			// start and end vertex are contained in listOfVertices
+            			if (listOfVertices.contains(pEdge.getStartNode()) &&
+            					listOfVertices.contains(pEdge.getEndNode()) ){
+            				match = true;
+            				// TODO Maybe here delete the pEdge from listOfEdges???
+            				// check this out later
+                			break;
+            			}
+            		}
+            	}
+            	if (match){
+            		return Color.RED;
+            	}
+                else 
+                	return Color.BLACK;
+                }
+            };
+            
+         // Setup up a new vertex to paint transformer...
+        Transformer<Integer,Paint> vertexPaint = new Transformer<Integer,Paint>() {
+            public Paint transform(Integer i) {
+            	if (listOfVertices.contains(i))
+            		return Color.YELLOW;
+            	else
+            		return Color.GREEN;
+            }
+        };  
+            
+            
+        vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
+        vv.getRenderContext().setEdgeStrokeTransformer(edgeStrokeTransformer);
+        vv.getRenderContext().setEdgeDrawPaintTransformer(edgePaint);
+        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+        vv.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);        
+        
+        JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(vv);
         frame.pack();

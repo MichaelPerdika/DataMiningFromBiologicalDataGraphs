@@ -65,20 +65,6 @@ public class Application {
 			// algorithm which shows the 2 graphs and highlights the common patterns 
 			clustAlg.highlightPatternsInGraphPair(0, 3);
 			
-			/****************The below code must be reworked ***********
-			GraphQueriesAPI.visualizePatternInGraph(
-					graphQueries.getSubGraphList().get(3),
-					graphQueries.getGraphList().get(0));
-			GraphQueriesAPI.visualizePatternInGraph(
-					graphQueries.getSubGraphList().get(3),
-					graphQueries.getGraphList().get(1));
-			GraphQueriesAPI.visualizePatternInGraph(
-					graphQueries.getSubGraphList().get(3),
-					graphQueries.getGraphList().get(2));
-			GraphQueriesAPI.visualizePatternInGraph(
-					graphQueries.getSubGraphList().get(3),
-					graphQueries.getGraphList().get(3));
-			/****************The above code must be reworked ***********/
 			System.out.println("Application ran succesfully...");		
 	}
 	

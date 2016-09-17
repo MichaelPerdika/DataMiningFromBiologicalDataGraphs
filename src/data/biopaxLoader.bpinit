@@ -2,7 +2,7 @@ src/data/TCA cycle I (prokaryotic).biopax
 src/data/TCA cycle, aerobic respiration.biopax
 src/data/TCA cycle II (plants and fungi).biopax
 src/data/TCA cycle.biopax
-#src/data/brassinosteroid biosynthesis I.biopax
-#src/data/ergosterol biosynthesis I.biopax
-#src/data/sterol:steryl ester interconversion.biopax
+src/data/brassinosteroid biosynthesis I.biopax
+src/data/ergosterol biosynthesis I.biopax
+src/data/sterol:steryl ester interconversion.biopax
 #src/data/sterol:steryl ester interconversion (yeast).biopax

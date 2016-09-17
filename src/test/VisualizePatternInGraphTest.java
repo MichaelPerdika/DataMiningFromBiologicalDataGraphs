@@ -2,6 +2,9 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +16,6 @@ import main.jung.MyEdge;
 
 public class VisualizePatternInGraphTest {
 	GraphQueriesAPI gQueris;
-	DirectedGraph<Integer, MyEdge> pattern;
 	DirectedGraph<Integer, MyEdge> graph;
 	
 	
@@ -24,7 +26,6 @@ public class VisualizePatternInGraphTest {
 	@Before
 	public void setUp() {
 		gQueris = new GraphQueriesAPI();
-		pattern = new DirectedSparseMultigraph<Integer, MyEdge>();
 		graph = new DirectedSparseMultigraph<Integer, MyEdge>();
 		
 
@@ -37,21 +38,22 @@ public class VisualizePatternInGraphTest {
 	 */
 	@After
 	public void tearDown() {
-		pattern = null;
 		graph = null;
 		gQueris = null;
 	}
 	
 	@Test
 	public void example1() {
-		/*********pattern*********/
-		TestingUtils.addEdge(pattern, "1.1.2.3", 5, 6);
 		/*********graph***********/
 		TestingUtils.addEdge(graph, "1.1.2.3", 0, 1);
 		TestingUtils.addEdge(graph, "2.3.4.5", 1, 2);
 		TestingUtils.addEdge(graph, "3.3.3.-", 2, 3);
 		
-		gQueris.visualizePatternInGraph(pattern, graph);
+		List<Integer> vertices = new ArrayList<Integer>();
+		List<MyEdge> edges = new ArrayList<MyEdge>();
+		vertices.add(0); vertices.add(1);
+		edges.add(new MyEdge("1.1.2.3", 0, 1));
+		GraphQueriesAPI.visualizePatternInGraph(graph,vertices, edges, "example1");
 		assertTrue(true);
 		while(true);
 	}

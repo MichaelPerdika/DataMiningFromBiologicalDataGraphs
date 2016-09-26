@@ -1,4 +1,5 @@
 package main.jung;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,27 +38,33 @@ public class Application {
 			
 			
 			// calculate the hierarchical clustering
-			//TODO clustering Algorithm
 			// initialize the clustering Algorithm
 			ClusteringAlgorithm clustAlg = new ClusteringAlgorithm(graphQueries);
+			
 			// calculate the pattern distances 
 			clustAlg.calculatePatternDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
+			//linkage for patterns using MIN
+			clustAlg.linkagePattern(linkMetric.MIN);
+			
+			
 			// calculate the graph distances 
-			clustAlg.calculateGraphDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
+			clustAlg.calculateGraphScores();
+			clustAlg.calculateGraphDistances(distMetric2.LINEAR);
+			//linkage for graphs using MIN
+			clustAlg.linkageGraph(linkMetric.MIN);
+
+
 			// print the similarity matrix of the patterns
 			clustAlg.printSimilarityMatrixPatterns();
 			// print the distance matrix of the patterns
 			clustAlg.printDistanceMatrixPatterns();
+			// print the score matrix of the graphs
+			clustAlg.printScoreMatrixGraphs();
 			// print the distance matrix of the graphs
-			//clustAlg.printDistanceMatrixGraphs();
+			clustAlg.printDistanceMatrixGraphs();
 			
-			// linkages
-			//linkage for patterns using MIN
-			clustAlg.linkagePattern(linkMetric.MIN);
 			// print clusters for Patterns
 			clustAlg.printPatternClusters();
-			//linkage for graphs using MIN
-			clustAlg.linkageGraph(linkMetric.MIN);
 			// print clusters for Graphs
 			clustAlg.printGraphClusters();
 			

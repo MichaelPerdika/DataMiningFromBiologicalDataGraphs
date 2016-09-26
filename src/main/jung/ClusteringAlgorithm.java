@@ -10,10 +10,16 @@ import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.sun.istack.internal.NotNull;
+
 import edu.uci.ics.jung.graph.DirectedGraph;
 
 enum distMetric {
 	   EUCLIDEAN, EUCLIDEAN_WITH_WEIGHTS, BIOPAX_METRIC //TODO
+	}
+
+enum distMetric2 {
+	   LINEAR //TODO
 	}
 
 enum linkMetric {
@@ -25,6 +31,7 @@ public class ClusteringAlgorithm {
 	GraphQueriesAPI gQAPI;
 	private List<Integer> graphSizes;
 	private List<List<Double>> distanceMatrixGraphs;
+	private List<List<Double>> scoreMatrixGraphs;
 	private List<Integer> patternSizes;
 	private List<List<Double>> distanceMatrixPatterns;
 	private List<List<Double>> similarityMatrixPatterns;
@@ -65,6 +72,7 @@ public class ClusteringAlgorithm {
 		// for the graph distance matrix
 		fillGraphSizes();
 		initializeDistanceMatrixGraphs();
+		initializeScoreMatrixGraphs();
 	}
 
 	/**
@@ -138,6 +146,17 @@ public class ClusteringAlgorithm {
 				rowList.add(null);
 			}
 			distanceMatrixGraphs.add(rowList);
+		}
+	}
+	
+	private void initializeScoreMatrixGraphs(){
+		scoreMatrixGraphs = new ArrayList<List<Double>>();
+		for (int i=0;i<graphSizes.size();i++){
+			List<Double> rowList = new ArrayList<Double>();
+			for (int j=0;j<graphSizes.size();j++){
+				rowList.add(null);
+			}
+			scoreMatrixGraphs.add(rowList);
 		}
 	}
 	
@@ -411,7 +430,6 @@ public class ClusteringAlgorithm {
 	    List<List<String[]>> edgeList = new ArrayList<List<String[]>>();
 	    List<List<String>> newCheck1 = new ArrayList<List<String>>();
 	    List<List<String>> newCheck2 = new ArrayList<List<String>>();
-	    List<String> originalVisitedPairs = DeepClone.deepClone(visitedPairs);
 	    
 	    for (int i=0;i<firstList.size();i++){
 	    	List<String> fL = firstList.get(i);
@@ -858,31 +876,6 @@ public class ClusteringAlgorithm {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	/**
-	 * this method calculates the distance matrix between every pair of graphs.
-	 * A distance metric (distMetric enum) must be passed.
-	 * @param metric 
-	 */
-	public void calculateGraphDistances(distMetric metric) {
-		//Iterate through all graphs.
-		for(int col=0;col<distanceMatrixGraphs.size();col++){
-			for(int row=0;row<distanceMatrixGraphs.size();row++){
-				// the main diagonal line has all zeros.
-				if (col==row) distanceMatrixGraphs.get(col).set(row, 0.0);
-				else{
-					distanceMatrixGraphs.get(col).set(row, calculateGraphDistancesCell(col,row, metric));
-				}
-			}
-		}
-	}
-	
 	/**
 	 * this method returns the distance of two graphs with index i,j.
 	 * 
@@ -934,56 +927,6 @@ public class ClusteringAlgorithm {
 	}
 	
 	/**
-	 * this method returns the distance of two graphs with index i,j.
-	 * 
-	 * Distance between graphs is calculated from the following metrics:
-	 * 1) The distance of two graphs with x, y number of edges respectively has a difference
-	 * of abs(x-y).
-	 * 2) A pattern with "x" number of edges has a weight of "x" points.
-	 * 
-	 * @param i index of graph(i)
-	 * @param j index of graph(j)
-	 * @param metric is the metric that is used in calculating the distance. 
-	 * EUCLIDEAN_WITH_WEIGHTS is default 
-	 * @return returns the distance of graphs graph(i), graph(j)
-	 */
-	private Double calculateGraphDistancesCell(int i, int j, distMetric metric) {
-		// TODO Auto-generated method stub
-		Double dist=0.0;
-		//1) distance between the edge count of graphs.
-		dist += Math.abs(graphSizes.get(i) - graphSizes.get(j));
-		//2) for every pattern that is found 
-		switch (metric)
-		{
-		case EUCLIDEAN_WITH_WEIGHTS:
-			for (int index=0;index<gQAPI.getSubGraphList().size();index++){
-				Integer cellI = gQAPI.getPatternTableCell(index, i);
-				Integer cellJ = gQAPI.getPatternTableCell(index, j);
-				int weight = gQAPI.getSubGraphList().get(index).getEdgeCount();
-				dist += weight*Math.sqrt(Math.pow(cellI - cellJ, 2));
-			}
-			break;
-		case EUCLIDEAN:
-			for (int index=0;index<gQAPI.getSubGraphList().size();index++){
-				Integer cellI = gQAPI.getPatternTableCell(index, i);
-				Integer cellJ = gQAPI.getPatternTableCell(index, j);
-				dist += Math.sqrt(Math.pow(cellI - cellJ, 2));
-			}
-			break;
-		case BIOPAX_METRIC:
-			for (int index=0;index<gQAPI.getSubGraphList().size();index++){
-				//TODO
-				continue;
-			}
-			break;
-		default:
-			//TODO do EUCLIDEAN_WITH_WEIGHTS
-		}
-		
-		return dist;
-	}
-
-	/**
 	 * this method prints the distanceMatrixPatterns
 	 */
 	public void printDistanceMatrixPatterns() {
@@ -1034,20 +977,54 @@ public class ClusteringAlgorithm {
 	/**
 	 * this method prints the distanceMatrix
 	 */
+	public void printScoreMatrixGraphs() {
+		// TODO Auto-generated method stub
+		
+		/**** print the grid******/
+		System.out.println("\nThe Score Matrix of graphs");
+		System.out.print("    ");
+		for (int num=0; num<scoreMatrixGraphs.size();num++){
+			System.out.print("g"+num+"     ");
+		}
+		System.out.println("");
+		for (int row=0;row<scoreMatrixGraphs.size();row++){
+			System.out.print("g"+row+"  ");
+			for (int col=0;col<scoreMatrixGraphs.get(row).size();col++){
+				// negative numbers have the '-' sign so print 1 char less
+				if ( row == col){
+					System.out.print("-----    ");
+				}
+				else if (scoreMatrixGraphs.get(row).get(col) < 0){
+					System.out.printf("%.2f    ", scoreMatrixGraphs.get(row).get(col));
+				}
+				else{
+					System.out.printf("%.3f    ", scoreMatrixGraphs.get(row).get(col));
+				}
+				
+			}
+			System.out.println("");
+		}
+		
+	}
+	
+	
+	/**
+	 * this method prints the distanceMatrix
+	 */
 	public void printDistanceMatrixGraphs() {
 		// TODO Auto-generated method stub
 		
 		/**** print the grid******/
 		System.out.println("\nThe Distance Matrix of graphs");
-		System.out.print("    ");
+		System.out.print("      ");
 		for (int num=0; num<distanceMatrixGraphs.size();num++){
-			System.out.print("g"+num+"   ");
+			System.out.print("g"+num+"     ");
 		}
 		System.out.println("");
 		for (int row=0;row<distanceMatrixGraphs.size();row++){
 			System.out.print("g"+row+"  ");
 			for (int col=0;col<distanceMatrixGraphs.get(row).size();col++){
-				System.out.print(distanceMatrixGraphs.get(row).get(col)+"  ");
+				System.out.printf("%.3f  ", distanceMatrixGraphs.get(row).get(col));
 			}
 			System.out.println("");
 		}
@@ -1088,6 +1065,7 @@ public class ClusteringAlgorithm {
 		}
 		else{
 			distanceMatrix = null;
+			System.out.println("error in linkage");
 			System.exit(1);
 		}
 		List<String> rowCols = new ArrayList<String>(); 
@@ -1219,6 +1197,7 @@ public class ClusteringAlgorithm {
 		else{
 			linkageDistances = null;
 			linkageClusters = null;
+			System.out.println("error in printClusters");
 			System.exit(1);
 		}
 		System.out.println("\nThe clusters created for "+type);
@@ -1377,5 +1356,264 @@ public class ClusteringAlgorithm {
 		//System.out.println("joining levels are "+joiningLvls);
 		return joiningLvls;
 	}
+
+	public void calculateGraphScores() {
+		
+		for (int col = 0; col < scoreMatrixGraphs.size(); col ++){	
+			for (int row = col; row < scoreMatrixGraphs.size(); row ++){
+				if (row == col) 
+					//distanceMatrixGraphs(row, col) = 0 
+					scoreMatrixGraphs.get(col).set(row, null);
+				else {
+					double score = getGraphCellScore(row, col);
+					// upper left
+					scoreMatrixGraphs.get(row).set(col, score);
+					// lower right
+					scoreMatrixGraphs.get(col).set(row, score);
+				}
+			}
+		}
+		// the score matrix should be ready by now. Now call the linkage and
+		// it should be ready to go???
+		
+	}
+
+	 
+	/**
+	* calculates the score/distance for the specific cell (i, j)
+	*/
+	private double getGraphCellScore(int i, int j){
+		// find the scores in the triplet Gi, Gj, pk / k e N
+		Map<String, Double> scoreMap = new HashMap<String, Double>();
+		List<String> incidentPattenrs = new ArrayList<String>();
+		// in pattern table rows are patters and colums are graphs.
+		List<List<Integer>> patTable = gQAPI.getPatternTableWhole();
+		for (int row = 0 ; row < patTable.size(); row++){
+			if ( (patTable.get(row).get(i) > 0) || (patTable.get(row).get(j) > 0) ){
+				scoreMap.put("p"+row, getTripletScore(i, j, row) );
+				incidentPattenrs.add("p"+row);
+			}
+			else{
+				scoreMap.put("p"+row, 0.0);
+			}
+		}
+		int totalNumber = incidentPattenrs.size();
+		// now i have the scores. Need to check the pattern linkage from the bottom till I find all 
+		// incident patterns.
+		// keep track of the incident patterns
+		
+		//return the only score no need to check further the clusters
+		if (totalNumber == 1)
+			return scoreMap.values().iterator().next(); 
+		// I don't want that
+		else if (totalNumber == 0){
+			System.out.println("error in getGraphCellScore 1");
+			System.exit(1); 
+		}
+		else{
+			// create graphScoreTable with size nxn / n --> number of graphs.
+			// In a previous method I should have a list that has the linking clusters/patterns 
+			// in each lvl. Suppose it as List<String> lvlLinkages
+			int lvl = 0;
+			for (String link: joinsPerLevelPatterns){
+				// skip lvl 0.
+				if (!link.equals("none")){
+					// link will be to concat of two clusters. Example p0-p1 or p0-p1-p2-p4.
+					// in this phase I need to split it successfully. 
+					System.out.println("link " + link);
+					System.out.println("scoreMap before " + scoreMap);
+					System.out.println("before link, lvl " + link +", "+ lvl);
+					updateScoreMap(link, scoreMap, lvl);
+					System.out.println("scoreMap after " + scoreMap);
+					// termination condition
+					List<String> filteredLink = new ArrayList<String>();
+					for (String l : link.split("-")){
+						if (incidentPattenrs.contains(l)){
+							filteredLink.add(l);
+						}
+					}
+					System.out.println("filteredLink " +filteredLink);
+					System.out.println("totalNumber " +totalNumber);
+					if (filteredLink.size() == totalNumber ){ 
+						//end the function with the latest score.
+						System.out.println("link "+ link);
+						System.out.println("scoreMap " + scoreMap);
+						return scoreMap.get(link); 
+					}
+				}
+				lvl++;
+			}
+		}
+		System.out.println(scoreMap);
+		// if the method gets in here return error. It should never reach this state
+		System.out.println("error in getGraphCellScore 2");
+		System.exit(1);
+		//it should never reach here. Just ignore the error message.
+		return 0;
+	}
+	
+
+	/**
+	* it mutates scoreMap
+	 * @param lvl 
+	 * @param scoreMap 
+	*/
+	
+	private void updateScoreMap(String link, 
+			Map<String, Double> scoreMap, int lvl){
+		List<String> splitted = Arrays.asList(link.split("-")); 
+		System.out.println("splitted "+ splitted);
+		String left, right;
+		int maxLvl = joinsPerLevelPatterns.size() - 1; 
+		double percentageDistance = 
+				linkageDistancesPatterns.get(lvl)/ 
+				linkageDistancesPatterns.get(maxLvl);
+		for (int i =0; i < splitted.size() - 1; i++){
+			left = ""; 
+			right = "";
+			for (int j=0 ; j<= i ;j++){
+				if (left.length() == 0)
+					left = left + splitted.get(j);
+				else
+					left = left + "-" + splitted.get(j);
+			}
+			for (int j = i+1; j <= splitted.size() - 1; j++ ) {
+				if (right.length() == 0 )
+					right = right + splitted.get(j);
+				else
+					right = right + "-" + splitted.get(j);
+			}
+			System.out.println("left " +left);
+			System.out.println("right " +right);
+			// since we iterate starting from left we need to check if right
+			// is already in scoreMap
+			if (scoreMap.containsKey(right) ){
+				// then we found the right cluster. Need to check if the lest already exists.
+				// if yes then ok do the math if not then it means that left is not incident pattern
+				// so add it to new cluster with the score of right.
+				if (scoreMap.containsKey(left) ){
+					// it already exists so do the math
+					double score;
+					if (scoreMap.get(left) > scoreMap.get(right) ){
+						
+						// for now lets assume that if they are +,+ give emphasis to the 
+						// biggest score. The same applies in -, - give emphasis to 
+						// biggest negative score. If it is +, - or -, + give emphasis to +.
+					
+						// then the left score is dominant so put as it is and the right 
+						// with the percentage. The percentage depends on the distance 
+						// from lvl 0. (I get the distance of maximum lvl and i divide 
+						// every lvl with this so i get percent from 0 to 100. 
+						// so this acts as a weight.
+						
+						// if one of them has value 0 ignore it and keep the others value
+						if (scoreMap.get(left) == 0) score = scoreMap.get(right);
+						else if (scoreMap.get(right) == 0) score = scoreMap.get(left);
+						// both non zero either with + or - value.
+						else{
+							score = scoreMap.get(left) + 
+							scoreMap.get(right)*percentageDistance;
+						}
+					}
+					else{
+						score = scoreMap.get(right) + 
+								scoreMap.get(left)*percentageDistance;
+					}
+					System.out.println("                       mjk");
+					scoreMap.put(link, score);
+					break;
+				}
+				else{
+					System.out.println("error in updateScoresMap");
+					System.exit(1);
+				}
+			}
+		}
+	}
+
+
+
+	/**
+	 * 
+	 * @param i graph i
+	 * @param j graph j
+	 * @param patIndex pattern index
+	 * @return
+	 */
+	private double getTripletScore(int i, int j, int patIndex){
+
+		int cell1 = gQAPI.getPatternTableWhole().get(patIndex).get(i);
+		int cell2 = gQAPI.getPatternTableWhole().get(patIndex).get(j);
+		
+		
+		int patDegree = patternSizes.get(patIndex);
+		int g1Degree = graphSizes.get(i);
+		int g2Degree = graphSizes.get(j);
+		double percent = (double)patDegree/ (double)(g1Degree + g2Degree);
+		// min(cell1, cell2) this
+		// is the common minimum occurrences of pattern in these graphs 
+		// multiplied by a percent of 
+		
+		// abs(cell1 - cell2) if the occurrences of pattern in the 
+		// graphs are different then subtract this amount 
+		// percent = something like "similarity" or "weight"
+		return percent* (Math.min(cell1,cell2) - Math.abs(cell1 - cell2) );
+	}
+
+	/**
+	 * this method creates a distance matrix for graphs from the 
+	 * scoreMatrixGraphs
+	 * @param linear 
+	 */
+	public void calculateGraphDistances(distMetric2 metric) {
+		//Iterate through all graphs.
+		double min = Double.MAX_VALUE, max = Double.MIN_VALUE;
+		for(int col=0;col<scoreMatrixGraphs.size();col++){
+			for(int row=col+1;row<scoreMatrixGraphs.size();row++){
+				if (scoreMatrixGraphs.get(row).get(col) > max){
+					max = scoreMatrixGraphs.get(row).get(col);
+				}
+				if (scoreMatrixGraphs.get(row).get(col) < min){
+					min = scoreMatrixGraphs.get(row).get(col);
+				}
+			}
+		}
+		
+		for(int col=0;col<distanceMatrixGraphs.size();col++){
+			for(int row=col;row<distanceMatrixGraphs.size();row++){
+				// the main diagonal line has all zeros.
+				if (col==row) distanceMatrixGraphs.get(col).set(row, 0.0);
+				else{
+					switch (metric)
+					{
+					case LINEAR:
+						// the score can get negative and positive values. With positive
+						// the best match and negative the worst. So i want a linear
+						// function y = lambda * x + b. with negative lambda. From
+						// convention we set distance to have values [0, 1] with
+						// 0 when gi == gi (the same graph). So we add a small bias
+						// e.g. 0.1 to start and end to 1.0
+						double bias = 0.1;
+						// we want f(+max) --> bias and f(-min) --> 1.0
+						// so after calculations we get
+						// f(score) --> -(1.0-bias)(in distance)
+						double score = scoreMatrixGraphs.get(row).get(col);
+						double dist = -(1.0 - bias)/(max - min) * score + 
+								bias + ((1.0 - bias) * max)/(max - min);
+						
+						// upper right
+						distanceMatrixGraphs.get(col).set(row, dist);
+						// lower left
+						distanceMatrixGraphs.get(row).set(col, dist);
+						break;
+					default:
+						//TODO LINEAR
+					}
+					
+				}
+			}
+		}
+	}
+	
 	
 }

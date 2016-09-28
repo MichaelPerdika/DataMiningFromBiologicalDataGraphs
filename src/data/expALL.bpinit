@@ -1,0 +1,18 @@
+src/data/L-Lysine Biosynthesis/L-lysine biosynthesis I.biopax
+src/data/L-Lysine Biosynthesis/L-lysine biosynthesis II.biopax
+src/data/L-Lysine Biosynthesis/L-lysine biosynthesis III.biopax
+src/data/L-Lysine Biosynthesis/L-lysine biosynthesis IV.biopax
+src/data/L-Lysine Biosynthesis/L-lysine biosynthesis V.biopax
+src/data/L-Lysine Biosynthesis/L-lysine biosynthesis VI.biopax
+src/data/TCA Cycle/TCA cycle I (prokaryotic).biopax
+src/data/TCA Cycle/TCA cycle II (plants and fungi).biopax
+src/data/TCA Cycle/TCA cycle III (animals).biopax
+src/data/TCA Cycle/TCA cycle IV (2-oxoglutarate decarboxylase).biopax
+#src/data/TCA Cycle/TCA cycle V (2-oxoglutarate:ferredoxin oxidoreductase) (lvl2).biopax
+src/data/TCA Cycle/TCA cycle VII (acetate-producers).biopax
+#src/data/TCA Cycle/TCA cycle VIII (helicobacter) (lvl2).biopax
+#src/data/Cholesterol Biosynthesis/cholesterol biosynthesis I(lvl2).biopax
+#src/data/Cholesterol Biosynthesis/cholesterol biosynthesis II (via 24,25-dihydrolanosterol)(lvl2).biopax
+#src/data/Cholesterol Biosynthesis/cholesterol biosynthesis III (via desmosterol)(lvl2).biopax
+src/data/Cholesterol Biosynthesis/Lipid A-core biosynthesis(lvl3).biopax
+#src/data/Cholesterol Biosynthesis/plant sterol biosynthesis(lvl2).biopax

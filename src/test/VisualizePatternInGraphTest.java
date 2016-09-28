@@ -53,7 +53,7 @@ public class VisualizePatternInGraphTest {
 		List<MyEdge> edges = new ArrayList<MyEdge>();
 		vertices.add(0); vertices.add(1);
 		edges.add(new MyEdge("1.1.2.3", 0, 1));
-		GraphQueriesAPI.visualizePatternInGraph(graph,vertices, edges, "example1");
+		gQueris.visualizePatternInGraph(graph,vertices, edges, "example1");
 		assertTrue(true);
 		while(true);
 	}

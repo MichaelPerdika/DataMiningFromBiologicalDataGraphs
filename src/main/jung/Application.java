@@ -14,7 +14,18 @@ public class Application {
 			
 			
 			// assign the path to the .bpinit file that the .biopax files are stored
-			String biopaxLoader = "src/data/biopaxLoader.bpinit";
+			// artificial test
+			String biopaxLoader0 = "src/data/biopaxLoader.bpinit";
+			// L-Lysine Biosynthesis
+			String biopaxLoader1 = "src/data/exp1.bpinit";
+			// TCA Cycle
+			String biopaxLoader2 = "src/data/exp2.bpinit";
+			// Cholesterol Biosynthesis  +   plant sterol biosynthesis  + Lipid A-core biosynthesis
+			String biopaxLoader3 = "src/data/exp3.bpinit";
+			// exp1 + exp2 + exp3
+			String biopaxLoader4 = "src/data/expALL.bpinit";
+			
+			String biopaxLoader = biopaxLoader0;
 			System.out.println("Launching Application, reading .biopax data from: "+biopaxLoader);
 			// load all .biopax files from a .bpinit and create the graphList
 			List<DirectedGraph<Integer, MyEdge>> graphList =
@@ -23,7 +34,7 @@ public class Application {
 			// initialize the API
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphList);
 			// find patterns in graphs. The main algorithm.
-			graphQueries.findPatternsInGraphs(1.0);
+			graphQueries.findPatternsInGraphs(0.5);
 			// print the pattern table
 			graphQueries.printApplicationOutput();
 			
@@ -70,7 +81,7 @@ public class Application {
 			
 			// Queries about: the visualization of 2 graphs in each level of the clustering
 			// algorithm which shows the 2 graphs and highlights the common patterns 
-			clustAlg.highlightPatternsInGraphPair(0, 3);
+			clustAlg.highlightPatternsInGraphPair(0, 2);
 			
 			System.out.println("Application ran succesfully...");		
 	}

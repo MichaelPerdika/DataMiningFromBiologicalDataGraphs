@@ -19,6 +19,9 @@ import java.util.regex.Pattern;
 import javax.swing.JFrame;
 
 import org.apache.commons.collections15.Transformer;
+import org.apache.commons.io.output.ThresholdingOutputStream;
+
+import com.ibm.icu.util.GlobalizationPreferences;
 
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -1116,7 +1119,7 @@ public class GraphQueriesAPI {
 	 * static method that can visualize a List of Directed graphs
 	 * @param graphList
 	 */
-	public static void visualizeListOfGraphs(
+	public void visualizeListOfGraphs(
 			List<DirectedGraph<Integer, MyEdge>> graphList, String prefix) {
 
 		int num = 0;
@@ -1153,7 +1156,7 @@ public class GraphQueriesAPI {
 	 * This method visualizes a graph
 	 * @param graph
 	 */
-	public static void visualizeGraph(DirectedGraph<Integer, MyEdge> graph, String title) {
+	public void visualizeGraph(DirectedGraph<Integer, MyEdge> graph, String title) {
 		// The visualization. Code from JUNG
 		Graph<Integer, String> covGraph = convertGraphForVisualization(graph);
 		
@@ -1273,12 +1276,12 @@ public class GraphQueriesAPI {
 	 * @param listOfEdges
 	 * @param title
 	 */
-	public static void visualizePatternInGraph(
+	public void visualizePatternInGraph(
 			DirectedGraph<Integer, MyEdge> graph, 
 			List<Integer> listOfVertices, List<MyEdge> listOfEdges, String title){
 		
 		Graph<Integer, String> covGraph = 
-				GraphQueriesAPI.convertGraphForVisualization(graph);
+				convertGraphForVisualization(graph);
 		
 		// Layout<V, E>, VisualizationComponent<V,E>
         Layout<Integer, String> layout = new CircleLayout(covGraph);
@@ -1353,7 +1356,7 @@ public class GraphQueriesAPI {
 	 * @param graph
 	 * @return The convenient Graph<Integer, String>
 	 */
-	public static Graph<Integer, String> convertGraphForVisualization(
+	public Graph<Integer, String> convertGraphForVisualization(
 			DirectedGraph<Integer, MyEdge> graph) {
 		Graph<Integer, String> convGraph = new DirectedSparseMultigraph<Integer, String>();
 		String emptyEdgeNameIter = "";
@@ -1373,15 +1376,17 @@ public class GraphQueriesAPI {
 				// print edge eCNumber
 				// in visualization if it contains two or more edges with same
 				// eCNumber it will throw exception. So just add a space for convenience.
-				if (convGraph.containsEdge(myEdge.toString())){
-					String tempEdge = myEdge.toString()+" ";
+				
+				//if (convGraph.containsEdge(myEdge.toString())){
+				if (convGraph.containsEdge(myEdge.toString(globalThreshold))){
+					String tempEdge = myEdge.toString(globalThreshold)+" ";
 					while(convGraph.containsEdge(tempEdge)){
 						tempEdge += " ";
 					}
 					convGraph.addEdge(tempEdge, myEdge.getStartNode(), myEdge.getEndNode());
 				}
 				else{
-					convGraph.addEdge(myEdge.toString(), myEdge.getStartNode(), myEdge.getEndNode());
+					convGraph.addEdge(myEdge.toString(globalThreshold), myEdge.getStartNode(), myEdge.getEndNode());
 				}
 			}
 		}

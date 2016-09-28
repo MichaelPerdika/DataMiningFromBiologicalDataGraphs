@@ -1274,7 +1274,7 @@ public class ClusteringAlgorithm {
 			listOfIndexes.add(Integer.parseInt(pN.substring(1)));
 		}
 		if (listOfIndexes.size() == 0){
-			GraphQueriesAPI.visualizePatternInGraph(
+			gQAPI.visualizePatternInGraph(
 					graph, new ArrayList<Integer>(), 
 					new ArrayList<MyEdge>(), title);
 		}
@@ -1298,6 +1298,7 @@ public class ClusteringAlgorithm {
 						if (!listOfVertices.contains(vertex))
 							listOfVertices.add(vertex);
 					// append the new edges to listOfVertices
+					
 					for (MyEdge edge: edges){
 						boolean match = false;
 						for ( MyEdge e : listOfEdges){
@@ -1306,14 +1307,15 @@ public class ClusteringAlgorithm {
 								break;
 							}
 						}
-						if (match)
+						if (!match)
 							listOfEdges.add(edge);
 					}
 					
 					}
 				}
 			}
-			GraphQueriesAPI.visualizePatternInGraph(
+			System.out.println("listOfEdges " +listOfEdges);
+			gQAPI.visualizePatternInGraph(
 				graph, listOfVertices, listOfEdges, title+" "+patNames.toString());
 		}
 	}
@@ -1420,11 +1422,11 @@ public class ClusteringAlgorithm {
 				if (!link.equals("none")){
 					// link will be to concat of two clusters. Example p0-p1 or p0-p1-p2-p4.
 					// in this phase I need to split it successfully. 
-					System.out.println("link " + link);
-					System.out.println("scoreMap before " + scoreMap);
-					System.out.println("before link, lvl " + link +", "+ lvl);
+					//System.out.println("link " + link);
+					//System.out.println("scoreMap before " + scoreMap);
+					//System.out.println("before link, lvl " + link +", "+ lvl);
 					updateScoreMap(link, scoreMap, lvl);
-					System.out.println("scoreMap after " + scoreMap);
+					//System.out.println("scoreMap after " + scoreMap);
 					// termination condition
 					List<String> filteredLink = new ArrayList<String>();
 					for (String l : link.split("-")){
@@ -1432,22 +1434,22 @@ public class ClusteringAlgorithm {
 							filteredLink.add(l);
 						}
 					}
-					System.out.println("filteredLink " +filteredLink);
-					System.out.println("totalNumber " +totalNumber);
+					//System.out.println("filteredLink " +filteredLink);
+					//System.out.println("totalNumber " +totalNumber);
 					if (filteredLink.size() == totalNumber ){ 
 						//end the function with the latest score.
-						System.out.println("link "+ link);
-						System.out.println("scoreMap " + scoreMap);
+						//System.out.println("link "+ link);
+						//System.out.println("scoreMap " + scoreMap);
 						return scoreMap.get(link); 
 					}
 				}
 				lvl++;
 			}
 		}
-		System.out.println(scoreMap);
+		//System.out.println(scoreMap);
 		// if the method gets in here return error. It should never reach this state
-		System.out.println("error in getGraphCellScore 2");
-		System.exit(1);
+		//System.out.println("error in getGraphCellScore 2");
+		//System.exit(1);
 		//it should never reach here. Just ignore the error message.
 		return 0;
 	}
@@ -1462,7 +1464,7 @@ public class ClusteringAlgorithm {
 	private void updateScoreMap(String link, 
 			Map<String, Double> scoreMap, int lvl){
 		List<String> splitted = Arrays.asList(link.split("-")); 
-		System.out.println("splitted "+ splitted);
+		//System.out.println("splitted "+ splitted);
 		String left, right;
 		int maxLvl = joinsPerLevelPatterns.size() - 1; 
 		double percentageDistance = 
@@ -1483,8 +1485,8 @@ public class ClusteringAlgorithm {
 				else
 					right = right + "-" + splitted.get(j);
 			}
-			System.out.println("left " +left);
-			System.out.println("right " +right);
+			//System.out.println("left " +left);
+			//System.out.println("right " +right);
 			// since we iterate starting from left we need to check if right
 			// is already in scoreMap
 			if (scoreMap.containsKey(right) ){
@@ -1519,7 +1521,7 @@ public class ClusteringAlgorithm {
 						score = scoreMap.get(right) + 
 								scoreMap.get(left)*percentageDistance;
 					}
-					System.out.println("                       mjk");
+					//System.out.println("                       mjk");
 					scoreMap.put(link, score);
 					break;
 				}

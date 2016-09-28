@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 public class MyEdge {
 	private String edgeRDFid;
@@ -174,6 +175,77 @@ public class MyEdge {
 		*/
     }
 
+	public String toString(double threshold) {
+		//TODO
+		if (threshold == 1.0) return toString();
+		//else
+		List<List<String>> x = parseEdgeECNumber();
+		String temp = "";
+		for (String t : eCNumber){
+			String[] splitted = t.split(Pattern.quote("."));
+			String truncated;
+			if (splitted.length == 0) truncated = "";
+			else{
+				// hard coded here
+				if (threshold == 0.75){
+					if (splitted.length > 3){
+						truncated = splitted[0]+"."+splitted[1]+"."+splitted[2]+".-";
+					}
+					else truncated = t;
+				}
+				else if (threshold == 0.5){
+					if (splitted.length > 2){
+						truncated = splitted[0]+"."+splitted[1]+".-";
+					}
+					else truncated = t;
+				}
+				else if (threshold == 0.25){
+					if (splitted.length > 3){
+						truncated = splitted[0]+".-";
+					}
+					else truncated = t;
+				}
+				else{
+					// just for safety
+					truncated = t;
+				}
+			}
+			temp += truncated+" ";
+		}
+		return temp;
+    }
+	
+	/**
+	 * code taken from GraphQueriesAPI
+	 * @return
+	 */
+	private List<List<String>> parseEdgeECNumber(){
+		String[] eCNumbers = this.getECNumber();
+		ArrayList<List<String>> listOfStrings = 
+				new ArrayList<List<String>>();
+		// Check if it has empty ECNumber then get from emptyECNumbersMap *ID
+		if ( (eCNumbers[0].length() > 0) && (eCNumbers[0].substring(0, 1).equals("*")) ){ 
+			//System.out.println(eCNumbers[0]);
+			//System.out.println(getEmptyECNumbersMap().get(eCNumbers[0]));
+			ArrayList<String> tempList = new ArrayList<String>();
+			tempList.add(eCNumbers[0]);
+			listOfStrings.add(tempList);
+			return listOfStrings;
+		}
+		
+		//iterate through the ECNumbers
+		for ( int i=0 ;i<eCNumbers.length;i++){
+			ArrayList<String> tempList = new ArrayList<String>();
+			String[] subECNum = eCNumbers[i].split(Pattern.quote(".")); // Split on period.
+			//iterate inside an ECNumber
+			for (int j=0;j<subECNum.length;j++){
+				tempList.add(subECNum[j]);
+			}
+			listOfStrings.add(tempList);
+		}
+		return listOfStrings;
+	}
+	
 	public String getEdgeRDFid() {
 		return this.edgeRDFid;
 	}

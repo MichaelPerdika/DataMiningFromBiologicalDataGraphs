@@ -1314,7 +1314,7 @@ public class ClusteringAlgorithm {
 					}
 				}
 			}
-			System.out.println("listOfEdges " +listOfEdges);
+			//System.out.println("listOfEdges " +listOfEdges);
 			gQAPI.visualizePatternInGraph(
 				graph, listOfVertices, listOfEdges, title+" "+patNames.toString());
 		}

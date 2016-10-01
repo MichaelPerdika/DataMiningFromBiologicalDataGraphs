@@ -288,7 +288,7 @@ public class GraphQueriesAPI {
 	public int getOccurrencesOfPatternInGraph(
 			DirectedGraph<Integer, MyEdge> subGraph,
 			DirectedGraph<Integer, MyEdge> graph, double threshold) {
-		System.out.println("ENTER");
+		//System.out.println("ENTER");
 		// TODO Auto-generated method stub		
 		// pattern must be smaller than the graph.
 		if (subGraph.getEdgeCount()>graph.getEdgeCount() 
@@ -302,10 +302,10 @@ public class GraphQueriesAPI {
 			for (MyEdge gEdge : graph.getEdges()){
 				MyEdge comEdge = getCommonEdgeFromThreshold(sEdge, gEdge, threshold);
 				// if there is no comEdge (null) or it doesn't match the patEdge return
-				System.out.println(sEdge.toString() +" : "+ gEdge.toString());
+				//System.out.println(sEdge.toString() +" : "+ gEdge.toString());
 				if (comEdge== null || !comEdge.isIdentical(sEdge)) continue;//do nothing
 				// there is a match. Create or append in graph list.
-				System.out.println("match");
+				//System.out.println("match");
 				List<DirectedGraph<Integer, MyEdge>> withNewEdge = 
 						getGraphListWithNewEdge(
 								new ArrayList<DirectedGraph<Integer, MyEdge>>(commonGraphList),
@@ -319,9 +319,11 @@ public class GraphQueriesAPI {
 		for (DirectedGraph<Integer, MyEdge> comGraph : commonGraphList){
 			if (graphEquality(comGraph, subGraph)) occurences++;
 		}
+		/*
 		System.out.println("common: "+commonGraphList);
 		System.out.println("pattern: "+subGraph);
 		System.out.println("occurrences: "+occurences);
+		*/
 		return occurences;
 	}
 
@@ -393,16 +395,32 @@ public class GraphQueriesAPI {
 					if(comEdge != null){
 						DirectedGraph<Integer, MyEdge> commonSubGraph = 
 								new DirectedSparseMultigraph<Integer, MyEdge>();
+						// visitedVertices is used because we need to have the information of the 
+						// vertices of the second graph. In commonGraphs the information
+						// about vertices are only from the first graph. This way is more robust
+						Map<String, List<Integer>> visitedVertices = 
+								new HashMap<String, List<Integer>>();
 						appendNextEdgesToCommonSubGraph(commonSubGraph, 
-								graph1, graph2, edge1, edge2, comEdge, threshold);
+								graph1, graph2, edge1, edge2, comEdge, threshold, visitedVertices);
 						appendPreviousEdgesToCommonSubGraph(commonSubGraph, 
-								graph1, graph2, edge1, edge2, comEdge, threshold);
+								graph1, graph2, edge1, edge2, comEdge, threshold, visitedVertices);
 						//this might need rework
 						commonSubGraphList.add(commonSubGraph);
 					}
 				}
 			}		
 		}
+		/** Redundant for debugging **/
+		for (DirectedGraph<Integer, MyEdge> x : commonSubGraphList){
+			int num1 = getOccurrencesOfPatternInGraph(x, graph1, threshold);
+			int num2 = getOccurrencesOfPatternInGraph(x, graph2, threshold);
+			if ( (num1 == 0) || (num2 == 0) ){
+				System.out.println("Error in findCommonSubGraphsBetweenTwoGraphs: "
+						+ "there has been found an erronous common pattern");
+				System.exit(1);
+			}
+		}
+		/** end **/
 		return commonSubGraphList;
 	}
 	
@@ -606,10 +624,12 @@ public class GraphQueriesAPI {
 	 */
 	private void appendNextEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
 			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, 
-			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold) {
+			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold,
+			Map<String, List<Integer>> visitedVertices) {
 		// Insert the common edge. It doesn't matter which vertices 
 		// we add edge1 or edge2. Add edge1 vertices as convention
-		if (!graphContainsEdge(commonSubGraph, comEdge)){
+		if (!graphContainsEdge(commonSubGraph, comEdge) && 
+				visitedVerticesOk(visitedVertices, edge1, edge2)){
 			commonSubGraph.addEdge(comEdge, edge1.getStartNode(), edge1.getEndNode());
 			
 			Collection<MyEdge> nextEdges1 = graph1.getOutEdges(edge1.getEndNode());
@@ -619,7 +639,7 @@ public class GraphQueriesAPI {
 					MyEdge nextComEdge = getCommonEdgeFromThreshold(next1, next2, threshold);
 					if(nextComEdge != null){
 						appendNextEdgesToCommonSubGraph(commonSubGraph,
-								graph1,graph2,next1,next2, nextComEdge,threshold);
+								graph1,graph2,next1,next2, nextComEdge,threshold, visitedVertices);
 					}
 				}
 			}
@@ -627,6 +647,54 @@ public class GraphQueriesAPI {
 		//else do nothing just return from the method
 	}
 
+	/**
+	 * this method checks if both edges have (or not) their starting vertices in the visitedVertices,
+	 * or if they have both (or not) ending vertices in visitedVertices. IF true IT ALSO APPENDS 
+	 * THE VERTICES TO THE MAP
+	 * @param visitedVertices
+	 * @param edge1
+	 * @param edge2
+	 * @return 
+	 */
+	private boolean visitedVerticesOk(Map<String, List<Integer>> visitedVertices, 
+			MyEdge edge1, MyEdge edge2) {
+		List<Integer> vertices1, vertices2;
+		if (visitedVertices.isEmpty()){
+			vertices1 = new ArrayList<Integer>();
+			vertices2 = new ArrayList<Integer>();
+			vertices1.add(edge1.getStartNode());
+			vertices1.add(edge1.getEndNode());
+			vertices2.add(edge2.getStartNode());
+			vertices2.add(edge2.getEndNode());
+			visitedVertices.put("first", vertices1);
+			visitedVertices.put("second", vertices2);
+			return true;
+		}
+		else{
+			vertices1 = visitedVertices.get("first");
+			vertices2 = visitedVertices.get("second");
+			int start1 = edge1.getStartNode();
+			int start2 = edge2.getStartNode();
+			// they must both contain the start nodes or both not containing. If only one
+			// contains then it is not ok and return false. So i want NOT XOR for true
+			if ( (vertices1.contains(start1) ^ vertices2.contains(start2)) ){
+				return false;
+			}
+			
+			// same here
+			int end1 = edge1.getEndNode();
+			int end2 = edge2.getEndNode();
+			if ( (vertices1.contains(end1) ^ vertices2.contains(end2)) ){
+				return false;
+			}
+			// so everything is ok here so return true and fill the visited vertices
+			if (!vertices1.contains(start1)) vertices1.add(start1);
+			if (!vertices1.contains(end1)) vertices1.add(end1);
+			if (!vertices2.contains(start2)) vertices2.add(start2);
+			if (!vertices2.contains(end2)) vertices2.add(end2);
+			return true;
+		}
+	}
 
 	/**
 	 * recursive method that will add all the previous edges to commonSubGraph.
@@ -643,14 +711,15 @@ public class GraphQueriesAPI {
 	 */
 	private void appendPreviousEdgesToCommonSubGraph(DirectedGraph<Integer, MyEdge> commonSubGraph,
 			DirectedGraph<Integer, MyEdge> graph1, DirectedGraph<Integer, MyEdge> graph2, 
-			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold) {
+			MyEdge edge1, MyEdge edge2, MyEdge comEdge, double threshold,
+			Map<String, List<Integer>> visitedVertices) {
 		// TODO Auto-generated method stub
 		//this has to be here because when going backward to see previous edges these edges may
 		//have more than 1 next edges. So need to search these branches first before going backwards
 		//again. If the next edges are already in the commonSubGraph then "appendNextEdgesToCommonSubGraph"
 		// will do nothing
 		appendNextEdgesToCommonSubGraph(commonSubGraph, 
-				graph1, graph2, edge1, edge2, comEdge, threshold);
+				graph1, graph2, edge1, edge2, comEdge, threshold, visitedVertices);
 		
 		// Here we append only the previous ones.
 		Collection<MyEdge> previousEdges1 = graph1.getInEdges(edge1.getStartNode());
@@ -662,7 +731,7 @@ public class GraphQueriesAPI {
 				if (!graphContainsEdge(commonSubGraph, prevComEdge)){
 					if(prevComEdge !=null){
 						appendPreviousEdgesToCommonSubGraph(commonSubGraph, graph1, graph2, 
-								previous1, previous2, prevComEdge, threshold);
+								previous1, previous2, prevComEdge, threshold, visitedVertices);
 					}
 				}
 			}

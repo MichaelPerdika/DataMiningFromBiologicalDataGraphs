@@ -12,7 +12,6 @@ public class Application {
 
 	public static void main(String[] args)  {
 			
-			
 			// assign the path to the .bpinit file that the .biopax files are stored
 			// artificial test
 			String biopaxLoader0 = "src/data/biopaxLoader.bpinit";
@@ -25,7 +24,7 @@ public class Application {
 			// exp1 + exp2 + exp3
 			String biopaxLoader4 = "src/data/expALL.bpinit";
 			
-			String biopaxLoader = biopaxLoader0;
+			String biopaxLoader = biopaxLoader4;
 			System.out.println("Launching Application, reading .biopax data from: "+biopaxLoader);
 			// load all .biopax files from a .bpinit and create the graphList
 			List<DirectedGraph<Integer, MyEdge>> graphList =
@@ -34,18 +33,18 @@ public class Application {
 			// initialize the API
 			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphList);
 			// find patterns in graphs. The main algorithm.
-			graphQueries.findPatternsInGraphs(0.5);
+			graphQueries.findPatternsInGraphs(1.0);
 			// print the pattern table
 			graphQueries.printApplicationOutput();
 			
-			/**
+			/** comment that **/
 			//visualize graphList
 			graphQueries.visualizeGraphList();
 			//visualize subGraphList
-			graphQueries.visualizeSubGraphList();
+			//graphQueries.visualizeSubGraphList();
 			//visualize subGraphListComplementary
-			graphQueries.visualizeComplementarySubGraphList();
-			*/
+			//graphQueries.visualizeComplementarySubGraphList();
+			/** */
 			
 			
 			// calculate the hierarchical clustering
@@ -81,7 +80,7 @@ public class Application {
 			
 			// Queries about: the visualization of 2 graphs in each level of the clustering
 			// algorithm which shows the 2 graphs and highlights the common patterns 
-			clustAlg.highlightPatternsInGraphPair(0, 2);
+			//clustAlg.highlightPatternsInGraphPair(0, 2);
 			
 			System.out.println("Application ran succesfully...");		
 	}

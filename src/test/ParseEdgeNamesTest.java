@@ -90,6 +90,7 @@ public class ParseEdgeNamesTest {
 	public void twoEmptyStrings() {
 		List<String> s = new ArrayList<String>();
 		myEdge = new MyEdge("", 0, 1);
+		s.add("");
 		System.out.println(s);
 		System.out.println(gQueris.parseEdgeNames(myEdge).get(0));
 		assertTrue(TestingUtils.equalLists(gQueris.parseEdgeNames(myEdge).get(0), s));

@@ -53,7 +53,7 @@ public class GetCommonEdgeFromThresholdTest {
 	public void oneNameEqual50() {
 		edge1 = new MyEdge("2.3.3.1", 0, 1);
 		edge2 = new MyEdge("2.3.5.5", 0, 1);
-		resultEdge = new MyEdge("2.3.*", 0, 1);
+		resultEdge = new MyEdge("2.3.-", 0, 1);
 		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 1)));
 		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.75)));
 		assertTrue(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.5)));
@@ -75,7 +75,7 @@ public class GetCommonEdgeFromThresholdTest {
 	public void twoNameEqual50case1() {
 		edge1 = new MyEdge(new String[] {"2.3.3.1", "4.1.1.1"}, 0, 1);
 		edge2 = new MyEdge(new String[] {"2.3.3.3"}, 0, 1);
-		resultEdge = new MyEdge("2.3.3.*", 0, 1);
+		resultEdge = new MyEdge("2.3.3.-", 0, 1);
 		// 0.75 * 1/2 + 0*1/2 = 0.375
 		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.376)));
 		assertTrue(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.375)));
@@ -86,7 +86,7 @@ public class GetCommonEdgeFromThresholdTest {
 	public void twoNameEqual50case2() {
 		edge1 = new MyEdge(new String[] {"2.3.5.5", "2.3.3.4"}, 0, 1);
 		edge2 = new MyEdge(new String[] {"2.3.3.1"}, 0, 1);
-		resultEdge = new MyEdge(new String[] {"2.3.*", "2.3.3.*"}, 0, 1);
+		resultEdge = new MyEdge(new String[] {"2.3.-", "2.3.3.-"}, 0, 1);
 		// 0.5 *1/2 + 0.75 * 1/2 = 0.625
 		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.63)));
 		assertTrue(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.625)));
@@ -97,7 +97,7 @@ public class GetCommonEdgeFromThresholdTest {
 	public void twoNameEqual50case3() {
 		edge1 = new MyEdge(new String[] {"2.3.5.5", "4.4.4.4"}, 0, 1);
 		edge2 = new MyEdge(new String[] {"2.3.3.1", "4.4.1.1"}, 0, 1);
-		resultEdge = new MyEdge(new String[] {"2.3.*", "4.4.*"}, 0, 1);
+		resultEdge = new MyEdge(new String[] {"2.3.-", "4.4.-"}, 0, 1);
 		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.6)));
 		assertTrue(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.5)));
 		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0)));

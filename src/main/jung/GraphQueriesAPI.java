@@ -417,6 +417,12 @@ public class GraphQueriesAPI {
 			if ( (num1 == 0) || (num2 == 0) ){
 				System.out.println("Error in findCommonSubGraphsBetweenTwoGraphs: "
 						+ "there has been found an erronous common pattern");
+				/*
+				System.out.println("Numbers: "+num1+", "+num2);
+				System.out.println("graph1:\n" + graph1);
+				System.out.println("graph2:\n" + graph2);
+				System.out.println("common pat:\n" + x);
+				*/
 				System.exit(1);
 			}
 		}
@@ -466,7 +472,6 @@ public class GraphQueriesAPI {
 				 */
 				if (e1.get(i).get(0).isEmpty() && e2.get(j).get(0).isEmpty()) 
 					return null;
-				/******/
 				double tempScore = getParsedEdgeScore(e1.get(i), e2.get(j));
 				String tempName = getParsedEdgeName(e1.get(i), e2.get(j));
 				if (maxScore < tempScore){
@@ -553,7 +558,7 @@ public class GraphQueriesAPI {
 		if ((length1 == 0 && length2!=0) || (length1 !=0 && length2==0)) return 0;
 		double numOfMatches =0;
 		for (int i=0; i<minLength;i++){
-			if (subStr1.get(i).equals(subStr2.get(i))) numOfMatches++;
+			if ( (subStr1.get(i).equals(subStr2.get(i))) && !subStr1.get(i).equals("-")) numOfMatches++;
 			else break;
 		}
 		return numOfMatches/maxLength;

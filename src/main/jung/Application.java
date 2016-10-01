@@ -39,7 +39,7 @@ public class Application {
 			
 			/** comment that **/
 			//visualize graphList
-			graphQueries.visualizeGraphList();
+			//graphQueries.visualizeGraphList();
 			//visualize subGraphList
 			//graphQueries.visualizeSubGraphList();
 			//visualize subGraphListComplementary
@@ -80,7 +80,7 @@ public class Application {
 			
 			// Queries about: the visualization of 2 graphs in each level of the clustering
 			// algorithm which shows the 2 graphs and highlights the common patterns 
-			//clustAlg.highlightPatternsInGraphPair(0, 2);
+			clustAlg.highlightPatternsInGraphPair(0, 2);
 			
 			System.out.println("Application ran succesfully...");		
 	}

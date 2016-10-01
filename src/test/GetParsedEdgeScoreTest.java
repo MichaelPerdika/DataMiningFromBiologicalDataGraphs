@@ -46,4 +46,13 @@ public class GetParsedEdgeScoreTest {
 		assertFalse(GraphQueriesAPI.getParsedEdgeScore(e1.get(0), e2.get(0)) >= 0.51);
 		assertTrue(GraphQueriesAPI.getParsedEdgeScore(e1.get(0), e2.get(0)) >= 0.50);
 	}
+	
+	@Test
+	public void notCompleteFromBefore() {
+		edge1 = new MyEdge("1.1.1.-", 0, 1);
+		edge2 = new MyEdge("1.1.1.-", 2, 3);
+		List<List<String>> e1 = gQueris.parseEdgeNames(edge1);
+		List<List<String>> e2 = gQueris.parseEdgeNames(edge2);
+		assertEquals(GraphQueriesAPI.getParsedEdgeScore(e1.get(0), e2.get(0)), 0.75, 0.001);
+	}
 }

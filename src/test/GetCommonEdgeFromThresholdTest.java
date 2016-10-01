@@ -98,6 +98,18 @@ public class GetCommonEdgeFromThresholdTest {
 	}
 	
 	@Test
+	public void test() {
+		edge1 = new MyEdge("1.1.1.-", 6, 4);
+		edge2 = new MyEdge("1.1.1.-", 0, 1);
+		resultEdge = new MyEdge("1.1.1.-", 6, 4);
+		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 1)));
+		assertTrue(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.75)));
+		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.5)));
+		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0.25)));
+		assertFalse(resultEdge.isIdentical(gQueris.getCommonEdgeFromThreshold(edge1, edge2, 0)));
+	}
+	
+	@Test
 	public void twoNameEqual100() {
 		edge1 = new MyEdge(new String[] {"2.3.3.1", "4.1.1.1"}, 0, 1);
 		edge2 = new MyEdge(new String[] {"2.3.3.1", "4.1.1.1"}, 0, 1);

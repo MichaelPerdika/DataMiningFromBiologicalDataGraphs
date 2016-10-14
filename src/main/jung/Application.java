@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import edu.uci.ics.jung.graph.DirectedGraph;
 
 public class Application {
@@ -80,8 +82,67 @@ public class Application {
 			
 			// Queries about: the visualization of 2 graphs in each level of the clustering
 			// algorithm which shows the 2 graphs and highlights the common patterns 
-			clustAlg.highlightPatternsInGraphPair(0, 2);
+			//clustAlg.highlightPatternsInGraphPair(0, 2);
 			
+			//user interaction
+			Scanner reader = new Scanner(System.in);  // Reading from System.in
+			//Successfully
+			System.out.println("\n\nThe program ran Successfully\n");
+			boolean run = true;
+			while(run){
+				System.out.println("what do you want to do?:\n"
+						+ "1. visualize graphs\n"
+						+ "2. visualize patterns\n"
+						+ "3. compare two graphs\n"
+						+ "4. exit\n");
+				int choice = reader.nextInt(); // Scans the next token of the input as an int.
+				switch (choice)
+				{
+				case 1:
+					System.out.println("Visualizing graphs");
+					graphQueries.visualizeGraphList();
+					System.out.println("Done");
+					break;
+				case 2:
+					System.out.println("Visualizing patterns");
+					graphQueries.visualizeSubGraphList();
+					graphQueries.visualizeComplementarySubGraphList();
+					System.out.println("Done");
+					break;
+				case 3:
+					boolean run2 = true;
+					int graphNum = graphQueries.getGraphList().size();
+					while(run2){
+						System.out.println("Enter the first graph number");
+						int first = reader.nextInt();
+						System.out.println("Enter the second graph number");
+						int second = reader.nextInt();
+						if ( (first < 0) || (first>=graphNum) ||
+								(second < 0) || (second>=graphNum)  ){
+							System.out.println("Wrong graph IDs. There are "+graphNum+" graphs"
+									+"please give a number between 0 and "+(graphNum-1));
+						}
+						else if (first == second){
+							System.out.println("Please give different graph IDs");
+						}
+						else{
+							System.out.println("Visualizing and comparing the graphs ("
+						+first+", "+second+")");
+							clustAlg.highlightPatternsInGraphPair(first, second);
+							System.out.println("Done");
+							run2 = false;
+						}
+					}
+					break;
+				case 4:
+					run = false;
+					break;
+				default:
+					System.out.println("Wrong input. Try again!");
+				}
+			}
+			reader.close();
+			System.out.println("Exiting Application...");
 			System.out.println("Application ran succesfully...");		
 	}
 	

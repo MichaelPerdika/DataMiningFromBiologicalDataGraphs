@@ -1,0 +1,8 @@
+*0=[L-2-acetamido-6-oxoheptanedioate, L-glutamate] --> [<i>N</i>-acetyl-L,L-2,6-diaminopimelate, 2-oxoglutarate]
+*1=[L-2-aminoadipyl-[LYS2 peptidyl-carrier-protein], NADPH, H<SUP>+</SUP>] --> [(<i>S</i>)-2-amino-6-oxohexanoate, a <i>holo</i>-[LYS2 peptidyl-carrier-protein], NADP<sup>+</sup>]
+*2=[ATP, L-2-aminoadipate, a <i>holo</i>-[LYS2 peptidyl-carrier-protein]] --> [AMP, L-2-aminoadipyl-[LYS2 peptidyl-carrier-protein], diphosphate]
+*3=[(2<i>R</i>)-homocitrate] --> [<i>cis</i>-homoaconitate, H<sub>2</sub>O]
+*4=[a [LysW]-C-terminal-L-glutamyl-&gamma;-L-2-aminoadipate, ATP] --> [a [LysW]-C-terminal-L-glutamyl-&gamma;-L-2-aminoadipate 6-phosphate, ADP]
+*5=[<i>cis</i>-aconitate, H<sub>2</sub>O] --> [D-<i>threo</i>-isocitrate]
+*6=[2-oxoglutarate, coenzyme A, NAD<sup>+</sup>] --> [succinyl-CoA, CO<SUB>2</SUB>, NADH]
+*7=[citrate] --> [<i>cis</i>-aconitate, H<sub>2</sub>O]

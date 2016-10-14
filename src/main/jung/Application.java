@@ -12,6 +12,9 @@ import edu.uci.ics.jung.graph.DirectedGraph;
 
 public class Application {
 
+	private static GraphQueriesAPI graphQueries;
+	private static ClusteringAlgorithm clustAlg;
+	
 	public static void main(String[] args)  {
 			
 			// assign the path to the .bpinit file that the .biopax files are stored
@@ -33,7 +36,7 @@ public class Application {
 					loadGraphListFromBiopaxLoaderBPINIT(biopaxLoader);
 			
 			// initialize the API
-			GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphList);
+			graphQueries = new GraphQueriesAPI(graphList);
 			// find patterns in graphs. The main algorithm.
 			graphQueries.findPatternsInGraphs(1.0);
 			// print the pattern table
@@ -51,7 +54,7 @@ public class Application {
 			
 			// calculate the hierarchical clustering
 			// initialize the clustering Algorithm
-			ClusteringAlgorithm clustAlg = new ClusteringAlgorithm(graphQueries);
+			clustAlg = new ClusteringAlgorithm(graphQueries);
 			
 			// calculate the pattern distances 
 			clustAlg.calculatePatternDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
@@ -85,64 +88,10 @@ public class Application {
 			//clustAlg.highlightPatternsInGraphPair(0, 2);
 			
 			//user interaction
-			Scanner reader = new Scanner(System.in);  // Reading from System.in
-			//Successfully
-			System.out.println("\n\nThe program ran Successfully\n");
-			boolean run = true;
-			while(run){
-				System.out.println("what do you want to do?:\n"
-						+ "1. visualize graphs\n"
-						+ "2. visualize patterns\n"
-						+ "3. compare two graphs\n"
-						+ "4. exit\n");
-				int choice = reader.nextInt(); // Scans the next token of the input as an int.
-				switch (choice)
-				{
-				case 1:
-					System.out.println("Visualizing graphs");
-					graphQueries.visualizeGraphList();
-					System.out.println("Done");
-					break;
-				case 2:
-					System.out.println("Visualizing patterns");
-					graphQueries.visualizeSubGraphList();
-					graphQueries.visualizeComplementarySubGraphList();
-					System.out.println("Done");
-					break;
-				case 3:
-					boolean run2 = true;
-					int graphNum = graphQueries.getGraphList().size();
-					while(run2){
-						System.out.println("Enter the first graph number");
-						int first = reader.nextInt();
-						System.out.println("Enter the second graph number");
-						int second = reader.nextInt();
-						if ( (first < 0) || (first>=graphNum) ||
-								(second < 0) || (second>=graphNum)  ){
-							System.out.println("Wrong graph IDs. There are "+graphNum+" graphs"
-									+"please give a number between 0 and "+(graphNum-1));
-						}
-						else if (first == second){
-							System.out.println("Please give different graph IDs");
-						}
-						else{
-							System.out.println("Visualizing and comparing the graphs ("
-						+first+", "+second+")");
-							clustAlg.highlightPatternsInGraphPair(first, second);
-							System.out.println("Done");
-							run2 = false;
-						}
-					}
-					break;
-				case 4:
-					run = false;
-					break;
-				default:
-					System.out.println("Wrong input. Try again!");
-				}
-			}
-			reader.close();
-			System.out.println("Exiting Application...");
+			userInteraction();
+			
+			System.out.println("Writing output data and exiting Application...");
+			clustAlg.writeOutputData();
 			System.out.println("Application ran succesfully...");		
 	}
 	
@@ -217,9 +166,63 @@ public class Application {
 		return graph;
 	}
 
-
+	private static void userInteraction(){
+		Scanner reader = new Scanner(System.in);  // Reading from System.in
+		//Successfully
+		System.out.println("\n\nThe program ran Successfully\n");
+		boolean run = true;
+		while(run){
+			System.out.println("what do you want to do?:\n"
+					+ "1. visualize graphs\n"
+					+ "2. visualize patterns\n"
+					+ "3. compare two graphs\n"
+					+ "4. exit\n");
+			int choice = reader.nextInt(); // Scans the next token of the input as an int.
+			switch (choice)
+			{
+			case 1:
+				System.out.println("Visualizing graphs");
+				graphQueries.visualizeGraphList();
+				System.out.println("Done");
+				break;
+			case 2:
+				System.out.println("Visualizing patterns");
+				graphQueries.visualizeSubGraphList();
+				graphQueries.visualizeComplementarySubGraphList();
+				System.out.println("Done");
+				break;
+			case 3:
+				boolean run2 = true;
+				int graphNum = graphQueries.getGraphList().size();
+				while(run2){
+					System.out.println("Enter the first graph number");
+					int first = reader.nextInt();
+					System.out.println("Enter the second graph number");
+					int second = reader.nextInt();
+					if ( (first < 0) || (first>=graphNum) ||
+							(second < 0) || (second>=graphNum)  ){
+						System.out.println("Wrong graph IDs. There are "+graphNum+" graphs"
+								+"please give a number between 0 and "+(graphNum-1));
+					}
+					else if (first == second){
+						System.out.println("Please give different graph IDs");
+					}
+					else{
+						System.out.println("Visualizing and comparing the graphs ("
+					+first+", "+second+")");
+						clustAlg.highlightPatternsInGraphPair(first, second);
+						System.out.println("Done");
+						run2 = false;
+					}
+				}
+				break;
+			case 4:
+				run = false;
+				break;
+			default:
+				System.out.println("Wrong input. Try again!");
+			}
+		}
+		reader.close();
+	}
 }
-
-//[BiochemicalReaction] == Edge
-//[SmallMolecule] == Node with standardName == the correct name.
-//[BiochemicalPathwayStep] with stepDirection == LEFT_TO_RIGHT or RIGHT_TO_LEFT.

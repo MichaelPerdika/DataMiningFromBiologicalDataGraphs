@@ -1364,6 +1364,7 @@ public class GraphQueriesAPI {
         		new BasicVisualizationServer<Integer,String>(layout);
         vv.setPreferredSize(new Dimension(850,650));       
         // Set up a new stroke Transformer for the edges
+        /* old one
         float dash[] = {10.0f};
         final Stroke edgeStroke1 = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
              BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f);
@@ -1372,6 +1373,38 @@ public class GraphQueriesAPI {
             	return edgeStroke1;
             }
         };
+        */
+        float dash[] = {10.0f};
+        final Stroke edgeStroke1 = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
+             BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f);
+        final Stroke edgeStroke2 = new BasicStroke(3.0f, BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_MITER);
+        Transformer<String, Stroke> edgeStrokeTransformer = new Transformer<String, Stroke>() {
+            public Stroke transform(String s) {
+            	boolean match = false;
+            	for (MyEdge pEdge : listOfEdges){
+            		// the edge name (s) may have whitespaces in the end, so remove them. 
+            		//String rightTrimmed = s.replaceAll("\\s+$", "");
+            		if (s.replaceAll("\\s+$", "").equals(pEdge.toString().replaceAll("\\s+$", ""))){
+            			// in this point the edge name is the same. now check if the 
+            			// start and end vertex are contained in listOfVertices
+            			if (listOfVertices.contains(pEdge.getStartNode()) &&
+            					listOfVertices.contains(pEdge.getEndNode()) ){
+            				match = true;
+            				// TODO Maybe here delete the pEdge from listOfEdges???
+            				// check this out later
+                			break;
+            			}
+            		}
+            	}
+            	if (match){
+            		return edgeStroke2;
+            	}
+                else 
+                	return edgeStroke1;
+            }
+        };
+        
         // set up a new edge paint Transformer
         Transformer<String, Paint> edgePaint = new Transformer<String, Paint>() {
             public Paint transform(String s) {

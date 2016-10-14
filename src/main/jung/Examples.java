@@ -19,7 +19,7 @@ public class Examples {
 		List<DirectedGraph<Integer, MyEdge>> graphList3 = loadExperiment4_3();
 		
 		// initialize the API
-		GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphList3);
+		GraphQueriesAPI graphQueries = new GraphQueriesAPI(graphList0);
 		// find patterns in graphs. The main algorithm.
 		graphQueries.findPatternsInGraphs(1.0);
 		// print the pattern table
@@ -127,6 +127,7 @@ public class Examples {
 		reader.close();
 		System.out.println("Exiting Application...\nDone");
 		//The End	
+		clustAlg.writeOutputData();
 	}
 
 	private static List<DirectedGraph<Integer, MyEdge>> loadExperimentOfChapter3() {

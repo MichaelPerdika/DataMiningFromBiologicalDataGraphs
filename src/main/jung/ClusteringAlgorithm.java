@@ -1,5 +1,8 @@
 package main.jung;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -42,6 +45,8 @@ public class ClusteringAlgorithm {
 	private List<DirectedGraph<Integer, MyEdge>> subGraphListWhole;
 	private List<String> joinsPerLevelPatterns;
 	private List<String> joinsPerLevelGraphs;
+	private String SEPARATOR = "\t";
+	private String  END_OF_LINE = "\n";
 
 	/**
 	 * never to be called
@@ -1617,5 +1622,215 @@ public class ClusteringAlgorithm {
 		}
 	}
 	
+	public void writeOutputData() {
+
+		writeOutGraphs();
+		writeOutEmptyECNumbersMap();
+		writeOutPatterns();
+		writeOutPatternTable();
+		writeOutSimilarityMatrixPatterns();
+		writeOutDistanceMatrixPatterns();
+		writeOutScoreMatrixGraphs();
+		writeOutDistanceMatrixGraphs();
+		writeOutClustersPatterns();
+		writeOutClustersGraphs();
+		
+		
+	}
+	
+	private void writeOutClustersPatterns(){
+		writeOutClusters("patterns");
+	}
+	
+	private void writeOutClustersGraphs(){
+		writeOutClusters("graphs");
+	}
+	
+	private void writeOutClusters(String type){
+		List<Double> linkageDistances;
+		List<List<String>> linkageClusters;
+		
+		if (type.equals("patterns")){
+			linkageDistances = linkageDistancesPatterns;
+			linkageClusters = linkageClustersPatterns;
+		}
+		else if (type.equals("graphs")){
+			linkageDistances = linkageDistancesGraphs;
+			linkageClusters = linkageClustersGraphs;
+		}
+		else{
+			linkageDistances = null;
+			linkageClusters = null;
+			System.out.println("error in printClusters");
+			System.exit(1);
+		}
+		try {
+			PrintWriter writer = new PrintWriter("src/output/"+type+"Clusters.txt", "UTF-8");
+			for (int i=0;i<linkageDistances.size();i++){
+				writer.print("lvl"+i+SEPARATOR);
+				//System.out.println(linkageDistances.get(i)+" :: "+linkageClusters.get(i));
+				writer.printf("%.1f", linkageDistances.get(i));
+				writer.print(SEPARATOR);
+				writer.println(linkageClusters.get(i));
+
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		}
+		
+	}
+
+	private void writeOutGraphs(){
+		try {
+			PrintWriter writer = new PrintWriter("src/output/graphs.txt", "UTF-8");
+			for (int i=0; i<gQAPI.getGraphList().size();i++){
+				writer.println("g"+i+" = "+gQAPI.getGraphList().get(i));
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		}
+		
+	}
+	
+	private void writeOutEmptyECNumbersMap(){
+		try {
+			PrintWriter writer = new PrintWriter("src/output/emptyECNumbersMap.txt", "UTF-8");
+			for (Entry<String, String> t : gQAPI.getEmptyECNumbersMap().entrySet()){
+				// don't print the auxiliary nextNameID entry.
+				if (t.getKey().equals("nextNameID")) continue;
+				writer.println(t);
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		}
+		
+	}
+	
+	private void writeOutPatterns(){
+		try {
+			PrintWriter writer = new PrintWriter("src/output/patterns.txt", "UTF-8");
+			for (int i=0; i<gQAPI.getSubGraphList().size();i++){
+				writer.println("p"+i+" = "+gQAPI.getSubGraphList().get(i));
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		}
+		
+	}
+	
+	private void writeOutScoreMatrixGraphs(){
+		writeOutDouble(scoreMatrixGraphs, "scoreMatrixGraphs");
+	}
+	
+	private void writeOutSimilarityMatrixPatterns() {
+		writeOutDouble(similarityMatrixPatterns, "similarityMatrixPatterns");
+	}
+	
+	private void writeOutDistanceMatrixPatterns(){
+		writeOutDouble(distanceMatrixPatterns, "patternDistanceMatrix");
+	}
+	
+	private void writeOutDistanceMatrixGraphs(){
+		writeOutDouble(distanceMatrixGraphs, "distanceMatrixGraphs");
+	}
+	
+	private void writeOutDouble(List<List<Double>> matrix, String fileTitle) {
+		// Whole patternDistanceMatrix
+		StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i < matrix.size(); i++) {
+	        for (int o = 0; o < matrix.get(i).size(); o++) {
+	        	sb.append(matrix.get(i).get(o));
+	            if (o <( matrix.get(i).size()-1))
+	            	sb.append(SEPARATOR);
+	            else
+	            	sb.append(END_OF_LINE);
+	        }
+	    }
+		try {
+			PrintWriter writer = new PrintWriter("src/output/"+fileTitle+".txt", "UTF-8");
+			writer.println(sb.toString());
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error while writing output data");
+			System.exit(0);
+		}
+		
+	}
+
+	
+	
+	private void writeOutPatternTable() {
+		// Whole pattern Table
+				StringBuilder sb = new StringBuilder();
+			    for (int i = 0; i < gQAPI.getPatternTableWhole().size(); i++) {
+			        for (int o = 0; o < gQAPI.getPatternTableWhole().get(i).size(); o++) {
+			            sb.append(gQAPI.getPatternTableWhole().get(i).get(o));
+			            if (o <( gQAPI.getPatternTableWhole().get(i).size()-1))
+			                sb.append(SEPARATOR);
+			            else
+			                sb.append(END_OF_LINE);
+			        }
+			    }
+				PrintWriter writer;
+				try {
+					writer = new PrintWriter("src/output/patternTable.txt", "UTF-8");
+					writer.println(sb.toString());
+					writer.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("error while writing output data");
+					System.exit(0);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("error while writing output data");
+					System.exit(0);
+				}
+		
+	}
 	
 }

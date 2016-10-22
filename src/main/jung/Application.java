@@ -16,85 +16,81 @@ public class Application {
 	private static ClusteringAlgorithm clustAlg;
 	
 	public static void main(String[] args)  {
-			
-			// assign the path to the .bpinit file that the .biopax files are stored
-			// artificial test
-			String biopaxLoader0 = "src/data/biopaxLoader.bpinit";
-			// L-Lysine Biosynthesis
-			String biopaxLoader1 = "src/data/exp1.bpinit";
-			// TCA Cycle
-			String biopaxLoader2 = "src/data/exp2.bpinit";
-			// Cholesterol Biosynthesis  +   plant sterol biosynthesis  + Lipid A-core biosynthesis
-			String biopaxLoader3 = "src/data/exp3.bpinit";
-			// exp1 + exp2 + exp3
-			String biopaxLoader4 = "src/data/expALL.bpinit";
-			
-			String biopaxLoader = biopaxLoader4;
-			System.out.println("Launching Application, reading .biopax data from: "+biopaxLoader);
-			long startTime = System.nanoTime();
-			// load all .biopax files from a .bpinit and create the graphList
-			List<DirectedGraph<Integer, MyEdge>> graphList =
-					loadGraphListFromBiopaxLoaderBPINIT(biopaxLoader);
-			
-			// initialize the API
-			graphQueries = new GraphQueriesAPI(graphList);
-			// find patterns in graphs. The main algorithm.
-			graphQueries.findPatternsInGraphs(1.0);
-			// print the pattern table
-			graphQueries.printApplicationOutput();
-			
-			/** comment that **/
-			//visualize graphList
-			//graphQueries.visualizeGraphList();
-			//visualize subGraphList
-			//graphQueries.visualizeSubGraphList();
-			//visualize subGraphListComplementary
-			//graphQueries.visualizeComplementarySubGraphList();
-			/** */
-			
-			
-			// calculate the hierarchical clustering
-			// initialize the clustering Algorithm
-			clustAlg = new ClusteringAlgorithm(graphQueries);
-			
-			// calculate the pattern distances 
-			clustAlg.calculatePatternDistances(distMetric.EUCLIDEAN_WITH_WEIGHTS);
-			//linkage for patterns using MIN
-			clustAlg.linkagePattern(linkMetric.MIN);
-			
-			
-			// calculate the graph distances 
-			clustAlg.calculateGraphScores();
-			clustAlg.calculateGraphDistances(distMetric2.LINEAR);
-			//linkage for graphs using MIN
-			clustAlg.linkageGraph(linkMetric.MIN);
-			long endTime = System.nanoTime();
-			double duration = (endTime - startTime)/1000000000.;//convert to miliseconds
-			// print the similarity matrix of the patterns
-			clustAlg.printSimilarityMatrixPatterns();
-			// print the distance matrix of the patterns
-			clustAlg.printDistanceMatrixPatterns();
-			// print the score matrix of the graphs
-			clustAlg.printScoreMatrixGraphs();
-			// print the distance matrix of the graphs
-			clustAlg.printDistanceMatrixGraphs();
-			
-			// print clusters for Patterns
-			clustAlg.printPatternClusters();
-			// print clusters for Graphs
-			clustAlg.printGraphClusters();
-			
-			// Queries about: the visualization of 2 graphs in each level of the clustering
-			// algorithm which shows the 2 graphs and highlights the common patterns 
-			//clustAlg.highlightPatternsInGraphPair(0, 2);
-			
-			//user interaction
-			userInteraction();
-			
-			System.out.println("Writing output data and exiting Application...");
-			clustAlg.writeOutputData();
-			System.out.println("System ran at "+duration+" seconds");
-			System.out.println("Application ran succesfully...");		
+		/** give the initial arguments */
+		double threshold = 1.0;
+		distMetric distanceMetric = distMetric.EUCLIDEAN_WITH_WEIGHTS;
+		linkMetric linkageMetric = linkMetric.MIN;
+		
+		// assign the path to the .bpinit file that the .biopax files are stored
+		// artificial test
+		String biopaxLoader0 = "src/data/biopaxLoader.bpinit";
+		// L-Lysine Biosynthesis
+		String biopaxLoader1 = "src/data/exp1.bpinit";
+		// TCA Cycle
+		String biopaxLoader2 = "src/data/exp2.bpinit";
+		// Cholesterol Biosynthesis  +   plant sterol biosynthesis  + Lipid A-core biosynthesis
+		String biopaxLoader3 = "src/data/exp3.bpinit";
+		// exp1 + exp2 + exp3
+		String biopaxLoader4 = "src/data/expALL.bpinit";
+		
+		// Chose an example .bpinit file.
+		String biopaxLoader = biopaxLoader4;
+		
+		/** Creating the graphList from the .bpinit file*/
+		System.out.println("Launching Application, reading .biopax data from: "+biopaxLoader);
+		long startTime = System.nanoTime();
+		// load all .biopax files from a .bpinit and create the graphList
+		List<DirectedGraph<Integer, MyEdge>> graphList =
+				loadGraphListFromBiopaxLoaderBPINIT(biopaxLoader);
+		
+		/** Find the patterns*/
+		// initialize the API
+		graphQueries = new GraphQueriesAPI(graphList);
+		// find patterns in graphs. The main algorithm.
+		graphQueries.findPatternsInGraphs(threshold);
+		// print the pattern table
+		graphQueries.printApplicationOutput();
+		
+		/** Call the clustering algorithm to find distances and clusters*/
+		// calculate the hierarchical clustering
+		// initialize the clustering Algorithm
+		clustAlg = new ClusteringAlgorithm(graphQueries);
+		
+		// calculate the pattern distances 
+		clustAlg.calculatePatternDistances(distanceMetric);
+		//linkage for patterns using MIN
+		clustAlg.linkagePattern(linkageMetric);
+		
+		
+		// calculate the graph distances 
+		clustAlg.calculateGraphScores();
+		clustAlg.calculateGraphDistances(distMetric2.LINEAR);
+		//linkage for graphs using MIN
+		clustAlg.linkageGraph(linkageMetric);
+		long endTime = System.nanoTime();
+		double duration = (endTime - startTime)/1000000000.;//convert to seconds
+		// print the similarity matrix of the patterns
+		clustAlg.printSimilarityMatrixPatterns();
+		// print the distance matrix of the patterns
+		clustAlg.printDistanceMatrixPatterns();
+		// print the score matrix of the graphs
+		clustAlg.printScoreMatrixGraphs();
+		// print the distance matrix of the graphs
+		clustAlg.printDistanceMatrixGraphs();
+		
+		// print clusters for Patterns
+		clustAlg.printPatternClusters();
+		// print clusters for Graphs
+		clustAlg.printGraphClusters();
+		
+		/** the user can do various queries */
+		//user interaction
+		userInteraction();
+		
+		System.out.println("Writing output data and exiting Application...");
+		clustAlg.writeOutputData();
+		System.out.println("System ran at "+duration+" seconds");
+		System.out.println("Application ran succesfully...");		
 	}
 	
 

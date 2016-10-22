@@ -31,6 +31,7 @@ public class Application {
 			
 			String biopaxLoader = biopaxLoader4;
 			System.out.println("Launching Application, reading .biopax data from: "+biopaxLoader);
+			long startTime = System.nanoTime();
 			// load all .biopax files from a .bpinit and create the graphList
 			List<DirectedGraph<Integer, MyEdge>> graphList =
 					loadGraphListFromBiopaxLoaderBPINIT(biopaxLoader);
@@ -67,8 +68,8 @@ public class Application {
 			clustAlg.calculateGraphDistances(distMetric2.LINEAR);
 			//linkage for graphs using MIN
 			clustAlg.linkageGraph(linkMetric.MIN);
-
-
+			long endTime = System.nanoTime();
+			double duration = (endTime - startTime)/1000000000.;//convert to miliseconds
 			// print the similarity matrix of the patterns
 			clustAlg.printSimilarityMatrixPatterns();
 			// print the distance matrix of the patterns
@@ -92,6 +93,7 @@ public class Application {
 			
 			System.out.println("Writing output data and exiting Application...");
 			clustAlg.writeOutputData();
+			System.out.println("System ran at "+duration+" seconds");
 			System.out.println("Application ran succesfully...");		
 	}
 	

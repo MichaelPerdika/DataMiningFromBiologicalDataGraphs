@@ -22,7 +22,7 @@ public class Examples {
 		List<DirectedGraph<Integer, MyEdge>> graphList3 = loadExperiment4_3();
 		
 		// initialize the API
-		graphQueries = new GraphQueriesAPI(graphList0);
+		graphQueries = new GraphQueriesAPI(graphList3);
 		// find patterns in graphs. The main algorithm.
 		graphQueries.findPatternsInGraphs(1.0);
 		// print the pattern table
